@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "CommandParseResults.h"
+#include "IParser.h"
 
 namespace PluggableBot
 {

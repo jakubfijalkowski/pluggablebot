@@ -12,16 +12,20 @@
     <ClInclude Include="Commands\IMatcher.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Commands\CommandParseResults.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
     <ClInclude Include="Exceptions\NotFoundException.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
+    <ClInclude Include="Commands\ICommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\IParser.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\ExecutionException.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Commands\Parser.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
 </Project>
