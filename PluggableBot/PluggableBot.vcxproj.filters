@@ -13,6 +13,9 @@
     <Filter Include="Plugins">
       <UniqueIdentifier>{235d2faf-f0ba-48d2-a7b9-de37a58d3e6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Logging">
+      <UniqueIdentifier>{97ed831b-fad1-4de0-8337-2fe37b95d073}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\IMatcher.h">
@@ -45,6 +48,12 @@
     </ClInclude>
     <ClInclude Include="Plugins\PluginManager.h">
       <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\ILogger.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\LogFactory.h">
+      <Filter>Logging</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
