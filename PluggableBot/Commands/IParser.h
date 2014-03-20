@@ -111,6 +111,8 @@ namespace PluggableBot
 			 * \param text Tekst wiadomoœci.
 			 */
 			virtual CommandParseResults Parse(const std::wstring& text) = 0;
+
+			virtual ~IParser() { }
 		};
 
 	}

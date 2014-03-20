@@ -66,11 +66,7 @@ namespace PluggableBot
 			 */
 			virtual CommandExecutionResults Execute() = 0;
 
-		protected:
-			ICommand(std::unique_ptr<IMatcher> matcher)
-			{
-
-			}
+			virtual ~ICommand() { }
 		};
 
 	}

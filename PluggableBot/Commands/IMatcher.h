@@ -27,6 +27,8 @@ namespace PluggableBot
 			 */
 			virtual bool Matches(const CommandParseResults& results) = 0;
 
+			virtual ~IMatcher() { }
+
 		protected:
 			/**
 			 * Inicjalizuje obiekt.

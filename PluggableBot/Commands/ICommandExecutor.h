@@ -49,6 +49,8 @@ namespace PluggableBot
 			 */
 			virtual CommandExecutionResults Execute(std::wstring& text) = 0;
 
+			virtual ~ICommandExecutor() { }
+
 		protected:
 			/**
 			 * Inicjalizuje obiekt.
