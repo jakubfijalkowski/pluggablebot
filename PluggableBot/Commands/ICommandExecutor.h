@@ -12,8 +12,8 @@ namespace PluggableBot
 		 * Interfejs okreœlaj¹cy, co klasa, która jest odpowiedzialna za wykonywnie metod, powinna udostêpniaæ.
 		 *
 		 * Klasa przechowuje listê komend oraz informacje o parserze(pochodz¹ce z zewn¹trz). Komendy nie s¹
-		 * przechowywane jako smart pointery poniewa¿ prawie na pewno bêd¹ alokowane w zewnêtrznych bibliotekach,
-		 * co uniemo¿liwia ich zwalnianie w kodzie g³ownym. Szerszy opis znajduje siê w dokumentacji.
+		 * przekazywane na w³asnoœæ, poniewa¿ mog¹ pochodziæ z zewnêtrznych bibliotek, co uniemo¿liwia
+		 * zwalnianie ich w sposób domyœlny - st¹d shared_ptr.
 		 */
 		class ICommandExecutor
 		{
@@ -21,7 +21,7 @@ namespace PluggableBot
 			/**
 			 * Typ okreœlaj¹cy kolekcjê komend.
 			 */
-			typedef std::vector<ICommand*> CommandList;
+			typedef std::vector<std::shared_ptr<ICommand>> CommandList;
 
 			/**
 			 * Parser u¿ywany przez klasê.
@@ -32,14 +32,14 @@ namespace PluggableBot
 			 * Pobiera listê komend zarejestrowanych w obiekcie.
 			 *
 			 * Lista komend nie jest dostêpna w prosty sposób, poniewa¿ obiekt mo¿e wymagaæ np. dodatkowej
-			 * synchronizacji w dostêpie i dodatkowo komendy nie powinny byæ usuwane.
+			 * synchronizacji w dostêpie. Dodatkowo, komendy nie powinny byæ usuwane.
 			 */
 			virtual const CommandList* GetCommands() = 0;
 			
 			/**
 			 * Dodaje komendê do listy obs³ugiwanych.
 			 */
-			virtual void AddCommand(ICommand* command);
+			virtual void AddCommand(std::shared_ptr<ICommand> command);
 
 			/**
 			 * Próbujê wywo³aæ komendê, która jest okreœlona w tekœcie. Rzuca wyj¹tkiem, gdy nie uda siê wykonanie metody.

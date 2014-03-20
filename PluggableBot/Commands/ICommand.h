@@ -34,7 +34,7 @@ namespace PluggableBot
 			const void* const AdditionalData;
 
 			/**
-			 *Inicjalizuje obiekt.
+			 * Inicjalizuje obiekt.
 			 */
 			CommandExecutionResults(const std::wstring& message, bool isAsync = false, void* additionalData = nullptr)
 				: IsAsync(isAsync), Message(message), AdditionalData(additionalData)
