@@ -4,6 +4,9 @@
     <Filter Include="Commands">
       <UniqueIdentifier>{a01dfcf4-36bd-42d6-8593-2ad6cb84c0e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Exceptions">
+      <UniqueIdentifier>{f6b5791e-d43a-43ab-b242-8e522135ca22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\IMatcher.h">
@@ -11,6 +14,9 @@
     </ClInclude>
     <ClInclude Include="Commands\CommandParseResults.h">
       <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Exceptions\NotFoundException.h">
+      <Filter>Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

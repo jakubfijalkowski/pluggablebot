@@ -98,7 +98,7 @@ namespace PluggableBot
 			/* Pobiera parametr o wskazanej nazwie. Jeœli nie istnieje, metoda rzuca wyj¹tek.
 			 *
 			 * \param name Nazwa parametru.
-			 * \exception ParameterNotFoundException Rzucany, gdy parametr o wskazanej nazwie nie mo¿e zostaæ znaleziony.
+			 * \exception Exceptions::NotFoundException Rzucany, gdy parametr o wskazanej nazwie nie mo¿e zostaæ znaleziony.
 			 */
 			const CommandParameter& GetParameter(const std::wstring& name) const
 			{
