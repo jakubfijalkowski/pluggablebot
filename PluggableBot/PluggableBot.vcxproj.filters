@@ -7,6 +7,9 @@
     <Filter Include="Exceptions">
       <UniqueIdentifier>{f6b5791e-d43a-43ab-b242-8e522135ca22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Messaging">
+      <UniqueIdentifier>{2be4c544-0e51-42cd-8a83-51327fee3d2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\IMatcher.h">
@@ -26,6 +29,12 @@
     </ClInclude>
     <ClInclude Include="Commands\ICommandExecutor.h">
       <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Messaging\IMessage.h">
+      <Filter>Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Messaging\Messenger.h">
+      <Filter>Messaging</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

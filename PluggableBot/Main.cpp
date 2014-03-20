@@ -4,6 +4,7 @@
 #include "Commands/IMatcher.h"
 #include "Commands/IParser.h"
 #include "Commands/ICommandExecutor.h"
+#include "Messaging/Messenger.h"
 
 int main()
 {

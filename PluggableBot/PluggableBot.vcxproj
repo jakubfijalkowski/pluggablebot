@@ -70,6 +70,8 @@
     <ClInclude Include="Commands\IMatcher.h" />
     <ClInclude Include="Commands\IParser.h" />
     <ClInclude Include="Exceptions\NotFoundException.h" />
+    <ClInclude Include="Messaging\IMessage.h" />
+    <ClInclude Include="Messaging\Messenger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
