@@ -66,6 +66,7 @@
   <ItemGroup>
     <ClInclude Include="Commands\ExecutionException.h" />
     <ClInclude Include="Commands\ICommand.h" />
+    <ClInclude Include="Commands\ICommandExecutor.h" />
     <ClInclude Include="Commands\IMatcher.h" />
     <ClInclude Include="Commands\IParser.h" />
     <ClInclude Include="Exceptions\NotFoundException.h" />

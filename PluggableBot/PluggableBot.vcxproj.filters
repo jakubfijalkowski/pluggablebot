@@ -24,6 +24,9 @@
     <ClInclude Include="Commands\ExecutionException.h">
       <Filter>Commands</Filter>
     </ClInclude>
+    <ClInclude Include="Commands\ICommandExecutor.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
