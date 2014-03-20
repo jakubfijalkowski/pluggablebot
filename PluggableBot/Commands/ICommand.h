@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "IMatcher.h"
 #include "ExecutionException.h"
 
@@ -53,9 +54,9 @@ namespace PluggableBot
 			const std::wstring Name;
 
 			/**
-			 * IMatcher, który jest odpowiedzialny za dopasowanie wiadomoœci do komendy.
+			 * Pobiera IMatcher, który jest odpowiedzialny za dopasowanie wiadomoœci do komendy.
 			 */
-			IMatcher* const Matcher;
+			virtual const IMatcher* GetMatcher() = 0;
 
 			/**
 			 * Wykonuje metodê i zwraca odpowiedŸ która zostanie dostarczona u¿ytkownikowi.
@@ -64,6 +65,12 @@ namespace PluggableBot
 			 * \exception ExecutionException Rzucany, gdy nie powiod³o siê wykonanie metody.
 			 */
 			virtual CommandExecutionResults Execute() = 0;
+
+		protected:
+			ICommand(std::unique_ptr<IMatcher> matcher)
+			{
+
+			}
 		};
 
 	}
