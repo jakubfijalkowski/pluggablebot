@@ -36,6 +36,7 @@
     <ClInclude Include="Messaging\Messenger.h">
       <Filter>Messaging</Filter>
     </ClInclude>
+    <ClInclude Include="IProtocol.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
