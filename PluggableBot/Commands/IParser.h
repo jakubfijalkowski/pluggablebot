@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <memory>
+#include <map>
 
 namespace PluggableBot
 {
@@ -7,38 +9,21 @@ namespace PluggableBot
 	{
 
 		/**
-		* Opisuje pojedynczy parametr komend zwyk³ych.
-		*
-		* Parametr ma format nazwa="wartoœæ". Znaki cudzys³owu s¹ opcjonalne, jeœli
-		* wartoœæ komendy nie zawiera znaków bia³ych.
-		*/
-		class CommandParameter
-		{
-		public:
-			/**
-			* Nazwê parametru.
-			*/
-			const std::wstring Name;
-
-			/**
-			* Zwraca wartoœæ parametru.
-			*/
-			const std::wstring Value;
-
-			/**
-			 * Inicjalizuje obiekt.
-			 */
-			CommandParameter(const std::wstring& name, const std::wstring& value)
-				: Name(name), Value(value)
-			{ }
-		};
-
-		/**
 		* Wynik parsowania tekstu, zwracany przez parser. Zawiera nazwê oraz wszystkie parametry, które uda³o siê dopasowaæ.
 		*/
 		class CommandParseResults
 		{
 		public:
+			/**
+			 * Typ listy parametrów(w³aœciwej).
+			 */
+			typedef std::map<std::wstring, std::wstring> ParameterList;
+
+			/**
+			 * Typ u¿ywany do przechowywania i przekazywania listy parametrów.
+			 */
+			typedef std::shared_ptr<ParameterList> ParametersPointer;
+
 			/**
 			* Nazwê komendy, nawet jeœli by³a to komenda pe³notekstowa i nie uda³o siê
 			* jej inaczej zinterpretowaæ(jest to fragment do pierwszego znaku).
@@ -66,11 +51,18 @@ namespace PluggableBot
 			{ }
 
 			/**
+			* Inicjalizuje obiekt, który okreœla wynik parsowania zwyk³ej komendy.
+			*/
+			CommandParseResults(const std::wstring& name, const std::wstring& fullText, ParametersPointer parameters)
+				: Name(name), FullText(fullText), IsSuccess(true), Parameters(parameters)
+			{ }
+
+			/**
 			* Pobiera iloœæ parametrów, o ile parsowanie siê uda³o.
 			*/
 			int GetParameterCount() const
 			{
-
+				return this->Parameters->size();
 			}
 
 			/**
@@ -80,30 +72,25 @@ namespace PluggableBot
 			*/
 			bool HasParameter(const std::wstring& name) const
 			{
-
+				return this->Parameters->find(name) != this->Parameters->end();
 			}
 
 			/**
-			* Pobiera parametr ze wskazanej pozycji. Jeœli indeks wykracza poza zakres, zostaje rzucony
-			* wyj¹tek.
-			*
-			* \param index Indeks parametru. Musi byæ z zakresu 0..GetParameterCount().
-			* \exception std::out_of_range Rzucany, gdy indeks wykracza poza zakres.
-			*/
-			const CommandParameter& GetParameter(int index) const
+			 * Pobiera wartoœæ parametru o wskazanej nazwie. Jeœli nie istnieje, metoda rzuca wyj¹tek.
+			 *
+			 * \param name Nazwa parametru.
+			 * \exception Exceptions::NotFoundException Rzucany, gdy parametr o wskazanej nazwie nie mo¿e zostaæ znaleziony.
+			 */
+			const std::wstring& GetParameter(const std::wstring& name) const
 			{
-
+				auto it = this->Parameters->find(name);
+				if (it == this->Parameters->end())
+					throw Exceptions::NotFoundException();
+				return it->second;
 			}
 
-			/* Pobiera parametr o wskazanej nazwie. Jeœli nie istnieje, metoda rzuca wyj¹tek.
-			*
-			* \param name Nazwa parametru.
-			* \exception Exceptions::NotFoundException Rzucany, gdy parametr o wskazanej nazwie nie mo¿e zostaæ znaleziony.
-			*/
-			const CommandParameter& GetParameter(const std::wstring& name) const
-			{
-
-			}
+		private:
+			ParametersPointer Parameters;
 		};
 
 		/**
@@ -121,7 +108,7 @@ namespace PluggableBot
 		public:
 			/**
 			 * Próbuje zinterpretowaæ wiadomoœæ jako komendê. Sposób parsowania jest w opisie klasy.
-			 * \param text Tekst wiadomoœci. 
+			 * \param text Tekst wiadomoœci.
 			 */
 			virtual CommandParseResults Parse(const std::wstring& text) = 0;
 		};
