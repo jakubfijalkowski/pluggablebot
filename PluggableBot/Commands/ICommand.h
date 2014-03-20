@@ -17,28 +17,27 @@ namespace PluggableBot
 		{
 		public:
 			/**
-			 * Pobiera wartoœæ okreœlaj¹c¹, czy wynik komendy jest synchroniczny, czy asynchroniczny.
+			 * Okreœla, czy wynik komendy jest synchroniczny, czy asynchroniczny.
 			 */
-			bool IsAsync() const
-			{
-
-			}
+			const bool IsAsync;
 
 			/**
-			 * Pobiera treœæ wiadomoœci maj¹cej byæ odpowiedzi¹.
+			 * Treœæ wiadomoœci maj¹cej byæ odpowiedzi¹.
 			 */
-			const std::wstring* GetMessage() const
-			{
-
-			}
+			const std::wstring Message;
 
 			/**
-			 * Pobiera obiekt bêd¹cy dodatkowymi danymi. Jest opcjonalny(mo¿e zwróciæ nullptr).
+			 * Obiekt bêd¹cy dodatkowymi danymi. Jest opcjonalny(mo¿e byæ nullptr).
 			 */
-			const void* GetJSONObject() const
-			{
+			// TODO: zmieniæ typ na w³aœciwy
+			const void const* AdditionalData;
 
-			}
+			/**
+			 *Inicjalizuje obiekt.
+			 */
+			CommandExecutionResults(const std::wstring& message, bool isAsync = false, void* additionalData = nullptr)
+				: IsAsync(isAsync), Message(message), AdditionalData(additionalData)
+			{ }
 		};
 
 		/**
@@ -48,15 +47,15 @@ namespace PluggableBot
 		{
 		public:
 			/**
-			 * Pobiera nazwê komendy. Metoda ta jest u¿ywana tylko w przypadku, gdy u¿ytkownik chce
-			 * dowiedzieæ siê, jakie komendy s¹ u¿ywane.
+			 * Nazwê komendy. U¿ywana tylko w przypadku, gdy u¿ytkownik chce dowiedzieæ siê, jakie
+			 * komendy s¹ dostêpne.
 			 */
-			virtual const std::wstring& GetName() = 0;
+			const std::wstring Name;
 
 			/**
-			 * Pobiera IMatcher, który jest odpowiedzialny za dopasowanie wiadomoœci do komendy.
+			 * IMatcher, który jest odpowiedzialny za dopasowanie wiadomoœci do komendy.
 			 */
-			virtual IMatcher* GetMatcher() = 0;
+			const IMatcher const* Matcher;
 
 			/**
 			 * Wykonuje metodê i zwraca odpowiedŸ która zostanie dostarczona u¿ytkownikowi.

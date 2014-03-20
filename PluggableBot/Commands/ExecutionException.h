@@ -10,7 +10,7 @@ namespace PluggableBot
 		/**
 		 * Wyj¹tek rzucany, gdy nie uda siê wykonaæ komendy.
 		 *
-		 * Zawiera podstawowe informacje o b³êdzie, tj. wiadomoœæ(u¿ywaj¹c GetMessage) i ewentualny kod,
+		 * Zawiera podstawowe informacje o b³êdzie, tj. wiadomoœæ(Message) i ewentualny kod,
 		 * który jest zwracany jako dodatkowa wartoœæ.
 		 */
 		class ExecutionException
@@ -18,20 +18,18 @@ namespace PluggableBot
 		{
 		public:
 			/**
-			 * Pobiera kod b³êdu.
-			 */
-			int GetErrorCode() const
-			{
-
-			}
+			* Wiadomoœæ.
+			*/
+			const std::wstring Message;
 
 			/**
-			 * Pobiera wiadomoœæ.
+			 * Kod b³êdu.
 			 */
-			const std::wstring& GetMessage() const
-			{
+			const int ErrorCode;
 
-			}
+			ExecutionException(const std::wstring& message, int errorCode = 0)
+				: Message(message), ErrorCode(errorCode)
+			{ }
 		};
 
 	}

@@ -18,7 +18,7 @@ namespace PluggableBot
 			/**
 			 * Okreœla, czy komenda jest pe³no tekstowa, czy nie.
 			 */
-			virtual bool IsFullText() = 0;
+			const bool IsFullText;
 
 			/**
 			 * Próbuje dopasowaæ wynik parsowania do komendy.
@@ -26,6 +26,14 @@ namespace PluggableBot
 			 * powinny pracowaæ na CommandParseResult.GetFullText, jeœli nie - na pozosta³ych parametrach.
 			 */
 			virtual bool Matches(const CommandParseResults& results) = 0;
+
+		protected:
+			/**
+			 * Inicjalizuje obiekt.
+			 */
+			IMatcher(bool isFullText = false)
+				: IsFullText(isFullText)
+			{ }
 		};
 
 	}

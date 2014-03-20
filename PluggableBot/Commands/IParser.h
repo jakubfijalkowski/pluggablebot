@@ -16,20 +16,21 @@ namespace PluggableBot
 		{
 		public:
 			/**
-			* Zwraca nazwê parametru.
+			* Nazwê parametru.
 			*/
-			const std::wstring& GetName() const
-			{
-
-			}
+			const std::wstring Name;
 
 			/**
 			* Zwraca wartoœæ parametru.
 			*/
-			const std::wstring& GetValue() const
-			{
+			const std::wstring Value;
 
-			}
+			/**
+			 * Inicjalizuje obiekt.
+			 */
+			CommandParameter(const std::wstring& name, const std::wstring& value)
+				: Name(name), Value(value)
+			{ }
 		};
 
 		/**
@@ -39,31 +40,30 @@ namespace PluggableBot
 		{
 		public:
 			/**
+			* Nazwê komendy, nawet jeœli by³a to komenda pe³notekstowa i nie uda³o siê
+			* jej inaczej zinterpretowaæ(jest to fragment do pierwszego znaku).
+			*/
+			const std::wstring Name;
+
+			/**
+			* Pe³ny tekst, który by³ u¿yty do parsowania.
+			*/
+			const std::wstring FullText;
+
+			/**
 			* Okreœla, czy uda³o siê dopasowaæ tekst do formatu komendy zwyk³ej.
 			* Jeœli jest fa³szem, oznacza to, ¿e komenda powinna byæ tylko rozwa¿ana
 			* jako pe³notekstowa.
 			*/
-			bool IsSuccess() const
-			{
-
-			}
+			const bool IsSuccess;
 
 			/**
-			* Pobiera pe³ny tekst, który by³ u¿yty do parsowania.
-			*/
-			const std::wstring& GetFullText() const
-			{
-
-			}
-
-			/**
-			* Pobiera nazwê komendy, nawet jeœli by³a to komenda pe³notekstowa i nie uda³o siê
-			* jej inaczej zinterpretowaæ(jest to fragment do pierwszego znaku).
-			*/
-			const std::wstring& GetName() const
-			{
-
-			}
+			 * Inicjalizuje obiekt, który okreœla wynik parsowania komendy
+			 * pe³notekstowej(IsSuccess bêdzie ustawiony na false).
+			 */
+			CommandParseResults(const std::wstring& name, const std::wstring& fullText)
+				: Name(name), FullText(fullText), IsSuccess(false)
+			{ }
 
 			/**
 			* Pobiera iloœæ parametrów, o ile parsowanie siê uda³o.
