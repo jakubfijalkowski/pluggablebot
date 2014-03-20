@@ -43,6 +43,9 @@
     <ClInclude Include="Plugins\IPlugin.h">
       <Filter>Plugins</Filter>
     </ClInclude>
+    <ClInclude Include="Plugins\PluginManager.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

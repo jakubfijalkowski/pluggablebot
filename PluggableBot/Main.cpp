@@ -6,6 +6,7 @@
 #include "Commands/ICommandExecutor.h"
 #include "Messaging/Messenger.h"
 #include "Plugins/IPlugin.h"
+#include "Plugins/PluginManager.h"
 #include "IProtocol.h"
 
 int main()

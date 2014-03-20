@@ -1,0 +1,80 @@
+#pragma once
+#include <string>
+#include <vector>
+#include "IPlugin.h"
+
+namespace PluggableBot
+{
+	namespace Plugins
+	{
+
+		/**
+		 * Klasa zarz¹dzaj¹ca wtyczkami. Odpowiada za ich ³adowanie, konfiguracjê oraz usuwanie,
+		 * gdy ju¿ nie s¹ potrzebne. Udostêpnia te¿ metody agreguj¹ce informacje udostêpniane przez wtyczki.
+		 */
+		class PluginManager
+		{
+		public:
+			/**
+			 * Inicjalizuje obiekt.
+			 *
+			 * \param pluginsPath Œcie¿ka(bezwzglêdna) do folderu z wtyczkami.
+			 */
+			PluginManager(const std::wstring& pluginsPath)
+				: PluginsPath(pluginsPath)
+			{ }
+
+			/*
+			 * Wy³adowuje wtyczki, jeœli nie zosta³y wy³adowane wczeœniej.
+			 */
+			~PluginManager()
+			{
+				if (!this->Plugins.empty())
+					this->Unload();
+			}
+
+			/**
+			 * Pobiera listê wtyczek.
+			 */
+			const std::vector<IPlugin*>* GetPlugins() const
+			{
+				return &this->Plugins;
+			}
+
+			/**
+			 * £aduje wszystkie wtyczki z lokalizacji przekazanej do konstruktora.
+			 */
+			void Load();
+
+			/**
+			 * Konfiguruje wtyczki, wyszukuj¹æ dla nich odpowiednie sekcje w pliku konfiguracyjnym.
+			 * Jeœli sekcja konfiguracyjna dla danej wtyczki nie istnieje, przekazywany jest pusty obiekt.
+			 *
+			 * \param configuration G³ówny wêze³ pliku konfiguracyjnego.
+			 */
+			void Configure(const void* configuration);
+
+			/**
+			 * Zwalnia zasoby po wtyczkach oraz wy³adowuje za³adowane biblioteki.
+			 */
+			void Unload();
+
+			/**
+			 * Pobiera po³¹czon¹ listê komend obs³ugiwanych przez wszystkie wtyczki.
+			 * Innymi s³owy agreguje wszystkie obs³ugiwane komendy.
+			 */
+			std::vector<Commands::CommandPointer> GetCombinedCommands();
+
+			/**
+			 * Pobiera listê protoko³ów obs³ugiwanych przez wszystkie wtyczki.
+			 * Innymi s³owy agreguje wszystkie obs³ugiwane protoko³y.
+			 */
+			std::vector<ProtocolPointer> GetCombinedProtocols();
+
+		private:
+			std::wstring PluginsPath;
+			std::vector<IPlugin*> Plugins;
+		};
+
+	}
+}

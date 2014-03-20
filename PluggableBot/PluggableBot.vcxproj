@@ -74,6 +74,7 @@
     <ClInclude Include="Messaging\IMessage.h" />
     <ClInclude Include="Messaging\Messenger.h" />
     <ClInclude Include="Plugins\IPlugin.h" />
+    <ClInclude Include="Plugins\PluginManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
