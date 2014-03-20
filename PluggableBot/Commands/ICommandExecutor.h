@@ -21,7 +21,7 @@ namespace PluggableBot
 			/**
 			 * Typ okreœlaj¹cy kolekcjê komend.
 			 */
-			typedef std::vector<std::shared_ptr<ICommand>> CommandList;
+			typedef std::vector<CommandPointer> CommandList;
 
 			/**
 			 * Parser u¿ywany przez klasê.
@@ -39,7 +39,7 @@ namespace PluggableBot
 			/**
 			 * Dodaje komendê do listy obs³ugiwanych.
 			 */
-			virtual void AddCommand(std::shared_ptr<ICommand> command);
+			virtual void AddCommand(CommandPointer command);
 
 			/**
 			 * Próbujê wywo³aæ komendê, która jest okreœlona w tekœcie. Rzuca wyj¹tkiem, gdy nie uda siê wykonanie metody.

@@ -5,6 +5,8 @@
 #include "Commands/IParser.h"
 #include "Commands/ICommandExecutor.h"
 #include "Messaging/Messenger.h"
+#include "Plugins/IPlugin.h"
+#include "IProtocol.h"
 
 int main()
 {

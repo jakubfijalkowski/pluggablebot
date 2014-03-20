@@ -73,6 +73,7 @@
     <ClInclude Include="IProtocol.h" />
     <ClInclude Include="Messaging\IMessage.h" />
     <ClInclude Include="Messaging\Messenger.h" />
+    <ClInclude Include="Plugins\IPlugin.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 namespace PluggableBot
 {
@@ -27,5 +28,7 @@ namespace PluggableBot
 
 		virtual ~IProtocol() { }
 	};
+
+	typedef std::shared_ptr<IProtocol> ProtocolPointer;
 
 }

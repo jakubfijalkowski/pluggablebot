@@ -10,6 +10,9 @@
     <Filter Include="Messaging">
       <UniqueIdentifier>{2be4c544-0e51-42cd-8a83-51327fee3d2e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plugins">
+      <UniqueIdentifier>{235d2faf-f0ba-48d2-a7b9-de37a58d3e6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\IMatcher.h">
@@ -37,6 +40,9 @@
       <Filter>Messaging</Filter>
     </ClInclude>
     <ClInclude Include="IProtocol.h" />
+    <ClInclude Include="Plugins\IPlugin.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
