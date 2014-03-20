@@ -30,7 +30,7 @@ namespace PluggableBot
 			 * Obiekt bêd¹cy dodatkowymi danymi. Jest opcjonalny(mo¿e byæ nullptr).
 			 */
 			// TODO: zmieniæ typ na w³aœciwy
-			const void const* AdditionalData;
+			const void* const AdditionalData;
 
 			/**
 			 *Inicjalizuje obiekt.
@@ -55,7 +55,7 @@ namespace PluggableBot
 			/**
 			 * IMatcher, który jest odpowiedzialny za dopasowanie wiadomoœci do komendy.
 			 */
-			const IMatcher const* Matcher;
+			IMatcher* const Matcher;
 
 			/**
 			 * Wykonuje metodê i zwraca odpowiedŸ która zostanie dostarczona u¿ytkownikowi.
