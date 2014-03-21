@@ -55,7 +55,16 @@
     <ClInclude Include="Logging\LogFactory.h">
       <Filter>Logging</Filter>
     </ClInclude>
+    <ClInclude Include="Commands\ExecutionContext.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
     <ClInclude Include="UserMessage.h" />
+    <ClInclude Include="Commands\ParseResults.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\CommandExecutionResults.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

@@ -39,7 +39,7 @@ namespace PluggableBot
 			/**
 			 * Dodaje komendê do listy obs³ugiwanych.
 			 */
-			virtual void AddCommand(CommandPointer command);
+			virtual void AddCommand(CommandPointer command) = 0;
 
 			/**
 			 * Próbujê wywo³aæ komendê, która jest okreœlona w tekœcie. Rzuca wyj¹tkiem, gdy nie uda siê wykonanie metody.

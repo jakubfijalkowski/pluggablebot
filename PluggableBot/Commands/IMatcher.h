@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "IParser.h"
+#include "ExecutionContext.h"
 
 namespace PluggableBot
 {
@@ -8,10 +8,10 @@ namespace PluggableBot
 	{
 
 		/**
-		* Klasy implementuj¹ce ten interfejs s¹ odpowiedzialne za dopasowywanie tekstu do komend.
-		* S¹ odpowiedzialne tylko za okreœlenie, czy komenda jest pe³no tekstowa, czy nie
-		* oraz stwierdzenie, czy komenda pasuje.
-		*/
+		 * Klasy implementuj¹ce ten interfejs s¹ odpowiedzialne za dopasowywanie tekstu do komend.
+		 * S¹ odpowiedzialne tylko za okreœlenie, czy komenda jest pe³no tekstowa, czy nie
+		 * oraz stwierdzenie, czy komenda pasuje.
+		 */
 		class IMatcher
 		{
 		public:
@@ -23,9 +23,9 @@ namespace PluggableBot
 			/**
 			 * Próbuje dopasowaæ wynik parsowania do komendy.
 			 * Jeœli komenda jest pe³no tekstowa(IsFullText zwraca true), implementacje tej metody
-			 * powinny pracowaæ na CommandParseResult.GetFullText, jeœli nie - na pozosta³ych parametrach.
+			 * powinny pracowaæ na ExecutionContext::Message::FullText, jeœli nie - na pozosta³ych parametrach.
 			 */
-			virtual bool Matches(const CommandParseResults& results) = 0;
+			virtual bool Matches(const ExecutionContext& context) = 0;
 
 			virtual ~IMatcher() { }
 
