@@ -73,6 +73,7 @@
     <ClInclude Include="IProtocol.h" />
     <ClInclude Include="Logging\ILogger.h" />
     <ClInclude Include="Logging\LogFactory.h" />
+    <ClInclude Include="UserMessage.h" />
     <ClInclude Include="Messaging\IMessage.h" />
     <ClInclude Include="Messaging\Messenger.h" />
     <ClInclude Include="Plugins\IPlugin.h" />

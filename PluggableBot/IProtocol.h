@@ -15,6 +15,11 @@ namespace PluggableBot
 	class IProtocol
 	{
 	public:
+		/**
+		 * Nazwa protoko³u, która mo¿e byæ u¿ywana do, np., filtracji wiadomoœci albo u¿ywana do logowania.
+		 */
+		const std::wstring Name;
+
 		/*
 		 * Rozpoczyna pracê obiektu obs³uguj¹cego protokó³. Nie powinno zabieraæ zbyt du¿o czasu
 		 * i jak najszybciej przekierowaæ obs³ugê na osobny w¹tek.
@@ -27,6 +32,11 @@ namespace PluggableBot
 		virtual void Stop() = 0;
 
 		virtual ~IProtocol() { }
+
+	protected:
+		IProtocol(const std::wstring& name)
+			: Name(name)
+		{ }
 	};
 
 	typedef std::shared_ptr<IProtocol> ProtocolPointer;

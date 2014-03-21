@@ -55,6 +55,7 @@
     <ClInclude Include="Logging\LogFactory.h">
       <Filter>Logging</Filter>
     </ClInclude>
+    <ClInclude Include="UserMessage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
