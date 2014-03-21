@@ -54,11 +54,29 @@ namespace PluggableBot
 			}
 
 			/**
+			 * Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Debug.
+			 */
+			template<typename... Args>
+			void Debug(const std::wstring& foramt, const Args&... args)
+			{
+
+			}
+
+			/**
 			* Loguje informacje o poziomie LogLevel::Information.
 			*/
 			void Information(const std::wstring& message)
 			{
 				this->Log(LogLevel::Information, message);
+			}
+
+			/**
+			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Information.
+			*/
+			template<typename... Args>
+			void Information(const std::wstring& foramt, const Args&... args)
+			{
+
 			}
 
 			/**
@@ -70,6 +88,15 @@ namespace PluggableBot
 			}
 
 			/**
+			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Warning.
+			*/
+			template<typename... Args>
+			void Warning(const std::wstring& foramt, const Args&... args)
+			{
+
+			}
+
+			/**
 			* Loguje informacje o poziomie LogLevel::Error.
 			*/
 			void Error(const std::wstring& message)
@@ -78,11 +105,29 @@ namespace PluggableBot
 			}
 
 			/**
+			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Error.
+			*/
+			template<typename... Args>
+			void Error(const std::wstring& foramt, const Args&... args)
+			{
+
+			}
+
+			/**
 			* Loguje informacje o poziomie LogLevel::Fatal.
 			*/
 			void Fatal(const std::wstring& message)
 			{
 				this->Log(LogLevel::Fatal, message);
+			}
+
+			/**
+			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Fatal.
+			*/
+			template<typename... Args>
+			void Fatal(const std::wstring& foramt, const Args&... args)
+			{
+
 			}
 
 			/**
