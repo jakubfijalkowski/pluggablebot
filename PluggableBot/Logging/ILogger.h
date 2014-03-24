@@ -131,7 +131,7 @@ namespace PluggableBot
 			}
 
 			/**
-			 * Loguje informacje o podanym poziomie.
+			 * Loguje wiadomoœæ o podanym poziomie.
 			 *
 			 * Metoda ta musi byæ thread-safe, jako i¿ jest g³ówn¹ u¿ywan¹ do zapisu informacji,
 			 * i mo¿e byæ wywo³ywana z wielu w¹tków.

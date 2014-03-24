@@ -63,14 +63,12 @@ namespace PluggableBot
 			void Unload();
 
 			/**
-			 * Pobiera po³¹czon¹ listê komend obs³ugiwanych przez wszystkie wtyczki.
-			 * Innymi s³owy agreguje wszystkie obs³ugiwane komendy.
+			 * Agreguje obs³ugiwane komendy z wszystkich wtyczek.
 			 */
 			std::vector<Commands::CommandPointer> GetCombinedCommands();
 
 			/**
-			 * Pobiera listê protoko³ów obs³ugiwanych przez wszystkie wtyczki.
-			 * Innymi s³owy agreguje wszystkie obs³ugiwane protoko³y.
+			 * Agreguje obs³ugiwane protoko³y z wszystkich wtyczek.
 			 */
 			std::vector<ProtocolPointer> GetCombinedProtocols();
 

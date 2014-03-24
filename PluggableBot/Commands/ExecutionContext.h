@@ -36,7 +36,7 @@ namespace PluggableBot
 			 * Wynik parsowania wiadomoœci u¿ytkownika. Dopóki wiadomoœæ nie zosta³a
 			 * sparsowana, jest nullem.
 			 */
-			ParseResultsPointer ParseResult;
+			ParseResultsPointer ParseResults;
 
 			/**
 			 * Inicjalizuje obiekt.

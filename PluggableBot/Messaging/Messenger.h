@@ -48,15 +48,15 @@ namespace PluggableBot
 			/**
 			 * Wysy³a wskazan¹ wiadomoœæ.
 			 */
-			void Push(IMessage* message)
+			void Send(IMessage* message)
 			{
-				this->Push(std::shared_ptr<IMessage>(message));
+				this->Send(std::shared_ptr<IMessage>(message));
 			}
 
 			/**
 			 * Wysy³a wskazan¹ wiadomoœæ.
 			 */
-			void Push(MessagePointer message);
+			void Send(MessagePointer message);
 
 			/**
 			 * Badziej przejrzysta wersja Get(type, 0);

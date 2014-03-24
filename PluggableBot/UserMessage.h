@@ -37,6 +37,6 @@ namespace PluggableBot
 		{ }
 	};
 
-	typedef std::shared_ptr<UserMessage> UserMessagePointer;
+	typedef std::shared_ptr<const UserMessage> UserMessagePointer;
 
 }

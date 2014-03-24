@@ -9,7 +9,7 @@ namespace PluggableBot
 	namespace Commands
 	{
 		/**
-		 * Interfejs okreœlaj¹cy, co klasa, która jest odpowiedzialna za wykonywnie metod, powinna udostêpniaæ.
+		 * Okreœla funkcjonalnoœæ klas wykonuj¹cych komendy.
 		 *
 		 * Klasa przechowuje listê komend oraz informacje o parserze(pochodz¹ce z zewn¹trz). Komendy nie s¹
 		 * przekazywane na w³asnoœæ, poniewa¿ mog¹ pochodziæ z zewnêtrznych bibliotek, co uniemo¿liwia
@@ -47,7 +47,7 @@ namespace PluggableBot
 			 * \exception ExecutionException Rzucane, gdy nie uda siê dobraæ komendy do tekstu, lub wyst¹pi b³¹d w
 			 *			  trakcie wykonywania komendy.
 			 */
-			virtual CommandExecutionResults Execute(std::wstring& text) = 0;
+			virtual CommandExecutionResults Execute(UserMessagePointer message) = 0;
 
 			virtual ~ICommandExecutor() { }
 

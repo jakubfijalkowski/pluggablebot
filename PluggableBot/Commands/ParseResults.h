@@ -26,21 +26,21 @@ namespace PluggableBot
 			typedef std::unique_ptr<ParameterList> ParametersPointer;
 
 			/**
-			 * Nazwê komendy, nawet jeœli by³a to komenda pe³notekstowa i nie uda³o siê
-			 * jej inaczej zinterpretowaæ(jest to fragment do pierwszego znaku).
+			 * Nazwê komendy, nawet jeœli by³a to komenda pe³no tekstowa i nie uda³o siê
+			 * jej inaczej zinterpretowaæ(jest to fragment do pierwszego bia³ego znaku).
 			 */
 			const std::wstring Name;
 
 			/**
 			 * Okreœla, czy uda³o siê dopasowaæ tekst do formatu komendy zwyk³ej.
 			 * Jeœli jest fa³szem, oznacza to, ¿e komenda powinna byæ tylko rozwa¿ana
-			 * jako pe³notekstowa.
+			 * jako pe³no tekstowa.
 			 */
 			const bool IsSuccess;
 
 			/**
 			 * Inicjalizuje obiekt, który okreœla wynik parsowania komendy
-			 * pe³notekstowej(IsSuccess bêdzie ustawiony na false).
+			 * pe³no tekstowej(IsSuccess bêdzie ustawiony na false).
 			 */
 			ParseResults(const std::wstring& name)
 				: Name(name), IsSuccess(false)
