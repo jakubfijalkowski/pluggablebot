@@ -5,6 +5,8 @@
 
 namespace PluggableBot
 {
+	class Application;
+
 	namespace Plugins
 	{
 
@@ -18,10 +20,11 @@ namespace PluggableBot
 			/**
 			 * Inicjalizuje obiekt.
 			 *
+			 * \param application Aplikacja, która u¿ywa managera.
 			 * \param pluginsPath Œcie¿ka(bezwzglêdna) do folderu z wtyczkami.
 			 */
-			PluginManager(const std::wstring& pluginsPath)
-				: PluginsPath(pluginsPath)
+			PluginManager(Application* application, const std::wstring& pluginsPath)
+				: Application(application), PluginsPath(pluginsPath)
 			{ }
 
 			/*
@@ -72,6 +75,7 @@ namespace PluggableBot
 			std::vector<ProtocolPointer> GetCombinedProtocols();
 
 		private:
+			Application* Application;
 			std::wstring PluginsPath;
 			std::vector<IPlugin*> Plugins;
 		};
