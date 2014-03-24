@@ -1,5 +1,7 @@
 #pragma once
 #include <memory>
+#include <list>
+#include <functional>
 #include <Windows.h>
 #include "IMessage.h"
 
@@ -7,6 +9,10 @@ namespace PluggableBot
 {
 	namespace Messaging
 	{
+
+		typedef std::function<bool(IMessage*)> MessagePredicate;
+		typedef std::list<MessagePointer> MessageList;
+		typedef std::shared_ptr<MessageList> MessageListPointer;
 
 		/**
 		 * Pos³aniec, czy te¿ szyna wiadomoœci, który synchronizuje dostêp do g³ównego elementu
@@ -23,6 +29,10 @@ namespace PluggableBot
 		 * musi pomóc, a na pewno skomplikuje implementacje.
 		 * Dodatkowo u¿ywane jest zdarzenie, by powiadomiæ w¹tki oczekuj¹ce na wiadomoœci, ¿e takowe
 		 * nadesz³y.
+		 *
+		 * Kolejnoœæ wiadomoœci nie jest zachowana. Funkcje Get mog¹ zmieniaæ kolejnoœæ wiadomoœci
+		 * na liœcie, by przyspieszyæ usuwanie elementu(zastêpowany jest ostatnim, zamiast przesuniêcia
+		 * wszystkich elementów).
 		 */
 		class Messenger
 		{
@@ -46,17 +56,22 @@ namespace PluggableBot
 			/**
 			 * Wysy³a wskazan¹ wiadomoœæ.
 			 */
-			void Push(std::shared_ptr<IMessage> message);
+			void Push(MessagePointer message);
 
 			/**
-			 * Pobiera jedn¹ wiadomoœæ z listy, o ile istnieje. Jeœli nie ma ¿adnych wiadomoœci
-			 * to zwraca nullptr.
-			 *
-			 * \param type Typ wiadomoœci, której oczekujemy.
+			 * Badziej przejrzysta wersja Get(type, 0);
 			 */
-			std::shared_ptr<IMessage> TryGet(int type)
+			MessagePointer TryGet(int type)
 			{
 				return this->Get(type, 0);
+			}
+
+			/**
+			 * Badziej przejrzysta wersja Get(predicate, 0);
+			 */
+			MessageListPointer TryGet(MessagePredicate predicate)
+			{
+				return this->Get(predicate, 0);
 			}
 
 			/**
@@ -64,8 +79,20 @@ namespace PluggableBot
 			 * i j¹ zwraca. Jeœli czas oczekiwania zostanie przekroczony, zostaje zwrócony nullptr.
 			 *
 			 * \param type Typ wiadomoœci, której oczekujemy.
+			 * \param timeout Maksymalny czas oczekiwania. Domyœlnie nieskoñczonoœæ.
 			 */
-			std::shared_ptr<IMessage> Get(int type, int timeout = INFINITE);
+			MessagePointer Get(int type, int timeout = INFINITE);
+
+			/**
+			 * Wybiera z listy wiadomoœci, które spe³niaj¹ wskazany warunek. Gdy nie ma wiadomoœci
+			 * spe³niaj¹cych takie za³o¿enia, czeka okreœlony czas do pojawienia siê PIERWSZEJ
+			 * wiadomoœci, która mo¿e byæ zwrócona. Gdy czas oczekiwania zostanie przekroczony,
+			 * zostanie zwrócona pusta kolekcja wiadomoœci.
+			 *
+			 * \param predicate Warunek, który musi zostaæ spe³niony, by wiadomoœæ by³a zwrócona.
+			 * \param timeout Maksymalny czas oczekiwania. Domyœlnie nieskoñczonoœæ.
+			 */
+			MessageListPointer Get(MessagePredicate predicate, int timeout = INFINITE);
 		};
 
 	}

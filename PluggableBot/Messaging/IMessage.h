@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 namespace PluggableBot
 {
@@ -27,6 +28,8 @@ namespace PluggableBot
 				: Type(type)
 			{ }
 		};
+
+		typedef std::shared_ptr<IMessage> MessagePointer;
 
 	}
 }
