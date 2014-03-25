@@ -7,7 +7,7 @@ namespace PluggableBot
 {
 	
 	/**
-	 * G³ówna aplikacja, która zarz¹dza poszczególnymi podsystemami aplikacji.
+	 * G³ówna czêœæ aplikacja, która zarz¹dza poszczególnymi podsystemami aplikacji.
 	 * Przed jej uruchomieniem nale¿y zainicjowaæ wszystkie rzeczy, które s¹ pomocniecze,
 	 * np. Logger.
 	 */
@@ -18,14 +18,6 @@ namespace PluggableBot
 		 * Pobiera Commands::ICommandExecutor u¿ywany przez aplikacjê.
 		 */
 		const Commands::ICommandExecutor* GetCommandExecutor()
-		{
-
-		}
-		
-		/**
-		 * Pobiera Commands::IParser u¿ywany przez aplikacjê.
-		 */
-		const Commands::IParser* GetParser()
 		{
 
 		}
@@ -40,7 +32,8 @@ namespace PluggableBot
 
 		/**
 		 * Inicjalizuje aplikacje i jej podsystemy. £aduje konfiguracje, pluginy,
-		 * konfiguruje je i ich zale¿noœci, ale nie startuje obs³ugi protoko³ów.
+		 * konfiguruje je i ich zale¿noœci, ale nie startuje obs³ugi protoko³ów,
+		 * ani ¿adnego z podsystemów.
 		 *
 		 * Rozgraniczenie na inicjalizacjê i uruchomienie istnieje tylko dlatego,
 		 * by uproœciæ kod obu.
@@ -57,7 +50,7 @@ namespace PluggableBot
 		int Run();
 
 		/**
-		 * Wy³¹cza aplikacje, zmusz¹j¹æ g³ówny w¹tek do opuszczenia metody Run.
+		 * Wy³¹cza aplikacje, zmuszaj¹c g³ówny w¹tek do opuszczenia metody Run.
 		 */
 		void Shutdown();
 	};

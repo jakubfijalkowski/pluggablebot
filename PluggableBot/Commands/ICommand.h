@@ -41,7 +41,7 @@ namespace PluggableBot
 			virtual ~ICommand() { }
 		};
 
-		typedef std::shared_ptr<ICommand> CommandPointer;
+		typedef ICommand* CommandPointer;
 
 	}
 }

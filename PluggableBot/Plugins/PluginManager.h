@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <vector>
+#include <list>
 #include "IPlugin.h"
 
 namespace PluggableBot
@@ -65,12 +65,13 @@ namespace PluggableBot
 			/**
 			 * Agreguje obs³ugiwane komendy z wszystkich wtyczek.
 			 */
-			std::vector<Commands::CommandPointer> GetCombinedCommands();
+			std::list<Commands::CommandPointer> GetCombinedCommands();
 
 			/**
 			 * Agreguje obs³ugiwane protoko³y z wszystkich wtyczek.
 			 */
-			std::vector<ProtocolPointer> GetCombinedProtocols();
+			//TODO: zastanowiæ siê nad tym, czy u¿yæ zwyk³ego wskaŸnika, czy shared_ptr, vectora czy listy
+			std::list<ProtocolPointer> GetCombinedProtocols();
 
 		private:
 			Application* Application;

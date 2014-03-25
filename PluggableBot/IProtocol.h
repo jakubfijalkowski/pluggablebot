@@ -11,6 +11,10 @@ namespace PluggableBot
 	 * ¿e i tak w³aœciwa obs³uga dzieje siê na osobnym w¹tku. Ka¿da implementacja
 	 * powinna próbowaæ obs³u¿yæ b³¹d samodzielnie, a gdy to siê nie uda, powinna
 	 * wys³aæ odpowiedni¹ wiadomoœæ, na któr¹ zareaguje aplikacja.
+	 *
+	 * Komunikacja z reszt¹ aplikacji odbywa siê z wykorzystaniem obiektu typu
+	 * Messenger. Klasa powinna tam zapisywaæ wiadomoœci od u¿ytkowników
+	 * jak równie¿ oczekiwaæ na ewentualne wiadomoœci, które ma wys³aæ.
 	 */
 	class IProtocol
 	{
@@ -39,6 +43,6 @@ namespace PluggableBot
 		{ }
 	};
 
-	typedef std::shared_ptr<IProtocol> ProtocolPointer;
+	typedef IProtocol* ProtocolPointer;
 
 }
