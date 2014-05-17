@@ -4,22 +4,27 @@ namespace PluggableBot
 {
 	namespace Messaging
 	{
-
 		Messenger::Messenger()
-			: waitCount(0)
+			: waitCount(0), Logger(Logging::LogFactory::GetLogger("Messenger"))
 		{
 			InitializeCriticalSection(&this->lock);
 			this->newMessageEvent = CreateEvent(nullptr, TRUE, FALSE, TEXT("NewMessage"));
+
+			Logger->Information("Messenger initialized.");
 		}
 
 		Messenger::~Messenger()
 		{
+			Logger->Debug("Deinitializing messenger.");
+
 			CloseHandle(this->newMessageEvent);
 			DeleteCriticalSection(&this->lock);
 		}
 
 		void Messenger::Send(MessagePointer message)
 		{
+			Logger->Debug("Sending message of type: {0}.", message->Type);
+
 			EnterCriticalSection(&this->lock);
 			this->messages.push_back(message);
 			LeaveCriticalSection(&this->lock);

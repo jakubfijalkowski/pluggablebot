@@ -5,6 +5,7 @@
 #include <functional>
 #include <Windows.h>
 #include "IMessage.h"
+#include "../Logging/LogFactory.h"
 
 namespace PluggableBot
 {
@@ -116,6 +117,8 @@ namespace PluggableBot
 		private:
 			void Get(MessagePredicate predicatem, DWORD timeout, MessageListPointer output);
 			bool WaitForNewObject(DWORD timeout);
+
+			const Logging::LoggerPointer Logger;
 
 			std::vector<MessagePointer> messages;
 

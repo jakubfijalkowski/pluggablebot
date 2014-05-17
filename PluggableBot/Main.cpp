@@ -16,6 +16,7 @@
 #include "Plugins/PluginManager.h"
 #include "IProtocol.h"
 #include "UserMessage.h"
+using namespace PluggableBot;
 
 int main()
 {
