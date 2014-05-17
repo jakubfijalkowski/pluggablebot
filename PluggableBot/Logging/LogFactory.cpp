@@ -1,4 +1,3 @@
-#pragma once
 #include "LogFactory.h"
 
 namespace PluggableBot

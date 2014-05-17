@@ -1,4 +1,3 @@
-#pragma once
 #include "IOutput.h"
 #include "format.h"
 
