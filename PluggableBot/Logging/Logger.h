@@ -1,12 +1,14 @@
 #pragma once
 #include <string>
 #include <memory>
+#include <vector>
 #include "format.h"
 
 namespace PluggableBot
 {
 	namespace Logging
 	{
+		class IOutput;
 
 		/**
 		 * Poziom wiadomoœci.
@@ -43,9 +45,13 @@ namespace PluggableBot
 		/**
 		 * Logger - s³u¿y do logowania informacji z wykonywania aplikacji.
 		 */
-		class ILogger
+		class Logger
 		{
 		public:
+			/**
+			 * Inicjalizuje logger o wskazanej nazwie i podanymi wyjœciami.
+			 */
+			Logger(const std::string& name, const std::vector<IOutput*>& outputs);
 
 			/**
 			 * Loguje informacje o poziomie LogLevel::Debug.
@@ -61,7 +67,7 @@ namespace PluggableBot
 			template<typename... Args>
 			void Debug(const std::string& format, const Args&... args)
 			{
-				this->Log(LogLevel::Debug, fmt::Format(format, args));
+				this->Log(LogLevel::Debug, fmt::str(fmt::Format(format, args...)));
 			}
 
 			/**
@@ -76,9 +82,9 @@ namespace PluggableBot
 			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Information.
 			*/
 			template<typename... Args>
-			void Information(const std::string& foramt, const Args&... args)
+			void Information(const std::string& format, const Args&... args)
 			{
-				this->Log(LogLevel::Information, fmt::Format(format, args));
+				this->Log(LogLevel::Information, fmt::str(fmt::Format(format, args...)));
 			}
 
 			/**
@@ -93,9 +99,9 @@ namespace PluggableBot
 			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Warning.
 			*/
 			template<typename... Args>
-			void Warning(const std::string& foramt, const Args&... args)
+			void Warning(const std::string& format, const Args&... args)
 			{
-				this->Log(LogLevel::Warning, fmt::Format(format, args));
+				this->Log(LogLevel::Warning, fmt::str(fmt::Format(format, args...)));
 			}
 
 			/**
@@ -110,9 +116,9 @@ namespace PluggableBot
 			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Error.
 			*/
 			template<typename... Args>
-			void Error(const std::string& foramt, const Args&... args)
+			void Error(const std::string& format, const Args&... args)
 			{
-				this->Log(LogLevel::Error, fmt::Format(format, args));
+				this->Log(LogLevel::Error, fmt::str(fmt::Format(format, args...)));
 			}
 
 			/**
@@ -127,22 +133,24 @@ namespace PluggableBot
 			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Fatal.
 			*/
 			template<typename... Args>
-			void Fatal(const std::string& foramt, const Args&... args)
+			void Fatal(const std::string& format, const Args&... args)
 			{
-				this->Log(LogLevel::Fatal, fmt::Format(format, args));
+				this->Log(LogLevel::Fatal, fmt::str(fmt::Format(format, args...)));
 			}
 
 			/**
-			 * Loguje wiadomoœæ o podanym poziomie.
+			 * Loguje wiadomoœæ o podanym poziomie na wszystkie wyjœcia.
 			 *
-			 * Metoda ta musi byæ thread-safe, jako i¿ jest g³ówn¹ u¿ywan¹ do zapisu informacji,
+			 * Metoda ta musi jest thread-safe, jako i¿ jest g³ówn¹ u¿ywan¹ do zapisu informacji,
 			 * i mo¿e byæ wywo³ywana z wielu w¹tków.
 			 */
-			virtual void Log(LogLevel level, const std::string& message) = 0;
+			void Log(LogLevel level, const std::string& message);
 
-			~ILogger() { }
+		private:
+			std::string name;
+			const std::vector<IOutput*>& outputs;
 		};
 
-		typedef std::unique_ptr<ILogger> LoggerPointer;
+		typedef std::unique_ptr<Logger> LoggerPointer;
 	}
 }

@@ -7,7 +7,7 @@
 #include "Commands/IParser.h"
 #include "Commands/ParseResults.h"
 #include "Exceptions/NotFoundException.h"
-#include "Logging/ILogger.h"
+#include "Logging/Logger.h"
 #include "Logging/IOutput.h"
 #include "Logging/LogFactory.h"
 #include "Messaging/IMessage.h"

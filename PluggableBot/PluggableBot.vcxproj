@@ -76,7 +76,7 @@
     <ClInclude Include="Exceptions\NotFoundException.h" />
     <ClInclude Include="IProtocol.h" />
     <ClInclude Include="Logging\format.h" />
-    <ClInclude Include="Logging\ILogger.h" />
+    <ClInclude Include="Logging\Logger.h" />
     <ClInclude Include="Logging\IOutput.h" />
     <ClInclude Include="Logging\LogFactory.h" />
     <ClInclude Include="UserMessage.h" />
@@ -87,6 +87,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logging\format.cc" />
+    <ClCompile Include="Logging\LogFactory.cpp" />
+    <ClCompile Include="Logging\Logger.cpp" />
     <ClCompile Include="Logging\Outputs.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Messaging\Messenger.cpp" />

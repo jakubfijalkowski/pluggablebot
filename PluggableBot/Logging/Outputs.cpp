@@ -13,11 +13,11 @@ namespace PluggableBot
 		{
 			if (LevelStrings[0].empty())
 			{
-				LevelStrings[(int)LogLevel::Debug] = "[Debug] ";
-				LevelStrings[(int)LogLevel::Information] = "[Info] ";
-				LevelStrings[(int)LogLevel::Warning] = "[Warn] ";
-				LevelStrings[(int)LogLevel::Error] = "[Error] ";
-				LevelStrings[(int)LogLevel::Fatal] = "[Fatal] ";
+				LevelStrings[(int)LogLevel::Debug] = "[Debug]";
+				LevelStrings[(int)LogLevel::Information] = "[Info]";
+				LevelStrings[(int)LogLevel::Warning] = "[Warn]";
+				LevelStrings[(int)LogLevel::Error] = "[Error]";
+				LevelStrings[(int)LogLevel::Fatal] = "[Fatal]";
 			}
 		}
 
@@ -57,7 +57,7 @@ namespace PluggableBot
 			DeleteCriticalSection(&this->writeLock);
 		}
 
-		void ConsoleOutput::Write(LogLevel level, const std::string& message)
+		void ConsoleOutput::Write(LogLevel level, const std::string& loggerName, const std::string& message)
 		{
 			if (this->outHandle != nullptr)
 			{
@@ -78,7 +78,11 @@ namespace PluggableBot
 					break;
 				}
 				DWORD written;
+				WriteConsole(this->outHandle, "[", 1, &written, nullptr);
+				WriteConsole(this->outHandle, loggerName.c_str(), loggerName.length(), &written, nullptr);
+				WriteConsole(this->outHandle, "]", 1, &written, nullptr);
 				WriteConsole(this->outHandle, LevelStrings[(int)level].c_str(), LevelStrings[(int)level].length(), &written, nullptr);
+				WriteConsole(this->outHandle, " ", 1, &written, nullptr);
 				WriteConsole(this->outHandle, message.c_str(), message.length(), &written, nullptr);
 				WriteConsole(this->outHandle, "\n", 1, &written, nullptr);
 				SetConsoleTextAttribute(this->outHandle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
@@ -98,12 +102,14 @@ namespace PluggableBot
 			DeleteCriticalSection(&this->writeLock);
 		}
 
-		void FileOutput::Write(LogLevel level, const std::string& message)
+		void FileOutput::Write(LogLevel level, const std::string& loggerName,  const std::string& message)
 		{
 			EnterCriticalSection(&this->writeLock);
 			std::ofstream(this->fileName, std::ofstream::app | std::ofstream::out)
 				<< "[" << FormatDate() << " " << FormatTime() << "]"
-				<< LevelStrings[(int)level] << message << std::endl;
+				<< "[" << loggerName << "]"
+				<< LevelStrings[(int)level] << " "
+				<< message << std::endl;
 			LeaveCriticalSection(&this->writeLock);
 		}
 

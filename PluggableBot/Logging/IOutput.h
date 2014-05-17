@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <Windows.h>
-#include "ILogger.h"
+#include "Logger.h"
 
 namespace PluggableBot
 {
@@ -17,7 +17,7 @@ namespace PluggableBot
 			/**
 			 * Zapisuje wiadomoœæ do wyjœcia.
 			 */
-			virtual void Write(LogLevel level, const std::string& message) = 0;
+			virtual void Write(LogLevel level, const std::string& loggerName, const std::string& message) = 0;
 		};
 
 		/**
@@ -30,7 +30,7 @@ namespace PluggableBot
 			ConsoleOutput();
 			~ConsoleOutput();
 
-			virtual void Write(LogLevel level, const std::string& message);
+			virtual void Write(LogLevel level, const std::string& loggerName, const std::string& message);
 
 		private:
 			CRITICAL_SECTION writeLock;
@@ -48,7 +48,7 @@ namespace PluggableBot
 			FileOutput(const std::string& fileName);
 			~FileOutput();
 
-			virtual void Write(LogLevel level, const std::string& message);
+			virtual void Write(LogLevel level, const std::string& loggerName, const std::string& message);
 
 		private:
 			std::string fileName;

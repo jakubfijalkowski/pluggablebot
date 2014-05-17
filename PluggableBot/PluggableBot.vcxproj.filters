@@ -49,9 +49,6 @@
     <ClInclude Include="Plugins\PluginManager.h">
       <Filter>Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="Logging\ILogger.h">
-      <Filter>Logging</Filter>
-    </ClInclude>
     <ClInclude Include="Logging\LogFactory.h">
       <Filter>Logging</Filter>
     </ClInclude>
@@ -72,6 +69,9 @@
     <ClInclude Include="Logging\IOutput.h">
       <Filter>Logging</Filter>
     </ClInclude>
+    <ClInclude Include="Logging\Logger.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -82,6 +82,12 @@
       <Filter>Logging</Filter>
     </ClCompile>
     <ClCompile Include="Logging\Outputs.cpp">
+      <Filter>Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\Logger.cpp">
+      <Filter>Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\LogFactory.cpp">
       <Filter>Logging</Filter>
     </ClCompile>
   </ItemGroup>
