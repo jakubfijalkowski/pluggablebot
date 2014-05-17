@@ -4,7 +4,7 @@ namespace PluggableBot
 {
 	namespace Commands
 	{
-		bool SimpleMatcher::Matches(const ExecutionContext& context)
+		bool SimpleMatcher::Matches(const ExecutionContext& context) const
 		{
 			if (!context.ParseResults->IsSuccess || context.ParseResults->Name != this->name)
 			{
@@ -21,7 +21,7 @@ namespace PluggableBot
 			return true;
 		}
 
-		bool RegexMatcher::Matches(const ExecutionContext& context)
+		bool RegexMatcher::Matches(const ExecutionContext& context) const
 		{
 			return std::regex_match(context.Message->Content, this->expression);
 		}

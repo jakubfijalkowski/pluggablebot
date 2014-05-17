@@ -26,7 +26,7 @@ namespace PluggableBot
 			 * Jeœli komenda jest pe³no tekstowa(IsFullText zwraca true), implementacje tej metody
 			 * powinny pracowaæ na ExecutionContext::Message::FullText, jeœli nie - na pozosta³ych parametrach.
 			 */
-			virtual bool Matches(const ExecutionContext& context) = 0;
+			virtual bool Matches(const ExecutionContext& context) const = 0;
 
 			virtual ~IMatcher() { }
 
@@ -50,7 +50,7 @@ namespace PluggableBot
 				: IMatcher(false), name(name), parameters(params)
 			{ }
 
-			virtual bool Matches(const ExecutionContext& context);
+			virtual bool Matches(const ExecutionContext& context) const;
 
 		private:
 			std::string name;
@@ -68,7 +68,7 @@ namespace PluggableBot
 				: IMatcher(true), expression(regexString)
 			{ }
 
-			virtual bool Matches(const ExecutionContext& context);
+			virtual bool Matches(const ExecutionContext& context) const;
 
 		private:
 			std::regex expression;

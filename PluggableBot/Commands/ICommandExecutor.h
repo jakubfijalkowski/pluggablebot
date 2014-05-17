@@ -3,11 +3,13 @@
 #include <memory>
 #include "ICommand.h"
 #include "IParser.h"
+#include "../Logging/LogFactory.h"
 
 namespace PluggableBot
 {
 	namespace Commands
 	{
+
 		/**
 		 * Okreœla funkcjonalnoœæ klas wykonuj¹cych komendy.
 		 *
@@ -34,7 +36,7 @@ namespace PluggableBot
 			 * Lista komend nie jest dostêpna w prosty sposób, poniewa¿ obiekt mo¿e wymagaæ np. dodatkowej
 			 * synchronizacji w dostêpie. Dodatkowo, komendy nie powinny byæ usuwane.
 			 */
-			virtual const CommandList* GetCommands() = 0;
+			virtual const CommandList& GetCommands() = 0;
 			
 			/**
 			 * Dodaje komendê do listy obs³ugiwanych.
@@ -60,6 +62,29 @@ namespace PluggableBot
 			ICommandExecutor(IParser* parser)
 				: Parser(parser)
 			{ }
+		};
+
+		/**
+		 * Domyœlny \a {executor} komend. Spe³nia podstawowe za³o¿enia projektu.
+		 */
+		class DefaultCommandExecutor
+			: public ICommandExecutor
+		{
+		public:
+			DefaultCommandExecutor(IParser* parser);
+
+			virtual const CommandList& GetCommands()
+			{
+				return this->commands;
+			}
+
+			virtual void AddCommand(CommandPointer command);
+			virtual CommandExecutionResults Execute(UserMessagePointer message);
+
+		private:
+			const Logging::LoggerPointer Logger;
+
+			CommandList commands;
 		};
 
 	}
