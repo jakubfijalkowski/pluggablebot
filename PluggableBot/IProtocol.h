@@ -22,7 +22,7 @@ namespace PluggableBot
 		/**
 		 * Nazwa protoko³u, która mo¿e byæ u¿ywana do, np., filtracji wiadomoœci albo u¿ywana do logowania.
 		 */
-		const std::wstring Name;
+		const std::string Name;
 
 		/*
 		 * Rozpoczyna pracê obiektu obs³uguj¹cego protokó³. Nie powinno zabieraæ zbyt du¿o czasu
@@ -38,7 +38,7 @@ namespace PluggableBot
 		virtual ~IProtocol() { }
 
 	protected:
-		IProtocol(const std::wstring& name)
+		IProtocol(const std::string& name)
 			: Name(name)
 		{ }
 	};

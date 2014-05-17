@@ -18,7 +18,7 @@ namespace PluggableBot
 			/**
 			 * Typ listy parametrów(w³aœciwej).
 			 */
-			typedef std::map<std::wstring, std::wstring> ParameterList;
+			typedef std::map<std::string, std::string> ParameterList;
 
 			/**
 			 * Typ u¿ywany do przechowywania i przekazywania listy parametrów.
@@ -29,7 +29,7 @@ namespace PluggableBot
 			 * Nazwê komendy, nawet jeœli by³a to komenda pe³no tekstowa i nie uda³o siê
 			 * jej inaczej zinterpretowaæ(jest to fragment do pierwszego bia³ego znaku).
 			 */
-			const std::wstring Name;
+			const std::string Name;
 
 			/**
 			 * Okreœla, czy uda³o siê dopasowaæ tekst do formatu komendy zwyk³ej.
@@ -42,14 +42,14 @@ namespace PluggableBot
 			 * Inicjalizuje obiekt, który okreœla wynik parsowania komendy
 			 * pe³no tekstowej(IsSuccess bêdzie ustawiony na false).
 			 */
-			ParseResults(const std::wstring& name)
+			ParseResults(const std::string& name)
 				: Name(name), IsSuccess(false)
 			{ }
 
 			/**
 			 * Inicjalizuje obiekt, który okreœla wynik parsowania zwyk³ej komendy.
 			 */
-			ParseResults(const std::wstring& name, ParametersPointer parameters)
+			ParseResults(const std::string& name, ParametersPointer parameters)
 				: Name(name), IsSuccess(true), Parameters(std::move(parameters))
 			{ }
 
@@ -66,7 +66,7 @@ namespace PluggableBot
 			 *
 			 * \param name Nazwa parametru.
 			 */
-			bool HasParameter(const std::wstring& name) const
+			bool HasParameter(const std::string& name) const
 			{
 				return this->Parameters->find(name) != this->Parameters->end();
 			}
@@ -77,7 +77,7 @@ namespace PluggableBot
 			 * \param name Nazwa parametru.
 			 * \exception Exceptions::NotFoundException Rzucany, gdy parametr o wskazanej nazwie nie mo¿e zostaæ znaleziony.
 			 */
-			const std::wstring& GetParameter(const std::wstring& name) const
+			const std::string& GetParameter(const std::string& name) const
 			{
 				auto it = this->Parameters->find(name);
 				if (it == this->Parameters->end())

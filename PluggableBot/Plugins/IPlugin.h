@@ -26,7 +26,7 @@ namespace PluggableBot
 			/**
 			 * Pobiera nazwê wtyczki, u¿ywan¹ m.in. do okreœlenia sekcji w pliku konfiguracyjnym.
 			 */
-			virtual const std::wstring& GetName() = 0;
+			virtual const std::string& GetName() = 0;
 
 			/**
 			 * Konfiguruje wtyczkê, u¿ywaj¹c ustawieñ wczytanych z odpowiedniej sekcji pliku konfiguracyjnego.

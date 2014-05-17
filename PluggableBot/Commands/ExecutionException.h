@@ -20,14 +20,14 @@ namespace PluggableBot
 			/**
 			* Wiadomoœæ.
 			*/
-			const std::wstring Message;
+			const std::string Message;
 
 			/**
 			 * Kod b³êdu.
 			 */
 			const int ErrorCode;
 
-			ExecutionException(const std::wstring& message, int errorCode = 0)
+			ExecutionException(const std::string& message, int errorCode = 0)
 				: Message(message), ErrorCode(errorCode)
 			{ }
 		};

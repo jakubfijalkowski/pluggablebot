@@ -26,7 +26,7 @@ namespace PluggableBot
 			 * Próbuje zinterpretowaæ wiadomoœæ jako komendê. Sposób parsowania jest w opisie klasy.
 			 * \param text Tekst wiadomoœci.
 			 */
-			virtual ParseResultsPointer Parse(const std::wstring& text) = 0;
+			virtual ParseResultsPointer Parse(const std::string& text) = 0;
 
 			virtual ~IParser() { }
 		};

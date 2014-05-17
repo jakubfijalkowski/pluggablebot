@@ -23,7 +23,7 @@ namespace PluggableBot
 			 * Nazwê komendy. U¿ywana tylko w przypadku, gdy u¿ytkownik chce dowiedzieæ siê, jakie
 			 * komendy s¹ dostêpne.
 			 */
-			const std::wstring Name;
+			const std::string Name;
 
 			/**
 			 * Pobiera IMatcher, który jest odpowiedzialny za dopasowanie wiadomoœci do komendy.

@@ -21,7 +21,7 @@ namespace PluggableBot
 			/**
 			 * Treœæ wiadomoœci maj¹cej byæ odpowiedzi¹.
 			 */
-			const std::wstring Message;
+			const std::string Message;
 
 			/**
 			 * Obiekt bêd¹cy dodatkowymi danymi. Jest opcjonalny(mo¿e byæ nullptr).
@@ -32,7 +32,7 @@ namespace PluggableBot
 			/**
 			 * Inicjalizuje obiekt.
 			 */
-			CommandExecutionResults(const std::wstring& message, bool isAsync = false, void* additionalData = nullptr)
+			CommandExecutionResults(const std::string& message, bool isAsync = false, void* additionalData = nullptr)
 				: IsAsync(isAsync), Message(message), AdditionalData(additionalData)
 			{ }
 		};

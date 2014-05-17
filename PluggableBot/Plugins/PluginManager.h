@@ -23,7 +23,7 @@ namespace PluggableBot
 			 * \param application Aplikacja, która u¿ywa managera.
 			 * \param pluginsPath Œcie¿ka(bezwzglêdna) do folderu z wtyczkami.
 			 */
-			PluginManager(Application* application, const std::wstring& pluginsPath)
+			PluginManager(Application* application, const std::string& pluginsPath)
 				: Application(application), PluginsPath(pluginsPath)
 			{ }
 
@@ -75,7 +75,7 @@ namespace PluggableBot
 
 		private:
 			Application* Application;
-			std::wstring PluginsPath;
+			std::string PluginsPath;
 			std::vector<IPlugin*> Plugins;
 		};
 
