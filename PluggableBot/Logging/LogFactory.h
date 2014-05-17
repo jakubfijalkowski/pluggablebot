@@ -24,7 +24,7 @@ namespace PluggableBot
 			 *
 			 * \param name Nazwa loggera.
 			 */
-			static ILogger* GetLogger(const std::string& name);
+			static LoggerPointer GetLogger(const std::string& name);
 
 			/**
 			 * Usuwa wszystkie instancje loggerów.

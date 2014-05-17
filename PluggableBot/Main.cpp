@@ -8,6 +8,7 @@
 #include "Commands/ParseResults.h"
 #include "Exceptions/NotFoundException.h"
 #include "Logging/ILogger.h"
+#include "Logging/IOutput.h"
 #include "Logging/LogFactory.h"
 #include "Messaging/IMessage.h"
 #include "Messaging/Messenger.h"
@@ -18,5 +19,4 @@
 
 int main()
 {
-
 }

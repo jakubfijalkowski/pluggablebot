@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <memory>
+#include "format.h"
 
 namespace PluggableBot
 {
@@ -57,9 +59,9 @@ namespace PluggableBot
 			 * Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Debug.
 			 */
 			template<typename... Args>
-			void Debug(const std::string& foramt, const Args&... args)
+			void Debug(const std::string& format, const Args&... args)
 			{
-
+				this->Log(LogLevel::Debug, fmt::Format(format, args));
 			}
 
 			/**
@@ -76,7 +78,7 @@ namespace PluggableBot
 			template<typename... Args>
 			void Information(const std::string& foramt, const Args&... args)
 			{
-
+				this->Log(LogLevel::Information, fmt::Format(format, args));
 			}
 
 			/**
@@ -93,7 +95,7 @@ namespace PluggableBot
 			template<typename... Args>
 			void Warning(const std::string& foramt, const Args&... args)
 			{
-
+				this->Log(LogLevel::Warning, fmt::Format(format, args));
 			}
 
 			/**
@@ -110,7 +112,7 @@ namespace PluggableBot
 			template<typename... Args>
 			void Error(const std::string& foramt, const Args&... args)
 			{
-
+				this->Log(LogLevel::Error, fmt::Format(format, args));
 			}
 
 			/**
@@ -127,7 +129,7 @@ namespace PluggableBot
 			template<typename... Args>
 			void Fatal(const std::string& foramt, const Args&... args)
 			{
-
+				this->Log(LogLevel::Fatal, fmt::Format(format, args));
 			}
 
 			/**
@@ -141,5 +143,6 @@ namespace PluggableBot
 			~ILogger() { }
 		};
 
+		typedef std::unique_ptr<ILogger> LoggerPointer;
 	}
 }
