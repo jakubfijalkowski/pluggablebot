@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <functional>
 #include "ICommandExecutor.h"
 
 namespace PluggableBot
@@ -19,6 +20,7 @@ namespace PluggableBot
 			else
 			{
 				this->commands.insert(this->commands.begin(), command);
+				this->normalCommandOffset++;
 			}
 		}
 		
@@ -40,7 +42,9 @@ namespace PluggableBot
 			}
 			
 			Logger->Debug("Trying to find an command.");
-			auto command = find_if(this->commands.begin(), this->commands.end(), [&](CommandPointer cmd)
+			auto command = find_if(
+				this->commands.begin() + (context.ParseResults->IsSuccess ? 0 : this->normalCommandOffset),
+				this->commands.end(), [&](CommandPointer cmd)
 			{
 				return cmd->GetMatcher()->Matches(context);
 			});
@@ -51,6 +55,7 @@ namespace PluggableBot
 				throw ExecutionException("Cannot find command for the message.");
 			}
 
+			Logger->Information("Command {0} found. Executing.", (*command)->Name);
 			return (*command)->Execute(context);
 		}
 

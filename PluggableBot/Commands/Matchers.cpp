@@ -6,7 +6,8 @@ namespace PluggableBot
 	{
 		bool SimpleMatcher::Matches(const ExecutionContext& context) const
 		{
-			if (!context.ParseResults->IsSuccess || context.ParseResults->Name != this->name)
+			if (!context.ParseResults->IsSuccess || context.ParseResults->Name != this->name ||
+				context.ParseResults->GetParameterCount() != this->parameters.size())
 			{
 				return false;
 			}

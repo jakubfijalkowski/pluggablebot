@@ -85,6 +85,7 @@ namespace PluggableBot
 			const Logging::LoggerPointer Logger;
 
 			CommandList commands;
+			int normalCommandOffset;
 		};
 
 	}

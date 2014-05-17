@@ -28,7 +28,7 @@ namespace PluggableBot
 			/**
 			 * Pobiera IMatcher, który jest odpowiedzialny za dopasowanie wiadomoœci do komendy.
 			 */
-			virtual const IMatcher* GetMatcher() = 0;
+			virtual const IMatcher* GetMatcher() const = 0;
 
 			/**
 			 * Wykonuje metodê i zwraca odpowiedŸ która zostanie dostarczona u¿ytkownikowi.
@@ -39,6 +39,11 @@ namespace PluggableBot
 			virtual CommandExecutionResults Execute(const ExecutionContext& context) = 0;
 
 			virtual ~ICommand() { }
+
+		protected:
+			ICommand(const std::string& name)
+				: Name(name)
+			{ }
 		};
 
 		typedef std::shared_ptr<ICommand> CommandPointer;
