@@ -9,7 +9,7 @@ namespace PluggableBot
 
 		/**
 		 * Klasy implementuj¹ce ten interfejs s¹ odpowiedzialne za dopasowywanie tekstu do komend.
-		 * S¹ odpowiedzialne tylko za okreœlenie, czy komenda jest pe³no tekstowa, czy nie
+		 * S¹ odpowiedzialne tylko za okreœlenie, czy komenda jest, czy nie, pe³no tekstowa
 		 * oraz stwierdzenie, czy komenda pasuje.
 		 */
 		class IMatcher
@@ -37,6 +37,5 @@ namespace PluggableBot
 				: IsFullText(isFullText)
 			{ }
 		};
-
 	}
 }
