@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <regex>
 #include "ExecutionContext.h"
 
 namespace PluggableBot
@@ -36,6 +37,41 @@ namespace PluggableBot
 			IMatcher(bool isFullText = false)
 				: IsFullText(isFullText)
 			{ }
+		};
+
+		/**
+		 * Bêdzie pasowaæ dla zwyk³ych komend, z okreœlonymi parametrami.
+		 */
+		class SimpleMatcher
+			: public IMatcher
+		{
+		public:
+			SimpleMatcher(const std::string& name, std::initializer_list<std::string> params)
+				: IMatcher(false), name(name), parameters(params)
+			{ }
+
+			virtual bool Matches(const ExecutionContext& context);
+
+		private:
+			std::string name;
+			std::vector<std::string> parameters;
+		};
+
+		/**
+		 * Bêdzie pasowaæ dla komend spe³niaj¹cych podane wyra¿enie regularne.
+		 */
+		class RegexMatcher
+			: public IMatcher
+		{
+		public:
+			RegexMatcher(const std::string& regexString)
+				: IMatcher(true), expression(regexString)
+			{ }
+
+			virtual bool Matches(const ExecutionContext& context);
+
+		private:
+			std::regex expression;
 		};
 	}
 }

@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Commands\DefaultParser.cpp" />
+    <ClCompile Include="Commands\Matchers.cpp" />
     <ClCompile Include="Logging\format.cc" />
     <ClCompile Include="Logging\LogFactory.cpp" />
     <ClCompile Include="Logging\Logger.cpp" />

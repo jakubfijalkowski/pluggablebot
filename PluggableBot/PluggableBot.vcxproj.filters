@@ -93,5 +93,8 @@
     <ClCompile Include="Commands\DefaultParser.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="Commands\Matchers.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
