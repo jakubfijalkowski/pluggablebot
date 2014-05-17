@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <list>
+#include <vector>
 #include <functional>
 #include <Windows.h>
 #include "IMessage.h"
@@ -33,24 +34,42 @@ namespace PluggableBot
 		 * Kolejnoœæ wiadomoœci nie jest zachowana. Funkcje Get mog¹ zmieniaæ kolejnoœæ wiadomoœci
 		 * na liœcie, by przyspieszyæ usuwanie elementu(zastêpowany jest ostatnim, zamiast przesuniêcia
 		 * wszystkich elementów).
+		 *
+		 * Problemy z implementacj¹:
+		 * Przez u¿ycie smart pointerów i szablonów, biblioteki DLL musz¹ byæ kompilowane z t¹ sam¹
+		 * implementacj¹ CRT(czyli tak naprawdê w konkretnej wersji Visual Studio).
 		 */
 		class Messenger
 		{
 		public:
 			/**
-			 * Wysy³a now¹ pust¹ wiadomoœæ o wskazanym typie.
+			 * Inicjalizuje nowy obiekt.
 			 */
-			template<typename TMessage> void Send()
+			Messenger();
+
+			/**
+			 * Czyœci po obiekcie.
+			 */
+			~Messenger();
+
+			/**
+			 * Wysy³a now¹ pust¹ wiadomoœæ o wskazanym typie.
+			 *
+			 * UWAGA! Mo¿e spowodowaæ problem z dealokacj¹ w niew³aœciwym miejscu(DLL boundary)
+			 */
+			template<typename TMessage>
+			void Send()
 			{
-				this->Send(new TMessage());
+				this->Send(MessagePointer(new TMessage(), MessageDeleter<TMessage>()));
 			}
 
 			/**
-			 * Wysy³a wskazan¹ wiadomoœæ.
+			 * Wysy³a wskazan¹ wiadomoœæ, opakowuj¹c obiekt w shared_ptr.
 			 */
-			void Send(IMessage* message)
+			template<typename TMessage>
+			void Send(TMessage* message)
 			{
-				this->Send(std::shared_ptr<IMessage>(message));
+				this->Send(MessagePointer(message));
 			}
 
 			/**
@@ -81,7 +100,7 @@ namespace PluggableBot
 			 * \param type Typ wiadomoœci, której oczekujemy.
 			 * \param timeout Maksymalny czas oczekiwania. Domyœlnie nieskoñczonoœæ.
 			 */
-			MessagePointer Get(int type, int timeout = INFINITE);
+			MessagePointer Get(int type, DWORD timeout = INFINITE);
 
 			/**
 			 * Wybiera z listy wiadomoœci, które spe³niaj¹ wskazany warunek. Gdy nie ma wiadomoœci
@@ -92,8 +111,17 @@ namespace PluggableBot
 			 * \param predicate Warunek, który musi zostaæ spe³niony, by wiadomoœæ by³a zwrócona.
 			 * \param timeout Maksymalny czas oczekiwania. Domyœlnie nieskoñczonoœæ.
 			 */
-			MessageListPointer Get(MessagePredicate predicate, int timeout = INFINITE);
-		};
+			MessageListPointer Get(MessagePredicate predicate, DWORD timeout = INFINITE);
 
+		private:
+			void Get(MessagePredicate predicatem, DWORD timeout, MessageListPointer output);
+			bool WaitForNewObject(DWORD timeout);
+
+			std::vector<MessagePointer> messages;
+
+			CRITICAL_SECTION lock;
+			HANDLE newMessageEvent;
+			volatile long waitCount;
+		};
 	}
 }
