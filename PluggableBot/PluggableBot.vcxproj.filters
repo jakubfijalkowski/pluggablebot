@@ -30,9 +30,6 @@
     <ClInclude Include="Commands\IParser.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Commands\ExecutionException.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
     <ClInclude Include="Commands\ICommandExecutor.h">
       <Filter>Commands</Filter>
     </ClInclude>
@@ -71,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="Logging\Logger.h">
       <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Exceptions\ExecutionException.h">
+      <Filter>Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

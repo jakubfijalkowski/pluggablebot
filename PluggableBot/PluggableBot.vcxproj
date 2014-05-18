@@ -67,12 +67,12 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Commands\CommandExecutionResults.h" />
     <ClInclude Include="Commands\ExecutionContext.h" />
-    <ClInclude Include="Commands\ExecutionException.h" />
     <ClInclude Include="Commands\ICommand.h" />
     <ClInclude Include="Commands\ICommandExecutor.h" />
     <ClInclude Include="Commands\IMatcher.h" />
     <ClInclude Include="Commands\IParser.h" />
     <ClInclude Include="Commands\ParseResults.h" />
+    <ClInclude Include="Exceptions\ExecutionException.h" />
     <ClInclude Include="Exceptions\NotFoundException.h" />
     <ClInclude Include="IProtocol.h" />
     <ClInclude Include="Logging\format.h" />

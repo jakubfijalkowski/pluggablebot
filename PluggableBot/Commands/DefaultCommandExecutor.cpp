@@ -52,7 +52,7 @@ namespace PluggableBot
 			if (command == this->commands.end())
 			{
 				Logger->Warning("Cannot find command for message: {0}.", context.ParseResults->Name);
-				throw ExecutionException("Cannot find command for the message.");
+				throw Exceptions::ExecutionException("Cannot find command for the message.");
 			}
 
 			Logger->Information("Command {0} found. Executing.", (*command)->Name);

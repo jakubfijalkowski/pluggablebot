@@ -3,7 +3,7 @@
 #include "IMatcher.h"
 #include "CommandExecutionResults.h"
 #include "ExecutionContext.h"
-#include "ExecutionException.h"
+#include "../Exceptions/ExecutionException.h"
 
 namespace PluggableBot
 {

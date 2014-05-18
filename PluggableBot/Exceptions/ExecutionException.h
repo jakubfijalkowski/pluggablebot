@@ -4,13 +4,13 @@
 
 namespace PluggableBot
 {
-	namespace Commands
+	namespace Exceptions
 	{
 
 		/**
 		 * Wyj¹tek rzucany, gdy nie uda siê wykonaæ komendy.
 		 *
-		 * Zawiera podstawowe informacje o b³êdzie, tj. wiadomoœæ(Message) i ewentualny kod,
+		 * Zawiera podstawowe informacje o b³êdzie, tj. wiadomoœæ i ewentualny kod,
 		 * który jest zwracany jako dodatkowa wartoœæ.
 		 */
 		class ExecutionException
@@ -18,17 +18,12 @@ namespace PluggableBot
 		{
 		public:
 			/**
-			* Wiadomoœæ.
-			*/
-			const std::string Message;
-
-			/**
 			 * Kod b³êdu.
 			 */
 			const int ErrorCode;
 
 			ExecutionException(const std::string& message, int errorCode = 0)
-				: Message(message), ErrorCode(errorCode)
+				: std::exception(message.c_str()), ErrorCode(errorCode)
 			{ }
 		};
 
