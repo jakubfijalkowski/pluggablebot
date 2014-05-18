@@ -32,13 +32,15 @@ namespace PluggableBot
 			Logger->Debug("Loading plugins.");
 
 			char fullPath[MAX_PATH * 2 + 1] = { 0 };
-			DWORD length = GetFullPathNameA(this->pluginsPath.c_str(), MAX_PATH * 2, fullPath, nullptr);
+			char searchQuery[MAX_PATH * 2 + 1] = { 0 };
+
+			GetFullPathNameA(this->pluginsPath.c_str(), MAX_PATH * 2, fullPath, nullptr);
+			strcpy_s(searchQuery, fullPath);
+			strcat_s(searchQuery, "\\*.dll");
+
 			Logger->Information("Listing plugins in path '{0}'.", fullPath);
-
-			strcat_s(fullPath, "\\*.dll");
-
 			WIN32_FIND_DATAA ffd;
-			HANDLE hFind = FindFirstFileA(fullPath, &ffd);
+			HANDLE hFind = FindFirstFileA(searchQuery, &ffd);
 
 			if (hFind == INVALID_HANDLE_VALUE)
 			{
@@ -48,7 +50,7 @@ namespace PluggableBot
 
 			do
 			{
-				this->LoadPlugin(ffd.cFileName);
+				this->LoadPlugin(fullPath, ffd.cFileName);
 			} while (FindNextFile(hFind, &ffd));
 
 			DWORD lastError = GetLastError();
@@ -72,15 +74,22 @@ namespace PluggableBot
 				std::get<2>(t)(std::get<0>(t));
 				FreeLibrary(std::get<1>(t));
 			}
+			this->plugins.clear();
 			Logger->Information("All plugins unloaded.");
 		}
 
-		void PluginManager::LoadPlugin(const char* path)
+		void PluginManager::LoadPlugin(const char* pluginsPath, const char* pluginName)
 		{
-			HMODULE module = LoadLibrary(path);
+			char fullPath[MAX_PATH * 2 + 1];
+			strcpy_s(fullPath, pluginsPath);
+			strcat_s(fullPath, "\\");
+			strcat_s(fullPath, pluginName);
+
+			Logger->Debug("Loading module {0} from path '{1}'.", pluginName, fullPath);
+			HMODULE module = LoadLibrary(fullPath);
 			if (module == nullptr)
 			{
-				Logger->Warning("Cannot load library {0}. Error: {1}.", path, GetLastError());
+				Logger->Warning("Cannot load library {0}. Error: {1}.", pluginName, GetLastError());
 				return;
 			}
 
@@ -89,7 +98,7 @@ namespace PluggableBot
 
 			if (createMethod == nullptr || deleteMethod == nullptr)
 			{
-				Logger->Warning("Module {0} does not have CreatePlugin/DeletePlugin methods!", path);
+				Logger->Warning("Module {0} does not have CreatePlugin/DeletePlugin methods!", pluginName);
 				return;
 			}
 
@@ -97,7 +106,7 @@ namespace PluggableBot
 
 			if (plugin == nullptr)
 			{
-				Logger->Warning("CreatePlugin of {0} did not return valid IPlugin object.", path);
+				Logger->Warning("CreatePlugin of {0} did not return valid IPlugin object.", pluginName);
 				return;
 			}
 
@@ -105,7 +114,7 @@ namespace PluggableBot
 			this->plugins.push_back(std::make_tuple(plugin, module, deleteMethod));
 
 			Logger->Debug("Configuring plugin.");
-			plugin->Configure(this->configuration.get<jsonxx::Object>(plugin->GetName()));
+			plugin->Configure(this->configuration.get<jsonxx::Object>(plugin->GetName(), jsonxx::Object()));
 		}
 
 	}

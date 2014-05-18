@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <list>
+#include <vector>
 #include <memory>
 #include "../Commands/ICommand.h"
 #include "../IProtocol.h"
@@ -25,10 +25,13 @@ namespace PluggableBot
 		class IPlugin
 		{
 		public:
+			typedef std::vector<Commands::CommandPointer> CommandList;
+			typedef std::vector<ProtocolPointer> ProtocolList;
+
 			/**
 			 * Pobiera nazwê wtyczki, u¿ywan¹ m.in. do okreœlenia sekcji w pliku konfiguracyjnym.
 			 */
-			virtual const std::string& GetName() = 0;
+			virtual const std::string& GetName() const = 0;
 
 			/**
 			 * Konfiguruje wtyczkê, u¿ywaj¹c ustawieñ wczytanych z odpowiedniej sekcji pliku konfiguracyjnego.
@@ -38,12 +41,12 @@ namespace PluggableBot
 			/**
 			 * Pobiera listê komend obs³ugiwanych przez wtyczkê.
 			 */
-			virtual const std::list<Commands::CommandPointer>* GetSupportedCommands() = 0;
+			virtual const CommandList* GetSupportedCommands() const = 0;
 
 			/**
 			 * Pobiera listê protoko³ów obs³ugiwanych przez wtyczkê.
 			 */
-			virtual const std::list<ProtocolPointer>* GetSupportedProtocols() = 0;
+			virtual const ProtocolList* GetSupportedProtocols() const = 0;
 
 			virtual ~IPlugin() { }
 		};

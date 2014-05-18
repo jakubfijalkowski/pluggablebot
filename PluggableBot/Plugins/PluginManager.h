@@ -61,7 +61,7 @@ namespace PluggableBot
 			std::vector<ProtocolPointer> GetCombinedProtocols();
 
 		private:
-			void LoadPlugin(const char* path);
+			void LoadPlugin(const char* pluginsPath, const char* pluginName);
 
 			const Logging::LoggerPointer Logger;
 
