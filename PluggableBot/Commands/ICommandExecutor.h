@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include "../Config.h"
 #include "ICommand.h"
 #include "IParser.h"
 #include "../Logging/LogFactory.h"
@@ -17,7 +18,7 @@ namespace PluggableBot
 		 * przekazywane na w³asnoœæ, poniewa¿ mog¹ pochodziæ z zewnêtrznych bibliotek, co uniemo¿liwia
 		 * zwalnianie ich w sposób domyœlny.
 		 */
-		class ICommandExecutor
+		class PLUGIN_API ICommandExecutor
 		{
 		public:
 			/**
@@ -67,7 +68,7 @@ namespace PluggableBot
 		/**
 		 * Domyœlny \a {executor} komend. Spe³nia podstawowe za³o¿enia projektu.
 		 */
-		class DefaultCommandExecutor
+		class PLUGIN_API DefaultCommandExecutor
 			: public ICommandExecutor
 		{
 		public:

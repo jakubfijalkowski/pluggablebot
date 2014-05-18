@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <regex>
+#include "../Config.h"
 #include "ExecutionContext.h"
 
 namespace PluggableBot
@@ -13,7 +14,7 @@ namespace PluggableBot
 		 * S¹ odpowiedzialne tylko za okreœlenie, czy komenda jest, czy nie, pe³no tekstowa
 		 * oraz stwierdzenie, czy komenda pasuje.
 		 */
-		class IMatcher
+		class PLUGIN_API IMatcher
 		{
 		public:
 			/**
@@ -42,7 +43,7 @@ namespace PluggableBot
 		/**
 		 * Bêdzie pasowaæ dla zwyk³ych komend, z okreœlonymi parametrami.
 		 */
-		class SimpleMatcher
+		class PLUGIN_API SimpleMatcher
 			: public IMatcher
 		{
 		public:
@@ -60,7 +61,7 @@ namespace PluggableBot
 		/**
 		 * Bêdzie pasowaæ dla komend spe³niaj¹cych podane wyra¿enie regularne.
 		 */
-		class RegexMatcher
+		class PLUGIN_API RegexMatcher
 			: public IMatcher
 		{
 		public:

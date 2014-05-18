@@ -79,6 +79,7 @@
     <ClInclude Include="External\jsonxx.h">
       <Filter>External</Filter>
     </ClInclude>
+    <ClInclude Include="Config.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

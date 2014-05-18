@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "Config.h"
 #include "Commands/ICommandExecutor.h"
 #include "Messaging/Messenger.h"
 #include "Plugins/PluginManager.h"
@@ -10,7 +11,7 @@ namespace PluggableBot
 	/**
 	 * Okreœla kontekst aplikacji, czyli wszystkie zale¿noœci z g³ównego poziomu.
 	 */
-	class ApplicationContext
+	class PLUGIN_API ApplicationContext
 	{
 	public:
 		/**

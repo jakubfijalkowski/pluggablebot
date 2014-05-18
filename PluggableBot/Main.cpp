@@ -20,4 +20,13 @@ using namespace PluggableBot;
 
 int main()
 {
+	Logging::LogFactory::AddOutput(new Logging::ConsoleOutput());
+
+	Plugins::PluginManager manager(nullptr);
+	jsonxx::Object o;
+	manager.Configure(o);
+
+	manager.Load();
+	manager.Unload();
+	system("PAUSE");
 }

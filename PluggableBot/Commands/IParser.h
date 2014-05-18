@@ -2,6 +2,7 @@
 #include <string>
 #include <memory>
 #include <map>
+#include "../Config.h"
 #include "ParseResults.h"
 
 namespace PluggableBot
@@ -20,7 +21,7 @@ namespace PluggableBot
 		 * Gdy nie uda siê dopasowaæ tekstu do w/w formatu, parser uznaje, ¿e komenda jest pe³no tekstowa
 		 * i przerywa parsowanie.
 		 */
-		class IParser
+		class PLUGIN_API IParser
 		{
 		public:
 			/**
@@ -35,7 +36,7 @@ namespace PluggableBot
 		/**
 		 * Domyœlna implementacja IParser.
 		 */
-		class DefaultParser
+		class PLUGIN_API DefaultParser
 			: public IParser
 		{
 		public:

@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "../Config.h"
 #include "ParseResults.h"
 #include "../UserMessage.h"
 
@@ -15,7 +16,7 @@ namespace PluggableBot
 		 * Kontekst wykonywania komendy - tworzony zaraz na pocz¹tku procesu, w miarê przechodzenia kolejnych
 		 * etapów, uzupe³niany(np. ParseResult na pocz¹tku jest puste).
 		 */
-		class ExecutionContext
+		class PLUGIN_API ExecutionContext
 		{
 		public:
 			/**

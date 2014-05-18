@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <memory>
+#include "../Config.h"
 #include "../External/jsonxx.h"
 
 namespace PluggableBot
@@ -11,7 +12,7 @@ namespace PluggableBot
 		/**
 		 * Wynik wykonywania komendy. Zawiera treœæ odpowiedzi i opcjonalny obiekt bêd¹cy dodatkowymi danymi(JSON).
 		 */
-		class CommandExecutionResults
+		class PLUGIN_API CommandExecutionResults
 		{
 		public:
 			/**
@@ -27,12 +28,12 @@ namespace PluggableBot
 			/**
 			 * Obiekt bêd¹cy dodatkowymi danymi. Jest opcjonalny(mo¿e byæ nullptr).
 			 */
-			const std::unique_ptr<const jsonxx::Object> AdditionalData;
+			const std::shared_ptr<const jsonxx::Object> AdditionalData;
 
 			/**
 			 * Inicjalizuje obiekt.
 			 */
-			CommandExecutionResults(const std::string& message, bool isAsync = false, const jsonxx::Object* additionalData = nullptr)
+			CommandExecutionResults(const std::string& message, bool isAsync = false, std::shared_ptr<const jsonxx::Object> additionalData = nullptr)
 				: IsAsync(isAsync), Message(message), AdditionalData(additionalData)
 			{ }
 		};

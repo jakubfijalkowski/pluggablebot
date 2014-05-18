@@ -73,6 +73,7 @@
     <ClInclude Include="Commands\IMatcher.h" />
     <ClInclude Include="Commands\IParser.h" />
     <ClInclude Include="Commands\ParseResults.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="Exceptions\ExecutionException.h" />
     <ClInclude Include="Exceptions\NotFoundException.h" />
     <ClInclude Include="External\format.h" />

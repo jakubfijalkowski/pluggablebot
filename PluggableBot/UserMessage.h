@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <memory>
+#include "Config.h"
 #include "IProtocol.h"
 
 namespace PluggableBot
@@ -9,7 +10,7 @@ namespace PluggableBot
 	/**
 	 * Okreœla wiadomoœæ otrzyman¹ od u¿ytkownika.
 	 */
-	class UserMessage
+	class PLUGIN_API UserMessage
 	{
 	public:
 		/**

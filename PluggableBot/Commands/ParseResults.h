@@ -2,6 +2,7 @@
 #include <string>
 #include <memory>
 #include <map>
+#include "../Config.h"
 #include "../Exceptions/NotFoundException.h"
 
 namespace PluggableBot
@@ -12,7 +13,7 @@ namespace PluggableBot
 		/**
 		 * Wynik parsowania wiadomoœci, zwracany przez IParser. Zawiera nazwê oraz wszystkie parametry, które uda³o siê dopasowaæ.
 		 */
-		class ParseResults
+		class PLUGIN_API ParseResults
 		{
 		public:
 			/**

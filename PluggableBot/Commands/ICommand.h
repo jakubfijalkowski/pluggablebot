@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "../Config.h"
 #include "IMatcher.h"
 #include "CommandExecutionResults.h"
 #include "ExecutionContext.h"
@@ -16,7 +17,7 @@ namespace PluggableBot
 		/**
 		 * Interfejs dla komend. Dostarcza podstawowych informacji o komendzie oraz obs³uguje jej wywo³anie.
 		 */
-		class ICommand
+		class PLUGIN_API ICommand
 		{
 		public:
 			/**
