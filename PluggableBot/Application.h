@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
-#include "Commands/ICommandExecutor.h"
-#include "Messaging/Messenger.h"
+#include "ApplicationContext.h"
 
 namespace PluggableBot
 {
@@ -15,20 +14,9 @@ namespace PluggableBot
 	{
 	public:
 		/**
-		 * Pobiera Commands::ICommandExecutor u¿ywany przez aplikacjê.
+		 * Pobiera ApplicationContext dla tej instancji.
 		 */
-		const Commands::ICommandExecutor* GetCommandExecutor()
-		{
-
-		}
-
-		/**
-		 * Pobiera Messageing::Messenger u¿ywanego przez aplikacjê.
-		 */
-		const Messaging::Messenger* GetMessenger()
-		{
-
-		}
+		ApplicationContext* const Context;
 
 		/**
 		 * Inicjalizuje aplikacje i jej podsystemy. £aduje konfiguracje, pluginy,

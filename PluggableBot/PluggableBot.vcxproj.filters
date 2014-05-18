@@ -72,6 +72,7 @@
     <ClInclude Include="Exceptions\ExecutionException.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
+    <ClInclude Include="ApplicationContext.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

@@ -15,7 +15,7 @@ namespace PluggableBot
 		 *
 		 * Klasa przechowuje listê komend oraz informacje o parserze(pochodz¹ce z zewn¹trz). Komendy nie s¹
 		 * przekazywane na w³asnoœæ, poniewa¿ mog¹ pochodziæ z zewnêtrznych bibliotek, co uniemo¿liwia
-		 * zwalnianie ich w sposób domyœlny - st¹d shared_ptr.
+		 * zwalnianie ich w sposób domyœlny.
 		 */
 		class ICommandExecutor
 		{

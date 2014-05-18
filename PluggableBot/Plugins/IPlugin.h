@@ -7,6 +7,8 @@
 
 namespace PluggableBot
 {
+	class ApplicationContext;
+
 	namespace Plugins
 	{
 
@@ -52,7 +54,7 @@ namespace PluggableBot
 		 * Metoda ta powinna byæ dodatkowo "nieozdobiona"(tj. eksportowana w stylu C)
 		 * oraz oznaczona atrybutem \a dllexport albo eksportowana "rêcznie".
 		 */
-		typedef IPlugin* (*CreatePluginMethod)();
+		typedef IPlugin* (*CreatePluginMethod)(ApplicationContext* context);
 
 		/**
 		 * Okreœla sygnaturê metody u¿ywanej przez loader do zwolnienia wtyczki.

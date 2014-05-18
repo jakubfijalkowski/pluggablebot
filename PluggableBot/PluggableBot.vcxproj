@@ -65,6 +65,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="ApplicationContext.h" />
     <ClInclude Include="Commands\CommandExecutionResults.h" />
     <ClInclude Include="Commands\ExecutionContext.h" />
     <ClInclude Include="Commands\ICommand.h" />
