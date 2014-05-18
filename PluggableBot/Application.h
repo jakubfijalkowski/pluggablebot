@@ -1,6 +1,8 @@
 #pragma once
 #include <memory>
 #include "ApplicationContext.h"
+#include "Logging/LogFactory.h"
+#include "External/jsonxx.h"
 
 namespace PluggableBot
 {
@@ -13,11 +15,6 @@ namespace PluggableBot
 	class Application
 	{
 	public:
-		/**
-		 * Pobiera ApplicationContext dla tej instancji.
-		 */
-		ApplicationContext* const Context;
-
 		/**
 		 * Inicjalizuje aplikacje i jej podsystemy. £aduje konfiguracje, pluginy,
 		 * konfiguruje je i ich zale¿noœci, ale nie startuje obs³ugi protoko³ów,
@@ -39,8 +36,24 @@ namespace PluggableBot
 
 		/**
 		 * Wy³¹cza aplikacje, zmuszaj¹c g³ówny w¹tek do opuszczenia metody Run.
+		 *
+		 * Mo¿e byæ wywo³ana asynchronicznie.
 		 */
 		void Shutdown();
+
+		/**
+		 * Czyœci obiekt po zakoñczeniu dzia³ania. Wywo³ywane przez g³ówny w¹tek zaraz po
+		 * opuszczeniu Run.
+		 */
+		void Deinitialize();
+
+	private:
+		Logging::LoggerPointer Logger;
+
+		jsonxx::Object configuration;
+		std::unique_ptr<ApplicationContext> context;
+
+		bool exiting;
 	};
 
 }

@@ -1,32 +1,41 @@
-#include "Commands/CommandExecutionResults.h"
-#include "Commands/ExecutionContext.h"
-#include "Exceptions/ExecutionException.h"
-#include "Commands/ICommand.h"
-#include "Commands/ICommandExecutor.h"
-#include "Commands/IMatcher.h"
-#include "Commands/IParser.h"
-#include "Commands/ParseResults.h"
-#include "Exceptions/NotFoundException.h"
-#include "Logging/Logger.h"
-#include "Logging/IOutput.h"
+#include <Windows.h>
+#include "Application.h"
 #include "Logging/LogFactory.h"
-#include "Messaging/IMessage.h"
-#include "Messaging/Messenger.h"
-#include "Plugins/IPlugin.h"
-#include "Plugins/PluginManager.h"
-#include "IProtocol.h"
-#include "UserMessage.h"
 using namespace PluggableBot;
+using namespace PluggableBot::Logging;
+
+static Application GlobalApplication;
+
+BOOL WINAPI CtrlCHandler(DWORD dwCtrlType)
+{
+	GlobalApplication.Shutdown();
+	return TRUE;
+}
 
 int main()
 {
-	Logging::LogFactory::AddOutput(new Logging::ConsoleOutput());
+#ifdef _DEBUG
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetBreakAlloc( 670 );
+#endif  
 
-	Plugins::PluginManager manager(nullptr);
-	jsonxx::Object o;
-	manager.Configure(o);
+	SetConsoleCtrlHandler(CtrlCHandler, TRUE);
 
-	manager.Load();
-	manager.Unload();
-	system("PAUSE");
+	LogFactory::AddOutput(new ConsoleOutput());
+	//TODO: add logging to file.
+
+	auto logger = LogFactory::GetLogger("Main");
+	logger->Information("Application started. You can stop it using Ctrl+C combination.");
+	logger->Debug("Starting main application.");
+
+	GlobalApplication.Initialize();
+	logger->Debug("Application initialized. Starting main loop.");
+
+	auto exitCode = GlobalApplication.Run();
+	logger->Information("Main loop stopped. Exiting.");
+
+	GlobalApplication.Deinitialize();
+
+	LogFactory::Unload();
+	return exitCode;
 }

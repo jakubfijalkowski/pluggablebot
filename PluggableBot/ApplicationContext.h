@@ -16,66 +16,41 @@ namespace PluggableBot
 	{
 	public:
 		/**
-		 * Commands::ICommandExecutor u¿ywany przez aplikacjê.
-		 */
-		Commands::ICommandExecutor* GetCommandExecutor()
-		{
-			return this->executor.get();
-		}
+		* Messaging::Messenger u¿ywany przez aplikacjê.
+		*/
+		Messaging::Messenger* const Messenger;
 
 		/**
-		 * Messaging::Messenger u¿ywany przez aplikacjê.
+		 * Commands::ICommandExecutor u¿ywany przez aplikacjê.
 		 */
-		Messaging::Messenger* GetMessenger()
-		{
-			return this->messenger.get();
-		}
+		Commands::ICommandExecutor* const CommandExecutor;
 
 		/**
 		 * Plugins::PluginManager u¿ywany przez aplikacjê
 		 */
 		Plugins::PluginManager* GetPlugins()
 		{
-			return this->plugins.get();
+			return this->plugins;
 		}
 
 		/**
-		 * Ustawia u¿ywany Commands::ICommandExecutor. Przekazywany na w³asnoœæ.
+		 * Inicializuje kontekst aplikacji.
 		 */
-		ApplicationContext& Set(Commands::ICommandExecutor* executor)
-		{
-			assert(!this->executor);
-			std::unique_ptr<Commands::ICommandExecutor> tmp(executor);
-			this->executor = std::move(tmp);
-			return *this;
-		}
+		ApplicationContext(Messaging::Messenger* messenger, Commands::ICommandExecutor* executor)
+			: Messenger(messenger), CommandExecutor(executor), plugins(nullptr)
+		{ }
 
 		/**
-		 * Ustawia u¿ywany Messaging::Messenger. Przekazywany na w³asnoœæ.
+		 * Ustawia Plugins::PluginManager, który musi byæ tworzony po utworzeniu ApplicationContext.
 		 */
-		ApplicationContext& Set(Messaging::Messenger* messenger)
+		void Set(Plugins::PluginManager* plugins)
 		{
-			assert(!this->messenger);
-			std::unique_ptr<Messaging::Messenger> tmp(messenger);
-			this->messenger = std::move(tmp);
-			return *this;
-		}
-
-		/**
-		 * Ustawia u¿ywany Plugins::PluginManager. Przekazywany na w³asnoœæ.
-		 */
-		ApplicationContext& Set(Plugins::PluginManager* plugins)
-		{
-			assert(!this->plugins);
-			std::unique_ptr<Plugins::PluginManager> tmp(plugins);
-			this->plugins = std::move(tmp);
-			return *this;
+			assert(this->plugins == nullptr);
+			this->plugins = plugins;
 		}
 
 	private:
-		std::unique_ptr<Commands::ICommandExecutor> executor;
-		std::unique_ptr<Messaging::Messenger> messenger;
-		std::unique_ptr<Plugins::PluginManager> plugins;
+		Plugins::PluginManager* plugins;
 	};
 
 }

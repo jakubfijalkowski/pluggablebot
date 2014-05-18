@@ -89,6 +89,7 @@
     <ClInclude Include="Plugins\PluginManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="Commands\DefaultCommandExecutor.cpp" />
     <ClCompile Include="Commands\DefaultParser.cpp" />
     <ClCompile Include="Commands\Matchers.cpp" />
