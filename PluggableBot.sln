@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PluggableBot", "PluggableBot\PluggableBot.vcxproj", "{793B6C5C-C9B2-45D2-834B-426CC8AB550E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StatelessCommands", "StatelessCommands\StatelessCommands.vcxproj", "{95427FED-56D7-4AF2-BC93-175622F2F8AF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{793B6C5C-C9B2-45D2-834B-426CC8AB550E} = {793B6C5C-C9B2-45D2-834B-426CC8AB550E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

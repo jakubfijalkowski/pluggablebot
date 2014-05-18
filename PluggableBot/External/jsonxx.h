@@ -13,6 +13,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include "../Config.h"
 
 // jsonxx versioning: major.minor-extra where
 // major = { number }
@@ -70,23 +71,23 @@ class Array;
 
 // Identity meta-function
 template <typename T>
-struct identity {
+struct PLUGIN_API identity {
   typedef T type;
 };
 
 // Tools
-bool validate( const std::string &input );
-bool validate( std::istream &input );
-std::string reformat( const std::string &input );
-std::string reformat( std::istream &input );
-std::string xml( const std::string &input, unsigned format = JSONx );
-std::string xml( std::istream &input, unsigned format = JSONx );
+PLUGIN_API bool validate(const std::string &input);
+PLUGIN_API bool validate(std::istream &input);
+PLUGIN_API std::string reformat(const std::string &input);
+PLUGIN_API std::string reformat(std::istream &input);
+PLUGIN_API std::string xml(const std::string &input, unsigned format = JSONx);
+PLUGIN_API std::string xml(std::istream &input, unsigned format = JSONx);
 
 // Detail
-void assertion( const char *file, int line, const char *expression, bool result );
+PLUGIN_API void assertion(const char *file, int line, const char *expression, bool result);
 
 // A JSON Object
-class Object {
+class PLUGIN_API Object {
  public:
   Object();
   ~Object();
@@ -136,7 +137,7 @@ class Object {
   std::string odd;
 };
 
-class Array {
+class PLUGIN_API Array {
  public:
   Array();
   ~Array();
@@ -181,7 +182,7 @@ class Array {
 
 // A value could be a number, an array, a string, an object, a
 // boolean, or null
-class Value {
+class PLUGIN_API Value {
  public:
 
   Value();
