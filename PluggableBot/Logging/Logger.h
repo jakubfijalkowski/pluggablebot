@@ -2,6 +2,7 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include "../Config.h"
 #include "../External/format.h"
 
 namespace PluggableBot
@@ -45,7 +46,7 @@ namespace PluggableBot
 		/**
 		 * Logger - s³u¿y do logowania informacji z wykonywania aplikacji.
 		 */
-		class Logger
+		class PLUGIN_API Logger
 		{
 		public:
 			/**

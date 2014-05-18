@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <Windows.h>
+#include "../Config.h"
 #include "Logger.h"
 
 namespace PluggableBot
@@ -11,7 +12,7 @@ namespace PluggableBot
 		/**
 		 * Wyjœcie dla klasy loggera.
 		 */
-		class IOutput
+		class PLUGIN_API IOutput
 		{
 		public:
 			/**

@@ -9,13 +9,17 @@ namespace PluggableBot
 	{
 		using namespace Messaging;
 
-		GGProtocol::GGProtocol(ApplicationContext* context, const jsonxx::Object& config)
+		GGProtocol::GGProtocol(ApplicationContext* context)
 			: IProtocol("Gadu-Gadu"), context(context)
 		{ }
 
-
 		GGProtocol::~GGProtocol()
 		{ }
+
+		bool GGProtocol::Configure(const jsonxx::Object& config)
+		{
+			return false;
+		}
 
 		void GGProtocol::Start()
 		{

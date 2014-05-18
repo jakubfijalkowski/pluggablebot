@@ -16,7 +16,8 @@ namespace PluggableBot
 			: public IProtocol
 		{
 		public:
-			GGProtocol(ApplicationContext* context, const jsonxx::Object& config);
+			GGProtocol(ApplicationContext* context);
+			bool Configure(const jsonxx::Object& config);
 			virtual ~GGProtocol();
 
 			virtual void Start();

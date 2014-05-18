@@ -1,5 +1,6 @@
 #pragma once
 #include <PluggableBot/Plugins/IPlugin.h>
+#include <PluggableBot/Logging/LogFactory.h>
 
 namespace PluggableBot
 {
@@ -23,6 +24,8 @@ namespace PluggableBot
 			virtual const ProtocolList* GetSupportedProtocols() const;
 
 		private:
+			const Logging::LoggerPointer Logger;
+
 			std::string name;
 			ProtocolList suppotedProtocols;
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "../Config.h"
 #include "Logger.h"
 #include "IOutput.h"
 
@@ -14,7 +15,7 @@ namespace PluggableBot
 		 *
 		 * W aktualnej formie nie ma mo¿liwoœci konfiguracji biblioteki.
 		 */
-		class LogFactory
+		class PLUGIN_API LogFactory
 		{
 		public:
 			/**
