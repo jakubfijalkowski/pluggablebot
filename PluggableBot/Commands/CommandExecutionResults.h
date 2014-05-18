@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <memory>
+#include "../External/jsonxx.h"
 
 namespace PluggableBot
 {
@@ -26,13 +27,12 @@ namespace PluggableBot
 			/**
 			 * Obiekt bêd¹cy dodatkowymi danymi. Jest opcjonalny(mo¿e byæ nullptr).
 			 */
-			// TODO: zmieniæ typ na w³aœciwy
-			const void* const AdditionalData;
+			const std::unique_ptr<const jsonxx::Object> AdditionalData;
 
 			/**
 			 * Inicjalizuje obiekt.
 			 */
-			CommandExecutionResults(const std::string& message, bool isAsync = false, void* additionalData = nullptr)
+			CommandExecutionResults(const std::string& message, bool isAsync = false, const jsonxx::Object* additionalData = nullptr)
 				: IsAsync(isAsync), Message(message), AdditionalData(additionalData)
 			{ }
 		};

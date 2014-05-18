@@ -2,6 +2,7 @@
 #include <string>
 #include <list>
 #include "IPlugin.h"
+#include "../External/jsonxx.h"
 
 namespace PluggableBot
 {
@@ -57,7 +58,7 @@ namespace PluggableBot
 			 *
 			 * \param configuration G³ówny wêze³ pliku konfiguracyjnego.
 			 */
-			void Configure(const void* configuration);
+			void Configure(const jsonxx::Object* configuration);
 
 			/**
 			 * Zwalnia zasoby po wtyczkach oraz wy³adowuje za³adowane biblioteki.

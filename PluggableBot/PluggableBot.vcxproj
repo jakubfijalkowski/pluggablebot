@@ -76,6 +76,7 @@
     <ClInclude Include="Exceptions\ExecutionException.h" />
     <ClInclude Include="Exceptions\NotFoundException.h" />
     <ClInclude Include="External\format.h" />
+    <ClInclude Include="External\jsonxx.h" />
     <ClInclude Include="IProtocol.h" />
     <ClInclude Include="Logging\Logger.h" />
     <ClInclude Include="Logging\IOutput.h" />
@@ -91,6 +92,7 @@
     <ClCompile Include="Commands\DefaultParser.cpp" />
     <ClCompile Include="Commands\Matchers.cpp" />
     <ClCompile Include="External\format.cc" />
+    <ClCompile Include="External\jsonxx.cc" />
     <ClCompile Include="Logging\LogFactory.cpp" />
     <ClCompile Include="Logging\Logger.cpp" />
     <ClCompile Include="Logging\Outputs.cpp" />

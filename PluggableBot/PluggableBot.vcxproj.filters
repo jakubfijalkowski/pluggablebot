@@ -76,6 +76,9 @@
     <ClInclude Include="External\format.h">
       <Filter>External</Filter>
     </ClInclude>
+    <ClInclude Include="External\jsonxx.h">
+      <Filter>External</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -101,6 +104,9 @@
       <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="External\format.cc">
+      <Filter>External</Filter>
+    </ClCompile>
+    <ClCompile Include="External\jsonxx.cc">
       <Filter>External</Filter>
     </ClCompile>
   </ItemGroup>
