@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "Config.h"
 
 namespace PluggableBot
 {
@@ -16,7 +17,7 @@ namespace PluggableBot
 	 * Messenger. Klasa powinna tam zapisywaæ wiadomoœci od u¿ytkowników
 	 * jak równie¿ oczekiwaæ na ewentualne wiadomoœci, które ma wys³aæ.
 	 */
-	class IProtocol
+	class PLUGIN_API IProtocol
 	{
 	public:
 		/**

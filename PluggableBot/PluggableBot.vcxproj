@@ -82,6 +82,10 @@
     <ClInclude Include="Logging\Logger.h" />
     <ClInclude Include="Logging\IOutput.h" />
     <ClInclude Include="Logging\LogFactory.h" />
+    <ClInclude Include="Messages\Messages.h" />
+    <ClInclude Include="Messages\SendMessage.h" />
+    <ClInclude Include="Messages\ProtocolFailure.h" />
+    <ClInclude Include="Messages\ShutdownRequest.h" />
     <ClInclude Include="UserMessage.h" />
     <ClInclude Include="Messaging\IMessage.h" />
     <ClInclude Include="Messaging\Messenger.h" />
@@ -99,6 +103,7 @@
     <ClCompile Include="Logging\Logger.cpp" />
     <ClCompile Include="Logging\Outputs.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Messages\MessageReceived.h" />
     <ClCompile Include="Messaging\Messenger.cpp" />
     <ClCompile Include="Plugins\PluginManager.cpp" />
   </ItemGroup>

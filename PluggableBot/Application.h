@@ -2,11 +2,20 @@
 #include <memory>
 #include "ApplicationContext.h"
 #include "Logging/LogFactory.h"
+#include "Messages/Messages.h"
 #include "External/jsonxx.h"
 
 namespace PluggableBot
 {
-	
+
+	enum class ApplicationExitCode
+		: int
+	{
+		Success,
+		NoWorkingProtocols,
+		ProtocolsFailed,
+	};
+
 	/**
 	 * G³ówna czêœæ aplikacja, która zarz¹dza poszczególnymi podsystemami aplikacji.
 	 * Przed jej uruchomieniem nale¿y zainicjowaæ wszystkie rzeczy, które s¹ pomocniecze,
@@ -15,6 +24,13 @@ namespace PluggableBot
 	class Application
 	{
 	public:
+		/**
+		 * Inicjalizuje obiekt.
+		 */
+		Application()
+			: exitCode(ApplicationExitCode::Success), exiting(false)
+		{ }
+
 		/**
 		 * Inicjalizuje aplikacje i jej podsystemy. £aduje konfiguracje, pluginy,
 		 * konfiguruje je i ich zale¿noœci, ale nie startuje obs³ugi protoko³ów,
@@ -32,7 +48,7 @@ namespace PluggableBot
 		 * 
 		 * \return Zwraca kod wyjœcia aplikacji.
 		 */
-		int Run();
+		ApplicationExitCode Run();
 
 		/**
 		 * Wy³¹cza aplikacje, zmuszaj¹c g³ówny w¹tek do opuszczenia metody Run.
@@ -48,11 +64,22 @@ namespace PluggableBot
 		void Deinitialize();
 
 	private:
+		bool StartProtocols();
+		void StopProtocols();
+
+		void GetMessages();
+		void Handle(Messages::MessageReceived* message);
+		void Handle(Messages::ShutdownRequest* message);
+		void Handle(Messages::ProtocolFailure* message);
+
 		Logging::LoggerPointer Logger;
 
 		jsonxx::Object configuration;
 		std::unique_ptr<ApplicationContext> context;
 
+		std::vector<ProtocolPointer> workingProtocols;
+
+		ApplicationExitCode exitCode;
 		bool exiting;
 	};
 

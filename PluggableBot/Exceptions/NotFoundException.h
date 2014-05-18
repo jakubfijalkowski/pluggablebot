@@ -12,7 +12,13 @@ namespace PluggableBot
 		class NotFoundException
 			: public std::exception
 		{
+		public:
+			NotFoundException()
+			{ }
 
+			NotFoundException(const std::string& msg)
+				: std::exception(msg.c_str())
+			{ }
 		};
 
 	}

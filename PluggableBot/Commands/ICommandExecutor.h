@@ -40,15 +40,17 @@ namespace PluggableBot
 			virtual const CommandList& GetCommands() = 0;
 			
 			/**
-			 * Dodaje komendê do listy obs³ugiwanych.
+			 * Dodaje komendy do listy obs³ugiwanych.
+			 *
+			 * \param from Lista komend do dodania.
 			 */
-			virtual void AddCommand(CommandPointer command) = 0;
+			virtual void AddCommands(const std::vector<CommandPointer>& from) = 0;
 
 			/**
 			 * Próbujê wywo³aæ komendê, która jest okreœlona w tekœcie. Rzuca wyj¹tkiem, gdy nie uda siê wykonanie metody.
 			 *
-			 * \exception ExecutionException Rzucane, gdy nie uda siê dobraæ komendy do tekstu, lub wyst¹pi b³¹d w
-			 *			  trakcie wykonywania komendy.
+			 * \exception ExecutionException Rzucane, gdy wyst¹pi b³¹d w trakcie wykonywania komendy.
+			 * \exception NotFoundException Rzucane, gdy nie uda siê odnaleŸæ wskazanej komendy.
 			 */
 			virtual CommandExecutionResults Execute(UserMessagePointer message) = 0;
 
@@ -79,7 +81,7 @@ namespace PluggableBot
 				return this->commands;
 			}
 
-			virtual void AddCommand(CommandPointer command);
+			virtual void AddCommands(const std::vector<CommandPointer>& from);
 			virtual CommandExecutionResults Execute(UserMessagePointer message);
 
 		private:

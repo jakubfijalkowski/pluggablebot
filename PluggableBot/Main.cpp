@@ -16,7 +16,6 @@ int main()
 {
 #ifdef _DEBUG
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc( 670 );
 #endif  
 
 	SetConsoleCtrlHandler(CtrlCHandler, TRUE);
@@ -36,6 +35,7 @@ int main()
 
 	GlobalApplication.Deinitialize();
 
+	logger->Information("Finishing application. Exit code: {0}.", (int)exitCode);
 	LogFactory::Unload();
-	return exitCode;
+	return (int)exitCode;
 }

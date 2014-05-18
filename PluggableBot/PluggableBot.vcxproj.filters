@@ -19,6 +19,9 @@
     <Filter Include="External">
       <UniqueIdentifier>{368e93c7-ad8c-405b-9182-3a1cc2e8047d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Messages">
+      <UniqueIdentifier>{5bdda3e7-8531-4e04-abe0-414f5d086b53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\IMatcher.h">
@@ -80,6 +83,18 @@
       <Filter>External</Filter>
     </ClInclude>
     <ClInclude Include="Config.h" />
+    <ClInclude Include="Messages\SendMessage.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages\ProtocolFailure.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages\ShutdownRequest.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages\Messages.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -114,5 +129,8 @@
       <Filter>Plugins</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Messages\MessageReceived.h">
+      <Filter>Messages</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
