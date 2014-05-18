@@ -109,5 +109,8 @@
     <ClCompile Include="External\jsonxx.cc">
       <Filter>External</Filter>
     </ClCompile>
+    <ClCompile Include="Plugins\PluginManager.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

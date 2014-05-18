@@ -1,7 +1,9 @@
 #pragma once
 #include <string>
-#include <list>
+#include <vector>
+#include <Windows.h>
 #include "IPlugin.h"
+#include "../Logging/LogFactory.h"
 #include "../External/jsonxx.h"
 
 namespace PluggableBot
@@ -22,43 +24,26 @@ namespace PluggableBot
 			 * Inicjalizuje obiekt.
 			 *
 			 * \param context Kontekst aplikacji, która u¿ywa managera.
-			 * \param pluginsPath Œcie¿ka(bezwzglêdna) do folderu z wtyczkami.
 			 */
-			PluginManager(ApplicationContext* context, const std::string& pluginsPath)
-				: context(context), pluginsPath(pluginsPath)
-			{ }
+			PluginManager(ApplicationContext* context);
 
 			/*
 			 * Wy³adowuje wtyczki, jeœli nie zosta³y wy³adowane wczeœniej.
 			 */
-			~PluginManager()
-			{
-				if (!this->plugins.empty())
-				{
-					this->Unload();
-				}
-			}
+			~PluginManager();
 
 			/**
-			 * Pobiera listê wtyczek.
-			 */
-			const std::vector<IPlugin*>* GetPlugins() const
-			{
-				return &this->plugins;
-			}
+			* Konfiguruje wtyczki, wyszukuj¹æ dla nich odpowiednie sekcje w pliku konfiguracyjnym.
+			* Jeœli sekcja konfiguracyjna dla danej wtyczki nie istnieje, przekazywany jest pusty obiekt.
+			*
+			* \param configuration G³ówny wêze³ pliku konfiguracyjnego.
+			*/
+			void Configure(const jsonxx::Object& configuration);
 
 			/**
 			 * £aduje wszystkie wtyczki z lokalizacji przekazanej do konstruktora.
 			 */
 			void Load();
-
-			/**
-			 * Konfiguruje wtyczki, wyszukuj¹æ dla nich odpowiednie sekcje w pliku konfiguracyjnym.
-			 * Jeœli sekcja konfiguracyjna dla danej wtyczki nie istnieje, przekazywany jest pusty obiekt.
-			 *
-			 * \param configuration G³ówny wêze³ pliku konfiguracyjnego.
-			 */
-			void Configure(const jsonxx::Object* configuration);
 
 			/**
 			 * Zwalnia zasoby po wtyczkach oraz wy³adowuje za³adowane biblioteki.
@@ -68,18 +53,23 @@ namespace PluggableBot
 			/**
 			 * Agreguje obs³ugiwane komendy z wszystkich wtyczek.
 			 */
-			std::list<Commands::CommandPointer> GetCombinedCommands();
+			std::vector<Commands::CommandPointer> GetCombinedCommands();
 
 			/**
 			 * Agreguje obs³ugiwane protoko³y z wszystkich wtyczek.
 			 */
-			//TODO: zastanowiæ siê nad tym, czy u¿yæ zwyk³ego wskaŸnika, czy shared_ptr, vectora czy listy
-			std::list<ProtocolPointer> GetCombinedProtocols();
+			std::vector<ProtocolPointer> GetCombinedProtocols();
 
 		private:
+			void LoadPlugin(const char* path);
+
+			const Logging::LoggerPointer Logger;
+
 			ApplicationContext* context;
 			std::string pluginsPath;
-			std::vector<IPlugin*> plugins;
+			jsonxx::Object configuration;
+			
+			std::vector<std::tuple<IPlugin*, HMODULE, DeletePluginMethod>> plugins;
 		};
 
 	}

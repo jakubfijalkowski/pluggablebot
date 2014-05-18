@@ -98,6 +98,7 @@
     <ClCompile Include="Logging\Outputs.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Messaging\Messenger.cpp" />
+    <ClCompile Include="Plugins\PluginManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

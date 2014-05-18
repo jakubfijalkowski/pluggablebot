@@ -33,8 +33,7 @@ namespace PluggableBot
 			/**
 			 * Konfiguruje wtyczkê, u¿ywaj¹c ustawieñ wczytanych z odpowiedniej sekcji pliku konfiguracyjnego.
 			 */
-			// TODO: zmieñ typ konfiguracji
-			virtual void Configure(const void* configuration) = 0;
+			virtual void Configure(const jsonxx::Object& configuration) = 0;
 
 			/**
 			 * Pobiera listê komend obs³ugiwanych przez wtyczkê.
