@@ -3,9 +3,11 @@
   <ItemGroup>
     <ClInclude Include="StatelessPlugin.h" />
     <ClInclude Include="HelpCommand.h" />
+    <ClInclude Include="StopCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StatelessPlugin.cpp" />
     <ClCompile Include="HelpCommand.cpp" />
+    <ClCompile Include="StopCommand.cpp" />
   </ItemGroup>
 </Project>

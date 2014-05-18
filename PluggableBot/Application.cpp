@@ -15,7 +15,7 @@ namespace PluggableBot
 	using namespace Plugins;
 
 	static const DWORD WaitTime = 1000;
-	static const char* ConfigPath = "pluggablebot.config";
+	static const char* ConfigPath = "config.json";
 	static const char* AsyncMessage = "Wiadomoœæ jest wywo³ywana asynchronicznie. OdpowiedŸ otrzymasz, gdy wywo³anie zostanie zakoñczone.";
 	static const char* CommandDoesNotExist = "Wiadomoœæ nie mog³a zostaæ przetworzona. Komenda jej odpowiadaj¹ca nie istnieje.";
 	static const char* ExecutionExceptionMessage = "Wiadomoœæ nie mog³a zostaæ przetworzona. Komenda zwróci³a b³¹d.";
@@ -49,7 +49,9 @@ namespace PluggableBot
 		this->context->GetPlugins()->Configure(this->configuration);
 		this->context->GetPlugins()->Load();
 
-		this->context->CommandExecutor->AddCommands(this->context->GetPlugins()->GetCombinedCommands());
+		auto commands = this->context->GetPlugins()->GetCombinedCommands();
+		this->context->CommandExecutor->AddCommands(commands);
+		Logger->Information("{0} commands will be available.", commands.size());
 
 		Logger->Information("All subsystems initialized. Returning control to main thread.");
 	}

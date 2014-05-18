@@ -133,4 +133,7 @@
       <Filter>Messages</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="config.json" />
+  </ItemGroup>
 </Project>

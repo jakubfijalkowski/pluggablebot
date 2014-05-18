@@ -4,6 +4,7 @@
 #include <vector>
 #include <functional>
 #include <Windows.h>
+#include "../Config.h"
 #include "IMessage.h"
 #include "../Logging/LogFactory.h"
 
@@ -40,7 +41,7 @@ namespace PluggableBot
 		 * Przez u¿ycie smart pointerów i szablonów, biblioteki DLL musz¹ byæ kompilowane z t¹ sam¹
 		 * implementacj¹ CRT(czyli tak naprawdê w konkretnej wersji Visual Studio).
 		 */
-		class Messenger
+		class PLUGIN_API Messenger
 		{
 		public:
 			/**

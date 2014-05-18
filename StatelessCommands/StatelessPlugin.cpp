@@ -1,5 +1,7 @@
 #include "StatelessPlugin.h"
+
 #include "HelpCommand.h"
+#include "StopCommand.h"
 
 namespace PluggableBot
 {
@@ -27,6 +29,7 @@ namespace PluggableBot
 		void StatelessPlugin::Configure(const jsonxx::Object& configuration)
 		{
 			this->supportedCommands.push_back(new HelpCommand(this->context));
+			this->supportedCommands.push_back(new StopCommand(this->context));
 		}
 
 		const IPlugin::CommandList* StatelessPlugin::GetSupportedCommands() const

@@ -13,7 +13,7 @@ namespace PluggableBot
 
 		void DefaultCommandExecutor::AddCommands(const std::vector<CommandPointer>& from)
 		{
-			for (auto command : commands)
+			for (auto command : from)
 			{
 				if (command->GetMatcher()->IsFullText)
 				{

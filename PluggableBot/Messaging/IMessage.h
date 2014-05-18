@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "../Config.h"
 
 namespace PluggableBot
 {
@@ -10,7 +11,7 @@ namespace PluggableBot
 		 * Interfejs dla wszystkich wiadomoœci - zawiera pole Type, pozwalaj¹ce okreœliæ w³aœciwy typ
 		 * wiadomoœci nie u¿ywaj¹c dynamic_cast.
 		 */
-		class IMessage
+		class PLUGIN_API IMessage
 		{
 		public:
 			/**

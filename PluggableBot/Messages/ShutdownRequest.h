@@ -21,7 +21,7 @@ namespace PluggableBot
 			/**
 			 * Inicializuje obiekt wiadomoœci.
 			 */
-			ShutdownRequest(const IProtocol* protocol)
+			ShutdownRequest()
 				: IMessage(MessageType)
 			{ }
 		};
