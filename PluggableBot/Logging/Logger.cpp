@@ -1,5 +1,5 @@
+#include "Logger.h"
 #include "IOutput.h"
-#include "format.h"
 
 namespace PluggableBot
 {

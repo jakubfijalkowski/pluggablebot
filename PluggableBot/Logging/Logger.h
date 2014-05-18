@@ -2,7 +2,7 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include "format.h"
+#include "../External/format.h"
 
 namespace PluggableBot
 {

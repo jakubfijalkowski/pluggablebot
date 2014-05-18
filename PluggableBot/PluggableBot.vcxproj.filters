@@ -16,6 +16,9 @@
     <Filter Include="Logging">
       <UniqueIdentifier>{97ed831b-fad1-4de0-8337-2fe37b95d073}</UniqueIdentifier>
     </Filter>
+    <Filter Include="External">
+      <UniqueIdentifier>{368e93c7-ad8c-405b-9182-3a1cc2e8047d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\IMatcher.h">
@@ -60,9 +63,6 @@
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="Logging\format.h">
-      <Filter>Logging</Filter>
-    </ClInclude>
     <ClInclude Include="Logging\IOutput.h">
       <Filter>Logging</Filter>
     </ClInclude>
@@ -73,14 +73,14 @@
       <Filter>Exceptions</Filter>
     </ClInclude>
     <ClInclude Include="ApplicationContext.h" />
+    <ClInclude Include="External\format.h">
+      <Filter>External</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Messaging\Messenger.cpp">
       <Filter>Messaging</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\format.cc">
-      <Filter>Logging</Filter>
     </ClCompile>
     <ClCompile Include="Logging\Outputs.cpp">
       <Filter>Logging</Filter>
@@ -99,6 +99,9 @@
     </ClCompile>
     <ClCompile Include="Commands\DefaultCommandExecutor.cpp">
       <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="External\format.cc">
+      <Filter>External</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

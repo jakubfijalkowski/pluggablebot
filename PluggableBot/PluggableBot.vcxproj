@@ -75,8 +75,8 @@
     <ClInclude Include="Commands\ParseResults.h" />
     <ClInclude Include="Exceptions\ExecutionException.h" />
     <ClInclude Include="Exceptions\NotFoundException.h" />
+    <ClInclude Include="External\format.h" />
     <ClInclude Include="IProtocol.h" />
-    <ClInclude Include="Logging\format.h" />
     <ClInclude Include="Logging\Logger.h" />
     <ClInclude Include="Logging\IOutput.h" />
     <ClInclude Include="Logging\LogFactory.h" />
@@ -90,7 +90,7 @@
     <ClCompile Include="Commands\DefaultCommandExecutor.cpp" />
     <ClCompile Include="Commands\DefaultParser.cpp" />
     <ClCompile Include="Commands\Matchers.cpp" />
-    <ClCompile Include="Logging\format.cc" />
+    <ClCompile Include="External\format.cc" />
     <ClCompile Include="Logging\LogFactory.cpp" />
     <ClCompile Include="Logging\Logger.cpp" />
     <ClCompile Include="Logging\Outputs.cpp" />
