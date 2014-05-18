@@ -117,5 +117,34 @@ namespace PluggableBot
 			plugin->Configure(this->configuration.get<jsonxx::Object>(plugin->GetName(), jsonxx::Object()));
 		}
 
+		std::vector<Commands::CommandPointer> PluginManager::GetCombinedCommands()
+		{
+			std::vector<Commands::CommandPointer> commands;
+			for (auto p : this->plugins)
+			{
+				if (std::get<0>(p)->GetSupportedCommands() != nullptr)
+				{
+					commands.insert(commands.begin(),
+						std::get<0>(p)->GetSupportedCommands()->begin(),
+						std::get<0>(p)->GetSupportedCommands()->end());
+				}
+			}
+			return commands;
+		}
+
+		std::vector<ProtocolPointer> PluginManager::GetCombinedProtocols()
+		{
+			std::vector<ProtocolPointer> protocols;
+			for (auto p : this->plugins)
+			{
+				if (std::get<0>(p)->GetSupportedProtocols() != nullptr)
+				{
+					protocols.insert(protocols.begin(),
+						std::get<0>(p)->GetSupportedProtocols()->begin(),
+						std::get<0>(p)->GetSupportedProtocols()->end());
+				}
+			}
+			return protocols;
+		}
 	}
 }

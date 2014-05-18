@@ -15,6 +15,8 @@ namespace PluggableBot
 		{
 		public:
 			StatelessPlugin(ApplicationContext* context);
+			virtual ~StatelessPlugin();
+
 			virtual const std::string& GetName() const;
 			virtual void Configure(const jsonxx::Object& configuration);
 			virtual const CommandList* GetSupportedCommands() const;

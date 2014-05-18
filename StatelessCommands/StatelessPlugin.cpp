@@ -1,4 +1,5 @@
 #include "StatelessPlugin.h"
+#include "HelpCommand.h"
 
 namespace PluggableBot
 {
@@ -9,13 +10,24 @@ namespace PluggableBot
 			: name("StatelessPlugin"), context(context)
 		{ }
 
+		StatelessPlugin::~StatelessPlugin()
+		{
+			for (auto p : this->supportedCommands)
+			{
+				delete p;
+			}
+			this->supportedCommands.clear();
+		}
+
 		const std::string& StatelessPlugin::GetName() const
 		{
 			return this->name;
 		}
 
 		void StatelessPlugin::Configure(const jsonxx::Object& configuration)
-		{ }
+		{
+			this->supportedCommands.push_back(new HelpCommand(this->context));
+		}
 
 		const IPlugin::CommandList* StatelessPlugin::GetSupportedCommands() const
 		{
