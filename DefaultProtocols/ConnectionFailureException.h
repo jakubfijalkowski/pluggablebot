@@ -11,7 +11,7 @@ namespace PluggableBot
 		 * Wyj¹tek mówi¹cy o tym, ¿e wyst¹pi³ problem z po³¹czeniem.
 		 */
 		class ConnectionFailureException
-			: std::exception
+			: public std::exception
 		{
 		public:
 			/**

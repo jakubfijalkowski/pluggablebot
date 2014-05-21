@@ -10,5 +10,13 @@
     <ClCompile Include="DefaultProtocolsPlugin.cpp" />
     <ClCompile Include="GGProtocol.cpp" />
     <ClCompile Include="GGClient.cpp" />
+    <ClCompile Include="..\PluggableBot\External\format.cc">
+      <Filter>External</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="External">
+      <UniqueIdentifier>{0c38d95f-563c-4a84-aae1-5b0f2ac1dfd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 #include <WinSock2.h>
+#include <ctime>
 #include "GGClient.h"
 
 namespace PluggableBot
@@ -48,47 +49,44 @@ namespace PluggableBot
 
 			int loginTimeout = this->timeout * ConnectTimeoutMultiplier;
 
-			int eventType;
-			gg_event* event = nullptr;
-			try
+			int eventType = GG_EVENT_NONE;
+			time_t startTime = time(nullptr);
+			while (eventType != GG_EVENT_CONN_SUCCESS && difftime(time(nullptr), startTime) < loginTimeout)
 			{
-				event = this->WaitForEvent(loginTimeout);
-			}
-			catch (...)
-			{
-				if (event != nullptr)
+				gg_event* event = nullptr;
+				try
 				{
-					gg_free_event(event);
+					event = this->WaitForEvent(loginTimeout);
 				}
-				this->Disconnect();
-				throw;
-			}
-
-			eventType = event != nullptr ? event->type : GG_EVENT_NONE;
-			gg_free_event(event);
-
-			switch (eventType)
-			{
-			case GG_EVENT_CONN_SUCCESS:
-				if (gg_notify(this->session, nullptr, 0) == -1)
+				catch (...)
 				{
+					if (event != nullptr)
+					{
+						gg_free_event(event);
+					}
 					this->Disconnect();
-					throw ConnectionFailureException("Cannot send the user list.");
+					throw;
 				}
-				break;
 
-			case GG_EVENT_CONN_FAILED:
-				this->Disconnect();
-				throw ConnectionFailureException("Server rejected the connection.");
+				eventType = event != nullptr ? event->type : GG_EVENT_NONE;
+				gg_free_event(event);
 
-			case GG_EVENT_NONE:
-				this->Disconnect();
-				throw ConnectionFailureException("Connection timeout.");
+				switch (eventType)
+				{
+				case GG_EVENT_CONN_SUCCESS:
+					if (gg_notify(this->session, nullptr, 0) == -1)
+					{
+						this->Disconnect();
+						throw ConnectionFailureException("Cannot send the user list.");
+					}
+					return;
 
-			default:
-				this->Disconnect();
-				throw ConnectionFailureException("Server sent invalid message.");
+				case GG_EVENT_CONN_FAILED:
+					this->Disconnect();
+					throw ConnectionFailureException("Server rejected the connection.");
+				}
 			}
+			throw ConnectionFailureException("Connection timed out.");
 		}
 
 		void GGClient::Disconnect()
@@ -136,6 +134,7 @@ namespace PluggableBot
 				{
 					throw ConnectionFailureException("Cannot retrieve event from the library.");
 				}
+				return event;
 			}
 			return nullptr;
 		}

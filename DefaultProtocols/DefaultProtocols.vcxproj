@@ -17,6 +17,7 @@
     <ClInclude Include="GGProtocol.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\PluggableBot\External\format.cc" />
     <ClCompile Include="DefaultProtocolsPlugin.cpp" />
     <ClCompile Include="GGClient.cpp" />
     <ClCompile Include="GGProtocol.cpp" />
