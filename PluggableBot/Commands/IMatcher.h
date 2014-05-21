@@ -10,22 +10,22 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Klasy implementuj¹ce ten interfejs s¹ odpowiedzialne za dopasowywanie tekstu do komend.
-		 * S¹ odpowiedzialne tylko za okreœlenie, czy komenda jest, czy nie, pe³no tekstowa
+		 * Klasy implementujÄ…ce ten interfejs sÄ… odpowiedzialne za dopasowywanie tekstu do komend.
+		 * SÄ… odpowiedzialne tylko za okreÅ›lenie, czy komenda jest, czy nie, peÅ‚no tekstowa
 		 * oraz stwierdzenie, czy komenda pasuje.
 		 */
 		class PLUGIN_API IMatcher
 		{
 		public:
 			/**
-			 * Okreœla, czy komenda jest pe³no tekstowa, czy nie.
+			 * OkreÅ›la, czy komenda jest peÅ‚no tekstowa, czy nie.
 			 */
 			const bool IsFullText;
 
 			/**
-			 * Próbuje dopasowaæ wynik parsowania do komendy.
-			 * Jeœli komenda jest pe³no tekstowa(IsFullText zwraca true), implementacje tej metody
-			 * powinny pracowaæ na ExecutionContext::Message::FullText, jeœli nie - na pozosta³ych parametrach.
+			 * PrÃ³buje dopasowaÄ‡ wynik parsowania do komendy.
+			 * JeÅ›li komenda jest peÅ‚no tekstowa(IsFullText zwraca true), implementacje tej metody
+			 * powinny pracowaÄ‡ na ExecutionContext::Message::FullText, jeÅ›li nie - na pozostaÅ‚ych parametrach.
 			 */
 			virtual bool Matches(const ExecutionContext& context) const = 0;
 
@@ -41,7 +41,7 @@ namespace PluggableBot
 		};
 
 		/**
-		 * Bêdzie pasowaæ dla zwyk³ych komend, z okreœlonymi parametrami.
+		 * BÄ™dzie pasowaÄ‡ dla zwykÅ‚ych komend, z okreÅ›lonymi parametrami.
 		 */
 		class PLUGIN_API SimpleMatcher
 			: public IMatcher
@@ -59,7 +59,7 @@ namespace PluggableBot
 		};
 
 		/**
-		 * Bêdzie pasowaæ dla komend spe³niaj¹cych podane wyra¿enie regularne.
+		 * BÄ™dzie pasowaÄ‡ dla komend speÅ‚niajÄ…cych podane wyraÅ¼enie regularne.
 		 */
 		class PLUGIN_API RegexMatcher
 			: public IMatcher

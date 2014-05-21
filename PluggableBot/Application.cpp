@@ -16,9 +16,9 @@ namespace PluggableBot
 
 	static const DWORD WaitTime = 1000;
 	static const char* ConfigPath = "config.json";
-	static const char* AsyncMessage = "Wiadomoœæ jest wywo³ywana asynchronicznie. OdpowiedŸ otrzymasz, gdy wywo³anie zostanie zakoñczone.";
-	static const char* CommandDoesNotExist = "Wiadomoœæ nie mog³a zostaæ przetworzona. Komenda jej odpowiadaj¹ca nie istnieje.";
-	static const char* ExecutionExceptionMessage = "Wiadomoœæ nie mog³a zostaæ przetworzona. Komenda zwróci³a b³¹d.";
+	static const char* AsyncMessage = "WiadomoÅ›Ä‡ jest wywoÅ‚ywana asynchronicznie. OdpowiedÅº otrzymasz, gdy wywoÅ‚anie zostanie zakoÅ„czone.";
+	static const char* CommandDoesNotExist = "WiadomoÅ›Ä‡ nie mogÅ‚a zostaÄ‡ przetworzona. Komenda jej odpowiadajÄ…ca nie istnieje.";
+	static const char* ExecutionExceptionMessage = "WiadomoÅ›Ä‡ nie mogÅ‚a zostaÄ‡ przetworzona. Komenda zwrÃ³ciÅ‚a bÅ‚Ä…d.";
 
 	void Application::Initialize()
 	{

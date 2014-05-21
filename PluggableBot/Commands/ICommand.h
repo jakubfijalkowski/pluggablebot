@@ -9,33 +9,33 @@
 namespace PluggableBot
 {
 	/**
-	 * Przestrzeñ nazw zawieraj¹ca wszystkie klasy i interfejsy zwi¹zane z komendami.
+	 * PrzestrzeÅ„ nazw zawierajÄ…ca wszystkie klasy i interfejsy zwiÄ…zane z komendami.
 	 */
 	namespace Commands
 	{
 
 		/**
-		 * Interfejs dla komend. Dostarcza podstawowych informacji o komendzie oraz obs³uguje jej wywo³anie.
+		 * Interfejs dla komend. Dostarcza podstawowych informacji o komendzie oraz obsÅ‚uguje jej wywoÅ‚anie.
 		 */
 		class PLUGIN_API ICommand
 		{
 		public:
 			/**
-			 * Nazwê komendy. U¿ywana tylko w przypadku, gdy u¿ytkownik chce dowiedzieæ siê, jakie
-			 * komendy s¹ dostêpne.
+			 * NazwÄ™ komendy. UÅ¼ywana tylko w przypadku, gdy uÅ¼ytkownik chce dowiedzieÄ‡ siÄ™, jakie
+			 * komendy sÄ… dostÄ™pne.
 			 */
 			const std::string Name;
 
 			/**
-			 * Pobiera IMatcher, który jest odpowiedzialny za dopasowanie wiadomoœci do komendy.
+			 * Pobiera IMatcher, ktÃ³ry jest odpowiedzialny za dopasowanie wiadomoÅ›ci do komendy.
 			 */
 			virtual const IMatcher* GetMatcher() const = 0;
 
 			/**
-			 * Wykonuje metodê i zwraca odpowiedŸ która zostanie dostarczona u¿ytkownikowi.
-			 * By zg³osiæ b³¹d, metoda powinna rzuciæ wyj¹tek dziedzicz¹cy z ExecutionException lub jego samego.
+			 * Wykonuje metodÄ™ i zwraca odpowiedÅº ktÃ³ra zostanie dostarczona uÅ¼ytkownikowi.
+			 * By zgÅ‚osiÄ‡ bÅ‚Ä…d, metoda powinna rzuciÄ‡ wyjÄ…tek dziedziczÄ…cy z ExecutionException lub jego samego.
 			 *
-			 * \exception ExecutionException Rzucany, gdy nie powiod³o siê wykonanie metody.
+			 * \exception ExecutionException Rzucany, gdy nie powiodÅ‚o siÄ™ wykonanie metody.
 			 */
 			virtual CommandExecutionResults Execute(const ExecutionContext& context) = 0;
 

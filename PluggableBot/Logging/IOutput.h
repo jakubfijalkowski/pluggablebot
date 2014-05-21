@@ -10,19 +10,19 @@ namespace PluggableBot
 	{
 		
 		/**
-		 * Wyjúcie dla klasy loggera.
+		 * Wyj≈õcie dla klasy loggera.
 		 */
 		class PLUGIN_API IOutput
 		{
 		public:
 			/**
-			 * Zapisuje wiadomoúÊ do wyjúcia.
+			 * Zapisuje wiadomo≈õƒá do wyj≈õcia.
 			 */
 			virtual void Write(LogLevel level, const std::string& loggerName, const std::string& message) = 0;
 		};
 
 		/**
-		 * Wyúwietla wiadomoúci w konsoli.
+		 * Wy≈õwietla wiadomo≈õci w konsoli.
 		 */
 		class ConsoleOutput
 			: public IOutput
@@ -40,7 +40,7 @@ namespace PluggableBot
 
 
 		/**
-		 * Zapisuje wiadomoúci do pliku.
+		 * Zapisuje wiadomo≈õci do pliku.
 		 */
 		class FileOutput
 			: public IOutput

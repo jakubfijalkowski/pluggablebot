@@ -8,14 +8,14 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Interfejs dla wszystkich wiadomoúci - zawiera pole Type, pozwalajπce okreúliÊ w≥aúciwy typ
-		 * wiadomoúci nie uøywajπc dynamic_cast.
+		 * Interfejs dla wszystkich wiadomo≈õci - zawiera pole Type, pozwalajƒÖce okre≈õliƒá w≈Ça≈õciwy typ
+		 * wiadomo≈õci nie u≈ºywajƒÖc dynamic_cast.
 		 */
 		class PLUGIN_API IMessage
 		{
 		public:
 			/**
-			 * Typ wiadomoúci
+			 * Typ wiadomo≈õci
 			 */
 			const int Type;
 

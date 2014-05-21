@@ -10,7 +10,7 @@ namespace PluggableBot
 		using namespace Messaging;
 
 		/**
-		 * ProtokÛ≥ przesta≥ dzia≥aÊ.
+		 * Protok√≥≈Ç przesta≈Ç dzia≈Çaƒá.
 		 */
 		class ProtocolFailure
 			: public IMessage
@@ -19,12 +19,12 @@ namespace PluggableBot
 			static const int MessageType = 3;
 
 			/**
-			 * Okreúla, ktÛry protokÛ≥ przesta≥ dzia≥aÊ.
+			 * Okre≈õla, kt√≥ry protok√≥≈Ç przesta≈Ç dzia≈Çaƒá.
 			 */
 			const IProtocol* const Protocol;
 
 			/**
-			 * Inicializuje obiekt wiadomoúci.
+			 * Inicializuje obiekt wiadomo≈õci.
 			 */
 			ProtocolFailure(const IProtocol* protocol)
 				: IMessage(MessageType), Protocol(protocol)

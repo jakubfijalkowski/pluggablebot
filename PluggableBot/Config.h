@@ -1,6 +1,6 @@
 #pragma once
 
-// Kilka makr u³atwiaj¹cych budowê DLL-ki
+// Kilka makr uÅ‚atwiajÄ…cych budowÄ™ DLL-ki
 
 #ifdef PLUGIN_DLL
 #define PLUGIN_API __declspec(dllimport)

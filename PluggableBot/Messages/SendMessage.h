@@ -14,7 +14,7 @@ namespace PluggableBot
 		using namespace Messaging;
 
 		/**
-		 * Rz¹danie wys³ania wiadomoœci.
+		 * RzÄ…danie wysÅ‚ania wiadomoÅ›ci.
 		 */
 		class SendMessage
 			: public IMessage
@@ -23,23 +23,23 @@ namespace PluggableBot
 			static const int MessageType = 2;
 
 			/**
-			 * Wiadomoœæ, któr¹ otrzymano.
+			 * WiadomoÅ›Ä‡, ktÃ³rÄ… otrzymano.
 			 */
 			const std::string Content;
 
 			/**
-			 * Odbiorca wiadomoœci.
+			 * Odbiorca wiadomoÅ›ci.
 			 */
 			const std::string Recipient;
 
 			/**
-			 * Okreœla, który protokó³ powinien wys³aæ wiadomoœæ.
-			 * Jeœli jest \a {nullptr}, nie ma ograniczeñ, kto powinien obs³u¿yæ t¹ wiadomoœæ.
+			 * OkreÅ›la, ktÃ³ry protokÃ³Å‚ powinien wysÅ‚aÄ‡ wiadomoÅ›Ä‡.
+			 * JeÅ›li jest \a {nullptr}, nie ma ograniczeÅ„, kto powinien obsÅ‚uÅ¼yÄ‡ tÄ… wiadomoÅ›Ä‡.
 			 */
 			const IProtocol* const Protocol;
 
 			/**
-			 * Inicializuje obiekt wiadomoœci.
+			 * Inicializuje obiekt wiadomoÅ›ci.
 			 */
 			SendMessage(const std::string& content, const std::string& recipient, const IProtocol* protocol)
 				: IMessage(MessageType), Content(content), Recipient(recipient), Protocol(protocol)

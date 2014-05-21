@@ -13,28 +13,28 @@ namespace PluggableBot
 		class ICommandExecutor;
 
 		/**
-		 * Kontekst wykonywania komendy - tworzony zaraz na poczπtku procesu, w miarÍ przechodzenia kolejnych
-		 * etapÛw, uzupe≥niany(np. ParseResult na poczπtku jest puste).
+		 * Kontekst wykonywania komendy - tworzony zaraz na poczƒÖtku procesu, w miarƒô przechodzenia kolejnych
+		 * etap√≥w, uzupe≈Çniany(np. ParseResult na poczƒÖtku jest puste).
 		 */
 		class PLUGIN_API ExecutionContext
 		{
 		public:
 			/**
-			 * Silnik uøywany do wykonywania komend.
+			 * Silnik u≈ºywany do wykonywania komend.
 			 *
-			 * Nie jest \a {smart pointer}em poniewaø jest to wskaünik na obiekt, ktÛry utworzy≥
-			 * kontekst i jest waøny tylko w trakcie wykonywania komendy. Øadna z istniejπcych
-			 * klas nie pasuje do wymogÛw, dlatego uøywany jest zwyk≥y wskaünik.
+			 * Nie jest \a {smart pointer}em poniewa≈º jest to wska≈∫nik na obiekt, kt√≥ry utworzy≈Ç
+			 * kontekst i jest wa≈ºny tylko w trakcie wykonywania komendy. ≈ªadna z istniejƒÖcych
+			 * klas nie pasuje do wymog√≥w, dlatego u≈ºywany jest zwyk≈Çy wska≈∫nik.
 			 */
 			ICommandExecutor* const Executor;
 
 			/**
-			 * WiadomoúÊ otrzymana od uøytkownika.
+			 * Wiadomo≈õƒá otrzymana od u≈ºytkownika.
 			 */
 			const UserMessagePointer Message;
 
 			/**
-			 * Wynik parsowania wiadomoúci uøytkownika. DopÛki wiadomoúÊ nie zosta≥a
+			 * Wynik parsowania wiadomo≈õci u≈ºytkownika. Dop√≥ki wiadomo≈õƒá nie zosta≈Ça
 			 * sparsowana, jest nullem.
 			 */
 			ParseResultsPointer ParseResults;

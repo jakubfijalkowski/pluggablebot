@@ -20,7 +20,7 @@ namespace PluggableBot
 		};
 
 		/**
-		 * Obs≥uguje protokÛ≥ GG.
+		 * Obs≈Çuguje protok√≥≈Ç GG.
 		 */
 		class GGProtocol
 			: public IProtocol

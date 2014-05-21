@@ -11,51 +11,51 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Wynik parsowania wiadomoœci, zwracany przez IParser. Zawiera nazwê oraz wszystkie parametry, które uda³o siê dopasowaæ.
+		 * Wynik parsowania wiadomoÅ›ci, zwracany przez IParser. Zawiera nazwÄ™ oraz wszystkie parametry, ktÃ³re udaÅ‚o siÄ™ dopasowaÄ‡.
 		 */
 		class PLUGIN_API ParseResults
 		{
 		public:
 			/**
-			 * Typ listy parametrów(w³aœciwej).
+			 * Typ listy parametrÃ³w(wÅ‚aÅ›ciwej).
 			 */
 			typedef std::map<std::string, std::string> ParameterList;
 
 			/**
-			 * Typ u¿ywany do przechowywania i przekazywania listy parametrów.
+			 * Typ uÅ¼ywany do przechowywania i przekazywania listy parametrÃ³w.
 			 */
 			typedef std::unique_ptr<ParameterList> ParametersPointer;
 
 			/**
-			 * Nazwê komendy, nawet jeœli by³a to komenda pe³no tekstowa i nie uda³o siê
-			 * jej inaczej zinterpretowaæ(jest to fragment do pierwszego bia³ego znaku).
+			 * NazwÄ™ komendy, nawet jeÅ›li byÅ‚a to komenda peÅ‚no tekstowa i nie udaÅ‚o siÄ™
+			 * jej inaczej zinterpretowaÄ‡(jest to fragment do pierwszego biaÅ‚ego znaku).
 			 */
 			const std::string Name;
 
 			/**
-			 * Okreœla, czy uda³o siê dopasowaæ tekst do formatu komendy zwyk³ej.
-			 * Jeœli jest fa³szem, oznacza to, ¿e komenda powinna byæ tylko rozwa¿ana
-			 * jako pe³no tekstowa.
+			 * OkreÅ›la, czy udaÅ‚o siÄ™ dopasowaÄ‡ tekst do formatu komendy zwykÅ‚ej.
+			 * JeÅ›li jest faÅ‚szem, oznacza to, Å¼e komenda powinna byÄ‡ tylko rozwaÅ¼ana
+			 * jako peÅ‚no tekstowa.
 			 */
 			const bool IsSuccess;
 
 			/**
-			 * Inicjalizuje obiekt, który okreœla wynik parsowania komendy
-			 * pe³no tekstowej(IsSuccess bêdzie ustawiony na false).
+			 * Inicjalizuje obiekt, ktÃ³ry okreÅ›la wynik parsowania komendy
+			 * peÅ‚no tekstowej(IsSuccess bÄ™dzie ustawiony na false).
 			 */
 			ParseResults(const std::string& name)
 				: Name(name), IsSuccess(false)
 			{ }
 
 			/**
-			 * Inicjalizuje obiekt, który okreœla wynik parsowania zwyk³ej komendy.
+			 * Inicjalizuje obiekt, ktÃ³ry okreÅ›la wynik parsowania zwykÅ‚ej komendy.
 			 */
 			ParseResults(const std::string& name, ParametersPointer parameters)
 				: Name(name), IsSuccess(true), Parameters(std::move(parameters))
 			{ }
 
 			/**
-			 * Pobiera iloœæ parametrów, o ile parsowanie siê uda³o.
+			 * Pobiera iloÅ›Ä‡ parametrÃ³w, o ile parsowanie siÄ™ udaÅ‚o.
 			 */
 			int GetParameterCount() const
 			{
@@ -73,10 +73,10 @@ namespace PluggableBot
 			}
 
 			/**
-			 * Pobiera wartoœæ parametru o wskazanej nazwie. Jeœli nie istnieje, metoda rzuca wyj¹tek.
+			 * Pobiera wartoÅ›Ä‡ parametru o wskazanej nazwie. JeÅ›li nie istnieje, metoda rzuca wyjÄ…tek.
 			 *
 			 * \param name Nazwa parametru.
-			 * \exception Exceptions::NotFoundException Rzucany, gdy parametr o wskazanej nazwie nie mo¿e zostaæ znaleziony.
+			 * \exception Exceptions::NotFoundException Rzucany, gdy parametr o wskazanej nazwie nie moÅ¼e zostaÄ‡ znaleziony.
 			 */
 			const std::string& GetParameter(const std::string& name) const
 			{

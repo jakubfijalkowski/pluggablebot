@@ -9,7 +9,7 @@ namespace PluggableBot
 		using namespace PluggableBot::Plugins;
 
 		/**
-		 * Plugin z obs≥ugπ podstawowych protoko≥Ûw.
+		 * Plugin z obs≈ÇugƒÖ podstawowych protoko≈Ç√≥w.
 		 */
 		class DefaultProtocolsPlugin
 			: public IPlugin

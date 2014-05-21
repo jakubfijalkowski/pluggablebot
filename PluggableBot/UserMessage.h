@@ -8,30 +8,30 @@ namespace PluggableBot
 {
 
 	/**
-	 * Okreœla wiadomoœæ otrzyman¹ od u¿ytkownika.
+	 * OkreÅ›la wiadomoÅ›Ä‡ otrzymanÄ… od uÅ¼ytkownika.
 	 */
 	class PLUGIN_API UserMessage
 	{
 	public:
 		/**
-		 * Treœæ wiadomoœci.
+		 * TreÅ›Ä‡ wiadomoÅ›ci.
 		 */
 		const std::string Content;
 
 		/**
-		 * Okreœla, kto wys³a³ wiadomoœæ. Mo¿e to byæ np. numer GG albo adres XMPP, zale¿nie od tego,
-		 * jakim protoko³em zosta³a wys³ana. Jest jednoznaczna, tj. wysy³aj¹c odpowiedŸ na ten adres,
-		 * wiadomoœæ otrzyma u¿ytkownik, który wys³a³ t¹ wiadomoœæ.
+		 * OkreÅ›la, kto wysÅ‚aÅ‚ wiadomoÅ›Ä‡. MoÅ¼e to byÄ‡ np. numer GG albo adres XMPP, zaleÅ¼nie od tego,
+		 * jakim protokoÅ‚em zostaÅ‚a wysÅ‚ana. Jest jednoznaczna, tj. wysyÅ‚ajÄ…c odpowiedÅº na ten adres,
+		 * wiadomoÅ›Ä‡ otrzyma uÅ¼ytkownik, ktÃ³ry wysÅ‚aÅ‚ tÄ… wiadomoÅ›Ä‡.
 		 */
 		const std::string Sender;
 
 		/**
-		 * Protokó³, na który wiadomoœæ zosta³a wys³ana.
+		 * ProtokÃ³Å‚, na ktÃ³ry wiadomoÅ›Ä‡ zostaÅ‚a wysÅ‚ana.
 		 */
 		const ProtocolPointer SourceProtocol;
 
 		/**
-		 * Inicjalizuje wiadomoœæ.
+		 * Inicjalizuje wiadomoÅ›Ä‡.
 		 */
 		UserMessage(const std::string& content, const std::string& sender, ProtocolPointer protocol)
 			: Content(content), Sender(sender), SourceProtocol(protocol)

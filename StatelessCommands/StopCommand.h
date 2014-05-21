@@ -10,7 +10,7 @@ namespace PluggableBot
 		using namespace PluggableBot::Commands;
 
 		/**
-		 * Zatrzymuje dzia≥anie aplikacji.
+		 * Zatrzymuje dzia≈Çanie aplikacji.
 		 */
 		class StopCommand
 			: public ICommand

@@ -3,9 +3,9 @@
 
 /*
  *  (C) Copyright 2001-2009 Wojtek Kaniewski <wojtekka@irc.pl>
- *                          Robert J. Woźny <speedy@ziew.org>
- *                          Arkadiusz Miśkiewicz <arekm@pld-linux.org>
- *                          Tomasz Chiliński <chilek@chilan.com>
+ *                          Robert J. WoĹşny <speedy@ziew.org>
+ *                          Arkadiusz MiĹ›kiewicz <arekm@pld-linux.org>
+ *                          Tomasz ChiliĹ„ski <chilek@chilan.com>
  *                          Piotr Wysocki <wysek@linux.bydg.org>
  *                          Dawid Jarosz <dawjar@poczta.onet.pl>
  *                          Jakub Zawadzki <darkjames@darkjames.ath.cx>
@@ -28,7 +28,7 @@
 /**
  * \file libgadu.h
  *
- * \brief Główny plik nagłówkowy biblioteki
+ * \brief GĹ‚Ăłwny plik nagĹ‚Ăłwkowy biblioteki
  */
 
 #ifndef LIBGADU_LIBGADU_H
@@ -162,7 +162,7 @@ typedef SSIZE_T ssize_t;
 typedef uint32_t uin_t;
 
 /**
- * Identyfikator połączenia bezpośredniego Gadu-Gadu 7.x.
+ * Identyfikator poĹ‚Ä…czenia bezpoĹ›redniego Gadu-Gadu 7.x.
  */
 typedef struct {
 	uint8_t id[8];
@@ -176,22 +176,22 @@ typedef struct {
 } gg_multilogon_id_t;
 
 /**
- * Makro deklarujące pola wspólne dla struktur sesji.
+ * Makro deklarujÄ…ce pola wspĂłlne dla struktur sesji.
  */
 #define gg_common_head(x) \
 	int fd;			/**< Obserwowany deskryptor */ \
-	int check;		/**< Informacja o żądaniu odczytu/zapisu (patrz \ref gg_check_t) */ \
-	int state;		/**< Aktualny stan połączenia (patrz \ref gg_state_t) */ \
-	int error;		/**< Kod błędu dla \c GG_STATE_ERROR (patrz \ref gg_error_t) */ \
+	int check;		/**< Informacja o ĹĽÄ…daniu odczytu/zapisu (patrz \ref gg_check_t) */ \
+	int state;		/**< Aktualny stan poĹ‚Ä…czenia (patrz \ref gg_state_t) */ \
+	int error;		/**< Kod bĹ‚Ä™du dla \c GG_STATE_ERROR (patrz \ref gg_error_t) */ \
 	int type;		/**< Rodzaj sesji (patrz \ref gg_session_t) */ \
 	int id;			/**< Identyfikator sesji */ \
-	int timeout;		/**< Czas pozostały do zakończenia stanu */ \
+	int timeout;		/**< Czas pozostaĹ‚y do zakoĹ„czenia stanu */ \
 	int (*callback)(x*); 	/**< Funkcja zwrotna */ \
-	void (*destroy)(x*); 	/**< Funkcja zwalniania zasobów */
+	void (*destroy)(x*); 	/**< Funkcja zwalniania zasobĂłw */
 
 /**
- * Struktura wspólna dla wszystkich sesji i połączeń. Pozwala na proste
- * rzutowanie niezależne od rodzaju połączenia.
+ * Struktura wspĂłlna dla wszystkich sesji i poĹ‚Ä…czeĹ„. Pozwala na proste
+ * rzutowanie niezaleĹĽne od rodzaju poĹ‚Ä…czenia.
  */
 struct gg_common {
 	gg_common_head(struct gg_common)
@@ -206,97 +206,97 @@ struct gg_dcc7_relay;
 struct gg_session_private;
 
 /**
- * Sposób rozwiązywania nazw serwerów.
+ * SposĂłb rozwiÄ…zywania nazw serwerĂłw.
  */
 typedef enum {
-	GG_RESOLVER_DEFAULT = 0,	/**< Domyślny sposób rozwiązywania nazw (jeden z poniższych) */
-	GG_RESOLVER_FORK,		/**< Rozwiązywanie nazw bazujące na procesach */
-	GG_RESOLVER_PTHREAD,		/**< Rozwiązywanie nazw bazujące na wątkach */
-	GG_RESOLVER_CUSTOM,		/**< Funkcje rozwiązywania nazw dostarczone przed aplikację */
-	GG_RESOLVER_WIN32,		/**< Rozwiązywanie nazw bazujące na wątkach Win32 */
-	GG_RESOLVER_INVALID = -1	/**< Nieprawidłowy sposób rozwiązywania nazw (wynik \c gg_session_get_resolver) */
+	GG_RESOLVER_DEFAULT = 0,	/**< DomyĹ›lny sposĂłb rozwiÄ…zywania nazw (jeden z poniĹĽszych) */
+	GG_RESOLVER_FORK,		/**< RozwiÄ…zywanie nazw bazujÄ…ce na procesach */
+	GG_RESOLVER_PTHREAD,		/**< RozwiÄ…zywanie nazw bazujÄ…ce na wÄ…tkach */
+	GG_RESOLVER_CUSTOM,		/**< Funkcje rozwiÄ…zywania nazw dostarczone przed aplikacjÄ™ */
+	GG_RESOLVER_WIN32,		/**< RozwiÄ…zywanie nazw bazujÄ…ce na wÄ…tkach Win32 */
+	GG_RESOLVER_INVALID = -1	/**< NieprawidĹ‚owy sposĂłb rozwiÄ…zywania nazw (wynik \c gg_session_get_resolver) */
 } gg_resolver_t;
 
 /**
- * Rodzaj kodowania znaków.
+ * Rodzaj kodowania znakĂłw.
  */
 typedef enum {
 	GG_ENCODING_CP1250 = 0,		/**< Kodowanie CP1250 */
 	GG_ENCODING_UTF8,		/**< Kodowanie UTF-8 */
-	GG_ENCODING_INVALID = -1	/**< Nieprawidłowe kodowanie */
+	GG_ENCODING_INVALID = -1	/**< NieprawidĹ‚owe kodowanie */
 } gg_encoding_t;
 
 /**
- * Stopień kompatybilności ze starymi wersjami API.
+ * StopieĹ„ kompatybilnoĹ›ci ze starymi wersjami API.
  */
 typedef enum {
-	GG_COMPAT_LEGACY = 0,	/**< Całkowita kompatybilność (nie wyłącza żadnych funkcji) */
-	GG_COMPAT_1_12_0 = 1	/**< Wyłącza: dostarczanie eventów GG_EVENT_ACK, stary format konferencji */
+	GG_COMPAT_LEGACY = 0,	/**< CaĹ‚kowita kompatybilnoĹ›Ä‡ (nie wyĹ‚Ä…cza ĹĽadnych funkcji) */
+	GG_COMPAT_1_12_0 = 1	/**< WyĹ‚Ä…cza: dostarczanie eventĂłw GG_EVENT_ACK, stary format konferencji */
 } gg_compat_t;
 
 /**
- * Flaga połączenia szyfrowanego.
+ * Flaga poĹ‚Ä…czenia szyfrowanego.
  *
  * \ingroup login
  */
 typedef enum {
-	GG_SSL_DISABLED = 0,	/**< Połączenie SSL wyłączone */
-	GG_SSL_ENABLED,		/**< Połączenie SSL włączone gdy dostępne. Błędny certyfikat serwera nie powoduje odrzucenia połączenia. */
-	GG_SSL_REQUIRED		/**< Połączenie SSL wymagane. Błędny certyfikat serwera powoduje odrzucenie połączenia. */
+	GG_SSL_DISABLED = 0,	/**< PoĹ‚Ä…czenie SSL wyĹ‚Ä…czone */
+	GG_SSL_ENABLED,		/**< PoĹ‚Ä…czenie SSL wĹ‚Ä…czone gdy dostÄ™pne. BĹ‚Ä™dny certyfikat serwera nie powoduje odrzucenia poĹ‚Ä…czenia. */
+	GG_SSL_REQUIRED		/**< PoĹ‚Ä…czenie SSL wymagane. BĹ‚Ä™dny certyfikat serwera powoduje odrzucenie poĹ‚Ä…czenia. */
 } gg_ssl_t;
 
 /**
  * Sesja Gadu-Gadu.
  *
- * Tworzona przez funkcję \c gg_login(), zwalniana przez \c gg_free_session().
+ * Tworzona przez funkcjÄ™ \c gg_login(), zwalniana przez \c gg_free_session().
  *
  * \ingroup login
  */
 struct gg_session {
 	gg_common_head(struct gg_session)
 
-	int async;      	/**< Flaga połączenia asynchronicznego */
-	int pid;        	/**< Numer procesu rozwiązującego nazwę serwera */
+	int async;      	/**< Flaga poĹ‚Ä…czenia asynchronicznego */
+	int pid;        	/**< Numer procesu rozwiÄ…zujÄ…cego nazwÄ™ serwera */
 	int port;       	/**< Port serwera */
-	int seq;        	/**< Numer sekwencyjny ostatniej wiadomości */
+	int seq;        	/**< Numer sekwencyjny ostatniej wiadomoĹ›ci */
 	int last_pong;  	/**< Czas otrzymania ostatniej ramki utrzymaniowej */
 	int last_event;		/**< Czas otrzymania ostatniego pakietu */
 
-	struct gg_event *event;	/**< Zdarzenie po wywołaniu \c callback */
+	struct gg_event *event;	/**< Zdarzenie po wywoĹ‚aniu \c callback */
 
-	uint32_t proxy_addr;	/**< Adres serwera pośredniczącego */
-	uint16_t proxy_port;	/**< Port serwera pośredniczącego */
+	uint32_t proxy_addr;	/**< Adres serwera poĹ›redniczÄ…cego */
+	uint16_t proxy_port;	/**< Port serwera poĹ›redniczÄ…cego */
 
-	uint32_t hub_addr;	/**< Adres huba po rozwiązaniu nazwy */
+	uint32_t hub_addr;	/**< Adres huba po rozwiÄ…zaniu nazwy */
 	uint32_t server_addr;	/**< Adres serwera otrzymany od huba */
 
-	uint32_t client_addr;	/**< Adres gniazda dla połączeń bezpośrednich */
-	uint16_t client_port;	/**< Port gniazda dla połączeń bezpośrednich */
+	uint32_t client_addr;	/**< Adres gniazda dla poĹ‚Ä…czeĹ„ bezpoĹ›rednich */
+	uint16_t client_port;	/**< Port gniazda dla poĹ‚Ä…czeĹ„ bezpoĹ›rednich */
 
-	uint32_t external_addr;	/**< Publiczny adres dla połączeń bezpośrednich */
-	uint16_t external_port;	/**< Publiczny port dla połączeń bezpośrednich */
+	uint32_t external_addr;	/**< Publiczny adres dla poĹ‚Ä…czeĹ„ bezpoĹ›rednich */
+	uint16_t external_port;	/**< Publiczny port dla poĹ‚Ä…czeĹ„ bezpoĹ›rednich */
 
-	uin_t uin;		/**< Własny numer Gadu-Gadu */
-	char *password;		/**< Hasło (zwalniane po użyciu) */
+	uin_t uin;		/**< WĹ‚asny numer Gadu-Gadu */
+	char *password;		/**< HasĹ‚o (zwalniane po uĹĽyciu) */
 
-	int initial_status;	/**< Początkowy status */
+	int initial_status;	/**< PoczÄ…tkowy status */
 	int status;		/**< Aktualny status */
 
-	char *recv_buf;		/**< Bufor na odbierane pakiety. Wskaźnik zawsze maksymalnie wyrównany, tak jak w wyniku działania \c malloc(). */
-	int recv_done;		/**< Liczba wczytanych bajtów pakietu */
-	int recv_left;		/**< Liczba pozostałych do wczytania bajtów pakietu */
+	char *recv_buf;		/**< Bufor na odbierane pakiety. WskaĹşnik zawsze maksymalnie wyrĂłwnany, tak jak w wyniku dziaĹ‚ania \c malloc(). */
+	int recv_done;		/**< Liczba wczytanych bajtĂłw pakietu */
+	int recv_left;		/**< Liczba pozostaĹ‚ych do wczytania bajtĂłw pakietu */
 
-	int protocol_version;	/**< Wersja protokołu (bez flag) */
+	int protocol_version;	/**< Wersja protokoĹ‚u (bez flag) */
 	char *client_version;	/**< Wersja klienta */
-	int last_sysmsg;	/**< Numer ostatniej wiadomości systemowej */
+	int last_sysmsg;	/**< Numer ostatniej wiadomoĹ›ci systemowej */
 
-	char *initial_descr;	/**< Początkowy opis statusu */
+	char *initial_descr;	/**< PoczÄ…tkowy opis statusu */
 
-	void *resolver;		/**< Dane prywatne procesu lub wątku rozwiązującego nazwę serwera */
+	void *resolver;		/**< Dane prywatne procesu lub wÄ…tku rozwiÄ…zujÄ…cego nazwÄ™ serwera */
 
 #ifndef DOXYGEN
-	char *header_buf;	/**< Bufor na początek nagłówka pakietu (nieaktualne) */
-	unsigned int header_done;	/**< Liczba wczytanych bajtów nagłówka pakietu (nieaktualne) */
+	char *header_buf;	/**< Bufor na poczÄ…tek nagĹ‚Ăłwka pakietu (nieaktualne) */
+	unsigned int header_done;	/**< Liczba wczytanych bajtĂłw nagĹ‚Ăłwka pakietu (nieaktualne) */
 #endif
 
 #ifdef GG_CONFIG_HAVE_OPENSSL
@@ -307,51 +307,51 @@ struct gg_session {
 	void *ssl_ctx;		/**< Kontekst sesji TLS */
 #endif
 
-	int image_size;		/**< Maksymalny rozmiar obsługiwanych obrazków w KiB */
+	int image_size;		/**< Maksymalny rozmiar obsĹ‚ugiwanych obrazkĂłw w KiB */
 
-	char *userlist_reply;	/**< Bufor z odbieraną listą kontaktów */
+	char *userlist_reply;	/**< Bufor z odbieranÄ… listÄ… kontaktĂłw */
 
-	int userlist_blocks;	/**< Liczba części listy kontaktów */
+	int userlist_blocks;	/**< Liczba czÄ™Ĺ›ci listy kontaktĂłw */
 
-	struct gg_image_queue *images;	/**< Lista wczytywanych obrazków */
+	struct gg_image_queue *images;	/**< Lista wczytywanych obrazkĂłw */
 
-	int hash_type;		/**< Rodzaj funkcji skrótu hasła (\c GG_LOGIN_HASH_GG32 lub \c GG_LOGIN_HASH_SHA1) */
+	int hash_type;		/**< Rodzaj funkcji skrĂłtu hasĹ‚a (\c GG_LOGIN_HASH_GG32 lub \c GG_LOGIN_HASH_SHA1) */
 
-	char *send_buf;		/**< Bufor z danymi do wysłania */
-	int send_left;		/**< Liczba bajtów do wysłania */
+	char *send_buf;		/**< Bufor z danymi do wysĹ‚ania */
+	int send_left;		/**< Liczba bajtĂłw do wysĹ‚ania */
 
-	struct gg_dcc7 *dcc7_list;	/**< Lista połączeń bezpośrednich skojarzonych z sesją */
+	struct gg_dcc7 *dcc7_list;	/**< Lista poĹ‚Ä…czeĹ„ bezpoĹ›rednich skojarzonych z sesjÄ… */
 	
-	int soft_timeout;	/**< Flaga mówiąca, że po przekroczeniu \c timeout należy wywołać \c gg_watch_fd() */
+	int soft_timeout;	/**< Flaga mĂłwiÄ…ca, ĹĽe po przekroczeniu \c timeout naleĹĽy wywoĹ‚aÄ‡ \c gg_watch_fd() */
 
-	int protocol_flags;	/**< Flagi protokołu */
+	int protocol_flags;	/**< Flagi protokoĹ‚u */
 
-	gg_encoding_t encoding;		/**< Rodzaj kodowania znaków */
+	gg_encoding_t encoding;		/**< Rodzaj kodowania znakĂłw */
 
-	gg_resolver_t resolver_type;	/**< Sposób rozwiązywania nazw serwerów */
-	int (*resolver_start)(int *fd, void **private_data, const char *hostname);	/**< Funkcja rozpoczynająca rozwiązywanie nazwy */
-	void (*resolver_cleanup)(void **private_data, int force);	/**< Funkcja zwalniająca zasoby po rozwiązaniu nazwy */
+	gg_resolver_t resolver_type;	/**< SposĂłb rozwiÄ…zywania nazw serwerĂłw */
+	int (*resolver_start)(int *fd, void **private_data, const char *hostname);	/**< Funkcja rozpoczynajÄ…ca rozwiÄ…zywanie nazwy */
+	void (*resolver_cleanup)(void **private_data, int force);	/**< Funkcja zwalniajÄ…ca zasoby po rozwiÄ…zaniu nazwy */
 
-	int protocol_features;	/**< Opcje protokołu */
+	int protocol_features;	/**< Opcje protokoĹ‚u */
 	int status_flags;	/**< Flagi statusu */
-	int recv_msg_count;	/**< Liczba odebranych wiadomości */
+	int recv_msg_count;	/**< Liczba odebranych wiadomoĹ›ci */
 
-	const char *resolver_host;		/**< Nazwa do rozwiązania */
-	struct in_addr *resolver_result;	/**< Wynik rozwiązywania nazwy */
-	unsigned int resolver_index;		/**< Indeks aktualnie obsługiwanego wyniku rozwiązywania nazwy */
-	unsigned int resolver_count;		/**< Liczba wyników rozwiązywania nazwy */
+	const char *resolver_host;		/**< Nazwa do rozwiÄ…zania */
+	struct in_addr *resolver_result;	/**< Wynik rozwiÄ…zywania nazwy */
+	unsigned int resolver_index;		/**< Indeks aktualnie obsĹ‚ugiwanego wyniku rozwiÄ…zywania nazwy */
+	unsigned int resolver_count;		/**< Liczba wynikĂłw rozwiÄ…zywania nazwy */
 
-	uint16_t connect_port[2];		/**< Lista portów do połączenia */
-	unsigned int connect_index;		/**< Indeks aktualnie obsługiwanego portu */
+	uint16_t connect_port[2];		/**< Lista portĂłw do poĹ‚Ä…czenia */
+	unsigned int connect_index;		/**< Indeks aktualnie obsĹ‚ugiwanego portu */
 
-	char *connect_host;			/**< Adres serwera Gadu-Gadu, z którym się łączymy */
-	gg_ssl_t ssl_flag;			/**< Flaga połączenia szyfrowanego */
+	char *connect_host;			/**< Adres serwera Gadu-Gadu, z ktĂłrym siÄ™ Ĺ‚Ä…czymy */
+	gg_ssl_t ssl_flag;			/**< Flaga poĹ‚Ä…czenia szyfrowanego */
 
-	struct gg_session_private *private_data;	/**< Prywatne dane sesji, nie udostępnione w API */
+	struct gg_session_private *private_data;	/**< Prywatne dane sesji, nie udostÄ™pnione w API */
 };
 
 /**
- * Połączenie HTTP.
+ * PoĹ‚Ä…czenie HTTP.
  *
  * Tworzone przez \c gg_http_connect(), zwalniane przez \c gg_http_free().
  *
@@ -360,27 +360,27 @@ struct gg_session {
 struct gg_http {
 	gg_common_head(struct gg_http)
 
-	int async;              /**< Flaga połączenia asynchronicznego */
-	int pid;                /**< Identyfikator procesu rozwiązującego nazwę serwera */
+	int async;              /**< Flaga poĹ‚Ä…czenia asynchronicznego */
+	int pid;                /**< Identyfikator procesu rozwiÄ…zujÄ…cego nazwÄ™ serwera */
 	int port;               /**< Port */
 
 	char *query;            /**< Zapytanie HTTP */
-	char *header;           /**< Odebrany nagłówek */
-	int header_size;        /**< Rozmiar wczytanego nagłówka */
+	char *header;           /**< Odebrany nagĹ‚Ăłwek */
+	int header_size;        /**< Rozmiar wczytanego nagĹ‚Ăłwka */
 	char *body;             /**< Odebrana strona */
 	unsigned int body_size; /**< Rozmiar strony */
 
-	void *data;             /**< Dane prywatne usługi HTTP */
+	void *data;             /**< Dane prywatne usĹ‚ugi HTTP */
 
-	char *user_data;	/**< Dane prywatne użytkownika (nie są zwalniane) */
+	char *user_data;	/**< Dane prywatne uĹĽytkownika (nie sÄ… zwalniane) */
 
-	void *resolver;		/**< Dane prywatne procesu lub wątku rozwiązującego nazwę */
+	void *resolver;		/**< Dane prywatne procesu lub wÄ…tku rozwiÄ…zujÄ…cego nazwÄ™ */
 
-	unsigned int body_done;	/**< Liczba odebranych bajtów strony */
+	unsigned int body_done;	/**< Liczba odebranych bajtĂłw strony */
 
-	gg_resolver_t resolver_type;	/**< Sposób rozwiązywania nazw serwerów */
-	int (*resolver_start)(int *fd, void **private_data, const char *hostname);	/**< Funkcja rozpoczynająca rozwiązywanie nazwy */
-	void (*resolver_cleanup)(void **private_data, int force);	/**< Funkcja zwalniająca zasoby po rozwiązaniu nazwy */
+	gg_resolver_t resolver_type;	/**< SposĂłb rozwiÄ…zywania nazw serwerĂłw */
+	int (*resolver_start)(int *fd, void **private_data, const char *hostname);	/**< Funkcja rozpoczynajÄ…ca rozwiÄ…zywanie nazwy */
+	void (*resolver_cleanup)(void **private_data, int force);	/**< Funkcja zwalniajÄ…ca zasoby po rozwiÄ…zaniu nazwy */
 };
 
 /** \cond ignore */
@@ -404,7 +404,7 @@ struct gg_http {
 /**
  * Odpowiednik struktury WIN32_FIND_DATA z API WIN32.
  *
- * Wykorzystywana przy połączeniach bezpośrednich do wersji Gadu-Gadu 6.x.
+ * Wykorzystywana przy poĹ‚Ä…czeniach bezpoĹ›rednich do wersji Gadu-Gadu 6.x.
  */
 struct gg_file_info {
 	uint32_t mode;			/**< dwFileAttributes */
@@ -420,7 +420,7 @@ struct gg_file_info {
 } /** \cond ignore */ GG_PACKED /** \endcond */;
 
 /**
- * Połączenie bezpośrednie do wersji Gadu-Gadu 6.x.
+ * PoĹ‚Ä…czenie bezpoĹ›rednie do wersji Gadu-Gadu 6.x.
  *
  * Tworzone przez \c gg_dcc_socket_create(), \c gg_dcc_get_file(),
  * \c gg_dcc_send_file() lub \c gg_dcc_voice_chat(), zwalniane przez
@@ -431,60 +431,60 @@ struct gg_file_info {
 struct gg_dcc {
 	gg_common_head(struct gg_dcc)
 
-	struct gg_event *event;	/**< Zdarzenie po wywołaniu \c callback */
+	struct gg_event *event;	/**< Zdarzenie po wywoĹ‚aniu \c callback */
 
-	int active;		/**< Flaga połączenia aktywnego (nieużywana) */
-	int port;		/**< Port gniazda nasłuchującego */
-	uin_t uin;		/**< Własny numer Gadu-Gadu */
-	uin_t peer_uin;		/**< Numer Gadu-Gadu drugiej strony połączenia */
+	int active;		/**< Flaga poĹ‚Ä…czenia aktywnego (nieuĹĽywana) */
+	int port;		/**< Port gniazda nasĹ‚uchujÄ…cego */
+	uin_t uin;		/**< WĹ‚asny numer Gadu-Gadu */
+	uin_t peer_uin;		/**< Numer Gadu-Gadu drugiej strony poĹ‚Ä…czenia */
 	int file_fd;		/**< deskryptor pliku */
-	unsigned int offset;	/**< Położenie w pliku */
+	unsigned int offset;	/**< PoĹ‚oĹĽenie w pliku */
 	unsigned int chunk_size;
-				/**< Rozmiar kawałka pliku */
+				/**< Rozmiar kawaĹ‚ka pliku */
 	unsigned int chunk_offset;
-				/**< Położenie w aktualnym kawałku pliku */
+				/**< PoĹ‚oĹĽenie w aktualnym kawaĹ‚ku pliku */
 	struct gg_file_info file_info;
 				/**< Informacje o pliku */
-	int established;	/**< Flaga ustanowienia połączenia */
-	char *voice_buf;	/**< Bufor na pakiet połączenia głosowego */
-	int incoming;		/**< Flaga połączenia przychodzącego */
+	int established;	/**< Flaga ustanowienia poĹ‚Ä…czenia */
+	char *voice_buf;	/**< Bufor na pakiet poĹ‚Ä…czenia gĹ‚osowego */
+	int incoming;		/**< Flaga poĹ‚Ä…czenia przychodzÄ…cego */
 	char *chunk_buf;	/**< Bufor na fragment danych */
 	uint32_t remote_addr;	/**< Adres drugiej strony */
 	uint16_t remote_port;	/**< Port drugiej strony */
 };
 
-#define GG_DCC7_HASH_LEN	20	/**< Maksymalny rozmiar skrótu pliku w połączeniach bezpośrenich */
-#define GG_DCC7_FILENAME_LEN	255	/**< Maksymalny rozmiar nazwy pliku w połączeniach bezpośrednich */
-#define GG_DCC7_INFO_LEN	32	/**< Maksymalny rozmiar informacji o połączeniach bezpośrednich */
-#define GG_DCC7_INFO_HASH_LEN	32	/**< Maksymalny rozmiar skrótu ip informacji o połączeniach bezpośrednich */
+#define GG_DCC7_HASH_LEN	20	/**< Maksymalny rozmiar skrĂłtu pliku w poĹ‚Ä…czeniach bezpoĹ›renich */
+#define GG_DCC7_FILENAME_LEN	255	/**< Maksymalny rozmiar nazwy pliku w poĹ‚Ä…czeniach bezpoĹ›rednich */
+#define GG_DCC7_INFO_LEN	32	/**< Maksymalny rozmiar informacji o poĹ‚Ä…czeniach bezpoĹ›rednich */
+#define GG_DCC7_INFO_HASH_LEN	32	/**< Maksymalny rozmiar skrĂłtu ip informacji o poĹ‚Ä…czeniach bezpoĹ›rednich */
 
 /**
- * Połączenie bezpośrednie od wersji Gadu-Gadu 7.x.
+ * PoĹ‚Ä…czenie bezpoĹ›rednie od wersji Gadu-Gadu 7.x.
  *
  * \ingroup dcc7
  */
 struct gg_dcc7 {
 	gg_common_head(struct gg_dcc7)
 
-	gg_dcc7_id_t cid;	/**< Identyfikator połączenia */
+	gg_dcc7_id_t cid;	/**< Identyfikator poĹ‚Ä…czenia */
 
 	struct gg_event *event;	/**< Struktura zdarzenia */
 
-	uin_t uin;		/**< Własny numer Gadu-Gadu */
-	uin_t peer_uin;		/**< Numer Gadu-Gadu drugiej strony połączenia */
+	uin_t uin;		/**< WĹ‚asny numer Gadu-Gadu */
+	uin_t peer_uin;		/**< Numer Gadu-Gadu drugiej strony poĹ‚Ä…czenia */
 
-	int file_fd;		/**< Deskryptor przesyłanego pliku */
-	unsigned int offset;	/**< Aktualne położenie w przesyłanym pliku */
-	unsigned int size;	/**< Rozmiar przesyłanego pliku */
+	int file_fd;		/**< Deskryptor przesyĹ‚anego pliku */
+	unsigned int offset;	/**< Aktualne poĹ‚oĹĽenie w przesyĹ‚anym pliku */
+	unsigned int size;	/**< Rozmiar przesyĹ‚anego pliku */
 	unsigned char filename[GG_DCC7_FILENAME_LEN + 1];
-				/**< Nazwa przesyłanego pliku */
+				/**< Nazwa przesyĹ‚anego pliku */
 	unsigned char hash[GG_DCC7_HASH_LEN];
-				/**< Skrót SHA1 przesyłanego pliku */
+				/**< SkrĂłt SHA1 przesyĹ‚anego pliku */
 
-	int dcc_type;		/**< Rodzaj połączenia bezpośredniego */
-	int established;	/**< Flaga ustanowienia połączenia */
-	int incoming;		/**< Flaga połączenia przychodzącego */
-	int reverse;		/**< Flaga połączenia zwrotnego */
+	int dcc_type;		/**< Rodzaj poĹ‚Ä…czenia bezpoĹ›redniego */
+	int established;	/**< Flaga ustanowienia poĹ‚Ä…czenia */
+	int incoming;		/**< Flaga poĹ‚Ä…czenia przychodzÄ…cego */
+	int reverse;		/**< Flaga poĹ‚Ä…czenia zwrotnego */
 
 	uint32_t local_addr;	/**< Adres lokalny */
 	uint16_t local_port;	/**< Port lokalny */
@@ -493,125 +493,125 @@ struct gg_dcc7 {
 	uint16_t remote_port;	/**< Port drugiej strony */
 
 	struct gg_session *sess;
-				/**< Sesja do której przypisano połączenie */
-	struct gg_dcc7 *next;	/**< Następne połączenie w liście */
+				/**< Sesja do ktĂłrej przypisano poĹ‚Ä…czenie */
+	struct gg_dcc7 *next;	/**< NastÄ™pne poĹ‚Ä…czenie w liĹ›cie */
 
-	int soft_timeout;	/**< Flaga mówiąca, że po przekroczeniu \c timeout należy wywołać \c gg_dcc7_watch_fd() */
-	int seek;		/**< Flaga mówiąca, że można zmieniać położenie w wysyłanym pliku */
+	int soft_timeout;	/**< Flaga mĂłwiÄ…ca, ĹĽe po przekroczeniu \c timeout naleĹĽy wywoĹ‚aÄ‡ \c gg_dcc7_watch_fd() */
+	int seek;		/**< Flaga mĂłwiÄ…ca, ĹĽe moĹĽna zmieniaÄ‡ poĹ‚oĹĽenie w wysyĹ‚anym pliku */
 
-	void *resolver;		/**< Dane prywatne procesu lub wątku rozwiązującego nazwę serwera */
+	void *resolver;		/**< Dane prywatne procesu lub wÄ…tku rozwiÄ…zujÄ…cego nazwÄ™ serwera */
 
-	int relay;		/**< Flaga mówiąca, że laczymy sie przez serwer */
-	int relay_index;	/**< Numer serwera pośredniczącego, do którego się łączymy */
-	int relay_count;	/**< Rozmiar listy serwerów pośredniczących */
-	struct gg_dcc7_relay *relay_list;	/**< Lista serwerów pośredniczących */
+	int relay;		/**< Flaga mĂłwiÄ…ca, ĹĽe laczymy sie przez serwer */
+	int relay_index;	/**< Numer serwera poĹ›redniczÄ…cego, do ktĂłrego siÄ™ Ĺ‚Ä…czymy */
+	int relay_count;	/**< Rozmiar listy serwerĂłw poĹ›redniczÄ…cych */
+	struct gg_dcc7_relay *relay_list;	/**< Lista serwerĂłw poĹ›redniczÄ…cych */
 };
 
 /**
  * Rodzaj sesji.
  */
 enum gg_session_t {
-	GG_SESSION_GG = 1,	/**< Połączenie z serwerem Gadu-Gadu */
-	GG_SESSION_HTTP,	/**< Połączenie HTTP */
+	GG_SESSION_GG = 1,	/**< PoĹ‚Ä…czenie z serwerem Gadu-Gadu */
+	GG_SESSION_HTTP,	/**< PoĹ‚Ä…czenie HTTP */
 	GG_SESSION_SEARCH,	/**< Wyszukiwanie w katalogu publicznym (nieaktualne) */
 	GG_SESSION_REGISTER,	/**< Rejestracja nowego konta */
-	GG_SESSION_REMIND,	/**< Przypominanie hasła */
-	GG_SESSION_PASSWD,	/**< Zmiana hasła */
+	GG_SESSION_REMIND,	/**< Przypominanie hasĹ‚a */
+	GG_SESSION_PASSWD,	/**< Zmiana hasĹ‚a */
 	GG_SESSION_CHANGE,	/**< Zmiana informacji w katalogu publicznym (nieaktualne) */
-	GG_SESSION_DCC,		/**< Połączenie bezpośrednie (do wersji 6.x) */
-	GG_SESSION_DCC_SOCKET,	/**< Gniazdo nasłuchujące (do wersji 6.x) */
-	GG_SESSION_DCC_SEND,	/**< Wysyłanie pliku (do wersji 6.x) */
+	GG_SESSION_DCC,		/**< PoĹ‚Ä…czenie bezpoĹ›rednie (do wersji 6.x) */
+	GG_SESSION_DCC_SOCKET,	/**< Gniazdo nasĹ‚uchujÄ…ce (do wersji 6.x) */
+	GG_SESSION_DCC_SEND,	/**< WysyĹ‚anie pliku (do wersji 6.x) */
 	GG_SESSION_DCC_GET,	/**< Odbieranie pliku (do wersji 6.x) */
-	GG_SESSION_DCC_VOICE,	/**< Rozmowa głosowa (do wersji 6.x) */
-	GG_SESSION_USERLIST_GET,	/**< Import listy kontaktów z serwera (nieaktualne) */
-	GG_SESSION_USERLIST_PUT,	/**< Eksport listy kontaktów do serwera (nieaktualne) */
+	GG_SESSION_DCC_VOICE,	/**< Rozmowa gĹ‚osowa (do wersji 6.x) */
+	GG_SESSION_USERLIST_GET,	/**< Import listy kontaktĂłw z serwera (nieaktualne) */
+	GG_SESSION_USERLIST_PUT,	/**< Eksport listy kontaktĂłw do serwera (nieaktualne) */
 	GG_SESSION_UNREGISTER,	/**< Usuwanie konta */
-	GG_SESSION_USERLIST_REMOVE,	/**< Usuwanie listy kontaktów z serwera (nieaktualne) */
+	GG_SESSION_USERLIST_REMOVE,	/**< Usuwanie listy kontaktĂłw z serwera (nieaktualne) */
 	GG_SESSION_TOKEN,	/**< Pobieranie tokenu */
-	GG_SESSION_DCC7_SOCKET,	/**< Gniazdo nasłuchujące (od wersji 7.x) */
-	GG_SESSION_DCC7_SEND,	/**< Wysyłanie pliku (od wersji 7.x) */
+	GG_SESSION_DCC7_SOCKET,	/**< Gniazdo nasĹ‚uchujÄ…ce (od wersji 7.x) */
+	GG_SESSION_DCC7_SEND,	/**< WysyĹ‚anie pliku (od wersji 7.x) */
 	GG_SESSION_DCC7_GET,	/**< Odbieranie pliku (od wersji 7.x) */
-	GG_SESSION_DCC7_VOICE,	/**< Rozmowa głosowa (od wersji 7.x) */
+	GG_SESSION_DCC7_VOICE,	/**< Rozmowa gĹ‚osowa (od wersji 7.x) */
 
-	GG_SESSION_USER0 = 256,	/**< Rodzaj zadeklarowany dla użytkownika */
-	GG_SESSION_USER1,	/**< Rodzaj zadeklarowany dla użytkownika */
-	GG_SESSION_USER2,	/**< Rodzaj zadeklarowany dla użytkownika */
-	GG_SESSION_USER3,	/**< Rodzaj zadeklarowany dla użytkownika */
-	GG_SESSION_USER4,	/**< Rodzaj zadeklarowany dla użytkownika */
-	GG_SESSION_USER5,	/**< Rodzaj zadeklarowany dla użytkownika */
-	GG_SESSION_USER6,	/**< Rodzaj zadeklarowany dla użytkownika */
-	GG_SESSION_USER7	/**< Rodzaj zadeklarowany dla użytkownika */
+	GG_SESSION_USER0 = 256,	/**< Rodzaj zadeklarowany dla uĹĽytkownika */
+	GG_SESSION_USER1,	/**< Rodzaj zadeklarowany dla uĹĽytkownika */
+	GG_SESSION_USER2,	/**< Rodzaj zadeklarowany dla uĹĽytkownika */
+	GG_SESSION_USER3,	/**< Rodzaj zadeklarowany dla uĹĽytkownika */
+	GG_SESSION_USER4,	/**< Rodzaj zadeklarowany dla uĹĽytkownika */
+	GG_SESSION_USER5,	/**< Rodzaj zadeklarowany dla uĹĽytkownika */
+	GG_SESSION_USER6,	/**< Rodzaj zadeklarowany dla uĹĽytkownika */
+	GG_SESSION_USER7	/**< Rodzaj zadeklarowany dla uĹĽytkownika */
 };
 
 /**
  * Aktualny stan sesji.
  */
 enum gg_state_t {
-	/* wspólne */
-	GG_STATE_IDLE = 0,		/**< Nie dzieje się nic */
-	GG_STATE_RESOLVING,             /**< Oczekiwanie na rozwiązanie nazwy serwera */
-	GG_STATE_CONNECTING,            /**< Oczekiwanie na połączenie */
+	/* wspĂłlne */
+	GG_STATE_IDLE = 0,		/**< Nie dzieje siÄ™ nic */
+	GG_STATE_RESOLVING,             /**< Oczekiwanie na rozwiÄ…zanie nazwy serwera */
+	GG_STATE_CONNECTING,            /**< Oczekiwanie na poĹ‚Ä…czenie */
 	GG_STATE_READING_DATA,		/**< Oczekiwanie na dane */
-	GG_STATE_ERROR,			/**< Kod błędu w polu \c error */
+	GG_STATE_ERROR,			/**< Kod bĹ‚Ä™du w polu \c error */
 
 	/* gg_session */
-	GG_STATE_CONNECTING_HUB,	/**< Oczekiwanie na połączenie z hubem */
-	GG_STATE_CONNECTING_GG,         /**< Oczekiwanie na połączenie z serwerem */
+	GG_STATE_CONNECTING_HUB,	/**< Oczekiwanie na poĹ‚Ä…czenie z hubem */
+	GG_STATE_CONNECTING_GG,         /**< Oczekiwanie na poĹ‚Ä…czenie z serwerem */
 	GG_STATE_READING_KEY,           /**< Oczekiwanie na klucz */
-	GG_STATE_READING_REPLY,         /**< Oczekiwanie na odpowiedź serwera */
-	GG_STATE_CONNECTED,             /**< Połączono z serwerem */
+	GG_STATE_READING_REPLY,         /**< Oczekiwanie na odpowiedĹş serwera */
+	GG_STATE_CONNECTED,             /**< PoĹ‚Ä…czono z serwerem */
 
 	/* gg_http */
-	GG_STATE_SENDING_QUERY,		/**< Wysłano zapytanie HTTP */
-	GG_STATE_READING_HEADER,	/**< Oczekiwanie na nagłówek HTTP */
+	GG_STATE_SENDING_QUERY,		/**< WysĹ‚ano zapytanie HTTP */
+	GG_STATE_READING_HEADER,	/**< Oczekiwanie na nagĹ‚Ăłwek HTTP */
 	GG_STATE_PARSING,               /**< Przetwarzanie danych */
-	GG_STATE_DONE,                  /**< Połączenie zakończone */
+	GG_STATE_DONE,                  /**< PoĹ‚Ä…czenie zakoĹ„czone */
 
 	/* gg_dcc */
-	GG_STATE_LISTENING,		/* czeka na połączenia */
+	GG_STATE_LISTENING,		/* czeka na poĹ‚Ä…czenia */
 	GG_STATE_READING_UIN_1,		/* czeka na uin peera */
-	GG_STATE_READING_UIN_2,		/* czeka na swój uin */
-	GG_STATE_SENDING_ACK,		/* wysyła potwierdzenie dcc */
+	GG_STATE_READING_UIN_2,		/* czeka na swĂłj uin */
+	GG_STATE_SENDING_ACK,		/* wysyĹ‚a potwierdzenie dcc */
 	GG_STATE_READING_ACK,		/* czeka na potwierdzenie dcc */
-	GG_STATE_READING_REQUEST,	/* czeka na komendę */
-	GG_STATE_SENDING_REQUEST,	/* wysyła komendę */
-	GG_STATE_SENDING_FILE_INFO,	/* wysyła informacje o pliku */
+	GG_STATE_READING_REQUEST,	/* czeka na komendÄ™ */
+	GG_STATE_SENDING_REQUEST,	/* wysyĹ‚a komendÄ™ */
+	GG_STATE_SENDING_FILE_INFO,	/* wysyĹ‚a informacje o pliku */
 	GG_STATE_READING_PRE_FILE_INFO,	/* czeka na pakiet przed file_info */
 	GG_STATE_READING_FILE_INFO,	/* czeka na informacje o pliku */
-	GG_STATE_SENDING_FILE_ACK,	/* wysyła potwierdzenie pliku */
+	GG_STATE_SENDING_FILE_ACK,	/* wysyĹ‚a potwierdzenie pliku */
 	GG_STATE_READING_FILE_ACK,	/* czeka na potwierdzenie pliku */
-	GG_STATE_SENDING_FILE_HEADER,	/* wysyła nagłówek pliku */
-	GG_STATE_READING_FILE_HEADER,	/* czeka na nagłówek */
+	GG_STATE_SENDING_FILE_HEADER,	/* wysyĹ‚a nagĹ‚Ăłwek pliku */
+	GG_STATE_READING_FILE_HEADER,	/* czeka na nagĹ‚Ăłwek */
 	GG_STATE_GETTING_FILE,		/* odbiera plik */
-	GG_STATE_SENDING_FILE,		/* wysyła plik */
+	GG_STATE_SENDING_FILE,		/* wysyĹ‚a plik */
 	GG_STATE_READING_VOICE_ACK,	/* czeka na potwierdzenie voip */
 	GG_STATE_READING_VOICE_HEADER,	/* czeka na rodzaj bloku voip */
 	GG_STATE_READING_VOICE_SIZE,	/* czeka na rozmiar bloku voip */
 	GG_STATE_READING_VOICE_DATA,	/* czeka na dane voip */
-	GG_STATE_SENDING_VOICE_ACK,	/* wysyła potwierdzenie voip */
-	GG_STATE_SENDING_VOICE_REQUEST,	/* wysyła żądanie voip */
-	GG_STATE_READING_TYPE,		/* czeka na typ połączenia */
+	GG_STATE_SENDING_VOICE_ACK,	/* wysyĹ‚a potwierdzenie voip */
+	GG_STATE_SENDING_VOICE_REQUEST,	/* wysyĹ‚a ĹĽÄ…danie voip */
+	GG_STATE_READING_TYPE,		/* czeka na typ poĹ‚Ä…czenia */
 
 	/* nowe. bez sensu jest to API. */
-	GG_STATE_TLS_NEGOTIATION,	/**< Negocjacja połączenia szyfrowanego */
+	GG_STATE_TLS_NEGOTIATION,	/**< Negocjacja poĹ‚Ä…czenia szyfrowanego */
 
-	GG_STATE_REQUESTING_ID,		/**< Oczekiwanie na nadanie identyfikatora połączenia bezpośredniego */
-	GG_STATE_WAITING_FOR_ACCEPT,	/**< Oczekiwanie na potwierdzenie lub odrzucenie połączenia bezpośredniego */
-	GG_STATE_WAITING_FOR_INFO,	/**< Oczekiwanie na informacje o połączeniu bezpośrednim */
+	GG_STATE_REQUESTING_ID,		/**< Oczekiwanie na nadanie identyfikatora poĹ‚Ä…czenia bezpoĹ›redniego */
+	GG_STATE_WAITING_FOR_ACCEPT,	/**< Oczekiwanie na potwierdzenie lub odrzucenie poĹ‚Ä…czenia bezpoĹ›redniego */
+	GG_STATE_WAITING_FOR_INFO,	/**< Oczekiwanie na informacje o poĹ‚Ä…czeniu bezpoĹ›rednim */
 
-	GG_STATE_READING_ID,		/**< Odebranie identyfikatora połączenia bezpośredniego */
-	GG_STATE_SENDING_ID,		/**< Wysłano identyfikator połączenia bezpośredniego */
-	GG_STATE_RESOLVING_GG,		/**< Oczekiwanie na rozwiązanie nazwy serwera Gadu-Gadu */
+	GG_STATE_READING_ID,		/**< Odebranie identyfikatora poĹ‚Ä…czenia bezpoĹ›redniego */
+	GG_STATE_SENDING_ID,		/**< WysĹ‚ano identyfikator poĹ‚Ä…czenia bezpoĹ›redniego */
+	GG_STATE_RESOLVING_GG,		/**< Oczekiwanie na rozwiÄ…zanie nazwy serwera Gadu-Gadu */
 
-	GG_STATE_RESOLVING_RELAY,	/**< Oczekiwanie na rozwiązanie nazwy serwera pośredniczącego */
-	GG_STATE_CONNECTING_RELAY,	/**< Oczekiwanie na połączenie z serwerem pośredniczącym */
+	GG_STATE_RESOLVING_RELAY,	/**< Oczekiwanie na rozwiÄ…zanie nazwy serwera poĹ›redniczÄ…cego */
+	GG_STATE_CONNECTING_RELAY,	/**< Oczekiwanie na poĹ‚Ä…czenie z serwerem poĹ›redniczÄ…cym */
 	GG_STATE_READING_RELAY,		/**< Odbieranie danych */
 
-	GG_STATE_DISCONNECTING,		/**< Oczekiwanie na potwierdzenie rozłączenia */
+	GG_STATE_DISCONNECTING,		/**< Oczekiwanie na potwierdzenie rozĹ‚Ä…czenia */
 
-	GG_STATE_CONNECT_HUB,		/**< Nawiązanie połączenia z hubem */
+	GG_STATE_CONNECT_HUB,		/**< NawiÄ…zanie poĹ‚Ä…czenia z hubem */
 	GG_STATE_CONNECT_PROXY_HUB,
-	GG_STATE_CONNECT_GG,		/**< Nawiązanie połączenia z serwerem */
+	GG_STATE_CONNECT_GG,		/**< NawiÄ…zanie poĹ‚Ä…czenia z serwerem */
 	GG_STATE_CONNECT_PROXY_GG,
 	GG_STATE_CONNECTING_PROXY_HUB,
 	GG_STATE_CONNECTING_PROXY_GG,
@@ -638,41 +638,41 @@ enum gg_state_t {
 };
 
 /**
- * Informacja o tym, czy biblioteka chce zapisywać i/lub czytać
+ * Informacja o tym, czy biblioteka chce zapisywaÄ‡ i/lub czytaÄ‡
  * z deskryptora. Maska bitowa.
  *
  * \ingroup events
  */
 enum gg_check_t {
 	GG_CHECK_NONE = 0,		/**< Nie sprawdzaj niczego */
-	GG_CHECK_WRITE = 1,		/**< Sprawdź możliwość zapisu */
-	GG_CHECK_READ = 2		/**< Sprawdź możliwość odczytu */
+	GG_CHECK_WRITE = 1,		/**< SprawdĹş moĹĽliwoĹ›Ä‡ zapisu */
+	GG_CHECK_READ = 2		/**< SprawdĹş moĹĽliwoĹ›Ä‡ odczytu */
 };
 
 /**
- * Metody nawiązywania połączeń TCP/TLS.
+ * Metody nawiÄ…zywania poĹ‚Ä…czeĹ„ TCP/TLS.
  *
  * \ingroup socketmanager
  */
 typedef enum {
-	GG_SOCKET_MANAGER_TYPE_INTERNAL = 0, /**< Wewnętrzna obsługa gniazd (domyślne). */
-	GG_SOCKET_MANAGER_TYPE_TCP, /**< Dostarczona przez aplikację - tylko obsługa TCP. */
-	GG_SOCKET_MANAGER_TYPE_TLS /**< Dostarczona przez aplikację - obsługa zarówno TCP, jak i TLS. */
+	GG_SOCKET_MANAGER_TYPE_INTERNAL = 0, /**< WewnÄ™trzna obsĹ‚uga gniazd (domyĹ›lne). */
+	GG_SOCKET_MANAGER_TYPE_TCP, /**< Dostarczona przez aplikacjÄ™ - tylko obsĹ‚uga TCP. */
+	GG_SOCKET_MANAGER_TYPE_TLS /**< Dostarczona przez aplikacjÄ™ - obsĹ‚uga zarĂłwno TCP, jak i TLS. */
 } gg_socket_manager_type_t;
 
 /**
- * Funkcja dostarczona przez aplikację, tworząca nowe gniazdo TCP/TLS.
+ * Funkcja dostarczona przez aplikacjÄ™, tworzÄ…ca nowe gniazdo TCP/TLS.
  *
- * Po nawiązaniu połączenia aplikacja musi wywołać gg_socket_manager_connected.
- * Jeżeli połączenie jest asynchroniczne, wywołanie musi nastąpić po wyjściu z
- * kontekstu tej funkcji. Dla połączeń synchronicznych z kolei, musi nastąpić
- * jeszcze przed wyjściem z kontekstu.
+ * Po nawiÄ…zaniu poĹ‚Ä…czenia aplikacja musi wywoĹ‚aÄ‡ gg_socket_manager_connected.
+ * JeĹĽeli poĹ‚Ä…czenie jest asynchroniczne, wywoĹ‚anie musi nastÄ…piÄ‡ po wyjĹ›ciu z
+ * kontekstu tej funkcji. Dla poĹ‚Ä…czeĹ„ synchronicznych z kolei, musi nastÄ…piÄ‡
+ * jeszcze przed wyjĹ›ciem z kontekstu.
  *
  * \param cb_data Dane prywatne aplikacji
  * \param host Nazwa hosta
  * \param port Numer portu
- * \param is_tls Flaga określająca, czy ma zostać nawiązane połączenie TLS
- * \param is_async Flaga określająca połączenie asynchroniczne (patrz szczegóły powyżej)
+ * \param is_tls Flaga okreĹ›lajÄ…ca, czy ma zostaÄ‡ nawiÄ…zane poĹ‚Ä…czenie TLS
+ * \param is_async Flaga okreĹ›lajÄ…ca poĹ‚Ä…czenie asynchroniczne (patrz szczegĂłĹ‚y powyĹĽej)
  * \param priv Dane prywatne biblioteki libgadu (do przekazania do gg_socket_manager_connected)
  *
  * \return Uchwyt gniazda
@@ -682,7 +682,7 @@ typedef enum {
 typedef void* (*gg_socket_manager_connect_cb_t)(void *cb_data, const char *host, int port, int is_tls, int is_async, void *priv);
 
 /**
- * Niszczy gniazdo i zwalnia wszystkie powiązane z nim zasoby.
+ * Niszczy gniazdo i zwalnia wszystkie powiÄ…zane z nim zasoby.
  *
  * \param cb_data Dane prywatne aplikacji
  * \param handle Uchwyt gniazda
@@ -694,47 +694,47 @@ typedef void (*gg_socket_manager_close_cb_t)(void *cb_data, void *handle);
 /**
  * Odbiera z gniazda dane binarne.
  *
- * Funkcja powinna zajmować się obsługą TLS, jeżeli gniazdo jest w takim trybie.
+ * Funkcja powinna zajmowaÄ‡ siÄ™ obsĹ‚ugÄ… TLS, jeĹĽeli gniazdo jest w takim trybie.
  *
  * \param cb_data Dane prywatne aplikacji
  * \param handle Uchwyt gniazda
  * \param buffer Bufor do zapisu danych
  * \param bufsize Rozmiar bufora
  *
- * \return Ilość zapisanych danych, lub -1 (oraz ustawiony errno) w przypadku niepowodzenia
+ * \return IloĹ›Ä‡ zapisanych danych, lub -1 (oraz ustawiony errno) w przypadku niepowodzenia
  *
  * \ingroup socketmanager
  */
 typedef ssize_t (*gg_socket_manager_read_cb_t)(void *cb_data, void *handle, unsigned char *buffer, size_t bufsize);
 
 /**
- * Wysyła przez gniazdo dane binarne.
+ * WysyĹ‚a przez gniazdo dane binarne.
  *
- * Funkcja powinna zajmować się obsługą TLS, jeżeli gniazdo jest w takim trybie.
+ * Funkcja powinna zajmowaÄ‡ siÄ™ obsĹ‚ugÄ… TLS, jeĹĽeli gniazdo jest w takim trybie.
  *
  * \param cb_data Dane prywatne aplikacji
  * \param handle Uchwyt gniazda
- * \param data Dane do wysłania
+ * \param data Dane do wysĹ‚ania
  * \param length Rozmiar danych
  *
- * \return Ilość wysłanych danych, lub -1 (oraz ustawiony errno) w przypadku niepowodzenia
+ * \return IloĹ›Ä‡ wysĹ‚anych danych, lub -1 (oraz ustawiony errno) w przypadku niepowodzenia
  *
  * \ingroup socketmanager
  */
 typedef ssize_t (*gg_socket_manager_write_cb_t)(void *cb_data, void *handle, const unsigned char *data, size_t length);
 
 /**
- * Struktura opisująca funkcje zarządzające gniazdami, jeżeli aplikacja sama je
- * obsługuje.
+ * Struktura opisujÄ…ca funkcje zarzÄ…dzajÄ…ce gniazdami, jeĹĽeli aplikacja sama je
+ * obsĹ‚uguje.
  *
  * \ingroup socketmanager
  */
 typedef struct {
 	void *cb_data; /**< Dane prywatne aplikacji */
-	gg_socket_manager_connect_cb_t connect_cb; /**< Funkcja tworząca nowe gniazdo */
-	gg_socket_manager_close_cb_t close_cb; /**< Funkcja niszcząca gniazdo */
-	gg_socket_manager_read_cb_t read_cb; /**< Funkcja odczytująca dane z gniazda */
-	gg_socket_manager_write_cb_t write_cb; /**< Funkcja wysyłająca dane przez gniazdo */
+	gg_socket_manager_connect_cb_t connect_cb; /**< Funkcja tworzÄ…ca nowe gniazdo */
+	gg_socket_manager_close_cb_t close_cb; /**< Funkcja niszczÄ…ca gniazdo */
+	gg_socket_manager_read_cb_t read_cb; /**< Funkcja odczytujÄ…ca dane z gniazda */
+	gg_socket_manager_write_cb_t write_cb; /**< Funkcja wysyĹ‚ajÄ…ca dane przez gniazdo */
 #ifndef DOXYGEN
 	void *reserved1;
 	void *reserved2;
@@ -746,50 +746,50 @@ typedef struct {
 int gg_socket_manager_connected(void *handle, void *priv, int fd);
 
 /**
- * Parametry połączenia z serwerem Gadu-Gadu. Parametry zostały przeniesione
- * do struktury, by uniknąć zmian API po rozszerzeniu protokołu i dodaniu
- * kolejnych opcji połączenia. Część parametrów, które nie są już aktualne
- * lub nie mają znaczenia, została usunięta z dokumentacji.
+ * Parametry poĹ‚Ä…czenia z serwerem Gadu-Gadu. Parametry zostaĹ‚y przeniesione
+ * do struktury, by uniknÄ…Ä‡ zmian API po rozszerzeniu protokoĹ‚u i dodaniu
+ * kolejnych opcji poĹ‚Ä…czenia. CzÄ™Ĺ›Ä‡ parametrĂłw, ktĂłre nie sÄ… juĹĽ aktualne
+ * lub nie majÄ… znaczenia, zostaĹ‚a usuniÄ™ta z dokumentacji.
  *
  * \ingroup login
  */
 struct gg_login_params {
 	uin_t uin;			/**< Numer Gadu-Gadu */
-	char *password;			/**< Hasło */
-	int async;			/**< Flaga asynchronicznego połączenia (domyślnie nie) */
-	int status;			/**< Początkowy status użytkownika (domyślnie \c GG_STATUS_AVAIL) */
-	char *status_descr;		/**< Początkowy opis użytkownika (domyślnie brak) */
-	uint32_t server_addr;		/**< Adres serwera Gadu-Gadu (domyślnie pobierany automatycznie) */
-	uint16_t server_port;		/**< Port serwera Gadu-Gadu (domyślnie pobierany automatycznie) */
-	uint32_t client_addr;		/**< Adres połączeń bezpośrednich (domyślnie dobierany automatycznie) */
-	uint16_t client_port;		/**< Port połączeń bezpośrednich (domyślnie dobierany automatycznie) */
-	int protocol_version;		/**< Wersja protokołu wysyłana do serwera (domyślnie najnowsza obsługiwana) */
-	char *client_version;		/**< Wersja klienta wysyłana do serwera (domyślnie najnowsza znana) */
-	int has_audio;			/**< Flaga obsługi połączeń głosowych */
-	int last_sysmsg;		/**< Numer ostatnio odebranej wiadomości systemowej */
-	uint32_t external_addr;		/**< Adres publiczny dla połączeń bezpośrednich (domyślnie dobierany automatycznie) */
-	uint16_t external_port;		/**< Port publiczny dla połączeń bezpośrednich (domyślnie dobierany automatycznie) */
-	int tls;			/**< Flaga połączenia szyfrowanego (patrz \ref gg_ssl_t) */
-	int image_size;			/**< Maksymalny rozmiar obsługiwanych obrazków w kilobajtach */
+	char *password;			/**< HasĹ‚o */
+	int async;			/**< Flaga asynchronicznego poĹ‚Ä…czenia (domyĹ›lnie nie) */
+	int status;			/**< PoczÄ…tkowy status uĹĽytkownika (domyĹ›lnie \c GG_STATUS_AVAIL) */
+	char *status_descr;		/**< PoczÄ…tkowy opis uĹĽytkownika (domyĹ›lnie brak) */
+	uint32_t server_addr;		/**< Adres serwera Gadu-Gadu (domyĹ›lnie pobierany automatycznie) */
+	uint16_t server_port;		/**< Port serwera Gadu-Gadu (domyĹ›lnie pobierany automatycznie) */
+	uint32_t client_addr;		/**< Adres poĹ‚Ä…czeĹ„ bezpoĹ›rednich (domyĹ›lnie dobierany automatycznie) */
+	uint16_t client_port;		/**< Port poĹ‚Ä…czeĹ„ bezpoĹ›rednich (domyĹ›lnie dobierany automatycznie) */
+	int protocol_version;		/**< Wersja protokoĹ‚u wysyĹ‚ana do serwera (domyĹ›lnie najnowsza obsĹ‚ugiwana) */
+	char *client_version;		/**< Wersja klienta wysyĹ‚ana do serwera (domyĹ›lnie najnowsza znana) */
+	int has_audio;			/**< Flaga obsĹ‚ugi poĹ‚Ä…czeĹ„ gĹ‚osowych */
+	int last_sysmsg;		/**< Numer ostatnio odebranej wiadomoĹ›ci systemowej */
+	uint32_t external_addr;		/**< Adres publiczny dla poĹ‚Ä…czeĹ„ bezpoĹ›rednich (domyĹ›lnie dobierany automatycznie) */
+	uint16_t external_port;		/**< Port publiczny dla poĹ‚Ä…czeĹ„ bezpoĹ›rednich (domyĹ›lnie dobierany automatycznie) */
+	int tls;			/**< Flaga poĹ‚Ä…czenia szyfrowanego (patrz \ref gg_ssl_t) */
+	int image_size;			/**< Maksymalny rozmiar obsĹ‚ugiwanych obrazkĂłw w kilobajtach */
 #ifndef DOXYGEN
 	int era_omnix;			/**< Flaga udawania klienta Era Omnix (nieaktualna) */
 #endif
-	int hash_type;			/**< Rodzaj skrótu hasła (\c GG_LOGIN_HASH_GG32 lub \c GG_LOGIN_HASH_SHA1, domyślnie SHA1) */
-	gg_encoding_t encoding;		/**< Rodzaj kodowania używanego w sesji (domyślnie CP1250) */
-	gg_resolver_t resolver;		/**< Sposób rozwiązywania nazw (patrz \ref build-resolver) */
-	int protocol_features;		/**< Opcje protokołu (flagi GG_FEATURE_*). */
+	int hash_type;			/**< Rodzaj skrĂłtu hasĹ‚a (\c GG_LOGIN_HASH_GG32 lub \c GG_LOGIN_HASH_SHA1, domyĹ›lnie SHA1) */
+	gg_encoding_t encoding;		/**< Rodzaj kodowania uĹĽywanego w sesji (domyĹ›lnie CP1250) */
+	gg_resolver_t resolver;		/**< SposĂłb rozwiÄ…zywania nazw (patrz \ref build-resolver) */
+	int protocol_features;		/**< Opcje protokoĹ‚u (flagi GG_FEATURE_*). */
 	int status_flags;		/**< Flagi statusu (flagi GG_STATUS_FLAG_*, patrz \ref status). */
 
-	unsigned int struct_size;	/**< Rozmiar struktury. To pole powinno być inicjowane wartością sizeof(struct gg_login_params) - w przeciwnym przypadku pola za nim nie będą obsługiwane. Pozwala na rozszerzanie struktury bez łamania ABI. */
+	unsigned int struct_size;	/**< Rozmiar struktury. To pole powinno byÄ‡ inicjowane wartoĹ›ciÄ… sizeof(struct gg_login_params) - w przeciwnym przypadku pola za nim nie bÄ™dÄ… obsĹ‚ugiwane. Pozwala na rozszerzanie struktury bez Ĺ‚amania ABI. */
 
-	gg_compat_t compatibility;	/**< Stopień kompatybilności ze starym API. */
+	gg_compat_t compatibility;	/**< StopieĹ„ kompatybilnoĹ›ci ze starym API. */
 
-	char *connect_host;		/**< Nazwa hosta (oraz opcjonalnie port, podany po dwukropku) serwera Gadu-Gadu (domyślnie pobierany automatycznie) (patrz pole struct_size). */
+	char *connect_host;		/**< Nazwa hosta (oraz opcjonalnie port, podany po dwukropku) serwera Gadu-Gadu (domyĹ›lnie pobierany automatycznie) (patrz pole struct_size). */
 
-	gg_socket_manager_type_t socket_manager_type; /**< Wybrana metoda nawiązywania połączeń TCP/TLS (domyślnie wewnętrzna) */
-	gg_socket_manager_t socket_manager; /**< Jeżeli wybrano metodę zewnętrzną - konfiguracja jej */
+	gg_socket_manager_type_t socket_manager_type; /**< Wybrana metoda nawiÄ…zywania poĹ‚Ä…czeĹ„ TCP/TLS (domyĹ›lnie wewnÄ™trzna) */
+	gg_socket_manager_t socket_manager; /**< JeĹĽeli wybrano metodÄ™ zewnÄ™trznÄ… - konfiguracja jej */
 
-	char **host_white_list;		/**< Lista zakończona wskaźnikiem NULL, domen akceptowanych w odpowiedziach od huba (domyślnie wszystkie do tej pory znane). Używane tylko przy GG_SSL_REQUIRED. Pusta lista wyłącza sprawdzanie. */
+	char **host_white_list;		/**< Lista zakoĹ„czona wskaĹşnikiem NULL, domen akceptowanych w odpowiedziach od huba (domyĹ›lnie wszystkie do tej pory znane). UĹĽywane tylko przy GG_SSL_REQUIRED. Pusta lista wyĹ‚Ä…cza sprawdzanie. */
 };
 
 #ifdef GG_CONFIG_IS_GPL_COMPLIANT
@@ -843,115 +843,115 @@ int gg_chat_send_message(struct gg_session *gs, uint64_t id, const char *message
  * \ingroup events
  */
 enum gg_event_t {
-	GG_EVENT_NONE = 0,		/**< Nie wydarzyło się nic wartego uwagi */
-	GG_EVENT_MSG,			/**< \brief Otrzymano wiadomość. Przekazuje również wiadomości systemowe od numeru 0. */
-	GG_EVENT_NOTIFY,		/**< \brief Informacja o statusach osób z listy kontaktów (przed 6.0). Zdarzenie należy obsługiwać, jeśli planuje się używać protokołu w wersji starszej niż domyślna. Ostatni element tablicy zawiera uin równy 0, a pozostałe pola są niezainicjowane. */
-	GG_EVENT_NOTIFY_DESCR,		/**< \brief Informacja o statusie opisowym osoby z listy kontaktów (przed 6.0). Zdarzenie należy obsługiwać, jeśli planuje się używać protokołu w wersji starszej niż domyślna. */
-	GG_EVENT_STATUS,		/**< \brief Zmiana statusu osoby z listy kontaktów (przed 6.0). Zdarzenie należy obsługiwać, jeśli planuje się używać protokołu w wersji starszej niż domyślna. */
-	GG_EVENT_ACK,			/**< Potwierdzenie doręczenia wiadomości */
-	GG_EVENT_PONG,			/**< \brief Utrzymanie połączenia. Obecnie serwer nie wysyła już do klienta ramek utrzymania połączenia, polega wyłącznie na wysyłaniu ramek przez klienta. */
-	GG_EVENT_CONN_FAILED,		/**< \brief Nie udało się połączyć */
-	GG_EVENT_CONN_SUCCESS,		/**< \brief Połączono z serwerem. Pierwszą rzeczą, jaką należy zrobić jest wysłanie listy kontaktów. */
-	GG_EVENT_DISCONNECT,		/**< \brief Serwer zrywa połączenie. Zdarza się, gdy równolegle do serwera podłączy się druga sesja i trzeba zerwać połączenie z pierwszą. */
+	GG_EVENT_NONE = 0,		/**< Nie wydarzyĹ‚o siÄ™ nic wartego uwagi */
+	GG_EVENT_MSG,			/**< \brief Otrzymano wiadomoĹ›Ä‡. Przekazuje rĂłwnieĹĽ wiadomoĹ›ci systemowe od numeru 0. */
+	GG_EVENT_NOTIFY,		/**< \brief Informacja o statusach osĂłb z listy kontaktĂłw (przed 6.0). Zdarzenie naleĹĽy obsĹ‚ugiwaÄ‡, jeĹ›li planuje siÄ™ uĹĽywaÄ‡ protokoĹ‚u w wersji starszej niĹĽ domyĹ›lna. Ostatni element tablicy zawiera uin rĂłwny 0, a pozostaĹ‚e pola sÄ… niezainicjowane. */
+	GG_EVENT_NOTIFY_DESCR,		/**< \brief Informacja o statusie opisowym osoby z listy kontaktĂłw (przed 6.0). Zdarzenie naleĹĽy obsĹ‚ugiwaÄ‡, jeĹ›li planuje siÄ™ uĹĽywaÄ‡ protokoĹ‚u w wersji starszej niĹĽ domyĹ›lna. */
+	GG_EVENT_STATUS,		/**< \brief Zmiana statusu osoby z listy kontaktĂłw (przed 6.0). Zdarzenie naleĹĽy obsĹ‚ugiwaÄ‡, jeĹ›li planuje siÄ™ uĹĽywaÄ‡ protokoĹ‚u w wersji starszej niĹĽ domyĹ›lna. */
+	GG_EVENT_ACK,			/**< Potwierdzenie dorÄ™czenia wiadomoĹ›ci */
+	GG_EVENT_PONG,			/**< \brief Utrzymanie poĹ‚Ä…czenia. Obecnie serwer nie wysyĹ‚a juĹĽ do klienta ramek utrzymania poĹ‚Ä…czenia, polega wyĹ‚Ä…cznie na wysyĹ‚aniu ramek przez klienta. */
+	GG_EVENT_CONN_FAILED,		/**< \brief Nie udaĹ‚o siÄ™ poĹ‚Ä…czyÄ‡ */
+	GG_EVENT_CONN_SUCCESS,		/**< \brief PoĹ‚Ä…czono z serwerem. PierwszÄ… rzeczÄ…, jakÄ… naleĹĽy zrobiÄ‡ jest wysĹ‚anie listy kontaktĂłw. */
+	GG_EVENT_DISCONNECT,		/**< \brief Serwer zrywa poĹ‚Ä…czenie. Zdarza siÄ™, gdy rĂłwnolegle do serwera podĹ‚Ä…czy siÄ™ druga sesja i trzeba zerwaÄ‡ poĹ‚Ä…czenie z pierwszÄ…. */
 
-	GG_EVENT_DCC_NEW,		/**< Nowe połączenie bezpośrednie (6.x) */
-	GG_EVENT_DCC_ERROR,		/**< Błąd połączenia bezpośredniego (6.x) */
-	GG_EVENT_DCC_DONE,		/**< Zakończono połączenie bezpośrednie (6.x) */
-	GG_EVENT_DCC_CLIENT_ACCEPT,	/**< Moment akceptacji klienta w połączeniu bezpośrednim (6.x) */
-	GG_EVENT_DCC_CALLBACK,		/**< Zwrotne połączenie bezpośrednie (6.x) */
-	GG_EVENT_DCC_NEED_FILE_INFO,	/**< Należy wypełnić \c file_info dla połączenia bezpośredniego (6.x) */
-	GG_EVENT_DCC_NEED_FILE_ACK,	/**< Czeka na potwierdzenie pliku w połączeniu bezpośrednim (6.x) */
-	GG_EVENT_DCC_NEED_VOICE_ACK,	/**< Czeka na potwierdzenie rozmowy w połączeniu bezpośrednim (6.x) */
-	GG_EVENT_DCC_VOICE_DATA, 	/**< Dane bezpośredniego połączenia głosowego (6.x) */
+	GG_EVENT_DCC_NEW,		/**< Nowe poĹ‚Ä…czenie bezpoĹ›rednie (6.x) */
+	GG_EVENT_DCC_ERROR,		/**< BĹ‚Ä…d poĹ‚Ä…czenia bezpoĹ›redniego (6.x) */
+	GG_EVENT_DCC_DONE,		/**< ZakoĹ„czono poĹ‚Ä…czenie bezpoĹ›rednie (6.x) */
+	GG_EVENT_DCC_CLIENT_ACCEPT,	/**< Moment akceptacji klienta w poĹ‚Ä…czeniu bezpoĹ›rednim (6.x) */
+	GG_EVENT_DCC_CALLBACK,		/**< Zwrotne poĹ‚Ä…czenie bezpoĹ›rednie (6.x) */
+	GG_EVENT_DCC_NEED_FILE_INFO,	/**< NaleĹĽy wypeĹ‚niÄ‡ \c file_info dla poĹ‚Ä…czenia bezpoĹ›redniego (6.x) */
+	GG_EVENT_DCC_NEED_FILE_ACK,	/**< Czeka na potwierdzenie pliku w poĹ‚Ä…czeniu bezpoĹ›rednim (6.x) */
+	GG_EVENT_DCC_NEED_VOICE_ACK,	/**< Czeka na potwierdzenie rozmowy w poĹ‚Ä…czeniu bezpoĹ›rednim (6.x) */
+	GG_EVENT_DCC_VOICE_DATA, 	/**< Dane bezpoĹ›redniego poĹ‚Ä…czenia gĹ‚osowego (6.x) */
 
-	GG_EVENT_PUBDIR50_SEARCH_REPLY,	/**< Odpowiedź katalogu publicznego */
-	GG_EVENT_PUBDIR50_READ,		/**< Odczytano własne dane z katalogu publicznego */
-	GG_EVENT_PUBDIR50_WRITE,	/**< Zmieniono własne dane w katalogu publicznym */
+	GG_EVENT_PUBDIR50_SEARCH_REPLY,	/**< OdpowiedĹş katalogu publicznego */
+	GG_EVENT_PUBDIR50_READ,		/**< Odczytano wĹ‚asne dane z katalogu publicznego */
+	GG_EVENT_PUBDIR50_WRITE,	/**< Zmieniono wĹ‚asne dane w katalogu publicznym */
 
-	GG_EVENT_STATUS60,		/**< Zmiana statusu osoby z listy kontaktów */
-	GG_EVENT_NOTIFY60,		/**< Informacja o statusach osób z listy kontaktów. Ostatni element tablicy zawiera uin równy 0, a pozostałe pola są niezainicjowane.  */
-	GG_EVENT_USERLIST,		/**< Wynik importu lub eksportu listy kontaktów */
-	GG_EVENT_IMAGE_REQUEST,		/**< Żądanie przesłania obrazka z wiadomości */
-	GG_EVENT_IMAGE_REPLY,		/**< Przysłano obrazek z wiadomości */
-	GG_EVENT_DCC_ACK,		/**< Potwierdzenie transmisji w połączeniu bezpośrednim (6.x) */
+	GG_EVENT_STATUS60,		/**< Zmiana statusu osoby z listy kontaktĂłw */
+	GG_EVENT_NOTIFY60,		/**< Informacja o statusach osĂłb z listy kontaktĂłw. Ostatni element tablicy zawiera uin rĂłwny 0, a pozostaĹ‚e pola sÄ… niezainicjowane.  */
+	GG_EVENT_USERLIST,		/**< Wynik importu lub eksportu listy kontaktĂłw */
+	GG_EVENT_IMAGE_REQUEST,		/**< Ĺ»Ä…danie przesĹ‚ania obrazka z wiadomoĹ›ci */
+	GG_EVENT_IMAGE_REPLY,		/**< PrzysĹ‚ano obrazek z wiadomoĹ›ci */
+	GG_EVENT_DCC_ACK,		/**< Potwierdzenie transmisji w poĹ‚Ä…czeniu bezpoĹ›rednim (6.x) */
 
-	GG_EVENT_DCC7_NEW,		/**< Nowe połączenie bezpośrednie (7.x) */
-	GG_EVENT_DCC7_ACCEPT,		/**< Zaakceptowano połączenie bezpośrednie (7.x), nowy deskryptor */
-	GG_EVENT_DCC7_REJECT,		/**< Odrzucono połączenie bezpośrednie (7.x) */
-	GG_EVENT_DCC7_CONNECTED,	/**< Zestawiono połączenie bezpośrednie (7.x), nowy deskryptor */
-	GG_EVENT_DCC7_ERROR,		/**< Błąd połączenia bezpośredniego (7.x) */
-	GG_EVENT_DCC7_DONE,		/**< Zakończono połączenie bezpośrednie (7.x) */
-	GG_EVENT_DCC7_PENDING,		/**< Trwa próba połączenia bezpośredniego (7.x), nowy deskryptor */
+	GG_EVENT_DCC7_NEW,		/**< Nowe poĹ‚Ä…czenie bezpoĹ›rednie (7.x) */
+	GG_EVENT_DCC7_ACCEPT,		/**< Zaakceptowano poĹ‚Ä…czenie bezpoĹ›rednie (7.x), nowy deskryptor */
+	GG_EVENT_DCC7_REJECT,		/**< Odrzucono poĹ‚Ä…czenie bezpoĹ›rednie (7.x) */
+	GG_EVENT_DCC7_CONNECTED,	/**< Zestawiono poĹ‚Ä…czenie bezpoĹ›rednie (7.x), nowy deskryptor */
+	GG_EVENT_DCC7_ERROR,		/**< BĹ‚Ä…d poĹ‚Ä…czenia bezpoĹ›redniego (7.x) */
+	GG_EVENT_DCC7_DONE,		/**< ZakoĹ„czono poĹ‚Ä…czenie bezpoĹ›rednie (7.x) */
+	GG_EVENT_DCC7_PENDING,		/**< Trwa prĂłba poĹ‚Ä…czenia bezpoĹ›redniego (7.x), nowy deskryptor */
 
 	GG_EVENT_XML_EVENT,		/**< Otrzymano komunikat systemowy (7.7) */
-	GG_EVENT_DISCONNECT_ACK,	/**< \brief Potwierdzenie zakończenia sesji. Informuje o tym, że zmiana stanu na niedostępny z opisem dotarła do serwera i można zakończyć połączenie TCP. */
+	GG_EVENT_DISCONNECT_ACK,	/**< \brief Potwierdzenie zakoĹ„czenia sesji. Informuje o tym, ĹĽe zmiana stanu na niedostÄ™pny z opisem dotarĹ‚a do serwera i moĹĽna zakoĹ„czyÄ‡ poĹ‚Ä…czenie TCP. */
 	GG_EVENT_TYPING_NOTIFICATION,	/**< Powiadomienie o pisaniu */
 	GG_EVENT_USER_DATA,		/**< Informacja o kontaktach */
-	GG_EVENT_MULTILOGON_MSG,	/**< Wiadomość wysłana z innej sesji multilogowania */
+	GG_EVENT_MULTILOGON_MSG,	/**< WiadomoĹ›Ä‡ wysĹ‚ana z innej sesji multilogowania */
 	GG_EVENT_MULTILOGON_INFO,	/**< Informacja o innych sesjach multilogowania */
 
-	GG_EVENT_USERLIST100_VERSION,	/**< Otrzymano numer wersji listy kontaktów na serwerze (10.0) */
-	GG_EVENT_USERLIST100_REPLY,	/**< Wynik importu lub eksportu listy kontaktów (10.0) */
+	GG_EVENT_USERLIST100_VERSION,	/**< Otrzymano numer wersji listy kontaktĂłw na serwerze (10.0) */
+	GG_EVENT_USERLIST100_REPLY,	/**< Wynik importu lub eksportu listy kontaktĂłw (10.0) */
 
-	GG_EVENT_IMTOKEN,		/**< Otrzymano ciąg IMTOKEN (11.0) */
-	GG_EVENT_PONG110,		/**< \brief Utrzymanie połączenia (11.0). Może służyć do synchronizacji czasu z serwerem. */
+	GG_EVENT_IMTOKEN,		/**< Otrzymano ciÄ…g IMTOKEN (11.0) */
+	GG_EVENT_PONG110,		/**< \brief Utrzymanie poĹ‚Ä…czenia (11.0). MoĹĽe sĹ‚uĹĽyÄ‡ do synchronizacji czasu z serwerem. */
 	GG_EVENT_JSON_EVENT,		/**< Otrzymano komunikat systemowy (11.0) */
-	GG_EVENT_ACK110,		/**< Potwierdzenie wysłania wiadomości (11.0) */
+	GG_EVENT_ACK110,		/**< Potwierdzenie wysĹ‚ania wiadomoĹ›ci (11.0) */
 
-	GG_EVENT_CHAT_INFO,		/**< Otrzymano informację o konferencji (11.0). */
-	GG_EVENT_CHAT_INFO_GOT_ALL,	/**< \brief Informacje o wszystkich konferencjach zostały już wysłane (11.0). Otrzymywany po ostatnim pakiecie \c GG_EVENT_CHAT_INFO */
-	GG_EVENT_CHAT_INFO_UPDATE,	/**< \brief Aktualizacja informacji o konferencji (11.0). Dodanie, usunięcie jednego z uczestników. */
+	GG_EVENT_CHAT_INFO,		/**< Otrzymano informacjÄ™ o konferencji (11.0). */
+	GG_EVENT_CHAT_INFO_GOT_ALL,	/**< \brief Informacje o wszystkich konferencjach zostaĹ‚y juĹĽ wysĹ‚ane (11.0). Otrzymywany po ostatnim pakiecie \c GG_EVENT_CHAT_INFO */
+	GG_EVENT_CHAT_INFO_UPDATE,	/**< \brief Aktualizacja informacji o konferencji (11.0). Dodanie, usuniÄ™cie jednego z uczestnikĂłw. */
 	GG_EVENT_CHAT_CREATED,		/**< Potwierdzenie utworzenia konferencji (11.0) */
-	GG_EVENT_CHAT_INVITE_ACK,	/**< Potwierdzenie wysłania zaproszenia do konferencji (11.0) */
+	GG_EVENT_CHAT_INVITE_ACK,	/**< Potwierdzenie wysĹ‚ania zaproszenia do konferencji (11.0) */
 };
 
 #define GG_EVENT_SEARCH50_REPLY GG_EVENT_PUBDIR50_SEARCH_REPLY
 
 /**
- * Powód nieudanego połączenia.
+ * PowĂłd nieudanego poĹ‚Ä…czenia.
  */
 enum gg_failure_t {
 	GG_FAILURE_RESOLVING = 1,	/**< Nie znaleziono serwera */
-	GG_FAILURE_CONNECTING,		/**< Błąd połączenia */
-	GG_FAILURE_INVALID,		/**< Serwer zwrócił nieprawidłowe dane */
-	GG_FAILURE_READING,		/**< Zerwano połączenie podczas odczytu */
-	GG_FAILURE_WRITING,		/**< Zerwano połączenie podczas zapisu */
-	GG_FAILURE_PASSWORD,		/**< Nieprawidłowe hasło */
-	GG_FAILURE_404, 		/**< Nieużywane */
-	GG_FAILURE_TLS,			/**< Błąd negocjacji szyfrowanego połączenia */
-	GG_FAILURE_NEED_EMAIL, 		/**< Serwer rozłączył nas z prośbą o zmianę adresu e-mail */
-	GG_FAILURE_INTRUDER,		/**< Zbyt wiele prób połączenia z nieprawidłowym hasłem */
-	GG_FAILURE_UNAVAILABLE,		/**< Serwery są wyłączone */
-	GG_FAILURE_PROXY,		/**< Błąd serwera pośredniczącego */
-	GG_FAILURE_HUB,			/**< Błąd połączenia z hubem */
-	GG_FAILURE_INTERNAL,		/**< Błąd wewnętrzny */
+	GG_FAILURE_CONNECTING,		/**< BĹ‚Ä…d poĹ‚Ä…czenia */
+	GG_FAILURE_INVALID,		/**< Serwer zwrĂłciĹ‚ nieprawidĹ‚owe dane */
+	GG_FAILURE_READING,		/**< Zerwano poĹ‚Ä…czenie podczas odczytu */
+	GG_FAILURE_WRITING,		/**< Zerwano poĹ‚Ä…czenie podczas zapisu */
+	GG_FAILURE_PASSWORD,		/**< NieprawidĹ‚owe hasĹ‚o */
+	GG_FAILURE_404, 		/**< NieuĹĽywane */
+	GG_FAILURE_TLS,			/**< BĹ‚Ä…d negocjacji szyfrowanego poĹ‚Ä…czenia */
+	GG_FAILURE_NEED_EMAIL, 		/**< Serwer rozĹ‚Ä…czyĹ‚ nas z proĹ›bÄ… o zmianÄ™ adresu e-mail */
+	GG_FAILURE_INTRUDER,		/**< Zbyt wiele prĂłb poĹ‚Ä…czenia z nieprawidĹ‚owym hasĹ‚em */
+	GG_FAILURE_UNAVAILABLE,		/**< Serwery sÄ… wyĹ‚Ä…czone */
+	GG_FAILURE_PROXY,		/**< BĹ‚Ä…d serwera poĹ›redniczÄ…cego */
+	GG_FAILURE_HUB,			/**< BĹ‚Ä…d poĹ‚Ä…czenia z hubem */
+	GG_FAILURE_INTERNAL,		/**< BĹ‚Ä…d wewnÄ™trzny */
 };
 
 /**
- * Kod błędu danej operacji.
+ * Kod bĹ‚Ä™du danej operacji.
  *
- * Nie zawiera przesadnie szczegółowych informacji o powodach błędów, by nie
- * komplikować ich obsługi. Jeśli wymagana jest większa dokładność, należy
- * sprawdzić zawartość zmiennej systemowej \c errno.
+ * Nie zawiera przesadnie szczegĂłĹ‚owych informacji o powodach bĹ‚Ä™dĂłw, by nie
+ * komplikowaÄ‡ ich obsĹ‚ugi. JeĹ›li wymagana jest wiÄ™ksza dokĹ‚adnoĹ›Ä‡, naleĹĽy
+ * sprawdziÄ‡ zawartoĹ›Ä‡ zmiennej systemowej \c errno.
  */
 enum gg_error_t {
 	GG_ERROR_RESOLVING = 1,		/**< Nie znaleziono hosta */
-	GG_ERROR_CONNECTING,		/**< Błąd połączenia */
-	GG_ERROR_READING,		/**< Błąd odczytu/odbierania */
-	GG_ERROR_WRITING,		/**< Błąd zapisu/wysyłania */
+	GG_ERROR_CONNECTING,		/**< BĹ‚Ä…d poĹ‚Ä…czenia */
+	GG_ERROR_READING,		/**< BĹ‚Ä…d odczytu/odbierania */
+	GG_ERROR_WRITING,		/**< BĹ‚Ä…d zapisu/wysyĹ‚ania */
 
-	GG_ERROR_DCC_HANDSHAKE,		/**< Błąd negocjacji */
-	GG_ERROR_DCC_FILE,		/**< Błąd odczytu/zapisu pliku */
+	GG_ERROR_DCC_HANDSHAKE,		/**< BĹ‚Ä…d negocjacji */
+	GG_ERROR_DCC_FILE,		/**< BĹ‚Ä…d odczytu/zapisu pliku */
 	GG_ERROR_DCC_EOF,		/**< Przedwczesny koniec pliku */
-	GG_ERROR_DCC_NET,		/**< Błąd wysyłania/odbierania */
-	GG_ERROR_DCC_REFUSED, 		/**< Połączenie odrzucone */
+	GG_ERROR_DCC_NET,		/**< BĹ‚Ä…d wysyĹ‚ania/odbierania */
+	GG_ERROR_DCC_REFUSED, 		/**< PoĹ‚Ä…czenie odrzucone */
 
-	GG_ERROR_DCC7_HANDSHAKE,	/**< Błąd negocjacji */
-	GG_ERROR_DCC7_FILE,		/**< Błąd odczytu/zapisu pliku */
+	GG_ERROR_DCC7_HANDSHAKE,	/**< BĹ‚Ä…d negocjacji */
+	GG_ERROR_DCC7_FILE,		/**< BĹ‚Ä…d odczytu/zapisu pliku */
 	GG_ERROR_DCC7_EOF,		/**< Przedwczesny koniec pliku */
-	GG_ERROR_DCC7_NET,		/**< Błąd wysyłania/odbierania */
-	GG_ERROR_DCC7_REFUSED, 		/**< Połączenie odrzucone */
-	GG_ERROR_DCC7_RELAY,		/**< Problem z serwerem pośredniczącym */
+	GG_ERROR_DCC7_NET,		/**< BĹ‚Ä…d wysyĹ‚ania/odbierania */
+	GG_ERROR_DCC7_REFUSED, 		/**< PoĹ‚Ä…czenie odrzucone */
+	GG_ERROR_DCC7_RELAY,		/**< Problem z serwerem poĹ›redniczÄ…cym */
 };
 
 /**
@@ -960,62 +960,62 @@ enum gg_error_t {
 struct gg_pubdir50_entry {
 	int num;	/**< Numer wyniku */
 	char *field;	/**< Nazwa pola */
-	char *value;	/**< Wartość pola */
+	char *value;	/**< WartoĹ›Ä‡ pola */
 } /* GG_DEPRECATED */;
 
 /**
- * Zapytanie lub odpowiedź katalogu publicznego.
+ * Zapytanie lub odpowiedĹş katalogu publicznego.
  *
  * Patrz \c gg_pubdir50_t.
  */
 struct gg_pubdir50_s {
-	int count;	/**< Liczba wyników odpowiedzi */
-	uin_t next;	/**< Numer początkowy następnego zapytania */
+	int count;	/**< Liczba wynikĂłw odpowiedzi */
+	uin_t next;	/**< Numer poczÄ…tkowy nastÄ™pnego zapytania */
 	int type;	/**< Rodzaj zapytania */
 	uint32_t seq;	/**< Numer sekwencyjny */
 	struct gg_pubdir50_entry *entries;	/**< Pola zapytania lub odpowiedzi */
-	int entries_count;	/**< Liczba pól */
+	int entries_count;	/**< Liczba pĂłl */
 } /* GG_DEPRECATED */;
 
 /**
- * Zapytanie lub odpowiedź katalogu publicznego.
+ * Zapytanie lub odpowiedĹş katalogu publicznego.
  *
- * Do pól nie należy się odwoływać bezpośrednio -- wszystkie niezbędne
- * informacje są dostępne za pomocą funkcji \c gg_pubdir50_*
+ * Do pĂłl nie naleĹĽy siÄ™ odwoĹ‚ywaÄ‡ bezpoĹ›rednio -- wszystkie niezbÄ™dne
+ * informacje sÄ… dostÄ™pne za pomocÄ… funkcji \c gg_pubdir50_*
  */
 typedef struct gg_pubdir50_s *gg_pubdir50_t;
 
 /**
- * Opis zdarzeń \c GG_EVENT_MSG i \c GG_EVENT_MULTILOGON_MSG.
+ * Opis zdarzeĹ„ \c GG_EVENT_MSG i \c GG_EVENT_MULTILOGON_MSG.
  */
 struct gg_event_msg {
 	uin_t sender;		/**< Numer nadawcy/odbiorcy */
-	int msgclass;		/**< Klasa wiadomości */
+	int msgclass;		/**< Klasa wiadomoĹ›ci */
 #ifndef _WIN32
 	time_t time;		/**< Czas nadania */
 #else
 	uint32_t time;		/**< Czas nadania */
 #endif
-	unsigned char *message;	/**< Treść wiadomości */
+	unsigned char *message;	/**< TreĹ›Ä‡ wiadomoĹ›ci */
 
-	int recipients_count;	/**< Liczba odbiorców konferencji */
+	int recipients_count;	/**< Liczba odbiorcĂłw konferencji */
 	uin_t *recipients;	/**< Odbiorcy konferencji */
 
-	int formats_length;	/**< Długość informacji o formatowaniu tekstu */
+	int formats_length;	/**< DĹ‚ugoĹ›Ä‡ informacji o formatowaniu tekstu */
 	void *formats;		/**< Informacje o formatowaniu tekstu */
-	uint32_t seq;		/**< Numer sekwencyjny wiadomości */
+	uint32_t seq;		/**< Numer sekwencyjny wiadomoĹ›ci */
 
-	char *xhtml_message;	/**< Treść wiadomości w formacie XHTML */
+	char *xhtml_message;	/**< TreĹ›Ä‡ wiadomoĹ›ci w formacie XHTML */
 
-	uint64_t chat_id;	/**< Identyfikator konferencji lub 0, jeżeli jest to zwykła wiadomość (11.0) */
-	uint64_t flags;		/**< Flagi wiadomości (11.0) */
+	uint64_t chat_id;	/**< Identyfikator konferencji lub 0, jeĹĽeli jest to zwykĹ‚a wiadomoĹ›Ä‡ (11.0) */
+	uint64_t flags;		/**< Flagi wiadomoĹ›ci (11.0) */
 };
 
 /**
  * Opis zdarzenia \c GG_EVENT_NOTIFY_DESCR.
  */
 struct gg_event_notify_descr {
-	struct gg_notify_reply *notify;	/**< Informacje o liście kontaktów */
+	struct gg_notify_reply *notify;	/**< Informacje o liĹ›cie kontaktĂłw */
 	char *descr;		/**< Opis status */
 };
 
@@ -1034,10 +1034,10 @@ struct gg_event_status {
 struct gg_event_status60 {
 	uin_t uin;		/**< Numer Gadu-Gadu */
 	int status;		/**< Nowy status */
-	uint32_t remote_ip;	/**< Adres IP dla połączeń bezpośrednich */
-	uint16_t remote_port;	/**< Port dla połączeń bezpośrednich */
-	int version;		/**< Wersja protokołu */
-	int image_size;		/**< Maksymalny rozmiar obsługiwanych obrazków w KiB */
+	uint32_t remote_ip;	/**< Adres IP dla poĹ‚Ä…czeĹ„ bezpoĹ›rednich */
+	uint16_t remote_port;	/**< Port dla poĹ‚Ä…czeĹ„ bezpoĹ›rednich */
+	int version;		/**< Wersja protokoĹ‚u */
+	int image_size;		/**< Maksymalny rozmiar obsĹ‚ugiwanych obrazkĂłw w KiB */
 	char *descr;		/**< Opis statusu */
 #ifndef _WIN32
 	time_t time;		/**< Czas powrotu */
@@ -1050,12 +1050,12 @@ struct gg_event_status60 {
  * Opis zdarzenia \c GG_EVENT_NOTIFY_REPLY60.
  */
 struct gg_event_notify60 {
-	uin_t uin;		/**< Numer Gadu-Gadu. W ostatnim elemencie jest równy 0, a pozostałe pola są niezainicjowane. */
+	uin_t uin;		/**< Numer Gadu-Gadu. W ostatnim elemencie jest rĂłwny 0, a pozostaĹ‚e pola sÄ… niezainicjowane. */
 	int status;		/**< Nowy status */
-	uint32_t remote_ip;	/**< Adres IP dla połączeń bezpośrednich */
-	uint16_t remote_port;	/**< Port dla połączeń bezpośrednich */
-	int version;		/**< Wersja protokołu */
-	int image_size;		/**< Maksymalny rozmiar obsługiwanych obrazków w KiB */
+	uint32_t remote_ip;	/**< Adres IP dla poĹ‚Ä…czeĹ„ bezpoĹ›rednich */
+	uint16_t remote_port;	/**< Port dla poĹ‚Ä…czeĹ„ bezpoĹ›rednich */
+	int version;		/**< Wersja protokoĹ‚u */
+	int image_size;		/**< Maksymalny rozmiar obsĹ‚ugiwanych obrazkĂłw w KiB */
 	char *descr;		/**< Opis statusu */
 #ifndef _WIN32
 	time_t time;		/**< Czas powrotu */
@@ -1069,15 +1069,15 @@ struct gg_event_notify60 {
  */
 struct gg_event_ack {
 	uin_t recipient;	/**< Numer odbiorcy */
-	int status;		/**< Status doręczenia */
-	int seq;		/**< Numer sekwencyjny wiadomości */
+	int status;		/**< Status dorÄ™czenia */
+	int seq;		/**< Numer sekwencyjny wiadomoĹ›ci */
 };
 
 /**
  * Opis zdarzenia \c GG_EVENT_ACK110.
  */
 struct gg_event_ack110 {
-	uint8_t msg_type;	/**< Rodzaj wiadomości (0x01 - zwykła, 0x02 - konferencja) */
+	uint8_t msg_type;	/**< Rodzaj wiadomoĹ›ci (0x01 - zwykĹ‚a, 0x02 - konferencja) */
 	uint32_t seq;		/**< Numer sekwencyjny */
 	uint32_t time;		/**< Czas zdarzenia */
 };
@@ -1087,22 +1087,22 @@ struct gg_event_ack110 {
  */
 struct gg_event_userlist {
 	char type;		/**< Rodzaj odpowiedzi */
-	char *reply;		/**< Treść odpowiedzi */
+	char *reply;		/**< TreĹ›Ä‡ odpowiedzi */
 };
 
 /**
  * Opis zdarzenia \c GG_EVENT_DCC_VOICE_DATA.
  */
 struct gg_event_dcc_voice_data {
-	uint8_t *data;		/**< Dane dźwiękowe */
-	int length;		/**< Rozmiar danych dźwiękowych */
+	uint8_t *data;		/**< Dane dĹşwiÄ™kowe */
+	int length;		/**< Rozmiar danych dĹşwiÄ™kowych */
 };
 
 /**
  * Opis zdarzenia \c GG_EVENT_IMAGE_REQUEST.
  */
 struct gg_event_image_request {
-	uin_t sender;		/**< Nadawca żądania */
+	uin_t sender;		/**< Nadawca ĹĽÄ…dania */
 	uint32_t size;		/**< Rozmiar obrazka */
 	uint32_t crc32;		/**< Suma kontrolna CRC32 */
 };
@@ -1137,30 +1137,30 @@ struct gg_event_json_event {
  * Opis zdarzenia \c GG_EVENT_DCC7_CONNECTED.
  */
 struct gg_event_dcc7_connected {
-	struct gg_dcc7 *dcc7;	/**< Struktura połączenia */
+	struct gg_dcc7 *dcc7;	/**< Struktura poĹ‚Ä…czenia */
 };
 
 /**
  * Opis zdarzenia \c GG_EVENT_DCC7_PENDING.
  */
 struct gg_event_dcc7_pending {
-	struct gg_dcc7 *dcc7;	/**< Struktura połączenia */
+	struct gg_dcc7 *dcc7;	/**< Struktura poĹ‚Ä…czenia */
 };
 
 /**
  * Opis zdarzenia \c GG_EVENT_DCC7_REJECT.
  */
 struct gg_event_dcc7_reject {
-	struct gg_dcc7 *dcc7;	/**< Struktura połączenia */
-	int reason;		/**< powód odrzucenia */
+	struct gg_dcc7 *dcc7;	/**< Struktura poĹ‚Ä…czenia */
+	int reason;		/**< powĂłd odrzucenia */
 };
 
 /**
  * Opis zdarzenia \c GG_EVENT_DCC7_ACCEPT.
  */
 struct gg_event_dcc7_accept {
-	struct gg_dcc7 *dcc7;	/**< Struktura połączenia */
-	int type;		/**< Sposób połączenia (P2P, przez serwer) */
+	struct gg_dcc7 *dcc7;	/**< Struktura poĹ‚Ä…czenia */
+	int type;		/**< SposĂłb poĹ‚Ä…czenia (P2P, przez serwer) */
 	uint32_t remote_ip;	/**< Adres zdalnego klienta */
 	uint16_t remote_port;	/**< Port zdalnego klienta */
 };
@@ -1169,33 +1169,33 @@ struct gg_event_dcc7_accept {
  * Opis zdarzenia \c GG_EVENT_DCC7_DONE.
  */
 struct gg_event_dcc7_done {
-	struct gg_dcc7 *dcc7;	/**< Struktura połączenia */
+	struct gg_dcc7 *dcc7;	/**< Struktura poĹ‚Ä…czenia */
 };
 
 /**
  * Opis zdarzenia \c GG_EVENT_TYPING_NOTIFICATION.
  */
 struct gg_event_typing_notification {
-	uin_t uin;		/**< Numer rozmówcy */
-	int length;		/**< Długość tekstu */
+	uin_t uin;		/**< Numer rozmĂłwcy */
+	int length;		/**< DĹ‚ugoĹ›Ä‡ tekstu */
 };
 
 /**
- * Atrybut użytkownika.
+ * Atrybut uĹĽytkownika.
  */
 struct gg_event_user_data_attr {
 	int type;		/**< Typ atrybutu */
 	char *key;		/**< Klucz */
-	char *value;		/**< Wartość */
+	char *value;		/**< WartoĹ›Ä‡ */
 };
 
 /**
- * Struktura opisująca kontakt w zdarzeniu GG_EVENT_USER_DATA.
+ * Struktura opisujÄ…ca kontakt w zdarzeniu GG_EVENT_USER_DATA.
  */
 struct gg_event_user_data_user {
 	uin_t uin;		/**< Numer kontaktu */
-	size_t attr_count;	/**< Liczba atrybutów */
-	struct gg_event_user_data_attr *attrs;	/**< Lista atrybutów */
+	size_t attr_count;	/**< Liczba atrybutĂłw */
+	struct gg_event_user_data_attr *attrs;	/**< Lista atrybutĂłw */
 };
 
 /**
@@ -1203,12 +1203,12 @@ struct gg_event_user_data_user {
  */
 struct gg_event_user_data {
 	int type;		/**< Rodzaj informacji o kontaktach */
-	size_t user_count;	/**< Liczba kontaktów */
-	struct gg_event_user_data_user *users;	/**< Lista kontaktów */
+	size_t user_count;	/**< Liczba kontaktĂłw */
+	struct gg_event_user_data_user *users;	/**< Lista kontaktĂłw */
 };
 
 /**
- * Struktura opisująca sesję multilogowania.
+ * Struktura opisujÄ…ca sesjÄ™ multilogowania.
  */
 struct gg_multilogon_session {
 	gg_multilogon_id_t id;		/**< Identyfikator sesji */
@@ -1235,7 +1235,7 @@ struct gg_event_multilogon_info {
  * Opis zdarzenia \c GG_EVENT_USERLIST100_VERSION.
  */
 struct gg_event_userlist100_version {
-	uint32_t version;		/**< Numer wersji listy kontaktów na serwerze */
+	uint32_t version;		/**< Numer wersji listy kontaktĂłw na serwerze */
 };
 
 /**
@@ -1243,16 +1243,16 @@ struct gg_event_userlist100_version {
  */
 struct gg_event_userlist100_reply {
 	char type;			/**< Rodzaj odpowiedzi */
-	uint32_t version;		/**< Aktualna wersja listy kontaktów na serwerze */
-	char format_type;		/**< Typ formatu listy kontaktów (żądany w \c gg_userlist100_request.format_type) */
-	char *reply;			/**< Treść listy kontaktów w przesyłanej wersji i formacie */
+	uint32_t version;		/**< Aktualna wersja listy kontaktĂłw na serwerze */
+	char format_type;		/**< Typ formatu listy kontaktĂłw (ĹĽÄ…dany w \c gg_userlist100_request.format_type) */
+	char *reply;			/**< TreĹ›Ä‡ listy kontaktĂłw w przesyĹ‚anej wersji i formacie */
 };
 
 /**
  * Opis zdarzenia \c GG_EVENT_IMTOKEN.
  */
 struct gg_event_imtoken {
-	char *imtoken;			/**< Wartość IMTOKEN */
+	char *imtoken;			/**< WartoĹ›Ä‡ IMTOKEN */
 };
 
 /**
@@ -1272,8 +1272,8 @@ struct gg_event_pong110 {
 struct gg_event_chat_info {
 	uint64_t id;			/**< Identyfikator konferencji */
 	uint32_t version;		/**< Wersja informacji o konferencji */
-	uint32_t participants_count;	/**< Ilość uczestników */
-	uin_t *participants;		/**< Lista uczestników */
+	uint32_t participants_count;	/**< IloĹ›Ä‡ uczestnikĂłw */
+	uin_t *participants;		/**< Lista uczestnikĂłw */
 };
 
 /**
@@ -1282,8 +1282,8 @@ struct gg_event_chat_info {
 struct gg_event_chat_info_update {
 	uint64_t id;			/**< Identyfikator konferencji */
 	uint32_t type;			/**< Typ aktualizacji (\c GG_CHAT_INFO_UPDATE_*) */
-	uin_t participant;		/**< Uczestnik, którego dotyczy aktualizacja */
-	uin_t inviter;			/**< Uczestnik inicjujący aktualizację (zapraszający) */
+	uin_t participant;		/**< Uczestnik, ktĂłrego dotyczy aktualizacja */
+	uin_t inviter;			/**< Uczestnik inicjujÄ…cy aktualizacjÄ™ (zapraszajÄ…cy) */
 	uint32_t version;		/**< Wersja informacji o konferencji */
 	uint32_t time;			/**< Czas zdarzenia */
 };
@@ -1305,57 +1305,57 @@ struct gg_event_chat_invite_ack {
 };
 
 /**
- * Unia wszystkich zdarzeń zwracanych przez funkcje \c gg_watch_fd(), 
+ * Unia wszystkich zdarzeĹ„ zwracanych przez funkcje \c gg_watch_fd(), 
  * \c gg_dcc_watch_fd() i \c gg_dcc7_watch_fd().
  *
  * \ingroup events
  */
 union gg_event_union {
-	enum gg_failure_t failure;	/**< Błąd połączenia (\c GG_EVENT_CONN_FAILED) */
-	struct gg_notify_reply *notify;	/**< Zmiana statusu kontaktów (\c GG_EVENT_NOTIFY) */
-	struct gg_event_notify_descr notify_descr;	/**< Zmiana statusu kontaktów (\c GG_EVENT_NOTIFY_DESCR) */
-	struct gg_event_status status;	/**< Zmiana statusu kontaktów (\c GG_EVENT_STATUS) */
-	struct gg_event_status60 status60;	/**< Zmiana statusu kontaktów (\c GG_EVENT_STATUS60) */
-	struct gg_event_notify60 *notify60;	/**< Zmiana statusu kontaktów (\c GG_EVENT_NOTIFY60) */
-	struct gg_event_msg msg;	/**< Otrzymano wiadomość (\c GG_EVENT_MSG) */
-	struct gg_event_ack ack;	/**< Potwierdzenie wiadomości (\c GG_EVENT_ACK) */
-	struct gg_event_ack110 ack110;	/**< Potwierdzenie wysłania wiadomości (11.0) (\c GG_EVENT_ACK110) */
-	struct gg_event_image_request image_request;	/**< Żądanie wysłania obrazka (\c GG_EVENT_IMAGE_REQUEST) */
-	struct gg_event_image_reply image_reply;	/**< Odpowiedź z obrazkiem (\c GG_EVENT_IMAGE_REPLY) */
-	struct gg_event_userlist userlist;	/**< Odpowiedź listy kontaktów (\c GG_EVENT_USERLIST) */
-	gg_pubdir50_t pubdir50;	/**< Odpowiedź katalogu publicznego (\c GG_EVENT_PUBDIR50_*) */
+	enum gg_failure_t failure;	/**< BĹ‚Ä…d poĹ‚Ä…czenia (\c GG_EVENT_CONN_FAILED) */
+	struct gg_notify_reply *notify;	/**< Zmiana statusu kontaktĂłw (\c GG_EVENT_NOTIFY) */
+	struct gg_event_notify_descr notify_descr;	/**< Zmiana statusu kontaktĂłw (\c GG_EVENT_NOTIFY_DESCR) */
+	struct gg_event_status status;	/**< Zmiana statusu kontaktĂłw (\c GG_EVENT_STATUS) */
+	struct gg_event_status60 status60;	/**< Zmiana statusu kontaktĂłw (\c GG_EVENT_STATUS60) */
+	struct gg_event_notify60 *notify60;	/**< Zmiana statusu kontaktĂłw (\c GG_EVENT_NOTIFY60) */
+	struct gg_event_msg msg;	/**< Otrzymano wiadomoĹ›Ä‡ (\c GG_EVENT_MSG) */
+	struct gg_event_ack ack;	/**< Potwierdzenie wiadomoĹ›ci (\c GG_EVENT_ACK) */
+	struct gg_event_ack110 ack110;	/**< Potwierdzenie wysĹ‚ania wiadomoĹ›ci (11.0) (\c GG_EVENT_ACK110) */
+	struct gg_event_image_request image_request;	/**< Ĺ»Ä…danie wysĹ‚ania obrazka (\c GG_EVENT_IMAGE_REQUEST) */
+	struct gg_event_image_reply image_reply;	/**< OdpowiedĹş z obrazkiem (\c GG_EVENT_IMAGE_REPLY) */
+	struct gg_event_userlist userlist;	/**< OdpowiedĹş listy kontaktĂłw (\c GG_EVENT_USERLIST) */
+	gg_pubdir50_t pubdir50;	/**< OdpowiedĹş katalogu publicznego (\c GG_EVENT_PUBDIR50_*) */
 	struct gg_event_xml_event xml_event;	/**< Zdarzenie systemowe (\c GG_EVENT_XML_EVENT) */
 	struct gg_event_json_event json_event;	/**< Zdarzenie systemowe (\c GG_EVENT_JSON_EVENT) */
-	struct gg_dcc *dcc_new;	/**< Nowe połączenie bezpośrednie (\c GG_EVENT_DCC_NEW) */
-	enum gg_error_t dcc_error;	/**< Błąd połączenia bezpośredniego (\c GG_EVENT_DCC_ERROR) */
-	struct gg_event_dcc_voice_data dcc_voice_data;	/**< Dane połączenia głosowego (\c GG_EVENT_DCC_VOICE_DATA) */
-	struct gg_dcc7 *dcc7_new;	/**< Nowe połączenie bezpośrednie (\c GG_EVENT_DCC7_NEW) */
-	enum gg_error_t dcc7_error;	/**< Błąd połączenia bezpośredniego (\c GG_EVENT_DCC7_ERROR) */
-	struct gg_event_dcc7_connected dcc7_connected;	/**< Informacja o zestawieniu połączenia bezpośredniego (\c GG_EVENT_DCC7_CONNECTED) */
-	struct gg_event_dcc7_pending dcc7_pending;	/**< Trwa próba połączenia bezpośredniego (\c GG_EVENT_DCC7_PENDING) */
-	struct gg_event_dcc7_reject dcc7_reject;	/**< Odrzucono połączenia bezpośredniego (\c GG_EVENT_DCC7_REJECT) */
-	struct gg_event_dcc7_accept dcc7_accept;	/**< Zaakceptowano połączenie bezpośrednie (\c GG_EVENT_DCC7_ACCEPT) */
-	struct gg_event_dcc7_done dcc7_done;	/**< Zakończono połączenie bezpośrednie (\c GG_EVENT_DCC7_DONE) */
+	struct gg_dcc *dcc_new;	/**< Nowe poĹ‚Ä…czenie bezpoĹ›rednie (\c GG_EVENT_DCC_NEW) */
+	enum gg_error_t dcc_error;	/**< BĹ‚Ä…d poĹ‚Ä…czenia bezpoĹ›redniego (\c GG_EVENT_DCC_ERROR) */
+	struct gg_event_dcc_voice_data dcc_voice_data;	/**< Dane poĹ‚Ä…czenia gĹ‚osowego (\c GG_EVENT_DCC_VOICE_DATA) */
+	struct gg_dcc7 *dcc7_new;	/**< Nowe poĹ‚Ä…czenie bezpoĹ›rednie (\c GG_EVENT_DCC7_NEW) */
+	enum gg_error_t dcc7_error;	/**< BĹ‚Ä…d poĹ‚Ä…czenia bezpoĹ›redniego (\c GG_EVENT_DCC7_ERROR) */
+	struct gg_event_dcc7_connected dcc7_connected;	/**< Informacja o zestawieniu poĹ‚Ä…czenia bezpoĹ›redniego (\c GG_EVENT_DCC7_CONNECTED) */
+	struct gg_event_dcc7_pending dcc7_pending;	/**< Trwa prĂłba poĹ‚Ä…czenia bezpoĹ›redniego (\c GG_EVENT_DCC7_PENDING) */
+	struct gg_event_dcc7_reject dcc7_reject;	/**< Odrzucono poĹ‚Ä…czenia bezpoĹ›redniego (\c GG_EVENT_DCC7_REJECT) */
+	struct gg_event_dcc7_accept dcc7_accept;	/**< Zaakceptowano poĹ‚Ä…czenie bezpoĹ›rednie (\c GG_EVENT_DCC7_ACCEPT) */
+	struct gg_event_dcc7_done dcc7_done;	/**< ZakoĹ„czono poĹ‚Ä…czenie bezpoĹ›rednie (\c GG_EVENT_DCC7_DONE) */
 	struct gg_event_typing_notification typing_notification;	/**< Powiadomienie o pisaniu */
 	struct gg_event_user_data user_data;	/**< Informacje o kontaktach */
-	struct gg_event_msg multilogon_msg;	/**< Inna sesja wysłała wiadomość (\c GG_EVENT_MULTILOGON_MSG) */
+	struct gg_event_msg multilogon_msg;	/**< Inna sesja wysĹ‚aĹ‚a wiadomoĹ›Ä‡ (\c GG_EVENT_MULTILOGON_MSG) */
 	struct gg_event_multilogon_info multilogon_info;	/**< Informacja o innych sesjach multilogowania (\c GG_EVENT_MULTILOGON_INFO) */
-	struct gg_event_userlist100_version userlist100_version;	/**< Informacja o numerze wersji listy kontaktów na serwerze (\c GG_EVENT_USERLIST100_VERSION) */
-	struct gg_event_userlist100_reply userlist100_reply;	/**< Odpowiedź listy kontaktów (10.0) (\c GG_EVENT_USERLIST100_REPLY) */
-	struct gg_event_imtoken imtoken;	/**< Ciąg IMTOKEN (11.0) (\c GG_EVENT_IMTOKEN) */
-	struct gg_event_pong110 pong110;	/**< Utrzymanie połączenia (11.0) (\c GG_EVENT_PONG110) */
+	struct gg_event_userlist100_version userlist100_version;	/**< Informacja o numerze wersji listy kontaktĂłw na serwerze (\c GG_EVENT_USERLIST100_VERSION) */
+	struct gg_event_userlist100_reply userlist100_reply;	/**< OdpowiedĹş listy kontaktĂłw (10.0) (\c GG_EVENT_USERLIST100_REPLY) */
+	struct gg_event_imtoken imtoken;	/**< CiÄ…g IMTOKEN (11.0) (\c GG_EVENT_IMTOKEN) */
+	struct gg_event_pong110 pong110;	/**< Utrzymanie poĹ‚Ä…czenia (11.0) (\c GG_EVENT_PONG110) */
 	struct gg_event_chat_info chat_info;	/**< Informacje o konferencji (11.0) (\c GG_EVENT_CHAT_INFO) */
 	struct gg_event_chat_info_update chat_info_update;	/**< Aktualizacja informacji o konferencji (11.0) (\c GG_EVENT_CHAT_INFO_UPDATE) */
 	struct gg_event_chat_created chat_created;	/**< Potwierdzenie utworzenia konferencji (11.0) (\c GG_EVENT_CHAT_CREATED) */
-	struct gg_event_chat_invite_ack chat_invite_ack;	/**< Potwierdzenie wysłania zaproszenia do konferencji (11.0) (\c GG_EVENT_CHAT_INVITE_ACK) */
+	struct gg_event_chat_invite_ack chat_invite_ack;	/**< Potwierdzenie wysĹ‚ania zaproszenia do konferencji (11.0) (\c GG_EVENT_CHAT_INVITE_ACK) */
 };
 
 /**
  * Opis zdarzenia.
  *
  * Zwracany przez funkcje \c gg_watch_fd(), \c gg_dcc_watch_fd()
- * i \c gg_dcc7_watch_fd(). Po przeanalizowaniu należy zwolnić
- * za pomocą \c gg_event_free().
+ * i \c gg_dcc7_watch_fd(). Po przeanalizowaniu naleĹĽy zwolniÄ‡
+ * za pomocÄ… \c gg_event_free().
  *
  * \ingroup events
  */
@@ -1420,60 +1420,60 @@ void gg_pubdir50_free(gg_pubdir50_t res);
 enum {
 	GG_PUBDIR50_UIN,	/**< Numer Gadu-Gadu */
 	GG_PUBDIR50_STATUS,	/**< Status (tylko wynik wyszukiwania) */
-	GG_PUBDIR50_FIRSTNAME,	/**< Imię */
+	GG_PUBDIR50_FIRSTNAME,	/**< ImiÄ™ */
 	GG_PUBDIR50_LASTNAME,	/**< Nazwisko */
 	GG_PUBDIR50_NICKNAME,	/**< Pseudonim */
-	GG_PUBDIR50_BIRTHYEAR,	/**< Rok urodzenia lub przedział lat oddzielony spacją */
-	GG_PUBDIR50_CITY,	/**< Miejscowość */
-	GG_PUBDIR50_GENDER,	/**< Płeć */
-	GG_PUBDIR50_ACTIVE,	/**< Osoba dostępna (tylko wyszukiwanie) */
-	GG_PUBDIR50_START,	/**< Numer początkowy wyszukiwania (tylko wyszukiwanie) */
-	GG_PUBDIR50_FAMILYNAME,	/**< Nazwisko rodowe (tylko wysyłanie informacji o sobie) */
-	GG_PUBDIR50_FAMILYCITY,	/**< Miejscowość pochodzenia (tylko wysyłanie informacji o sobie) */
+	GG_PUBDIR50_BIRTHYEAR,	/**< Rok urodzenia lub przedziaĹ‚ lat oddzielony spacjÄ… */
+	GG_PUBDIR50_CITY,	/**< MiejscowoĹ›Ä‡ */
+	GG_PUBDIR50_GENDER,	/**< PĹ‚eÄ‡ */
+	GG_PUBDIR50_ACTIVE,	/**< Osoba dostÄ™pna (tylko wyszukiwanie) */
+	GG_PUBDIR50_START,	/**< Numer poczÄ…tkowy wyszukiwania (tylko wyszukiwanie) */
+	GG_PUBDIR50_FAMILYNAME,	/**< Nazwisko rodowe (tylko wysyĹ‚anie informacji o sobie) */
+	GG_PUBDIR50_FAMILYCITY,	/**< MiejscowoĹ›Ä‡ pochodzenia (tylko wysyĹ‚anie informacji o sobie) */
 };
 
 /**
  * \ingroup pubdir50
  *
- * Wartość pola GG_PUBDIR50_GENDER przy wyszukiwaniu. Brak pola oznacza dowolną płeć.
+ * WartoĹ›Ä‡ pola GG_PUBDIR50_GENDER przy wyszukiwaniu. Brak pola oznacza dowolnÄ… pĹ‚eÄ‡.
  */
 enum {
 	GG_PUBDIR50_GENDER_FEMALE,	/**< Kobieta */
-	GG_PUBDIR50_GENDER_MALE,	/**< Mężczyzna */
+	GG_PUBDIR50_GENDER_MALE,	/**< MÄ™ĹĽczyzna */
 };
 
 /**
  * \ingroup pubdir50
  *
- * Wartość pola GG_PUBDIR50_GENDER przy wysyłaniu informacji o sobie.
+ * WartoĹ›Ä‡ pola GG_PUBDIR50_GENDER przy wysyĹ‚aniu informacji o sobie.
  */
 enum {
 	GG_PUBDIR50_GENDER_SET_FEMALE,	/**< Kobieta */
-	GG_PUBDIR50_GENDER_SET_MALE,	/**< Mężczyzna */
+	GG_PUBDIR50_GENDER_SET_MALE,	/**< MÄ™ĹĽczyzna */
 };
 
 /**
  * \ingroup pubdir50
  *
- * Wartość pola GG_PUBDIR50_ACTIVE.
+ * WartoĹ›Ä‡ pola GG_PUBDIR50_ACTIVE.
  */
 enum {
-	GG_PUBDIR50_ACTIVE_TRUE,	/**< Wyszukaj tylko osoby dostępne */
+	GG_PUBDIR50_ACTIVE_TRUE,	/**< Wyszukaj tylko osoby dostÄ™pne */
 };
 
 #endif	/* DOXYGEN */
 
 /**
- * Powód błędu operacji na katalogu publicznym.
+ * PowĂłd bĹ‚Ä™du operacji na katalogu publicznym.
  *
  * \ingroup http
  */
 typedef enum {
-	GG_PUBDIR_ERROR_NONE = 0,	/**< Brak błędu */
-	GG_PUBDIR_ERROR_OTHER,	/**< Nieznany błąd */
-	GG_PUBDIR_ERROR_TOKEN,	/**< Błędny token */
-	GG_PUBDIR_ERROR_OLD_PASSWORD,	/**< Niepoprawne stare hasło */
-	GG_PUBDIR_ERROR_NEW_PASSWORD,	/**< Niepoprawne nowe hasło */
+	GG_PUBDIR_ERROR_NONE = 0,	/**< Brak bĹ‚Ä™du */
+	GG_PUBDIR_ERROR_OTHER,	/**< Nieznany bĹ‚Ä…d */
+	GG_PUBDIR_ERROR_TOKEN,	/**< BĹ‚Ä™dny token */
+	GG_PUBDIR_ERROR_OLD_PASSWORD,	/**< Niepoprawne stare hasĹ‚o */
+	GG_PUBDIR_ERROR_NEW_PASSWORD,	/**< Niepoprawne nowe hasĹ‚o */
 } gg_pubdir_error_t;
 
 /**
@@ -1483,22 +1483,22 @@ typedef enum {
  */
 struct gg_pubdir {
 	int success;		/**< Flaga powodzenia operacji */
-	uin_t uin;		/**< Otrzymany numer lub 0 w przypadku błędu */
-	gg_pubdir_error_t error;	/**< Powód błędu */
+	uin_t uin;		/**< Otrzymany numer lub 0 w przypadku bĹ‚Ä™du */
+	gg_pubdir_error_t error;	/**< PowĂłd bĹ‚Ä™du */
 };
 
 int gg_pubdir_watch_fd(struct gg_http *f);
 void gg_pubdir_free(struct gg_http *f);
 
 /**
- * Token autoryzacji niektórych operacji HTTP.
+ * Token autoryzacji niektĂłrych operacji HTTP.
  * 
  * \ingroup token
  */
 struct gg_token {
-	int width;		/**< Szerokość obrazka */
-	int height;		/**< Wysokość obrazka */
-	int length;		/**< Liczba znaków w tokenie */
+	int width;		/**< SzerokoĹ›Ä‡ obrazka */
+	int height;		/**< WysokoĹ›Ä‡ obrazka */
+	int length;		/**< Liczba znakĂłw w tokenie */
 	char *tokenid;		/**< Identyfikator tokenu */
 };
 
@@ -1543,8 +1543,8 @@ int gg_dcc_fill_file_info(struct gg_dcc *d, const char *filename);
 int gg_dcc_fill_file_info2(struct gg_dcc *d, const char *filename, const char *local_filename);
 int gg_dcc_voice_send(struct gg_dcc *d, char *buf, int length);
 
-#define GG_DCC_VOICE_FRAME_LENGTH 195		/**< Rozmiar pakietu głosowego przed wersją Gadu-Gadu 5.0.5 */
-#define GG_DCC_VOICE_FRAME_LENGTH_505 326	/**< Rozmiar pakietu głosowego od wersji Gadu-Gadu 5.0.5 */
+#define GG_DCC_VOICE_FRAME_LENGTH 195		/**< Rozmiar pakietu gĹ‚osowego przed wersjÄ… Gadu-Gadu 5.0.5 */
+#define GG_DCC_VOICE_FRAME_LENGTH_505 326	/**< Rozmiar pakietu gĹ‚osowego od wersji Gadu-Gadu 5.0.5 */
 
 struct gg_dcc *gg_dcc_socket_create(uin_t uin, uint16_t port);
 #ifndef DOXYGEN
@@ -1574,14 +1574,14 @@ extern FILE *gg_debug_file;
  * \ingroup debug
  * @{
  */
-#define GG_DEBUG_NET 1		/**< Rejestracja zdarzeń związanych z siecią */
+#define GG_DEBUG_NET 1		/**< Rejestracja zdarzeĹ„ zwiÄ…zanych z sieciÄ… */
 #define GG_DEBUG_TRAFFIC 2	/**< Rejestracja ruchu sieciowego */
-#define GG_DEBUG_DUMP 4		/**< Rejestracja zawartości pakietów */
-#define GG_DEBUG_FUNCTION 8	/**< Rejestracja wywołań funkcji */
-#define GG_DEBUG_MISC 16	/**< Rejestracja różnych informacji */
-#define GG_DEBUG_VERBOSE 32	/**< Rejestracja informacji szczegółowych */
-#define GG_DEBUG_WARNING 64	/**< Rejestracja ostrzeżeń */
-#define GG_DEBUG_ERROR 128	/**< Rejestracja błędów krytycznych */
+#define GG_DEBUG_DUMP 4		/**< Rejestracja zawartoĹ›ci pakietĂłw */
+#define GG_DEBUG_FUNCTION 8	/**< Rejestracja wywoĹ‚aĹ„ funkcji */
+#define GG_DEBUG_MISC 16	/**< Rejestracja rĂłĹĽnych informacji */
+#define GG_DEBUG_VERBOSE 32	/**< Rejestracja informacji szczegĂłĹ‚owych */
+#define GG_DEBUG_WARNING 64	/**< Rejestracja ostrzeĹĽeĹ„ */
+#define GG_DEBUG_ERROR 128	/**< Rejestracja bĹ‚Ä™dĂłw krytycznych */
 /** @} */
 
 const char *gg_debug_state(enum gg_state_t state);
@@ -1598,14 +1598,14 @@ void gg_debug_session(struct gg_session *sess, int level, const char *format, ..
 const char *gg_libgadu_version(void);
 
 /**
- * Lista funkcji biblioteki, które zależą od zewnętrznych bibliotek.
+ * Lista funkcji biblioteki, ktĂłre zaleĹĽÄ… od zewnÄ™trznych bibliotek.
  *
  * \ingroup version
  */
 typedef enum {
-	GG_LIBGADU_FEATURE_SSL,		/**< Biblioteka obsługuje połączenia szyfrowane */
-	GG_LIBGADU_FEATURE_PTHREAD,	/**< Biblioteka obsługuje rozwiązywanie nazw za pomocą wątków */
-	GG_LIBGADU_FEATURE_USERLIST100,	/**< Biblioteka obsługuje listę kontaktów zgodną z Gadu-Gadu 10 */
+	GG_LIBGADU_FEATURE_SSL,		/**< Biblioteka obsĹ‚uguje poĹ‚Ä…czenia szyfrowane */
+	GG_LIBGADU_FEATURE_PTHREAD,	/**< Biblioteka obsĹ‚uguje rozwiÄ…zywanie nazw za pomocÄ… wÄ…tkĂłw */
+	GG_LIBGADU_FEATURE_USERLIST100,	/**< Biblioteka obsĹ‚uguje listÄ™ kontaktĂłw zgodnÄ… z Gadu-Gadu 10 */
 } gg_libgadu_feature_t;
 
 int gg_libgadu_check_feature(gg_libgadu_feature_t feature);
@@ -1638,7 +1638,7 @@ extern unsigned long gg_local_ip;
  * Rodzaj zapytania lub odpowiedzi katalogu publicznego.
  */
 enum {
-	GG_PUBDIR50_WRITE,	/**< Wysłanie do serwera informacji o sobie */
+	GG_PUBDIR50_WRITE,	/**< WysĹ‚anie do serwera informacji o sobie */
 	GG_PUBDIR50_READ,	/**< Pobranie z serwera informacji o sobie */
 	GG_PUBDIR50_SEARCH,	/**< Wyszukiwanie w katalogu publicznym */
 	GG_PUBDIR50_SEARCH_REPLY,	/**< Wynik wyszukiwania w katalogu publicznym */
@@ -1781,7 +1781,7 @@ char *gg_base64_decode(const char *buf) GG_DEPRECATED;
 int gg_image_queue_remove(struct gg_session *s, struct gg_image_queue *q, int freeq) GG_DEPRECATED;
 
 /**
- * Kolejka odbieranych obrazków.
+ * Kolejka odbieranych obrazkĂłw.
  */
 struct gg_image_queue {
 	uin_t sender;			/**< Nadawca obrazka */
@@ -1793,7 +1793,7 @@ struct gg_image_queue {
 
 	struct gg_image_queue *next;	/**< Kolejny element listy */
 
-	uint32_t packet_type;		/**< \brief Rodzaj odbieranych pakietów. W niektórych przypadkach (przy multilogowaniu) serwer wysyła nam dwie kopie obrazka jako dwa różne typy pakietów */
+	uint32_t packet_type;		/**< \brief Rodzaj odbieranych pakietĂłw. W niektĂłrych przypadkach (przy multilogowaniu) serwer wysyĹ‚a nam dwie kopie obrazka jako dwa rĂłĹĽne typy pakietĂłw */
 } GG_DEPRECATED;
 
 int gg_dcc7_handle_id(struct gg_session *sess, struct gg_event *e, const void *payload, int len) GG_DEPRECATED;
@@ -1848,7 +1848,7 @@ int gg_dcc7_handle_reject(struct gg_session *sess, struct gg_event *e, const voi
 #define GG_FEATURE_TYPING_NOTIFICATION	0x2000
 #define GG_FEATURE_MULTILOGON		0x4000
 
-/* Poniższe makra zostały zachowane dla zgodności API */
+/* PoniĹĽsze makra zostaĹ‚y zachowane dla zgodnoĹ›ci API */
 #define GG_FEATURE_MSG80		0
 #define GG_FEATURE_STATUS80		0
 #define GG_FEATURE_STATUS80BETA		0
@@ -1860,13 +1860,13 @@ int gg_dcc7_handle_reject(struct gg_session *sess, struct gg_event *e, const voi
 /** 
  * \ingroup login
  *
- * Flagi opcji protokołu.
+ * Flagi opcji protokoĹ‚u.
  */
 enum {
-	GG_FEATURE_MSG77,	/**< Klient życzy sobie otrzymywać wiadomości zgodnie z protokołem 7.7 */
-	GG_FEATURE_STATUS77,	/**< Klient życzy sobie otrzymywać zmiany stanu zgodnie z protokołem 7.7 */
-	GG_FEATURE_DND_FFC,	/**< Klient obsługuje statusy "nie przeszkadzać" i "poGGadaj ze mną" */
-	GG_FEATURE_IMAGE_DESCR,	/**< Klient obsługuje opisy graficzne oraz flagę \c GG_STATUS80_DESCR_MASK */
+	GG_FEATURE_MSG77,	/**< Klient ĹĽyczy sobie otrzymywaÄ‡ wiadomoĹ›ci zgodnie z protokoĹ‚em 7.7 */
+	GG_FEATURE_STATUS77,	/**< Klient ĹĽyczy sobie otrzymywaÄ‡ zmiany stanu zgodnie z protokoĹ‚em 7.7 */
+	GG_FEATURE_DND_FFC,	/**< Klient obsĹ‚uguje statusy "nie przeszkadzaÄ‡" i "poGGadaj ze mnÄ…" */
+	GG_FEATURE_IMAGE_DESCR,	/**< Klient obsĹ‚uguje opisy graficzne oraz flagÄ™ \c GG_STATUS80_DESCR_MASK */
 };
 
 
@@ -1876,52 +1876,52 @@ enum {
 
 struct gg_header {
 	uint32_t type;			/* typ pakietu */
-	uint32_t length;		/* długość reszty pakietu */
+	uint32_t length;		/* dĹ‚ugoĹ›Ä‡ reszty pakietu */
 } GG_PACKED;
 
 #define GG_WELCOME 0x0001
 #define GG_NEED_EMAIL 0x0014
 
 struct gg_welcome {
-	uint32_t key;			/* klucz szyfrowania hasła */
+	uint32_t key;			/* klucz szyfrowania hasĹ‚a */
 } GG_PACKED;
 
 #define GG_LOGIN 0x000c
 
 struct gg_login {
-	uint32_t uin;			/* mój numerek */
-	uint32_t hash;			/* hash hasła */
-	uint32_t status;		/* status na dzień dobry */
+	uint32_t uin;			/* mĂłj numerek */
+	uint32_t hash;			/* hash hasĹ‚a */
+	uint32_t status;		/* status na dzieĹ„ dobry */
 	uint32_t version;		/* moja wersja klienta */
-	uint32_t local_ip;		/* mój adres ip */
-	uint16_t local_port;		/* port, na którym słucham */
+	uint32_t local_ip;		/* mĂłj adres ip */
+	uint16_t local_port;		/* port, na ktĂłrym sĹ‚ucham */
 } GG_PACKED;
 
 #define GG_LOGIN_EXT 0x0013
 
 struct gg_login_ext {
-	uint32_t uin;			/* mój numerek */
-	uint32_t hash;			/* hash hasła */
-	uint32_t status;		/* status na dzień dobry */
+	uint32_t uin;			/* mĂłj numerek */
+	uint32_t hash;			/* hash hasĹ‚a */
+	uint32_t status;		/* status na dzieĹ„ dobry */
 	uint32_t version;		/* moja wersja klienta */
-	uint32_t local_ip;		/* mój adres ip */
-	uint16_t local_port;		/* port, na którym słucham */
-	uint32_t external_ip;		/* zewnętrzny adres ip */
-	uint16_t external_port;		/* zewnętrzny port */
+	uint32_t local_ip;		/* mĂłj adres ip */
+	uint16_t local_port;		/* port, na ktĂłrym sĹ‚ucham */
+	uint32_t external_ip;		/* zewnÄ™trzny adres ip */
+	uint16_t external_port;		/* zewnÄ™trzny port */
 } GG_PACKED;
 
 #define GG_LOGIN60 0x0015
 
 struct gg_login60 {
-	uint32_t uin;			/* mój numerek */
-	uint32_t hash;			/* hash hasła */
-	uint32_t status;		/* status na dzień dobry */
+	uint32_t uin;			/* mĂłj numerek */
+	uint32_t hash;			/* hash hasĹ‚a */
+	uint32_t status;		/* status na dzieĹ„ dobry */
 	uint32_t version;		/* moja wersja klienta */
 	uint8_t dunno1;			/* 0x00 */
-	uint32_t local_ip;		/* mój adres ip */
-	uint16_t local_port;		/* port, na którym słucham */
-	uint32_t external_ip;		/* zewnętrzny adres ip */
-	uint16_t external_port;		/* zewnętrzny port */
+	uint32_t local_ip;		/* mĂłj adres ip */
+	uint16_t local_port;		/* port, na ktĂłrym sĹ‚ucham */
+	uint32_t external_ip;		/* zewnÄ™trzny adres ip */
+	uint16_t external_port;		/* zewnÄ™trzny port */
 	uint8_t image_size;		/* maksymalny rozmiar grafiki w KiB */
 	uint8_t dunno2;			/* 0xbe */
 } GG_PACKED;
@@ -1929,16 +1929,16 @@ struct gg_login60 {
 #define GG_LOGIN70 0x0019
 
 struct gg_login70 {
-	uint32_t uin;			/* mój numerek */
-	uint8_t hash_type;		/* rodzaj hashowania hasła */
-	uint8_t hash[64];		/* hash hasła dopełniony zerami */
-	uint32_t status;		/* status na dzień dobry */
+	uint32_t uin;			/* mĂłj numerek */
+	uint8_t hash_type;		/* rodzaj hashowania hasĹ‚a */
+	uint8_t hash[64];		/* hash hasĹ‚a dopeĹ‚niony zerami */
+	uint32_t status;		/* status na dzieĹ„ dobry */
 	uint32_t version;		/* moja wersja klienta */
 	uint8_t dunno1;			/* 0x00 */
-	uint32_t local_ip;		/* mój adres ip */
-	uint16_t local_port;		/* port, na którym słucham */
-	uint32_t external_ip;		/* zewnętrzny adres ip (???) */
-	uint16_t external_port;		/* zewnętrzny port (???) */
+	uint32_t local_ip;		/* mĂłj adres ip */
+	uint16_t local_port;		/* port, na ktĂłrym sĹ‚ucham */
+	uint32_t external_ip;		/* zewnÄ™trzny adres ip (???) */
+	uint16_t external_port;		/* zewnÄ™trzny port (???) */
 	uint8_t image_size;		/* maksymalny rozmiar grafiki w KiB */
 	uint8_t dunno2;			/* 0xbe */
 } GG_PACKED;
@@ -1951,14 +1951,14 @@ struct gg_login70 {
 
 struct gg_pubdir50_request {
 	uint8_t type;			/* GG_PUBDIR50_* */
-	uint32_t seq;			/* czas wysłania zapytania */
+	uint32_t seq;			/* czas wysĹ‚ania zapytania */
 } GG_PACKED;
 
 #define GG_PUBDIR50_REPLY 0x000e
 
 struct gg_pubdir50_reply {
 	uint8_t type;			/* GG_PUBDIR50_* */
-	uint32_t seq;			/* czas wysłania zapytania */
+	uint32_t seq;			/* czas wysĹ‚ania zapytania */
 } GG_PACKED;
 
 #define GG_NEW_STATUS 0x0002
@@ -1996,42 +1996,42 @@ struct gg_pubdir50_reply {
 #else
 
 /**
- * Rodzaje statusów użytkownika.
+ * Rodzaje statusĂłw uĹĽytkownika.
  *
  * \ingroup status
  */
 enum {
-	GG_STATUS_NOT_AVAIL,		/**< Niedostępny */
-	GG_STATUS_NOT_AVAIL_DESCR,	/**< Niedostępny z opisem */
-	GG_STATUS_FFC,			/**< PoGGadaj ze mną */
-	GG_STATUS_FFC_DESCR,		/**< PoGGadaj ze mną z opisem */
-	GG_STATUS_AVAIL,		/**< Dostępny */
-	GG_STATUS_AVAIL_DESCR,		/**< Dostępny z opisem */
-	GG_STATUS_BUSY,			/**< Zajęty */
-	GG_STATUS_BUSY_DESCR,		/**< Zajęty z opisem */
-	GG_STATUS_DND,			/**< Nie przeszkadzać */
-	GG_STATUS_DND_DESCR,		/**< Nie przeszakdzać z opisem */
-	GG_STATUS_INVISIBLE,		/**< Niewidoczny (tylko własny status) */
-	GG_STATUS_INVISIBLE_DESCR,	/**< Niewidoczny z opisem (tylko własny status) */
+	GG_STATUS_NOT_AVAIL,		/**< NiedostÄ™pny */
+	GG_STATUS_NOT_AVAIL_DESCR,	/**< NiedostÄ™pny z opisem */
+	GG_STATUS_FFC,			/**< PoGGadaj ze mnÄ… */
+	GG_STATUS_FFC_DESCR,		/**< PoGGadaj ze mnÄ… z opisem */
+	GG_STATUS_AVAIL,		/**< DostÄ™pny */
+	GG_STATUS_AVAIL_DESCR,		/**< DostÄ™pny z opisem */
+	GG_STATUS_BUSY,			/**< ZajÄ™ty */
+	GG_STATUS_BUSY_DESCR,		/**< ZajÄ™ty z opisem */
+	GG_STATUS_DND,			/**< Nie przeszkadzaÄ‡ */
+	GG_STATUS_DND_DESCR,		/**< Nie przeszakdzaÄ‡ z opisem */
+	GG_STATUS_INVISIBLE,		/**< Niewidoczny (tylko wĹ‚asny status) */
+	GG_STATUS_INVISIBLE_DESCR,	/**< Niewidoczny z opisem (tylko wĹ‚asny status) */
 	GG_STATUS_BLOCKED,		/**< Zablokowany (tylko status innych) */
 	GG_STATUS_GGPLUS,		/**< Status "Korzystam z GG Plus" */
-	GG_STATUS_NOT_SET,		/**< Status nie ustawiony (przy logowaniu się do sieci) */
-	GG_STATUS_IMAGE_MASK,		/**< Flaga bitowa oznaczająca opis graficzny (tylko jeśli wybrano \c GG_FEATURE_IMAGE_DESCR) */
-	GG_STATUS_DESCR_MASK,		/**< Flaga bitowa oznaczająca status z opisem (tylko jeśli wybrano \c GG_FEATURE_IMAGE_DESCR) */
-	GG_STATUS_FRIENDS_MASK,		/**< Flaga bitowa dostępności tylko dla znajomych */
+	GG_STATUS_NOT_SET,		/**< Status nie ustawiony (przy logowaniu siÄ™ do sieci) */
+	GG_STATUS_IMAGE_MASK,		/**< Flaga bitowa oznaczajÄ…ca opis graficzny (tylko jeĹ›li wybrano \c GG_FEATURE_IMAGE_DESCR) */
+	GG_STATUS_DESCR_MASK,		/**< Flaga bitowa oznaczajÄ…ca status z opisem (tylko jeĹ›li wybrano \c GG_FEATURE_IMAGE_DESCR) */
+	GG_STATUS_FRIENDS_MASK,		/**< Flaga bitowa dostÄ™pnoĹ›ci tylko dla znajomych */
 };
 
 /**
- * Rodzaje statusów użytkownika. Mapa bitowa.
+ * Rodzaje statusĂłw uĹĽytkownika. Mapa bitowa.
  *
  * \ingroup status
  */
 enum {
-	GG_STATUS_FLAG_UNKNOWN,		/**< Przeznaczenie nieznane, ale występuje zawsze */
-	GG_STATUS_FLAG_VIDEO,		/**< Klient obsługuje wideorozmowy */
-	GG_STATUS_FLAG_INHERIT,		/**< Synchronizacja statusu do innych klientów (przy logowaniu się do sieci) */
-	GG_STATUS_FLAG_MOBILE,		/**< Klient mobilny (ikona telefonu komórkowego) */
-	GG_STATUS_FLAG_SPAM,		/**< Klient chce otrzymywać linki od nieznajomych */
+	GG_STATUS_FLAG_UNKNOWN,		/**< Przeznaczenie nieznane, ale wystÄ™puje zawsze */
+	GG_STATUS_FLAG_VIDEO,		/**< Klient obsĹ‚uguje wideorozmowy */
+	GG_STATUS_FLAG_INHERIT,		/**< Synchronizacja statusu do innych klientĂłw (przy logowaniu siÄ™ do sieci) */
+	GG_STATUS_FLAG_MOBILE,		/**< Klient mobilny (ikona telefonu komĂłrkowego) */
+	GG_STATUS_FLAG_SPAM,		/**< Klient chce otrzymywaÄ‡ linki od nieznajomych */
 };
 
 #endif	/* DOXYGEN */
@@ -2047,7 +2047,7 @@ enum {
 /**
  * \ingroup status
  *
- * Maksymalna długośc opisu.
+ * Maksymalna dĹ‚ugoĹ›c opisu.
  */
 #define GG_STATUS_DESCR_MAXSIZE 255
 #define GG_STATUS_DESCR_MAXSIZE_PRE_8_0 70
@@ -2057,33 +2057,33 @@ enum {
 /* GG_S_F() tryb tylko dla znajomych */
 #define GG_S_F(x) (((x) & GG_STATUS_FRIENDS_MASK) != 0)
 
-/* GG_S() stan bez uwzględnienia dodatkowych flag */
+/* GG_S() stan bez uwzglÄ™dnienia dodatkowych flag */
 #define GG_S(x) ((x) & GG_STATUS_MASK)
 
 
-/* GG_S_FF() chętny do rozmowy */
+/* GG_S_FF() chÄ™tny do rozmowy */
 #define GG_S_FF(x) (GG_S(x) == GG_STATUS_FFC || GG_S(x) == GG_STATUS_FFC_DESCR)
 
-/* GG_S_AV() dostępny */
+/* GG_S_AV() dostÄ™pny */
 #define GG_S_AV(x) (GG_S(x) == GG_STATUS_AVAIL || GG_S(x) == GG_STATUS_AVAIL_DESCR)
 
 /* GG_S_AW() zaraz wracam */
 #define GG_S_AW(x) (GG_S(x) == GG_STATUS_BUSY || GG_S(x) == GG_STATUS_BUSY_DESCR)
 
-/* GG_S_DD() nie przeszkadzać */
+/* GG_S_DD() nie przeszkadzaÄ‡ */
 #define GG_S_DD(x) (GG_S(x) == GG_STATUS_DND || GG_S(x) == GG_STATUS_DND_DESCR)
 
-/* GG_S_NA() niedostępny */
+/* GG_S_NA() niedostÄ™pny */
 #define GG_S_NA(x) (GG_S(x) == GG_STATUS_NOT_AVAIL || GG_S(x) == GG_STATUS_NOT_AVAIL_DESCR)
 
 /* GG_S_I() niewidoczny */
 #define GG_S_I(x) (GG_S(x) == GG_STATUS_INVISIBLE || GG_S(x) == GG_STATUS_INVISIBLE_DESCR)
 
 
-/* GG_S_A() dostępny lub chętny do rozmowy */
+/* GG_S_A() dostÄ™pny lub chÄ™tny do rozmowy */
 #define GG_S_A(x) (GG_S_FF(x) || GG_S_AV(x))
 
-/* GG_S_B() zajęty lub nie przeszkadzać */
+/* GG_S_B() zajÄ™ty lub nie przeszkadzaÄ‡ */
 #define GG_S_B(x) (GG_S_AW(x) || GG_S_DD(x))
 
 
@@ -2095,7 +2095,7 @@ enum {
 		   GG_S(x) == GG_STATUS_DND_DESCR || \
 		   GG_S(x) == GG_STATUS_INVISIBLE_DESCR)
 
-/* GG_S_BL() blokowany lub blokujący */
+/* GG_S_BL() blokowany lub blokujÄ…cy */
 #define GG_S_BL(x) (GG_S(x) == GG_STATUS_BLOCKED)
 
 /**
@@ -2112,7 +2112,7 @@ struct gg_new_status {
 
 struct gg_notify {
 	uint32_t uin;				/* numerek danej osoby */
-	uint8_t dunno1;				/* rodzaj wpisu w liście */
+	uint8_t dunno1;				/* rodzaj wpisu w liĹ›cie */
 } GG_PACKED;
 
 #ifndef DOXYGEN
@@ -2129,7 +2129,7 @@ struct gg_notify {
  * Rodzaj kontaktu.
  */
 enum {
-	GG_USER_NORMAL,		/**< Zwykły kontakt */
+	GG_USER_NORMAL,		/**< ZwykĹ‚y kontakt */
 	GG_USER_BLOCKED,	/**< Zablokowany */
 	GG_USER_OFFLINE,	/**< Niewidoczny dla kontaktu */
 };
@@ -2144,7 +2144,7 @@ struct gg_notify_reply {
 	uint32_t uin;			/* numerek */
 	uint32_t status;		/* status danej osoby */
 	uint32_t remote_ip;		/* adres ip delikwenta */
-	uint16_t remote_port;		/* port, na którym słucha klient */
+	uint16_t remote_port;		/* port, na ktĂłrym sĹ‚ucha klient */
 	uint32_t version;		/* wersja klienta */
 	uint16_t dunno2;		/* znowu port? */
 } GG_PACKED;
@@ -2155,7 +2155,7 @@ struct gg_notify_reply60 {
 	uint32_t uin;			/* numerek plus flagi w MSB */
 	uint8_t status;			/* status danej osoby */
 	uint32_t remote_ip;		/* adres ip delikwenta */
-	uint16_t remote_port;		/* port, na którym słucha klient */
+	uint16_t remote_port;		/* port, na ktĂłrym sĹ‚ucha klient */
 	uint8_t version;		/* wersja klienta */
 	uint8_t image_size;		/* maksymalny rozmiar grafiki w KiB */
 	uint8_t dunno1;			/* 0x00 */
@@ -2167,7 +2167,7 @@ struct gg_status60 {
 	uint32_t uin;			/* numerek plus flagi w MSB */
 	uint8_t status;			/* status danej osoby */
 	uint32_t remote_ip;		/* adres ip delikwenta */
-	uint16_t remote_port;		/* port, na którym słucha klient */
+	uint16_t remote_port;		/* port, na ktĂłrym sĹ‚ucha klient */
 	uint8_t version;		/* wersja klienta */
 	uint8_t image_size;		/* maksymalny rozmiar grafiki w KiB */
 	uint8_t dunno1;			/* 0x00 */
@@ -2179,7 +2179,7 @@ struct gg_notify_reply77 {
 	uint32_t uin;			/* numerek plus flagi w MSB */
 	uint8_t status;			/* status danej osoby */
 	uint32_t remote_ip;		/* adres ip delikwenta */
-	uint16_t remote_port;		/* port, na którym słucha klient */
+	uint16_t remote_port;		/* port, na ktĂłrym sĹ‚ucha klient */
 	uint8_t version;		/* wersja klienta */
 	uint8_t image_size;		/* maksymalny rozmiar grafiki w KiB */
 	uint8_t dunno1;			/* 0x00 */
@@ -2192,7 +2192,7 @@ struct gg_status77 {
 	uint32_t uin;			/* numerek plus flagi w MSB */
 	uint8_t status;			/* status danej osoby */
 	uint32_t remote_ip;		/* adres ip delikwenta */
-	uint16_t remote_port;		/* port, na którym słucha klient */
+	uint16_t remote_port;		/* port, na ktĂłrym sĹ‚ucha klient */
 	uint8_t version;		/* wersja klienta */
 	uint8_t image_size;		/* maksymalny rozmiar grafiki w KiB */
 	uint8_t dunno1;			/* 0x00 */
@@ -2224,29 +2224,29 @@ struct gg_status {
 #define GG_CLASS_CHAT 0x0008
 #define GG_CLASS_CTCP 0x0010
 #define GG_CLASS_ACK 0x0020
-#define GG_CLASS_EXT GG_CLASS_ACK	/**< Dla kompatybilności wstecz */
+#define GG_CLASS_EXT GG_CLASS_ACK	/**< Dla kompatybilnoĹ›ci wstecz */
 
 #else
 
 /**
- * Klasy wiadomości. Wartości są maskami bitowymi, które w większości
- * przypadków można łączyć (połączenie \c GG_CLASS_MSG i \c GG_CLASS_CHAT
+ * Klasy wiadomoĹ›ci. WartoĹ›ci sÄ… maskami bitowymi, ktĂłre w wiÄ™kszoĹ›ci
+ * przypadkĂłw moĹĽna Ĺ‚Ä…czyÄ‡ (poĹ‚Ä…czenie \c GG_CLASS_MSG i \c GG_CLASS_CHAT
  * nie ma sensu).
  *
  * \ingroup messages
  */
 enum {
-	GG_CLASS_MSG,		/**< Wiadomość ma pojawić się w osobnym oknie */
-	GG_CLASS_CHAT,		/**< Wiadomość ma pojawić się w oknie rozmowy */
-	GG_CLASS_CTCP,		/**< Wiadomość przeznaczona dla klienta Gadu-Gadu */
-	GG_CLASS_ACK,		/**< Klient nie życzy sobie potwierdzenia */
-	GG_CLASS_QUEUED,	/**< Wiadomość zakolejkowana na serwerze (tylko przy odbieraniu) */
+	GG_CLASS_MSG,		/**< WiadomoĹ›Ä‡ ma pojawiÄ‡ siÄ™ w osobnym oknie */
+	GG_CLASS_CHAT,		/**< WiadomoĹ›Ä‡ ma pojawiÄ‡ siÄ™ w oknie rozmowy */
+	GG_CLASS_CTCP,		/**< WiadomoĹ›Ä‡ przeznaczona dla klienta Gadu-Gadu */
+	GG_CLASS_ACK,		/**< Klient nie ĹĽyczy sobie potwierdzenia */
+	GG_CLASS_QUEUED,	/**< WiadomoĹ›Ä‡ zakolejkowana na serwerze (tylko przy odbieraniu) */
 };
 
 #endif	/* DOXYGEN */
 
 /**
- * Maksymalna długość wiadomości.
+ * Maksymalna dĹ‚ugoĹ›Ä‡ wiadomoĹ›ci.
  *
  * \ingroup messages
  */
@@ -2264,14 +2264,14 @@ struct gg_msg_richtext {
 } GG_PACKED;
 
 /**
- * Struktura opisująca formatowanie tekstu. W zależności od wartości pola
- * \c font, zaraz za tą strukturą może wystąpić \c gg_msg_richtext_color
+ * Struktura opisujÄ…ca formatowanie tekstu. W zaleĹĽnoĹ›ci od wartoĹ›ci pola
+ * \c font, zaraz za tÄ… strukturÄ… moĹĽe wystÄ…piÄ‡ \c gg_msg_richtext_color
  * lub \c gg_msg_richtext_image.
  *
  * \ingroup messages
  */
 struct gg_msg_richtext_format {
-	uint16_t position;	/**< Początkowy znak formatowania (liczony od 0) */
+	uint16_t position;	/**< PoczÄ…tkowy znak formatowania (liczony od 0) */
 	uint8_t font;		/**< Atrybuty formatowania */
 } GG_PACKED;
 
@@ -2286,7 +2286,7 @@ struct gg_msg_richtext_format {
 #else
 
 /**
- * Atrybuty formatowania wiadomości.
+ * Atrybuty formatowania wiadomoĹ›ci.
  *
  * \ingroup messages
  */
@@ -2301,24 +2301,24 @@ enum {
 #endif	/* DOXYGEN */
 
 /**
- * Struktura opisującą kolor tekstu dla atrybutu \c GG_FONT_COLOR.
+ * Struktura opisujÄ…cÄ… kolor tekstu dla atrybutu \c GG_FONT_COLOR.
  *
  * \ingroup messages
  */
 struct gg_msg_richtext_color {
-	uint8_t red;		/**< Składowa czerwona koloru */
-	uint8_t green;		/**< Składowa zielona koloru */
-	uint8_t blue;		/**< Składowa niebieska koloru */
+	uint8_t red;		/**< SkĹ‚adowa czerwona koloru */
+	uint8_t green;		/**< SkĹ‚adowa zielona koloru */
+	uint8_t blue;		/**< SkĹ‚adowa niebieska koloru */
 } GG_PACKED;
 
 /**
- * Strukturya opisująca obrazek wstawiony do wiadomości dla atrubutu
+ * Strukturya opisujÄ…ca obrazek wstawiony do wiadomoĹ›ci dla atrubutu
  * \c GG_FONT_IMAGE.
  *
  * \ingroup messages
  */
 struct gg_msg_richtext_image {
-	uint16_t unknown1;	/**< Nieznane pole o wartości 0x0109 */
+	uint16_t unknown1;	/**< Nieznane pole o wartoĹ›ci 0x0109 */
 	uint32_t size;		/**< Rozmiar obrazka */
 	uint32_t crc32;		/**< Suma kontrolna CRC32 obrazka */
 } GG_PACKED;
@@ -2355,17 +2355,17 @@ struct gg_msg_image_reply {
 #else
 
 /**
- * Status doręczenia wiadomości.
+ * Status dorÄ™czenia wiadomoĹ›ci.
  *
  * \ingroup messages
  */
 enum
 {
-	GG_ACK_DELIVERED,	/**< Wiadomość dostarczono. */
-	GG_ACK_QUEUED,		/**< Wiadomość zakolejkowano z powodu niedostępności odbiorcy. */
-	GG_ACK_BLOCKED,		/**< Wiadomość zablokowana przez serwer (spam, świąteczne ograniczenia itd.) */
-	GG_ACK_MBOXFULL,	/**< Wiadomości nie dostarczono z powodu zapełnionej kolejki wiadomości odbiorcy. */
-	GG_ACK_NOT_DELIVERED	/**< Wiadomości nie dostarczono (tylko dla \c GG_CLASS_CTCP). */
+	GG_ACK_DELIVERED,	/**< WiadomoĹ›Ä‡ dostarczono. */
+	GG_ACK_QUEUED,		/**< WiadomoĹ›Ä‡ zakolejkowano z powodu niedostÄ™pnoĹ›ci odbiorcy. */
+	GG_ACK_BLOCKED,		/**< WiadomoĹ›Ä‡ zablokowana przez serwer (spam, Ĺ›wiÄ…teczne ograniczenia itd.) */
+	GG_ACK_MBOXFULL,	/**< WiadomoĹ›ci nie dostarczono z powodu zapeĹ‚nionej kolejki wiadomoĹ›ci odbiorcy. */
+	GG_ACK_NOT_DELIVERED	/**< WiadomoĹ›ci nie dostarczono (tylko dla \c GG_CLASS_CTCP). */
 };
 
 #endif	/* DOXYGEN */
@@ -2409,8 +2409,8 @@ struct gg_recv_msg {
  * Rodzaj zapytania.
  */
 enum {
-	GG_USERLIST_PUT,	/**< Eksport listy kontaktów. */
-	GG_USERLIST_GET,	/**< Import listy kontaktów. */
+	GG_USERLIST_PUT,	/**< Eksport listy kontaktĂłw. */
+	GG_USERLIST_GET,	/**< Import listy kontaktĂłw. */
 };
 
 #endif	/* DOXYGEN */
@@ -2436,8 +2436,8 @@ struct gg_userlist_request {
  * Rodzaj odpowiedzi.
  */
 enum {
-	GG_USERLIST_PUT_REPLY,	/**< Wyeksportowano listy kontaktów. */
-	GG_USERLIST_GET_REPLY,	/**< Zaimportowano listę kontaktów. */
+	GG_USERLIST_PUT_REPLY,	/**< Wyeksportowano listy kontaktĂłw. */
+	GG_USERLIST_GET_REPLY,	/**< Zaimportowano listÄ™ kontaktĂłw. */
 };
 
 #endif	/* DOXYGEN */
@@ -2459,8 +2459,8 @@ struct gg_userlist_reply {
  * Rodzaj zapytania (10.0).
  */
 enum {
-	GG_USERLIST100_PUT,	/**< Eksport listy kontaktów. */
-	GG_USERLIST100_GET,	/**< Import listy kontaktów. */
+	GG_USERLIST100_PUT,	/**< Eksport listy kontaktĂłw. */
+	GG_USERLIST100_GET,	/**< Import listy kontaktĂłw. */
 };
 
 #endif	/* DOXYGEN */
@@ -2476,12 +2476,12 @@ enum {
 /**
  * \ingroup importexport
  *
- * Typ formatu listy kontaktów (10.0).
+ * Typ formatu listy kontaktĂłw (10.0).
  */
 enum {
-	GG_USERLIST100_FORMAT_TYPE_NONE,	/**< Brak treści listy kontaktów. */
-	GG_USERLIST100_FORMAT_TYPE_GG70,	/**< Format listy kontaktów zgodny z Gadu-Gadu 7.0. */
-	GG_USERLIST100_FORMAT_TYPE_GG100,	/**< Format listy kontaktów zgodny z Gadu-Gadu 10.0. */
+	GG_USERLIST100_FORMAT_TYPE_NONE,	/**< Brak treĹ›ci listy kontaktĂłw. */
+	GG_USERLIST100_FORMAT_TYPE_GG70,	/**< Format listy kontaktĂłw zgodny z Gadu-Gadu 7.0. */
+	GG_USERLIST100_FORMAT_TYPE_GG100,	/**< Format listy kontaktĂłw zgodny z Gadu-Gadu 10.0. */
 };
 
 #endif	/* DOXYGEN */
@@ -2498,13 +2498,13 @@ enum {
 /**
  * \ingroup importexport
  *
- * Typ odpowiedzi listy kontaktów (10.0).
+ * Typ odpowiedzi listy kontaktĂłw (10.0).
  */
 enum {
-	GG_USERLIST100_REPLY_LIST,	/**< W odpowiedzi znajduje się aktualna lista kontaktów na serwerze. */
-	GG_USERLIST100_REPLY_UPTODATE,	/**< Komunikat o tym, że lista kontaktów jest już zsynchronizowana. */
-	GG_USERLIST100_REPLY_ACK,	/**< Potwierdzenie odebrania nowej wersji listy kontaktów. W polu \c gg_userlist100_reply.version znajduje się numer nowej wersji listy kontaktów. */
-	GG_USERLIST100_REPLY_REJECT,	/**< Odmowa przyjęcia nowej wersji listy kontaktów. W polu \c gg_userlist100_reply.version znajduje się numer wersji listy kontaktów aktualnie przechowywanej przez serwer. */
+	GG_USERLIST100_REPLY_LIST,	/**< W odpowiedzi znajduje siÄ™ aktualna lista kontaktĂłw na serwerze. */
+	GG_USERLIST100_REPLY_UPTODATE,	/**< Komunikat o tym, ĹĽe lista kontaktĂłw jest juĹĽ zsynchronizowana. */
+	GG_USERLIST100_REPLY_ACK,	/**< Potwierdzenie odebrania nowej wersji listy kontaktĂłw. W polu \c gg_userlist100_reply.version znajduje siÄ™ numer nowej wersji listy kontaktĂłw. */
+	GG_USERLIST100_REPLY_REJECT,	/**< Odmowa przyjÄ™cia nowej wersji listy kontaktĂłw. W polu \c gg_userlist100_reply.version znajduje siÄ™ numer wersji listy kontaktĂłw aktualnie przechowywanej przez serwer. */
 };
 
 #endif /* DOXYGEN */
@@ -2524,14 +2524,14 @@ struct gg_dcc_big_packet {
 } GG_PACKED;
 
 /*
- * póki co, nie znamy dokładnie protokołu. nie wiemy, co czemu odpowiada.
- * nazwy są niepoważne i tymczasowe.
+ * pĂłki co, nie znamy dokĹ‚adnie protokoĹ‚u. nie wiemy, co czemu odpowiada.
+ * nazwy sÄ… niepowaĹĽne i tymczasowe.
  */
 #define GG_DCC_WANT_FILE 0x0003		/* peer chce plik */
-#define GG_DCC_HAVE_FILE 0x0001		/* więc mu damy */
+#define GG_DCC_HAVE_FILE 0x0001		/* wiÄ™c mu damy */
 #define GG_DCC_HAVE_FILEINFO 0x0003	/* niech ma informacje o pliku */
 #define GG_DCC_GIMME_FILE 0x0006	/* peer jest pewny */
-#define GG_DCC_CATCH_FILE 0x0002	/* wysyłamy plik */
+#define GG_DCC_CATCH_FILE 0x0002	/* wysyĹ‚amy plik */
 
 #define GG_DCC_FILEATTR_READONLY 0x0020
 
@@ -2544,16 +2544,16 @@ struct gg_dcc_big_packet {
 
 struct gg_dcc7_info {
 	uint32_t uin;			/* numer nadawcy */
-	uint32_t type;			/* sposób połączenia */
-	gg_dcc7_id_t id;		/* identyfikator połączenia */
-	char info[GG_DCC7_INFO_LEN];	/* informacje o połączeniu "ip port" */
-	char hash[GG_DCC7_INFO_HASH_LEN];/* skrót "ip" */
+	uint32_t type;			/* sposĂłb poĹ‚Ä…czenia */
+	gg_dcc7_id_t id;		/* identyfikator poĹ‚Ä…czenia */
+	char info[GG_DCC7_INFO_LEN];	/* informacje o poĹ‚Ä…czeniu "ip port" */
+	char hash[GG_DCC7_INFO_HASH_LEN];/* skrĂłt "ip" */
 } GG_PACKED;
 
 #define GG_DCC7_NEW 0x20
 
 struct gg_dcc7_new {
-	gg_dcc7_id_t id;		/* identyfikator połączenia */
+	gg_dcc7_id_t id;		/* identyfikator poĹ‚Ä…czenia */
 	uint32_t uin_from;		/* numer nadawcy */
 	uint32_t uin_to;		/* numer odbiorcy */
 	uint32_t type;			/* rodzaj transmisji */
@@ -2566,28 +2566,28 @@ struct gg_dcc7_new {
 #define GG_DCC7_ACCEPT 0x21
 
 struct gg_dcc7_accept {
-	uint32_t uin;			/* numer przyjmującego połączenie */
-	gg_dcc7_id_t id;		/* identyfikator połączenia */
+	uint32_t uin;			/* numer przyjmujÄ…cego poĹ‚Ä…czenie */
+	gg_dcc7_id_t id;		/* identyfikator poĹ‚Ä…czenia */
 	uint32_t offset;		/* offset przy wznawianiu transmisji */
 	uint32_t dunno1;		/* 0x00000000 */
 } GG_PACKED;
 
 /* XXX API */
-#define GG_DCC7_TYPE_P2P 0x00000001	/**< Połączenie bezpośrednie */
-#define GG_DCC7_TYPE_SERVER 0x00000002	/**< Połączenie przez serwer */
+#define GG_DCC7_TYPE_P2P 0x00000001	/**< PoĹ‚Ä…czenie bezpoĹ›rednie */
+#define GG_DCC7_TYPE_SERVER 0x00000002	/**< PoĹ‚Ä…czenie przez serwer */
 
 #define GG_DCC7_REJECT 0x22
 
 struct gg_dcc7_reject {
-	uint32_t uin;			/**< Numer odrzucającego połączenie */
-	gg_dcc7_id_t id;		/**< Identyfikator połączenia */
-	uint32_t reason;		/**< Powód rozłączenia */
+	uint32_t uin;			/**< Numer odrzucajÄ…cego poĹ‚Ä…czenie */
+	gg_dcc7_id_t id;		/**< Identyfikator poĹ‚Ä…czenia */
+	uint32_t reason;		/**< PowĂłd rozĹ‚Ä…czenia */
 } GG_PACKED;
 
 /* XXX API */
-#define GG_DCC7_REJECT_BUSY 0x00000001	/**< Połączenie bezpośrednie już trwa, nie umiem obsłużyć więcej */
-#define GG_DCC7_REJECT_USER 0x00000002	/**< Użytkownik odrzucił połączenie */
-#define GG_DCC7_REJECT_VERSION 0x00000006	/**< Druga strona ma wersję klienta nieobsługującą połączeń bezpośrednich tego typu */
+#define GG_DCC7_REJECT_BUSY 0x00000001	/**< PoĹ‚Ä…czenie bezpoĹ›rednie juĹĽ trwa, nie umiem obsĹ‚uĹĽyÄ‡ wiÄ™cej */
+#define GG_DCC7_REJECT_USER 0x00000002	/**< UĹĽytkownik odrzuciĹ‚ poĹ‚Ä…czenie */
+#define GG_DCC7_REJECT_VERSION 0x00000006	/**< Druga strona ma wersjÄ™ klienta nieobsĹ‚ugujÄ…cÄ… poĹ‚Ä…czeĹ„ bezpoĹ›rednich tego typu */
 
 #define GG_DCC7_ID_REQUEST 0x23
 
@@ -2596,7 +2596,7 @@ struct gg_dcc7_id_request {
 } GG_PACKED;
 
 /* XXX API */
-#define GG_DCC7_TYPE_VOICE 0x00000001	/**< Transmisja głosu */
+#define GG_DCC7_TYPE_VOICE 0x00000001	/**< Transmisja gĹ‚osu */
 #define GG_DCC7_TYPE_FILE 0x00000004	/**< transmisja pliku */
 
 #define GG_DCC7_ID_REPLY 0x23

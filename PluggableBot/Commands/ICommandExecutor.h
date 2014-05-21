@@ -12,45 +12,45 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Okreœla funkcjonalnoœæ klas wykonuj¹cych komendy.
+		 * OkreÅ›la funkcjonalnoÅ›Ä‡ klas wykonujÄ…cych komendy.
 		 *
-		 * Klasa przechowuje listê komend oraz informacje o parserze(pochodz¹ce z zewn¹trz). Komendy nie s¹
-		 * przekazywane na w³asnoœæ, poniewa¿ mog¹ pochodziæ z zewnêtrznych bibliotek, co uniemo¿liwia
-		 * zwalnianie ich w sposób domyœlny.
+		 * Klasa przechowuje listÄ™ komend oraz informacje o parserze(pochodzÄ…ce z zewnÄ…trz). Komendy nie sÄ…
+		 * przekazywane na wÅ‚asnoÅ›Ä‡, poniewaÅ¼ mogÄ… pochodziÄ‡ z zewnÄ™trznych bibliotek, co uniemoÅ¼liwia
+		 * zwalnianie ich w sposÃ³b domyÅ›lny.
 		 */
 		class PLUGIN_API ICommandExecutor
 		{
 		public:
 			/**
-			 * Typ okreœlaj¹cy kolekcjê komend.
+			 * Typ okreÅ›lajÄ…cy kolekcjÄ™ komend.
 			 */
 			typedef std::vector<CommandPointer> CommandList;
 
 			/**
-			 * Parser u¿ywany przez klasê.
+			 * Parser uÅ¼ywany przez klasÄ™.
 			 */
 			const std::unique_ptr<IParser> Parser;
 
 			/**
-			 * Pobiera listê komend zarejestrowanych w obiekcie.
+			 * Pobiera listÄ™ komend zarejestrowanych w obiekcie.
 			 *
-			 * Lista komend nie jest dostêpna w prosty sposób, poniewa¿ obiekt mo¿e wymagaæ np. dodatkowej
-			 * synchronizacji w dostêpie. Dodatkowo, komendy nie powinny byæ usuwane.
+			 * Lista komend nie jest dostÄ™pna w prosty sposÃ³b, poniewaÅ¼ obiekt moÅ¼e wymagaÄ‡ np. dodatkowej
+			 * synchronizacji w dostÄ™pie. Dodatkowo, komendy nie powinny byÄ‡ usuwane.
 			 */
 			virtual const CommandList& GetCommands() = 0;
 			
 			/**
-			 * Dodaje komendy do listy obs³ugiwanych.
+			 * Dodaje komendy do listy obsÅ‚ugiwanych.
 			 *
 			 * \param from Lista komend do dodania.
 			 */
 			virtual void AddCommands(const std::vector<CommandPointer>& from) = 0;
 
 			/**
-			 * Próbujê wywo³aæ komendê, która jest okreœlona w tekœcie. Rzuca wyj¹tkiem, gdy nie uda siê wykonanie metody.
+			 * PrÃ³bujÄ™ wywoÅ‚aÄ‡ komendÄ™, ktÃ³ra jest okreÅ›lona w tekÅ›cie. Rzuca wyjÄ…tkiem, gdy nie uda siÄ™ wykonanie metody.
 			 *
-			 * \exception ExecutionException Rzucane, gdy wyst¹pi b³¹d w trakcie wykonywania komendy.
-			 * \exception NotFoundException Rzucane, gdy nie uda siê odnaleŸæ wskazanej komendy.
+			 * \exception ExecutionException Rzucane, gdy wystÄ…pi bÅ‚Ä…d w trakcie wykonywania komendy.
+			 * \exception NotFoundException Rzucane, gdy nie uda siÄ™ odnaleÅºÄ‡ wskazanej komendy.
 			 */
 			virtual CommandExecutionResults Execute(UserMessagePointer message) = 0;
 
@@ -60,7 +60,7 @@ namespace PluggableBot
 			/**
 			 * Inicjalizuje obiekt.
 			 *
-			 * \param parser U¿ywany parser, który przekazywany jest NA WY£¥CZNOŒÆ.
+			 * \param parser UÅ¼ywany parser, ktÃ³ry przekazywany jest NA WYÅÄ„CZNOÅšÄ†.
 			 */
 			ICommandExecutor(IParser* parser)
 				: Parser(parser)
@@ -68,7 +68,7 @@ namespace PluggableBot
 		};
 
 		/**
-		 * Domyœlny \a {executor} komend. Spe³nia podstawowe za³o¿enia projektu.
+		 * DomyÅ›lny \a {executor} komend. SpeÅ‚nia podstawowe zaÅ‚oÅ¼enia projektu.
 		 */
 		class PLUGIN_API DefaultCommandExecutor
 			: public ICommandExecutor

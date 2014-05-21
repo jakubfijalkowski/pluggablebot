@@ -107,7 +107,7 @@ namespace PluggableBot
 
 			size_t i = 0;
 
-			// Wy≥uskanie nazwy
+			// Wy≈Çuskanie nazwy
 			SkipWhiteSpace(text, i);
 			if (!ExtractPart(text, i, name, '\0'))
 			{

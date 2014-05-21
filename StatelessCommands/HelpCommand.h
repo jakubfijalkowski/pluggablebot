@@ -10,7 +10,7 @@ namespace PluggableBot
 		using namespace PluggableBot::Commands;
 
 		/**
-		 *Wyúwietla uøytkownikowi pomoc.
+		 *Wy≈õwietla u≈ºytkownikowi pomoc.
 		 */
 		class HelpCommand
 			: public ICommand

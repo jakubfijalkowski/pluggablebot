@@ -6,33 +6,33 @@ namespace PluggableBot
 {
 
 	/**
-	 * Interfejs dla klas obs³uguj¹cych protoko³y sieciowe.
+	 * Interfejs dla klas obsÅ‚ugujÄ…cych protokoÅ‚y sieciowe.
 	 *
-	 * Metody tej klasy nie powinny bezpoœrednio rzucaæ wyj¹tkami z racji tego,
-	 * ¿e i tak w³aœciwa obs³uga dzieje siê na osobnym w¹tku. Ka¿da implementacja
-	 * powinna próbowaæ obs³u¿yæ b³¹d samodzielnie, a gdy to siê nie uda, powinna
-	 * wys³aæ odpowiedni¹ wiadomoœæ, na któr¹ zareaguje aplikacja.
+	 * Metody tej klasy nie powinny bezpoÅ›rednio rzucaÄ‡ wyjÄ…tkami z racji tego,
+	 * Å¼e i tak wÅ‚aÅ›ciwa obsÅ‚uga dzieje siÄ™ na osobnym wÄ…tku. KaÅ¼da implementacja
+	 * powinna prÃ³bowaÄ‡ obsÅ‚uÅ¼yÄ‡ bÅ‚Ä…d samodzielnie, a gdy to siÄ™ nie uda, powinna
+	 * wysÅ‚aÄ‡ odpowiedniÄ… wiadomoÅ›Ä‡, na ktÃ³rÄ… zareaguje aplikacja.
 	 *
-	 * Komunikacja z reszt¹ aplikacji odbywa siê z wykorzystaniem obiektu typu
-	 * Messenger. Klasa powinna tam zapisywaæ wiadomoœci od u¿ytkowników
-	 * jak równie¿ oczekiwaæ na ewentualne wiadomoœci, które ma wys³aæ.
+	 * Komunikacja z resztÄ… aplikacji odbywa siÄ™ z wykorzystaniem obiektu typu
+	 * Messenger. Klasa powinna tam zapisywaÄ‡ wiadomoÅ›ci od uÅ¼ytkownikÃ³w
+	 * jak rÃ³wnieÅ¼ oczekiwaÄ‡ na ewentualne wiadomoÅ›ci, ktÃ³re ma wysÅ‚aÄ‡.
 	 */
 	class PLUGIN_API IProtocol
 	{
 	public:
 		/**
-		 * Nazwa protoko³u, która mo¿e byæ u¿ywana do, np., filtracji wiadomoœci albo u¿ywana do logowania.
+		 * Nazwa protokoÅ‚u, ktÃ³ra moÅ¼e byÄ‡ uÅ¼ywana do, np., filtracji wiadomoÅ›ci albo uÅ¼ywana do logowania.
 		 */
 		const std::string Name;
 
 		/*
-		 * Rozpoczyna pracê obiektu obs³uguj¹cego protokó³. Nie powinno zabieraæ zbyt du¿o czasu
-		 * i jak najszybciej przekierowaæ obs³ugê na osobny w¹tek.
+		 * Rozpoczyna pracÄ™ obiektu obsÅ‚ugujÄ…cego protokÃ³Å‚. Nie powinno zabieraÄ‡ zbyt duÅ¼o czasu
+		 * i jak najszybciej przekierowaÄ‡ obsÅ‚ugÄ™ na osobny wÄ…tek.
 		 */
 		virtual void Start() = 0;
 
 		/**
-		 * Wymusza zatrzymanie w¹tku obs³uguj¹cego protokó³ sieciowy.
+		 * Wymusza zatrzymanie wÄ…tku obsÅ‚ugujÄ…cego protokÃ³Å‚ sieciowy.
 		 */
 		virtual void Stop() = 0;
 

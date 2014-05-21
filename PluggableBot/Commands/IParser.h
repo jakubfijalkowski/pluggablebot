@@ -11,22 +11,22 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Interfejs dla klas, odpowiedzialnych za parsowanie wiadomoœci.
+		 * Interfejs dla klas, odpowiedzialnych za parsowanie wiadomoÅ›ci.
 		 *
-		 * Parsowanie odbywa siê poprzez próbê dopasowania tekstu do nastêpuj¹cego formatu:
-		 * {nazwa_komendy} {nazwa_parametru1}="{wartoœæ1}" {nazwa_parametru2}="{wartoœæ2}" ...
-		 * Znaki cudzys³owie s¹ opcjonalne gdy wartoœæ nie zawiera znaków bia³ych, w przeciwnym razie
-		 * s¹ one obowi¹zkowe. Nazwa komendy mo¿e byæ w cudzys³owie, dzieki czemu mo¿e zawieraæ bia³e znaki.
-		 * Znak cudzys³owu mo¿e byæ "wyescapeowany" znakiem \ .
-		 * Gdy nie uda siê dopasowaæ tekstu do w/w formatu, parser uznaje, ¿e komenda jest pe³no tekstowa
+		 * Parsowanie odbywa siÄ™ poprzez prÃ³bÄ™ dopasowania tekstu do nastÄ™pujÄ…cego formatu:
+		 * {nazwa_komendy} {nazwa_parametru1}="{wartoÅ›Ä‡1}" {nazwa_parametru2}="{wartoÅ›Ä‡2}" ...
+		 * Znaki cudzysÅ‚owie sÄ… opcjonalne gdy wartoÅ›Ä‡ nie zawiera znakÃ³w biaÅ‚ych, w przeciwnym razie
+		 * sÄ… one obowiÄ…zkowe. Nazwa komendy moÅ¼e byÄ‡ w cudzysÅ‚owie, dzieki czemu moÅ¼e zawieraÄ‡ biaÅ‚e znaki.
+		 * Znak cudzysÅ‚owu moÅ¼e byÄ‡ "wyescapeowany" znakiem \ .
+		 * Gdy nie uda siÄ™ dopasowaÄ‡ tekstu do w/w formatu, parser uznaje, Å¼e komenda jest peÅ‚no tekstowa
 		 * i przerywa parsowanie.
 		 */
 		class PLUGIN_API IParser
 		{
 		public:
 			/**
-			 * Próbuje zinterpretowaæ wiadomoœæ jako komendê. Sposób parsowania jest w opisie klasy.
-			 * \param text Tekst wiadomoœci.
+			 * PrÃ³buje zinterpretowaÄ‡ wiadomoÅ›Ä‡ jako komendÄ™. SposÃ³b parsowania jest w opisie klasy.
+			 * \param text Tekst wiadomoÅ›ci.
 			 */
 			virtual ParseResultsPointer Parse(const std::string& text) = 0;
 
@@ -34,7 +34,7 @@ namespace PluggableBot
 		};
 
 		/**
-		 * Domyœlna implementacja IParser.
+		 * DomyÅ›lna implementacja IParser.
 		 */
 		class PLUGIN_API DefaultParser
 			: public IParser

@@ -18,7 +18,7 @@ namespace PluggableBot
 		CommandExecutionResults StopCommand::Execute(const ExecutionContext& context)
 		{
 			this->context->Messenger->Send(Messaging::MessagePointer(new Messages::ShutdownRequest()));
-			return CommandExecutionResults("Aplikacja zostanie wy³¹czona.");
+			return CommandExecutionResults("Aplikacja zostanie wyÅ‚Ä…czona.");
 		}
 
 	}

@@ -8,17 +8,17 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Wyj¹tek rzucany, gdy nie uda siê wykonaæ komendy.
+		 * WyjÄ…tek rzucany, gdy nie uda siÄ™ wykonaÄ‡ komendy.
 		 *
-		 * Zawiera podstawowe informacje o b³êdzie, tj. wiadomoœæ i ewentualny kod,
-		 * który jest zwracany jako dodatkowa wartoœæ.
+		 * Zawiera podstawowe informacje o bÅ‚Ä™dzie, tj. wiadomoÅ›Ä‡ i ewentualny kod,
+		 * ktÃ³ry jest zwracany jako dodatkowa wartoÅ›Ä‡.
 		 */
 		class ExecutionException
 			: public std::exception
 		{
 		public:
 			/**
-			 * Kod b³êdu.
+			 * Kod bÅ‚Ä™du.
 			 */
 			const int ErrorCode;
 

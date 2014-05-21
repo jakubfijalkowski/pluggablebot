@@ -11,18 +11,18 @@ namespace PluggableBot
 	{
 		
 		/**
-		 * Fabryka dla nazwanych obiektÛw Logger. Zaimplementowane jako klasa statyczna.
+		 * Fabryka dla nazwanych obiekt√≥w Logger. Zaimplementowane jako klasa statyczna.
 		 *
-		 * W aktualnej formie nie ma moøliwoúci konfiguracji biblioteki.
+		 * W aktualnej formie nie ma mo≈ºliwo≈õci konfiguracji biblioteki.
 		 */
 		class PLUGIN_API LogFactory
 		{
 		public:
 			/**
-			 * Pobiera Logger o wskazanej nazwie. Obiekt jest zarzπdzany w ca≥oúci przez
-			 * fabrykÍ i nie powinien byÊ zwalniany.
+			 * Pobiera Logger o wskazanej nazwie. Obiekt jest zarzƒÖdzany w ca≈Ço≈õci przez
+			 * fabrykƒô i nie powinien byƒá zwalniany.
 			 *
-			 * Jeúli logger o podanej nazwie juø istnieje, zostaje zwrÛcowny. W przeciwnym razie
+			 * Je≈õli logger o podanej nazwie ju≈º istnieje, zostaje zwr√≥cowny. W przeciwnym razie
 			 * zostaje utworzony nowy obiekt.
 			 *
 			 * \param name Nazwa loggera.
@@ -30,15 +30,15 @@ namespace PluggableBot
 			static LoggerPointer GetLogger(const std::string& name);
 
 			/**
-			 * Dodaje wyjúcie, ktÛre bÍdzie uøywane przez wszystkie nowe loggery. Wejúcie przekazywane jest na w≥asnoúÊ.
+			 * Dodaje wyj≈õcie, kt√≥re bƒôdzie u≈ºywane przez wszystkie nowe loggery. Wej≈õcie przekazywane jest na w≈Çasno≈õƒá.
 			 *
-			 * \param output Wyjúcie.
+			 * \param output Wyj≈õcie.
 			 */
 			static void AddOutput(IOutput* output);
 
 			/**
-			 * Czyúci pozosta≥oúci po loggerach.
-			 * Ta metoda powinna zostaÊ wywo≥ana jako ostatnia w aplikacji!
+			 * Czy≈õci pozosta≈Ço≈õci po loggerach.
+			 * Ta metoda powinna zostaƒá wywo≈Çana jako ostatnia w aplikacji!
 			 */
 			static void Unload();
 

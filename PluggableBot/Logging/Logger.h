@@ -12,45 +12,45 @@ namespace PluggableBot
 		class IOutput;
 
 		/**
-		 * Poziom wiadomoœci.
+		 * Poziom wiadomoÅ›ci.
 		 */
 		enum class LogLevel
 		{
 			/**
-			 * Najni¿szy - informacja przydatna w debugowaniu.
+			 * NajniÅ¼szy - informacja przydatna w debugowaniu.
 			 */
 			Debug,
 
 			/**
-			 * Oznacza operacjê ukoñczon¹ sukcesem.
+			 * Oznacza operacjÄ™ ukoÅ„czonÄ… sukcesem.
 			 */
 			Information,
 
 			/**
-			 * Ostrze¿enie - coœ siê nie uda³o, ale nie ma to wiêkszego wp³ywu na dzia³anie aplikacji.
+			 * OstrzeÅ¼enie - coÅ› siÄ™ nie udaÅ‚o, ale nie ma to wiÄ™kszego wpÅ‚ywu na dziaÅ‚anie aplikacji.
 			 */
 			Warning,
 
 			 /**
-			 * B³¹d - operacja siê nie uda³a, czêœæ funkcjonalnoœci mo¿e nie byæ dostêpna, ale aplikacja
-			 * dzia³a nadal.
+			 * BÅ‚Ä…d - operacja siÄ™ nie udaÅ‚a, czÄ™Å›Ä‡ funkcjonalnoÅ›ci moÅ¼e nie byÄ‡ dostÄ™pna, ale aplikacja
+			 * dziaÅ‚a nadal.
 			 */
 			Error,
 			
 			/**
-			 * B³¹d którego nie da siê naprawiæ - przerywa dzia³anie aplikacji.
+			 * BÅ‚Ä…d ktÃ³rego nie da siÄ™ naprawiÄ‡ - przerywa dziaÅ‚anie aplikacji.
 			 */
 			Fatal
 		};
 
 		/**
-		 * Logger - s³u¿y do logowania informacji z wykonywania aplikacji.
+		 * Logger - sÅ‚uÅ¼y do logowania informacji z wykonywania aplikacji.
 		 */
 		class PLUGIN_API Logger
 		{
 		public:
 			/**
-			 * Inicjalizuje logger o wskazanej nazwie i podanymi wyjœciami.
+			 * Inicjalizuje logger o wskazanej nazwie i podanymi wyjÅ›ciami.
 			 */
 			Logger(const std::string& name, const std::vector<IOutput*>& outputs);
 
@@ -63,7 +63,7 @@ namespace PluggableBot
 			}
 
 			/**
-			 * Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Debug.
+			 * Loguje tekst, ktÃ³ry przed zapisem jest formatowany, o poziomie LogLevel::Debug.
 			 */
 			template<typename... Args>
 			void Debug(const std::string& format, const Args&... args)
@@ -80,7 +80,7 @@ namespace PluggableBot
 			}
 
 			/**
-			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Information.
+			* Loguje tekst, ktÃ³ry przed zapisem jest formatowany, o poziomie LogLevel::Information.
 			*/
 			template<typename... Args>
 			void Information(const std::string& format, const Args&... args)
@@ -97,7 +97,7 @@ namespace PluggableBot
 			}
 
 			/**
-			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Warning.
+			* Loguje tekst, ktÃ³ry przed zapisem jest formatowany, o poziomie LogLevel::Warning.
 			*/
 			template<typename... Args>
 			void Warning(const std::string& format, const Args&... args)
@@ -114,7 +114,7 @@ namespace PluggableBot
 			}
 
 			/**
-			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Error.
+			* Loguje tekst, ktÃ³ry przed zapisem jest formatowany, o poziomie LogLevel::Error.
 			*/
 			template<typename... Args>
 			void Error(const std::string& format, const Args&... args)
@@ -131,7 +131,7 @@ namespace PluggableBot
 			}
 
 			/**
-			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Fatal.
+			* Loguje tekst, ktÃ³ry przed zapisem jest formatowany, o poziomie LogLevel::Fatal.
 			*/
 			template<typename... Args>
 			void Fatal(const std::string& format, const Args&... args)
@@ -140,10 +140,10 @@ namespace PluggableBot
 			}
 
 			/**
-			 * Loguje wiadomoœæ o podanym poziomie na wszystkie wyjœcia.
+			 * Loguje wiadomoÅ›Ä‡ o podanym poziomie na wszystkie wyjÅ›cia.
 			 *
-			 * Metoda ta musi jest thread-safe, jako i¿ jest g³ówn¹ u¿ywan¹ do zapisu informacji,
-			 * i mo¿e byæ wywo³ywana z wielu w¹tków.
+			 * Metoda ta musi jest thread-safe, jako iÅ¼ jest gÅ‚Ã³wnÄ… uÅ¼ywanÄ… do zapisu informacji,
+			 * i moÅ¼e byÄ‡ wywoÅ‚ywana z wielu wÄ…tkÃ³w.
 			 */
 			void Log(LogLevel level, const std::string& message);
 

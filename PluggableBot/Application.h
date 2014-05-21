@@ -17,8 +17,8 @@ namespace PluggableBot
 	};
 
 	/**
-	 * G³ówna czêœæ aplikacja, która zarz¹dza poszczególnymi podsystemami aplikacji.
-	 * Przed jej uruchomieniem nale¿y zainicjowaæ wszystkie rzeczy, które s¹ pomocniecze,
+	 * GÅ‚Ã³wna czÄ™Å›Ä‡ aplikacja, ktÃ³ra zarzÄ…dza poszczegÃ³lnymi podsystemami aplikacji.
+	 * Przed jej uruchomieniem naleÅ¼y zainicjowaÄ‡ wszystkie rzeczy, ktÃ³re sÄ… pomocniecze,
 	 * np. Logger.
 	 */
 	class Application
@@ -32,33 +32,33 @@ namespace PluggableBot
 		{ }
 
 		/**
-		 * Inicjalizuje aplikacje i jej podsystemy. £aduje konfiguracje, pluginy,
-		 * konfiguruje je i ich zale¿noœci, ale nie startuje obs³ugi protoko³ów,
-		 * ani ¿adnego z podsystemów.
+		 * Inicjalizuje aplikacje i jej podsystemy. Åaduje konfiguracje, pluginy,
+		 * konfiguruje je i ich zaleÅ¼noÅ›ci, ale nie startuje obsÅ‚ugi protokoÅ‚Ã³w,
+		 * ani Å¼adnego z podsystemÃ³w.
 		 *
-		 * Rozgraniczenie na inicjalizacjê i uruchomienie istnieje tylko dlatego,
-		 * by uproœciæ kod obu.
+		 * Rozgraniczenie na inicjalizacjÄ™ i uruchomienie istnieje tylko dlatego,
+		 * by uproÅ›ciÄ‡ kod obu.
 		 */
 		void Initialize();
 
 		/**
-		 * Startuje wszystkie wtyczki obs³uguj¹ce protoko³y oraz rozpoczyna g³ówn¹ pêtle komunikatów.
-		 * Wyjœcie z tej metody nastêpuje, gdy wszystkie wtczki odmówi³y pos³uszeñstwa, u¿ytkownik wy³¹czy³
-		 * aplikacjê, lub zosta³a wywo³ana metoda Shutdown.
+		 * Startuje wszystkie wtyczki obsÅ‚ugujÄ…ce protokoÅ‚y oraz rozpoczyna gÅ‚Ã³wnÄ… pÄ™tle komunikatÃ³w.
+		 * WyjÅ›cie z tej metody nastÄ™puje, gdy wszystkie wtczki odmÃ³wiÅ‚y posÅ‚uszeÅ„stwa, uÅ¼ytkownik wyÅ‚Ä…czyÅ‚
+		 * aplikacjÄ™, lub zostaÅ‚a wywoÅ‚ana metoda Shutdown.
 		 * 
-		 * \return Zwraca kod wyjœcia aplikacji.
+		 * \return Zwraca kod wyjÅ›cia aplikacji.
 		 */
 		ApplicationExitCode Run();
 
 		/**
-		 * Wy³¹cza aplikacje, zmuszaj¹c g³ówny w¹tek do opuszczenia metody Run.
+		 * WyÅ‚Ä…cza aplikacje, zmuszajÄ…c gÅ‚Ã³wny wÄ…tek do opuszczenia metody Run.
 		 *
-		 * Mo¿e byæ wywo³ana asynchronicznie.
+		 * MoÅ¼e byÄ‡ wywoÅ‚ana asynchronicznie.
 		 */
 		void Shutdown();
 
 		/**
-		 * Czyœci obiekt po zakoñczeniu dzia³ania. Wywo³ywane przez g³ówny w¹tek zaraz po
+		 * CzyÅ›ci obiekt po zakoÅ„czeniu dziaÅ‚ania. WywoÅ‚ywane przez gÅ‚Ã³wny wÄ…tek zaraz po
 		 * opuszczeniu Run.
 		 */
 		void Deinitialize();

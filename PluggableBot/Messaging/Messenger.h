@@ -18,28 +18,28 @@ namespace PluggableBot
 		typedef std::shared_ptr<MessageList> MessageListPointer;
 
 		/**
-		 * Pos³aniec, czy te¿ szyna wiadomoœci, który synchronizuje dostêp do g³ównego elementu
+		 * PosÅ‚aniec, czy teÅ¼ szyna wiadomoÅ›ci, ktÃ³ry synchronizuje dostÄ™p do gÅ‚Ã³wnego elementu
 		 * komunikacyjnego aplikacji.
 		 *
-		 * Klasa ta odpowiada za przekazywanie wiadomoœci miêdzy poszczególnymi podsystemami
-		 * aplikacji, ze szczególnym uwzglêdnieniem tych dzia³aj¹cych na ró¿nych w¹tkach
-		 * (np. g³ównego w¹tku aplikacji i w¹tków obs³uguj¹cych wtyczki czy wiadomoœci
+		 * Klasa ta odpowiada za przekazywanie wiadomoÅ›ci miÄ™dzy poszczegÃ³lnymi podsystemami
+		 * aplikacji, ze szczegÃ³lnym uwzglÄ™dnieniem tych dziaÅ‚ajÄ…cych na rÃ³Å¼nych wÄ…tkach
+		 * (np. gÅ‚Ã³wnego wÄ…tku aplikacji i wÄ…tkÃ³w obsÅ‚ugujÄ…cych wtyczki czy wiadomoÅ›ci
 		 * asynchroniczne).
-		 * Do synchronizacji dostêpu do listy u¿ywana jest sekcja krytyczna, poniewa¿ ka¿da
-		 * z metod wymaga wy³¹cznego dostêpu. Jest to miejsce na ulepszenia, gdy¿ Get tak naprawdê
-		 * opiera siê g³ównie na odczycie(i sprawdzeniu, czy dana wiadomoœæ istnieje), ale poniewa¿
-		 * szukamy konkretnego typu wiadomoœci, musielibyœmy wykonaæ double-checking, co niekoniecznie
-		 * musi pomóc, a na pewno skomplikuje implementacje.
-		 * Dodatkowo u¿ywane jest zdarzenie, by powiadomiæ w¹tki oczekuj¹ce na wiadomoœci, ¿e takowe
-		 * nadesz³y.
+		 * Do synchronizacji dostÄ™pu do listy uÅ¼ywana jest sekcja krytyczna, poniewaÅ¼ kaÅ¼da
+		 * z metod wymaga wyÅ‚Ä…cznego dostÄ™pu. Jest to miejsce na ulepszenia, gdyÅ¼ Get tak naprawdÄ™
+		 * opiera siÄ™ gÅ‚Ã³wnie na odczycie(i sprawdzeniu, czy dana wiadomoÅ›Ä‡ istnieje), ale poniewaÅ¼
+		 * szukamy konkretnego typu wiadomoÅ›ci, musielibyÅ›my wykonaÄ‡ double-checking, co niekoniecznie
+		 * musi pomÃ³c, a na pewno skomplikuje implementacje.
+		 * Dodatkowo uÅ¼ywane jest zdarzenie, by powiadomiÄ‡ wÄ…tki oczekujÄ…ce na wiadomoÅ›ci, Å¼e takowe
+		 * nadeszÅ‚y.
 		 *
-		 * Kolejnoœæ wiadomoœci nie jest zachowana. Funkcje Get mog¹ zmieniaæ kolejnoœæ wiadomoœci
-		 * na liœcie, by przyspieszyæ usuwanie elementu(zastêpowany jest ostatnim, zamiast przesuniêcia
-		 * wszystkich elementów).
+		 * KolejnoÅ›Ä‡ wiadomoÅ›ci nie jest zachowana. Funkcje Get mogÄ… zmieniaÄ‡ kolejnoÅ›Ä‡ wiadomoÅ›ci
+		 * na liÅ›cie, by przyspieszyÄ‡ usuwanie elementu(zastÄ™powany jest ostatnim, zamiast przesuniÄ™cia
+		 * wszystkich elementÃ³w).
 		 *
-		 * Problemy z implementacj¹:
-		 * Przez u¿ycie smart pointerów i szablonów, biblioteki DLL musz¹ byæ kompilowane z t¹ sam¹
-		 * implementacj¹ CRT(czyli tak naprawdê w konkretnej wersji Visual Studio).
+		 * Problemy z implementacjÄ…:
+		 * Przez uÅ¼ycie smart pointerÃ³w i szablonÃ³w, biblioteki DLL muszÄ… byÄ‡ kompilowane z tÄ… samÄ…
+		 * implementacjÄ… CRT(czyli tak naprawdÄ™ w konkretnej wersji Visual Studio).
 		 */
 		class PLUGIN_API Messenger
 		{
@@ -50,14 +50,14 @@ namespace PluggableBot
 			Messenger();
 
 			/**
-			 * Czyœci po obiekcie.
+			 * CzyÅ›ci po obiekcie.
 			 */
 			~Messenger();
 
 			/**
-			 * Wysy³a now¹ pust¹ wiadomoœæ o wskazanym typie.
+			 * WysyÅ‚a nowÄ… pustÄ… wiadomoÅ›Ä‡ o wskazanym typie.
 			 *
-			 * UWAGA! Mo¿e spowodowaæ problem z dealokacj¹ w niew³aœciwym miejscu(DLL boundary)
+			 * UWAGA! MoÅ¼e spowodowaÄ‡ problem z dealokacjÄ… w niewÅ‚aÅ›ciwym miejscu(DLL boundary)
 			 */
 			template<typename TMessage>
 			void Send()
@@ -66,7 +66,7 @@ namespace PluggableBot
 			}
 
 			/**
-			 * Wysy³a wskazan¹ wiadomoœæ, opakowuj¹c obiekt w shared_ptr.
+			 * WysyÅ‚a wskazanÄ… wiadomoÅ›Ä‡, opakowujÄ…c obiekt w shared_ptr.
 			 */
 			template<typename TMessage>
 			void Send(TMessage* message)
@@ -75,7 +75,7 @@ namespace PluggableBot
 			}
 
 			/**
-			 * Wysy³a wskazan¹ wiadomoœæ.
+			 * WysyÅ‚a wskazanÄ… wiadomoÅ›Ä‡.
 			 */
 			void Send(MessagePointer message);
 
@@ -96,22 +96,22 @@ namespace PluggableBot
 			}
 
 			/**
-			 * Pobiera jedn¹ wiadomoœæ z list, a jeœli takowa nie istnieje - czeka a¿ siê pojawi
-			 * i j¹ zwraca. Jeœli czas oczekiwania zostanie przekroczony, zostaje zwrócony nullptr.
+			 * Pobiera jednÄ… wiadomoÅ›Ä‡ z list, a jeÅ›li takowa nie istnieje - czeka aÅ¼ siÄ™ pojawi
+			 * i jÄ… zwraca. JeÅ›li czas oczekiwania zostanie przekroczony, zostaje zwrÃ³cony nullptr.
 			 *
-			 * \param type Typ wiadomoœci, której oczekujemy.
-			 * \param timeout Maksymalny czas oczekiwania. Domyœlnie nieskoñczonoœæ.
+			 * \param type Typ wiadomoÅ›ci, ktÃ³rej oczekujemy.
+			 * \param timeout Maksymalny czas oczekiwania. DomyÅ›lnie nieskoÅ„czonoÅ›Ä‡.
 			 */
 			MessagePointer Get(int type, DWORD timeout = INFINITE);
 
 			/**
-			 * Wybiera z listy wiadomoœci, które spe³niaj¹ wskazany warunek. Gdy nie ma wiadomoœci
-			 * spe³niaj¹cych takie za³o¿enia, czeka okreœlony czas do pojawienia siê PIERWSZEJ
-			 * wiadomoœci, która mo¿e byæ zwrócona. Gdy czas oczekiwania zostanie przekroczony,
-			 * zostanie zwrócona pusta kolekcja wiadomoœci.
+			 * Wybiera z listy wiadomoÅ›ci, ktÃ³re speÅ‚niajÄ… wskazany warunek. Gdy nie ma wiadomoÅ›ci
+			 * speÅ‚niajÄ…cych takie zaÅ‚oÅ¼enia, czeka okreÅ›lony czas do pojawienia siÄ™ PIERWSZEJ
+			 * wiadomoÅ›ci, ktÃ³ra moÅ¼e byÄ‡ zwrÃ³cona. Gdy czas oczekiwania zostanie przekroczony,
+			 * zostanie zwrÃ³cona pusta kolekcja wiadomoÅ›ci.
 			 *
-			 * \param predicate Warunek, który musi zostaæ spe³niony, by wiadomoœæ by³a zwrócona.
-			 * \param timeout Maksymalny czas oczekiwania. Domyœlnie nieskoñczonoœæ.
+			 * \param predicate Warunek, ktÃ³ry musi zostaÄ‡ speÅ‚niony, by wiadomoÅ›Ä‡ byÅ‚a zwrÃ³cona.
+			 * \param timeout Maksymalny czas oczekiwania. DomyÅ›lnie nieskoÅ„czonoÅ›Ä‡.
 			 */
 			MessageListPointer Get(MessagePredicate predicate, DWORD timeout = INFINITE);
 

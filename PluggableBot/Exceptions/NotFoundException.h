@@ -7,7 +7,7 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Wyj¹tek rzucany, gdy nie uda siê znaleŸæ szukanej rzeczy.
+		 * WyjÄ…tek rzucany, gdy nie uda siÄ™ znaleÅºÄ‡ szukanej rzeczy.
 		 */
 		class NotFoundException
 			: public std::exception

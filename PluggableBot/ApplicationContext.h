@@ -10,23 +10,23 @@ namespace PluggableBot
 {
 
 	/**
-	 * Okreœla kontekst aplikacji, czyli wszystkie zale¿noœci z g³ównego poziomu.
+	 * OkreÅ›la kontekst aplikacji, czyli wszystkie zaleÅ¼noÅ›ci z gÅ‚Ã³wnego poziomu.
 	 */
 	class PLUGIN_API ApplicationContext
 	{
 	public:
 		/**
-		* Messaging::Messenger u¿ywany przez aplikacjê.
+		* Messaging::Messenger uÅ¼ywany przez aplikacjÄ™.
 		*/
 		Messaging::Messenger* const Messenger;
 
 		/**
-		 * Commands::ICommandExecutor u¿ywany przez aplikacjê.
+		 * Commands::ICommandExecutor uÅ¼ywany przez aplikacjÄ™.
 		 */
 		Commands::ICommandExecutor* const CommandExecutor;
 
 		/**
-		 * Plugins::PluginManager u¿ywany przez aplikacjê
+		 * Plugins::PluginManager uÅ¼ywany przez aplikacjÄ™
 		 */
 		Plugins::PluginManager* GetPlugins()
 		{
@@ -41,7 +41,7 @@ namespace PluggableBot
 		{ }
 
 		/**
-		 * Ustawia Plugins::PluginManager, który musi byæ tworzony po utworzeniu ApplicationContext.
+		 * Ustawia Plugins::PluginManager, ktÃ³ry musi byÄ‡ tworzony po utworzeniu ApplicationContext.
 		 */
 		void Set(Plugins::PluginManager* plugins)
 		{

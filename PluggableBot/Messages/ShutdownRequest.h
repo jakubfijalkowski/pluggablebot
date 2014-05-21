@@ -10,7 +10,7 @@ namespace PluggableBot
 		using namespace Messaging;
 
 		/**
-		 * Uøytkownik zaøπda≥ zatrzymania aplikacji.
+		 * U≈ºytkownik za≈ºƒÖda≈Ç zatrzymania aplikacji.
 		 */
 		class ShutdownRequest
 			: public IMessage
@@ -19,7 +19,7 @@ namespace PluggableBot
 			static const int MessageType = 4;
 
 			/**
-			 * Inicializuje obiekt wiadomoúci.
+			 * Inicializuje obiekt wiadomo≈õci.
 			 */
 			ShutdownRequest()
 				: IMessage(MessageType)

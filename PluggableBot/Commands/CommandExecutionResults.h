@@ -10,23 +10,23 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Wynik wykonywania komendy. Zawiera treœæ odpowiedzi i opcjonalny obiekt bêd¹cy dodatkowymi danymi(JSON).
+		 * Wynik wykonywania komendy. Zawiera treÅ›Ä‡ odpowiedzi i opcjonalny obiekt bÄ™dÄ…cy dodatkowymi danymi(JSON).
 		 */
 		class PLUGIN_API CommandExecutionResults
 		{
 		public:
 			/**
-			 * Okreœla, czy wynik komendy jest synchroniczny, czy asynchroniczny.
+			 * OkreÅ›la, czy wynik komendy jest synchroniczny, czy asynchroniczny.
 			 */
 			const bool IsAsync;
 
 			/**
-			 * Treœæ wiadomoœci maj¹cej byæ odpowiedzi¹.
+			 * TreÅ›Ä‡ wiadomoÅ›ci majÄ…cej byÄ‡ odpowiedziÄ….
 			 */
 			const std::string Message;
 
 			/**
-			 * Obiekt bêd¹cy dodatkowymi danymi. Jest opcjonalny(mo¿e byæ nullptr).
+			 * Obiekt bÄ™dÄ…cy dodatkowymi danymi. Jest opcjonalny(moÅ¼e byÄ‡ nullptr).
 			 */
 			const std::shared_ptr<const jsonxx::Object> AdditionalData;
 

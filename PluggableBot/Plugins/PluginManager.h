@@ -14,8 +14,8 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Klasa zarzπdzajπca wtyczkami. Odpowiada za ich ≥adowanie, konfiguracjÍ oraz usuwanie,
-		 * gdy juø nie sπ potrzebne. UdostÍpnia teø metody agregujπce informacje udostÍpniane przez wtyczki.
+		 * Klasa zarzƒÖdzajƒÖca wtyczkami. Odpowiada za ich ≈Çadowanie, konfiguracjƒô oraz usuwanie,
+		 * gdy ju≈º nie sƒÖ potrzebne. Udostƒôpnia te≈º metody agregujƒÖce informacje udostƒôpniane przez wtyczki.
 		 */
 		class PluginManager
 		{
@@ -23,40 +23,40 @@ namespace PluggableBot
 			/**
 			 * Inicjalizuje obiekt.
 			 *
-			 * \param context Kontekst aplikacji, ktÛra uøywa managera.
+			 * \param context Kontekst aplikacji, kt√≥ra u≈ºywa managera.
 			 */
 			PluginManager(ApplicationContext* context);
 
 			/*
-			 * Wy≥adowuje wtyczki, jeúli nie zosta≥y wy≥adowane wczeúniej.
+			 * Wy≈Çadowuje wtyczki, je≈õli nie zosta≈Çy wy≈Çadowane wcze≈õniej.
 			 */
 			~PluginManager();
 
 			/**
-			* Konfiguruje wtyczki, wyszukujπÊ dla nich odpowiednie sekcje w pliku konfiguracyjnym.
-			* Jeúli sekcja konfiguracyjna dla danej wtyczki nie istnieje, przekazywany jest pusty obiekt.
+			* Konfiguruje wtyczki, wyszukujƒÖƒá dla nich odpowiednie sekcje w pliku konfiguracyjnym.
+			* Je≈õli sekcja konfiguracyjna dla danej wtyczki nie istnieje, przekazywany jest pusty obiekt.
 			*
-			* \param configuration G≥Ûwny wÍze≥ pliku konfiguracyjnego.
+			* \param configuration G≈Ç√≥wny wƒôze≈Ç pliku konfiguracyjnego.
 			*/
 			void Configure(const jsonxx::Object& configuration);
 
 			/**
-			 * £aduje wszystkie wtyczki z lokalizacji przekazanej do konstruktora.
+			 * ≈Åaduje wszystkie wtyczki z lokalizacji przekazanej do konstruktora.
 			 */
 			void Load();
 
 			/**
-			 * Zwalnia zasoby po wtyczkach oraz wy≥adowuje za≥adowane biblioteki.
+			 * Zwalnia zasoby po wtyczkach oraz wy≈Çadowuje za≈Çadowane biblioteki.
 			 */
 			void Unload();
 
 			/**
-			 * Agreguje obs≥ugiwane komendy z wszystkich wtyczek.
+			 * Agreguje obs≈Çugiwane komendy z wszystkich wtyczek.
 			 */
 			std::vector<Commands::CommandPointer> GetCombinedCommands();
 
 			/**
-			 * Agreguje obs≥ugiwane protoko≥y z wszystkich wtyczek.
+			 * Agreguje obs≈Çugiwane protoko≈Çy z wszystkich wtyczek.
 			 */
 			std::vector<ProtocolPointer> GetCombinedProtocols();
 

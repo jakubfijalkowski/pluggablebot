@@ -8,14 +8,14 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Wyj¹tek mówi¹cy o tym, ¿e wyst¹pi³ problem z po³¹czeniem.
+		 * WyjÄ…tek mÃ³wiÄ…cy o tym, Å¼e wystÄ…piÅ‚ problem z poÅ‚Ä…czeniem.
 		 */
 		class ConnectionFailureException
 			: public std::exception
 		{
 		public:
 			/**
-			 * Inicjalizuje wyj¹tek odpowiedni¹ wiadomoœci¹.
+			 * Inicjalizuje wyjÄ…tek odpowiedniÄ… wiadomoÅ›ciÄ….
 			 */
 			ConnectionFailureException(const std::string& message)
 				: std::exception(message.c_str())
