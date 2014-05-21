@@ -11,11 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConnectionFailureException.h" />
     <ClInclude Include="DefaultProtocolsPlugin.h" />
+    <ClInclude Include="GGClient.h" />
     <ClInclude Include="GGProtocol.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultProtocolsPlugin.cpp" />
+    <ClCompile Include="GGClient.cpp" />
     <ClCompile Include="GGProtocol.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -71,10 +74,10 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>PluggableBot.lib;libgadu\libgadu-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PluggableBot.lib;libgadu\libgadu-3.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)libs\libgadu\libgadu-3.dll $(SolutionDir)$(Configuration)\Plugins\</Command>
+      <Command>copy $(SolutionDir)libs\libgadu\libgadu-3.dll $(SolutionDir)$(Configuration)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -93,10 +96,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PluggableBot.lib;libgadu\libgadu-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PluggableBot.lib;libgadu\libgadu-3.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)libs\libgadu\libgadu-3.dll $(SolutionDir)$(Configuration)\Plugins\</Command>
+      <Command>copy $(SolutionDir)libs\libgadu\libgadu-3.dll $(SolutionDir)$(Configuration)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

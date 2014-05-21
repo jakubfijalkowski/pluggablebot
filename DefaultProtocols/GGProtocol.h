@@ -1,6 +1,7 @@
 #pragma once
 #include <PluggableBot/ApplicationContext.h>
 #include <PluggableBot/IProtocol.h>
+#include <PluggableBot/Logging/LogFactory.h>
 #include <PluggableBot/External/jsonxx.h>
 #include <thread>
 
@@ -15,7 +16,6 @@ namespace PluggableBot
 			Invalid,
 			Disabled
 		};
-
 
 		/**
 		 * Obs³uguje protokó³ GG.
@@ -34,6 +34,8 @@ namespace PluggableBot
 			static ConfigurationStatus CheckConfiguration(const jsonxx::Object& config);
 
 		private:
+			const Logging::LoggerPointer Logger;
+
 			ApplicationContext* const context;
 			std::thread main;
 		};

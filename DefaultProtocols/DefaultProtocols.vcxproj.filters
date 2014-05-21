@@ -3,9 +3,12 @@
   <ItemGroup>
     <ClInclude Include="DefaultProtocolsPlugin.h" />
     <ClInclude Include="GGProtocol.h" />
+    <ClInclude Include="GGClient.h" />
+    <ClInclude Include="ConnectionFailureException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultProtocolsPlugin.cpp" />
     <ClCompile Include="GGProtocol.cpp" />
+    <ClCompile Include="GGClient.cpp" />
   </ItemGroup>
 </Project>
