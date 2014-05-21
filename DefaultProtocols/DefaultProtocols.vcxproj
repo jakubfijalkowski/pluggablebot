@@ -49,14 +49,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\libs;$(SolutionDir);$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\libs;$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Configuration)\Plugins\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\libs;$(SolutionDir);$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\libs;$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Configuration)\Plugins\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -71,8 +71,11 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>PluggableBot.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PluggableBot.lib;libgadu\libgadu-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)libs\libgadu\libgadu-3.dll $(SolutionDir)$(Configuration)\Plugins\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -90,8 +93,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PluggableBot.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PluggableBot.lib;libgadu\libgadu-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)libs\libgadu\libgadu-3.dll $(SolutionDir)$(Configuration)\Plugins\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

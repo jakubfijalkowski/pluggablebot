@@ -9,25 +9,22 @@ namespace PluggableBot
 	{
 		using namespace Messaging;
 
-		GGProtocol::GGProtocol(ApplicationContext* context)
+		GGProtocol::GGProtocol(ApplicationContext* context, const jsonxx::Object& config)
 			: IProtocol("Gadu-Gadu"), context(context)
 		{ }
 
 		GGProtocol::~GGProtocol()
 		{ }
 
-		bool GGProtocol::Configure(const jsonxx::Object& config)
+		ConfigurationStatus GGProtocol::CheckConfiguration(const jsonxx::Object& config)
 		{
-			return false;
+			return ConfigurationStatus::Valid;
 		}
 
 		void GGProtocol::Start()
 		{
 			this->main = std::thread([&]()
 			{
-				Sleep(1000);
-				UserMessagePointer userMsg(new UserMessage("stop", "gg:123", this));
-				this->context->Messenger->Send(MessagePointer(new Messages::MessageReceived(userMsg)));
 			});
 		}
 
