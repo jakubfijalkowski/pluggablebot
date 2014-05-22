@@ -95,6 +95,7 @@
     <ClInclude Include="Messages\Messages.h">
       <Filter>Messages</Filter>
     </ClInclude>
+    <ClInclude Include="UserData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -132,6 +133,7 @@
     <ClCompile Include="Messages\MessageReceived.h">
       <Filter>Messages</Filter>
     </ClCompile>
+    <ClCompile Include="UserData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config.json" />

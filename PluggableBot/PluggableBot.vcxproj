@@ -92,6 +92,7 @@
     <ClInclude Include="Messages\SendMessage.h" />
     <ClInclude Include="Messages\ProtocolFailure.h" />
     <ClInclude Include="Messages\ShutdownRequest.h" />
+    <ClInclude Include="UserData.h" />
     <ClInclude Include="UserMessage.h" />
     <ClInclude Include="Messaging\IMessage.h" />
     <ClInclude Include="Messaging\Messenger.h" />
@@ -112,6 +113,7 @@
     <ClCompile Include="Messages\MessageReceived.h" />
     <ClCompile Include="Messaging\Messenger.cpp" />
     <ClCompile Include="Plugins\PluginManager.cpp" />
+    <ClCompile Include="UserData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config.json">

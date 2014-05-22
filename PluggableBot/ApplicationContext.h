@@ -5,6 +5,7 @@
 #include "Commands/ICommandExecutor.h"
 #include "Messaging/Messenger.h"
 #include "Plugins/PluginManager.h"
+#include "UserData.h"
 
 namespace PluggableBot
 {
@@ -24,6 +25,11 @@ namespace PluggableBot
 		 * Commands::ICommandExecutor używany przez aplikację.
 		 */
 		Commands::ICommandExecutor* const CommandExecutor;
+
+		/**
+		 * Dane użytkownika(UserData) używane przez aplikację.
+		 */
+		const UserData UserData;
 
 		/**
 		 * Plugins::PluginManager używany przez aplikację
