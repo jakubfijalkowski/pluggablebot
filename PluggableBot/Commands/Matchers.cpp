@@ -24,7 +24,7 @@ namespace PluggableBot
 
 		bool RegexMatcher::Matches(const ExecutionContext& context) const
 		{
-			return std::regex_match(context.Message->Content, this->expression);
+			return std::regex_match(context.Message->Content, this->Expression);
 		}
 	}
 }

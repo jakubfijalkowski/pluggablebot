@@ -2,6 +2,7 @@
 
 #include "HelpCommand.h"
 #include "StopCommand.h"
+#include "PingCommand.h"
 
 namespace PluggableBot
 {
@@ -30,6 +31,7 @@ namespace PluggableBot
 		{
 			this->supportedCommands.push_back(new HelpCommand(this->context));
 			this->supportedCommands.push_back(new StopCommand(this->context));
+			this->supportedCommands.push_back(new PingCommand(this->context));
 		}
 
 		const IPlugin::CommandList* StatelessPlugin::GetSupportedCommands() const

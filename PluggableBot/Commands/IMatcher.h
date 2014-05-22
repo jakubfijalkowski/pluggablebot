@@ -65,14 +65,16 @@ namespace PluggableBot
 			: public IMatcher
 		{
 		public:
+			/**
+			 * Wyrażenie używane przez obiekt.
+			 */
+			const std::regex Expression;
+
 			RegexMatcher(const std::string& regexString)
-				: IMatcher(true), expression(regexString)
+				: IMatcher(true), Expression(regexString)
 			{ }
 
 			virtual bool Matches(const ExecutionContext& context) const;
-
-		private:
-			std::regex expression;
 		};
 	}
 }

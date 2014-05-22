@@ -36,6 +36,13 @@ namespace PluggableBot
 			CommandExecutionResults(const std::string& message, bool isAsync = false, std::shared_ptr<const jsonxx::Object> additionalData = nullptr)
 				: IsAsync(isAsync), Message(message), AdditionalData(additionalData)
 			{ }
+
+			/**
+			 * Inicjalizuje obiekt pustej wiadomości
+			 */
+			CommandExecutionResults(bool isAsync = false)
+				: IsAsync(isAsync), Message(), AdditionalData()
+			{ }
 		};
 
 	}
