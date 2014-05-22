@@ -4,6 +4,8 @@
 #include "GGProtocol.h"
 #include "ConnectionFailureException.h"
 
+#undef SendMessage
+
 namespace PluggableBot
 {
 	namespace DefaultProtocols
@@ -15,7 +17,8 @@ namespace PluggableBot
 
 		GGProtocol::GGProtocol(ApplicationContext* context, const jsonxx::Object& config)
 			: IProtocol("Gadu-Gadu"), Logger(Logging::LogFactory::GetLogger("GGProtocol")), context(context),
-			MaxRetryCount((int)config.get<jsonxx::Number>("max_retry_count", DefaultMaxRetryCount))
+			MaxRetryCount((int)config.get<jsonxx::Number>("max_retry_count", DefaultMaxRetryCount)),
+			shouldShutdown(false)
 		{
 			int uid = (int)config.get<jsonxx::Number>("number");
 			const std::string& password = config.get<std::string>("password");
@@ -47,32 +50,50 @@ namespace PluggableBot
 				throw std::system_error(std::error_code(WSAGetLastError(), std::generic_category()), "Cannot initialize WinSock.");
 			}
 
+			this->shouldShutdown = false;
 			this->main = std::thread([&]()
 			{
 				int retryCount = 0;
-				while (!this->TryConnect())
-				{
-					Logger->Warning("Cannot connect to the server. Retrying.");
-					retryCount++;
-					if (retryCount > this->MaxRetryCount)
-					{
-						Logger->Fatal("MaxRetryCount reached. Protocol failed.");
-						auto msg = new Messages::ProtocolFailure(this);
-						this->context->Messenger->Send(Messaging::MessagePointer(msg));
-						return;
-					}
-				}
-				Logger->Information("Connected.");
-
+				this->ThreadMain(retryCount);
 			});
 		}
 
 		void GGProtocol::Stop()
 		{
 			Logger->Information("Disconnecting.");
-			this->client->Disconnect();
-			WSACleanup();
+			this->shouldShutdown = true;
 			this->main.join();
+			WSACleanup();
+		}
+
+		void GGProtocol::ThreadMain(int& retryCount)
+		{
+			while (retryCount <= this->MaxRetryCount && !this->TryConnect())
+			{
+				Logger->Warning("Cannot connect to the server. Retrying.");
+				retryCount++;
+			}
+
+			if (retryCount > this->MaxRetryCount)
+			{
+				Logger->Fatal("MaxRetryCount reached. Protocol failed.");
+				auto msg = new Messages::ProtocolFailure(this);
+				this->context->Messenger->Send(Messaging::MessagePointer(msg));
+				return;
+			}
+
+			Logger->Information("Connected.");
+			while (!this->shouldShutdown)
+			{
+				if (!this->HandleGGEvents())
+				{
+					Logger->Error("Cannot handle server messages. Retrying.");
+					this->ThreadMain(retryCount);
+					return;
+				}
+				this->HandleSystemEvents();
+			}
+			this->client->Disconnect();
 		}
 
 		bool GGProtocol::TryConnect()
@@ -87,6 +108,48 @@ namespace PluggableBot
 				return false;
 			}
 			return true;
+		}
+
+		bool GGProtocol::HandleGGEvents()
+		{
+			GGEvent event;
+			try
+			{
+				event = this->client->HandleEvents();
+			}
+			catch (ConnectionFailureException ex)
+			{
+				Logger->Error("Connection to the server lost. Error: {0}", ex.what());
+				return false;
+			}
+
+			if (event != nullptr)
+			{
+				if (event->type == GG_EVENT_MSG && event->event.msg.sender != 0)
+				{
+					char uin[12];
+					_itoa_s(event->event.msg.sender, uin, 10);
+
+					UserMessagePointer userMessage(new UserMessage((char*)event->event.msg.message, uin, this));
+					this->context->Messenger->Send(MessagePointer(new Messages::MessageReceived(userMessage)));
+				}
+			}
+
+			return true;
+		}
+
+		void GGProtocol::HandleSystemEvents()
+		{
+			auto messages = this->context->Messenger->TryGet([&](Messaging::IMessage* message)
+			{
+				return $MessageIs(Messages::SendMessage) && ((Messages::SendMessage*)message)->Protocol == this;
+			});
+
+			for (auto message : *messages)
+			{
+				auto sendMessage = (Messages::SendMessage*)message.get();
+				this->client->SendMessage(strtoul(sendMessage->Recipient.c_str(), nullptr, 10), sendMessage->Content);
+			}
 		}
 
 	}

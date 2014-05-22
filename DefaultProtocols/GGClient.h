@@ -1,12 +1,17 @@
 #pragma once
 #include <libgadu/libgadu.h>
 #include <string>
+#include <memory>
+#include <ctime>
 #include "ConnectionFailureException.h"
+
+#undef SendMessage
 
 namespace PluggableBot
 {
 	namespace DefaultProtocols
 	{
+		typedef std::shared_ptr<gg_event> GGEvent;
 
 		/**
 		 * Wrapper na libgadu, uproszczający kod GGProtocol. Klient ten jest asynchroniczny, z pominięciem niektórych metod.
@@ -48,22 +53,44 @@ namespace PluggableBot
 			 */
 			void Disconnect();
 
+			/**
+			 * Pobiera zdarzenie z serwera GG. 
+			 *
+			 * Obsługuje nagłe zerwanie połączenia z serwerem jak i mechanizm ping-pong.
+			 *
+			 * \exception ConnectionFailureException Rzucany, gdy serwer nie odpowiadał zbyt długi czas.
+			 */
+			GGEvent HandleEvents();
+
+			/**
+			 * Wysyła wiadomość do użytkownika o wskazanym numerze.
+			 *
+			 * \param receipent Numer odbiorcy.
+			 * \param content Treść wiadomości.
+			 */
+			void SendMessage(unsigned int receipent, const std::string& content);
+
 		private:
+			static const int PingTime = 59;
+
 			/**
 			 * Oczekuje wskazany czas na wiadomość z serwera.
 			 *
 			 * \exception ConnectionFailureException Rzucany, gdy wystąpił problem z odebraniem wiadomości z serwera.
 			 * \return Zwraca typ wiadomości zapisane w zmiennej event.
 			 */
-			gg_event* WaitForEvent(int timeout);
+			GGEvent WaitForEvent(int timeout);
 
-			int timeout;
+			const int timeout;
 
 			gg_login_params loginParams;
 			gg_session *session;
 
 			FD_SET readSet;
 			FD_SET writeSet;
+
+			time_t lastPingTime;
+			bool pongReceived;
 		};
 
 	}

@@ -34,15 +34,19 @@ namespace PluggableBot
 			static ConfigurationStatus CheckConfiguration(const jsonxx::Object& config);
 
 		private:
+			void ThreadMain(int& retryCount);
 			bool TryConnect();
+			bool HandleGGEvents();
+			void HandleSystemEvents();
 
 			const Logging::LoggerPointer Logger;
 
 			const int MaxRetryCount;
 
 			ApplicationContext* const context;
-			std::thread main;
 
+			bool shouldShutdown;
+			std::thread main;
 			std::unique_ptr<GGClient> client;
 		};
 

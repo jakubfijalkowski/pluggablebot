@@ -15,7 +15,7 @@ namespace PluggableBot
 		}
 
 		GGClient::GGClient(int uid, const std::string& password, int status, const std::string& statusDescription, int timeout)
-			: timeout(timeout), session(nullptr)
+			: timeout(timeout), session(nullptr), lastPingTime(0), pongReceived(true)
 		{
 			memset(&this->loginParams, 0, sizeof(gg_login_params));
 			this->loginParams.struct_size = sizeof(gg_login_params);
@@ -53,27 +53,23 @@ namespace PluggableBot
 			time_t startTime = time(nullptr);
 			while (eventType != GG_EVENT_CONN_SUCCESS && difftime(time(nullptr), startTime) < loginTimeout)
 			{
-				gg_event* event = nullptr;
+				std::shared_ptr<gg_event> event = nullptr;
 				try
 				{
 					event = this->WaitForEvent(loginTimeout);
 				}
 				catch (...)
 				{
-					if (event != nullptr)
-					{
-						gg_free_event(event);
-					}
 					this->Disconnect();
 					throw;
 				}
 
 				eventType = event != nullptr ? event->type : GG_EVENT_NONE;
-				gg_free_event(event);
 
 				switch (eventType)
 				{
 				case GG_EVENT_CONN_SUCCESS:
+					this->lastPingTime = time(nullptr);
 					if (gg_notify(this->session, nullptr, 0) == -1)
 					{
 						this->Disconnect();
@@ -99,7 +95,43 @@ namespace PluggableBot
 			}
 		}
 
-		gg_event* GGClient::WaitForEvent(int timeout)
+		GGEvent GGClient::HandleEvents()
+		{
+			time_t currTime = time(nullptr);
+			if (difftime(currTime, this->lastPingTime) > PingTime)
+			{
+				if (!this->pongReceived)
+				{
+					throw ConnectionFailureException("Server did not send the pong response.");
+				}
+				gg_ping(this->session);
+				this->lastPingTime = currTime;
+			}
+
+			auto event = this->WaitForEvent(this->timeout);
+
+			if (event != nullptr)
+			{
+				if (event->type == GG_EVENT_PONG || event->type == GG_EVENT_PONG110)
+				{
+					this->pongReceived = true;
+					return nullptr;
+				}
+				else if(event->type == GG_EVENT_DISCONNECT)
+				{
+					throw ConnectionFailureException("Server closed the connection.");
+				}
+			}
+
+			return event;
+		}
+
+		void GGClient::SendMessage(unsigned int receipent, const std::string& content)
+		{
+			gg_send_message(this->session, GG_CLASS_MSG | GG_CLASS_ACK, receipent, (const unsigned char*)content.c_str());
+		}
+
+		GGEvent GGClient::WaitForEvent(int timeout)
 		{
 			timeval tv = { timeout, 0 };
 
@@ -134,7 +166,7 @@ namespace PluggableBot
 				{
 					throw ConnectionFailureException("Cannot retrieve event from the library.");
 				}
-				return event;
+				return std::shared_ptr<gg_event>(event, gg_free_event);
 			}
 			return nullptr;
 		}
