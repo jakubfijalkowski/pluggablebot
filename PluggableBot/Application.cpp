@@ -14,7 +14,7 @@ namespace PluggableBot
 	using namespace Messaging;
 	using namespace Plugins;
 
-	static const DWORD WaitTime = 1000;
+	static const DWORD WaitTime = 100;
 	static const char* ConfigPath = "config.json";
 	static const char* AsyncMessage = "Wiadomość jest wywoływana asynchronicznie. Odpowiedź otrzymasz, gdy wywołanie zostanie zakończone.";
 	static const char* CommandDoesNotExist = "Wiadomość nie mogła zostać przetworzona. Komenda jej odpowiadająca nie istnieje.";

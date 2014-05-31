@@ -12,7 +12,7 @@ namespace PluggableBot
 	{
 		using namespace Messaging;
 
-		const int EventWaitTime = 1;
+		const int EventWaitTime = 100;
 		const int DefaultMaxRetryCount = 10;
 
 		GGProtocol::GGProtocol(ApplicationContext* context, const jsonxx::Object& config)

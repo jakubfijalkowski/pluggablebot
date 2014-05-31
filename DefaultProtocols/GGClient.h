@@ -30,7 +30,7 @@ namespace PluggableBot
 			/**
 			 * Inicjalizuje obiekt ustawiając niezbędne wartości.
 			 *
-			 * \param timeout Określa jak długo klient będzie czekał na wiadomości. Wartość w sekundach.
+			 * \param timeout Określa jak długo klient będzie czekał na wiadomości. Wartość w milisekundach.
 			 */
 			GGClient(int uid, const std::string& password, int status, const std::string& statusDescription, int timeout);
 

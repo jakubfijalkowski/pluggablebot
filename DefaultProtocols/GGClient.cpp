@@ -133,7 +133,7 @@ namespace PluggableBot
 
 		GGEvent GGClient::WaitForEvent(int timeout)
 		{
-			timeval tv = { timeout, 0 };
+			timeval tv = { 0, timeout * 1000 };
 
 			FD_ZERO(&this->readSet);
 			FD_ZERO(&this->writeSet);
