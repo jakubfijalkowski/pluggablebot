@@ -1,6 +1,7 @@
 #include "FilesystemPlugin.h"
 
 #include "PWDCommand.h"
+#include "CDCommand.h"
 
 namespace PluggableBot
 {
@@ -28,6 +29,7 @@ namespace PluggableBot
 		void FilesystemPlugin::Configure(const jsonxx::Object& configuration)
 		{
 			this->supportedCommands.push_back(new PWDCommand(this->context));
+			this->supportedCommands.push_back(new CDCommand(this->context));
 		}
 
 		const IPlugin::CommandList* FilesystemPlugin::GetSupportedCommands() const
