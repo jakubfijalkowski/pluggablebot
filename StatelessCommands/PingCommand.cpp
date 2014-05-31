@@ -1,4 +1,3 @@
-#include <regex>
 #include <future>
 #include <PluggableBot/Messages/Messages.h>
 #include "PingCommand.h"
@@ -78,7 +77,7 @@ namespace PluggableBot
 
 
 		PingCommand::PingCommand(ApplicationContext* context)
-			: ICommand("ping"), context(context), matcher(new RegexMatcher("ping (.+)"))
+			: ICommand("ping"), context(context), matcher(new SimpleMatcher("ping", { "address" }))
 		{ }
 
 		const IMatcher* PingCommand::GetMatcher() const
@@ -88,10 +87,7 @@ namespace PluggableBot
 
 		CommandExecutionResults PingCommand::Execute(const ExecutionContext& context)
 		{
-			std::smatch match;
-			std::regex_search(context.Message->Content, match, this->matcher->Expression);
-
-			const std::string& address = match[1];
+			auto address = context.ParseResults->GetParameter("address");
 			const auto userMsg = context.Message;
 			std::async(std::launch::async, [=]()
 			{

@@ -22,7 +22,7 @@ namespace PluggableBot
 
 		private:
 			ApplicationContext* context;
-			std::unique_ptr<RegexMatcher> matcher;
+			std::unique_ptr<SimpleMatcher> matcher;
 		};
 	}
 }
