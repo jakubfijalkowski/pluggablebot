@@ -5,9 +5,11 @@
     <ClCompile Include="..\PluggableBot\External\format.cc">
       <Filter>External</Filter>
     </ClCompile>
+    <ClCompile Include="CatCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FilesystemPlugin.h" />
+    <ClInclude Include="CatCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

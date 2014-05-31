@@ -1,7 +1,6 @@
 #include "CDCommand.h"
 #include <Shlwapi.h>
 #include <PluggableBot/External/format.h>
-#include <algorithm>
 #include "Helper.h"
 
 namespace PluggableBot
@@ -23,23 +22,10 @@ namespace PluggableBot
 
 		CommandExecutionResults CDCommand::Execute(const ExecutionContext& context)
 		{
-			std::string path = context.ParseResults->GetParameter("to");
-			std::replace(path.begin(), path.end(), '/', '\\');
-			std::string newPath;
-			if (!PathIsRelativeA(path.c_str()))
-			{
-				newPath = path;
-			}
-			else
-			{
-				auto currentDir = GetCurrentPath(this->context->UserData, context.Message->SourceProtocol, context.Message->Sender);
-				char buffer[MAX_PATH];
-				if (PathCombineA(buffer, currentDir.c_str(), path.c_str()) != nullptr)
-				{
-					PathAddBackslashA(buffer);
-					newPath = buffer;
-				}
-			}
+			auto& currentDir = GetCurrentPath(this->context->UserData, context.Message->SourceProtocol, context.Message->Sender);
+			std::string path = SanitizePath(context.ParseResults->GetParameter("to"));
+			std::string newPath = JoinPath(currentDir, path);
+
 			if (newPath.empty() || !PathIsDirectoryA(newPath.c_str()))
 			{
 				return CommandExecutionResults(InvalidPath);

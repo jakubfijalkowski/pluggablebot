@@ -2,6 +2,7 @@
 
 #include "PWDCommand.h"
 #include "CDCommand.h"
+#include "CatCommand.h"
 
 namespace PluggableBot
 {
@@ -30,6 +31,7 @@ namespace PluggableBot
 		{
 			this->supportedCommands.push_back(new PWDCommand(this->context));
 			this->supportedCommands.push_back(new CDCommand(this->context));
+			this->supportedCommands.push_back(new CatCommand(this->context));
 		}
 
 		const IPlugin::CommandList* FilesystemPlugin::GetSupportedCommands() const
