@@ -53,7 +53,7 @@ namespace PluggableBot
 		/**
 		 * Dane użytkownika(UserData) używane przez aplikację.
 		 */
-		const UserData UserData;
+		UserData UserData;
 
 		/**
 		 * Plugins::PluginManager używany przez aplikację
