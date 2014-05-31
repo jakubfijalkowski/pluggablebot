@@ -5,11 +5,13 @@
     <ClInclude Include="HelpCommand.h" />
     <ClInclude Include="StopCommand.h" />
     <ClInclude Include="PingCommand.h" />
+    <ClInclude Include="SendCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StatelessPlugin.cpp" />
     <ClCompile Include="HelpCommand.cpp" />
     <ClCompile Include="StopCommand.cpp" />
     <ClCompile Include="PingCommand.cpp" />
+    <ClCompile Include="SendCommand.cpp" />
   </ItemGroup>
 </Project>

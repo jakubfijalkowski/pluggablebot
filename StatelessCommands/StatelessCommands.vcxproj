@@ -88,12 +88,14 @@
   <ItemGroup>
     <ClInclude Include="HelpCommand.h" />
     <ClInclude Include="PingCommand.h" />
+    <ClInclude Include="SendCommand.h" />
     <ClInclude Include="StatelessPlugin.h" />
     <ClInclude Include="StopCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HelpCommand.cpp" />
     <ClCompile Include="PingCommand.cpp" />
+    <ClCompile Include="SendCommand.cpp" />
     <ClCompile Include="StatelessPlugin.cpp" />
     <ClCompile Include="StopCommand.cpp" />
   </ItemGroup>
