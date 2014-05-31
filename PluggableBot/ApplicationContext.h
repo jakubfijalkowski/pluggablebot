@@ -1,6 +1,7 @@
 #pragma once
 #include <cassert>
 #include <memory>
+#include <vector>
 #include "Config.h"
 #include "Commands/ICommandExecutor.h"
 #include "Messaging/Messenger.h"
@@ -9,6 +10,29 @@
 
 namespace PluggableBot
 {
+
+	/**
+	 * Określa stan protokołu.
+	 */
+	class ProtocolState
+	{
+	public:
+		/**
+		 * Wskaźnik na protokół.
+		 */
+		const ProtocolPointer Protocol;
+
+		/**
+		 * Określa, czy dany protokół pracuje.
+		 */
+		bool IsWorking;
+
+		ProtocolState(ProtocolPointer pointer)
+			: Protocol(pointer), IsWorking(false)
+		{ }
+	};
+
+	typedef std::vector<const ProtocolState> ProtocolList;
 
 	/**
 	 * Określa kontekst aplikacji, czyli wszystkie zależności z głównego poziomu.
@@ -34,16 +58,21 @@ namespace PluggableBot
 		/**
 		 * Plugins::PluginManager używany przez aplikację
 		 */
-		Plugins::PluginManager* GetPlugins()
+		Plugins::PluginManager* GetPlugins() const
 		{
 			return this->plugins;
 		}
 
 		/**
+		 * Lista obsługiwanych protokołów załadowanych przez aplikację.
+		 */
+		const ProtocolList* const Protocols;
+
+		/**
 		 * Inicializuje kontekst aplikacji.
 		 */
-		ApplicationContext(Messaging::Messenger* messenger, Commands::ICommandExecutor* executor)
-			: Messenger(messenger), CommandExecutor(executor), plugins(nullptr)
+		ApplicationContext(Messaging::Messenger* messenger, Commands::ICommandExecutor* executor, const ProtocolList* protocols)
+			: Messenger(messenger), CommandExecutor(executor), plugins(nullptr), Protocols(protocols)
 		{ }
 
 		/**

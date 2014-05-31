@@ -64,6 +64,7 @@ namespace PluggableBot
 		void Deinitialize();
 
 	private:
+		bool HasWorkingProtocol();
 		bool StartProtocols();
 		void StopProtocols();
 
@@ -77,7 +78,7 @@ namespace PluggableBot
 		jsonxx::Object configuration;
 		std::unique_ptr<ApplicationContext> context;
 
-		std::vector<ProtocolPointer> workingProtocols;
+		std::vector<ProtocolState> protocols;
 
 		ApplicationExitCode exitCode;
 		bool exiting;

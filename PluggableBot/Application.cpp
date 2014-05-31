@@ -41,7 +41,7 @@ namespace PluggableBot
 		auto parser = new DefaultParser();
 		auto executor = new DefaultCommandExecutor(parser);
 
-		this->context.reset(new ApplicationContext(messenger, executor));
+		this->context.reset(new ApplicationContext(messenger, executor, (ProtocolList*)&this->protocols));
 
 		this->context->Set(new PluginManager(this->context.get()));
 
@@ -52,6 +52,12 @@ namespace PluggableBot
 		auto commands = this->context->GetPlugins()->GetCombinedCommands();
 		this->context->CommandExecutor->AddCommands(commands);
 		Logger->Information("{0} commands will be available.", commands.size());
+
+		for (auto protocol : this->context->GetPlugins()->GetCombinedProtocols())
+		{
+			this->protocols.push_back(ProtocolState(protocol));
+		}
+		Logger->Information("{0} protocols should be available.", this->protocols.size());
 
 		Logger->Information("All subsystems initialized. Returning control to main thread.");
 	}
@@ -96,22 +102,35 @@ namespace PluggableBot
 		Logger->Information("Application context destroyed. Exiting.");
 	}
 
+	bool Application::HasWorkingProtocol()
+	{
+		for (auto& p : this->protocols)
+		{
+			if (p.IsWorking)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	bool Application::StartProtocols()
 	{
-		for (auto protocol : this->context->GetPlugins()->GetCombinedProtocols())
+		for (auto& protocol : this->protocols)
 		{
 			try
 			{
-				Logger->Debug("Starting protocol {0}.", protocol->Name);
-				protocol->Start();
-				this->workingProtocols.push_back(protocol);
+				Logger->Debug("Starting protocol {0}.", protocol.Protocol->Name);
+				protocol.Protocol->Start();
+				protocol.IsWorking = true;
 			}
 			catch (std::exception ex)
 			{
-				Logger->Error("Protocol {0} has thrown an exception. Message: {1}.", protocol->Name, ex.what());
+				Logger->Error("Protocol {0} has thrown an exception. Message: {1}.", protocol.Protocol->Name, ex.what());
+				protocol.IsWorking = false;
 			}
 		}
-		if (this->workingProtocols.empty())
+		if (!this->HasWorkingProtocol())
 		{
 			Logger->Fatal("There are no working protocols.");
 			return false;
@@ -123,12 +142,12 @@ namespace PluggableBot
 
 	void Application::StopProtocols()
 	{
-		for (auto protocol : this->context->GetPlugins()->GetCombinedProtocols())
+		for (auto& protocol : this->protocols)
 		{
-			protocol->Stop();
+			protocol.Protocol->Stop();
+			protocol.IsWorking = false;
 		}
 		Logger->Information("All protocols stopped.");
-		this->workingProtocols.clear();
 	}
 
 	void Application::GetMessages()
@@ -185,15 +204,18 @@ namespace PluggableBot
 	{
 		Logger->Error("Protocol {0} failed.", message->Protocol->Name);
 
-		auto it = std::find(this->workingProtocols.begin(), this->workingProtocols.end(), message->Protocol);
-		if (it == this->workingProtocols.end())
+		auto it = std::find_if(this->protocols.begin(), this->protocols.end(), [&](const ProtocolState& state)
+		{
+			return state.Protocol == message->Protocol;
+		});
+		if (it == this->protocols.end())
 		{
 			Logger->Fatal("Protocol {0} was not working at the time of the message. Possible cause: bug in the protocol plugin.");
 			return;
 		}
 
-		this->workingProtocols.erase(it);
-		if (this->workingProtocols.empty())
+		it->IsWorking = false;
+		if (!this->HasWorkingProtocol())
 		{
 			this->exitCode = ApplicationExitCode::ProtocolsFailed;
 			this->exiting = true;
