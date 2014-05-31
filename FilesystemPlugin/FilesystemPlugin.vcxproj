@@ -89,16 +89,20 @@
     <ClInclude Include="CatCommand.h" />
     <ClInclude Include="CDCommand.h" />
     <ClInclude Include="FilesystemPlugin.h" />
+    <ClInclude Include="MvCommand.h" />
     <ClInclude Include="PWDCommand.h" />
     <ClInclude Include="Helper.h" />
+    <ClInclude Include="RmCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\PluggableBot\External\format.cc" />
     <ClCompile Include="CatCommand.cpp" />
     <ClCompile Include="CDCommand.cpp" />
     <ClCompile Include="FilesystemPlugin.cpp" />
+    <ClCompile Include="MvCommand.cpp" />
     <ClCompile Include="PWDCommand.cpp" />
     <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="RmCommand.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

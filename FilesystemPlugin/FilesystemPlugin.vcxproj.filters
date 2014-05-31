@@ -6,10 +6,14 @@
       <Filter>External</Filter>
     </ClCompile>
     <ClCompile Include="CatCommand.cpp" />
+    <ClCompile Include="MvCommand.cpp" />
+    <ClCompile Include="RmCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FilesystemPlugin.h" />
     <ClInclude Include="CatCommand.h" />
+    <ClInclude Include="MvCommand.h" />
+    <ClInclude Include="RmCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
