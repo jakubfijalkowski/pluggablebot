@@ -6,6 +6,7 @@
     <ClInclude Include="StopCommand.h" />
     <ClInclude Include="PingCommand.h" />
     <ClInclude Include="SendCommand.h" />
+    <ClInclude Include="ListProtocolsCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StatelessPlugin.cpp" />
@@ -13,5 +14,6 @@
     <ClCompile Include="StopCommand.cpp" />
     <ClCompile Include="PingCommand.cpp" />
     <ClCompile Include="SendCommand.cpp" />
+    <ClCompile Include="ListProtocolsCommand.cpp" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 #include "StopCommand.h"
 #include "PingCommand.h"
 #include "SendCommand.h"
+#include "ListProtocolsCommand.h"
 
 namespace PluggableBot
 {
@@ -34,6 +35,7 @@ namespace PluggableBot
 			this->supportedCommands.push_back(new StopCommand(this->context));
 			this->supportedCommands.push_back(new PingCommand(this->context));
 			this->supportedCommands.push_back(new SendCommand(this->context));
+			this->supportedCommands.push_back(new ListProtocolsCommand(this->context));
 		}
 
 		const IPlugin::CommandList* StatelessPlugin::GetSupportedCommands() const
