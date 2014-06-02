@@ -1,5 +1,6 @@
 #include "RmCommand.h"
 #include <Shlwapi.h>
+#include <PluggableBot/Exceptions/ExecutionException.h>
 #include "Helper.h"
 
 namespace PluggableBot
@@ -7,8 +8,8 @@ namespace PluggableBot
 	namespace FilesystemPlugin
 	{
 
-		const std::string FileDoesNotExist = "Podany plik nie istnieje!";
-		const std::string CannotDeleteFile = "Nie udało się usunąć pliku.";
+		const std::string FileDoesNotExist = "podany plik nie istnieje";
+		const std::string CannotDeleteFile = "nie udało się usunąć pliku";
 		const std::string FileDeleted = "Usunięto.";
 
 		RmCommand::RmCommand(ApplicationContext* context)
@@ -27,11 +28,11 @@ namespace PluggableBot
 
 			if (!PathFileExistsA(filePath.c_str()))
 			{
-				return CommandExecutionResults(FileDoesNotExist);
+				throw Exceptions::ExecutionException(FileDoesNotExist);
 			}
 			if (!DeleteFileA(filePath.c_str()))
 			{
-				return CommandExecutionResults(CannotDeleteFile);
+				throw Exceptions::ExecutionException(CannotDeleteFile);
 			}
 			return CommandExecutionResults(FileDeleted);
 		}

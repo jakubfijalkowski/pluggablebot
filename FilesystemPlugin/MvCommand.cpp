@@ -1,5 +1,6 @@
 #include "MvCommand.h"
 #include <Shlwapi.h>
+#include <PluggableBot/Exceptions/ExecutionException.h>
 #include "Helper.h"
 
 namespace PluggableBot
@@ -7,8 +8,8 @@ namespace PluggableBot
 	namespace FilesystemPlugin
 	{
 
-		const std::string FileDoesNotExist = "Podany plik nie istnieje!";
-		const std::string CannotMoveFile = "Nie udało się przenieść pliku/katalogu.";
+		const std::string FileDoesNotExist = "podany plik nie istnieje";
+		const std::string CannotMoveFile = "nie udało się przenieść pliku/katalogu";
 		const std::string FileMoved = "Przeniesiono.";
 
 		MvCommand::MvCommand(ApplicationContext* context)
@@ -28,11 +29,11 @@ namespace PluggableBot
 
 			if (!PathFileExistsA(fromPath.c_str()))
 			{
-				return CommandExecutionResults(FileDoesNotExist);
+				throw Exceptions::ExecutionException(FileDoesNotExist);
 			}
 			if (!MoveFileA(fromPath.c_str(), toPath.c_str()))
 			{
-				return CommandExecutionResults(CannotMoveFile);
+				throw Exceptions::ExecutionException(CannotMoveFile);
 			}
 			return CommandExecutionResults(FileMoved);
 		}

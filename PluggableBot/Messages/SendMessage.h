@@ -23,7 +23,7 @@ namespace PluggableBot
 			static const int MessageType = 2;
 
 			/**
-			 * Wiadomość, którą otrzymano.
+			 * Wiadomość, która ma zostać wysłana.
 			 */
 			const std::string Content;
 
@@ -36,12 +36,12 @@ namespace PluggableBot
 			 * Określa, który protokół powinien wysłać wiadomość.
 			 * Jeśli jest \a {nullptr}, nie ma ograniczeń, kto powinien obsłużyć tą wiadomość.
 			 */
-			const IProtocol* const Protocol;
+			const ProtocolPointer Protocol;
 
 			/**
 			 * Inicializuje obiekt wiadomości.
 			 */
-			SendMessage(const std::string& content, const std::string& recipient, const IProtocol* protocol)
+			SendMessage(const std::string& content, const std::string& recipient, const ProtocolPointer protocol)
 				: IMessage(MessageType), Content(content), Recipient(recipient), Protocol(protocol)
 			{ }
 		};

@@ -2,14 +2,15 @@
 #include <string>
 #include <algorithm>
 #include <PluggableBot/Messages/Messages.h>
+#include <PluggableBot/Exceptions/ExecutionException.h>
 
 namespace PluggableBot
 {
 	namespace StatelessCommands
 	{
 
-		const std::string NoProtocol = "Podany protokół nie istnieje.";
-		const std::string ProtocolIsNotWorking = "Podany protokół nie działa prawidłowo.";
+		const std::string NoProtocol = "podany protokół nie istnieje";
+		const std::string ProtocolIsNotWorking = "podany protokół nie działa prawidłowo";
 		const std::string MessageSent = "Wiadomość została wysłana.";
 
 		SendCommand::SendCommand(ApplicationContext* context)
@@ -31,11 +32,11 @@ namespace PluggableBot
 
 			if (protocol == this->context->Protocols->end())
 			{
-				return CommandExecutionResults(NoProtocol);
+				throw Exceptions::ExecutionException(NoProtocol);
 			}
 			else if (!protocol->IsWorking)
 			{
-				return CommandExecutionResults(ProtocolIsNotWorking);
+				throw Exceptions::ExecutionException(ProtocolIsNotWorking);
 			}
 
 			auto msg = new Messages::SendMessage(context.ParseResults->GetParameter("msg"), context.ParseResults->GetParameter("to"), protocol->Protocol);

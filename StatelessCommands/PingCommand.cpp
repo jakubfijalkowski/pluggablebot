@@ -10,22 +10,7 @@ namespace PluggableBot
 	namespace StatelessCommands
 	{
 
-		static const std::string CannotPingMessage = "Nie udało się wywołać polecenia PING.";
-
-		std::string SystemPing(const std::string& address)
-		{
-			const std::string CommandLine = "ping " + address;
-
-			try
-			{
-				return Other::CallSystemCommand(CommandLine, "");
-			}
-			catch (...)
-			{
-				return CannotPingMessage;
-			}
-		}
-
+		static const std::string CannotPingMessage = "nie udało się wywołać polecenia PING";
 
 		PingCommand::PingCommand(ApplicationContext* context)
 			: ICommand("ping"), context(context), matcher(new SimpleMatcher("ping", { "address" }))
@@ -38,13 +23,23 @@ namespace PluggableBot
 
 		CommandExecutionResults PingCommand::Execute(const ExecutionContext& context)
 		{
-			auto address = context.ParseResults->GetParameter("address");
+			const std::string commandLine = "ping " + context.ParseResults->GetParameter("address");
 			const auto userMsg = context.Message;
 			std::async(std::launch::async, [=]()
 			{
-				auto response = SystemPing(address);
-				auto message = new Messages::SendMessage(response, userMsg->Sender, userMsg->SourceProtocol);
-				this->context->Messenger->Send(Messaging::MessagePointer(message));
+				try
+				{
+					auto response = Other::CallSystemCommand(commandLine, "");
+					auto message = new Messages::SendMessage(response, userMsg->Sender, userMsg->SourceProtocol);
+					this->context->Messenger->Send(Messaging::MessagePointer(message));
+				}
+				catch (std::system_error ex)
+				{
+					auto message = new Messages::AsyncExecutionFailure(this,
+						CannotPingMessage, ex.code().value(),
+						userMsg->Sender, userMsg->SourceProtocol);
+					this->context->Messenger->Send(Messaging::MessagePointer(message));
+				}
 			});
 
 			return CommandExecutionResults(true);

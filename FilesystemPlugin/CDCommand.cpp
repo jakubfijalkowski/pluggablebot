@@ -1,6 +1,7 @@
 #include "CDCommand.h"
 #include <Shlwapi.h>
 #include <PluggableBot/External/format.h>
+#include <PluggableBot/Exceptions/ExecutionException.h>
 #include "Helper.h"
 
 namespace PluggableBot
@@ -8,7 +9,7 @@ namespace PluggableBot
 	namespace FilesystemPlugin
 	{
 
-		const std::string InvalidPath = "Ścieżka jest nieprawidłowa.";
+		const std::string InvalidPath = "ścieżka jest nieprawidłowa";
 		const std::string PathChanged = "Ścieżka została zmieniona na '{0}'.";
 
 		CDCommand::CDCommand(ApplicationContext* context)
@@ -28,7 +29,7 @@ namespace PluggableBot
 
 			if (newPath.empty() || !PathIsDirectoryA(newPath.c_str()))
 			{
-				return CommandExecutionResults(InvalidPath);
+				throw Exceptions::ExecutionException(InvalidPath);
 			}
 			SetCurrentPath(this->context->UserData, context.Message->SourceProtocol, context.Message->Sender, newPath);
 			return CommandExecutionResults(fmt::str(fmt::Format(PathChanged, newPath)));

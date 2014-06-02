@@ -9,7 +9,7 @@ namespace PluggableBot
 	namespace FilesystemPlugin
 	{
 
-		const std::string CannotExecuteCommand = "Nie udało się wywołać polecenia. Powód: ";
+		const std::string CannotExecuteCommand = "nie udało się wywołać polecenia";
 
 		ExecuteCommand::ExecuteCommand(ApplicationContext* context)
 			: ICommand("execute"), context(context), matcher(new SimpleMatcher("execute", { "command" }))
@@ -28,17 +28,19 @@ namespace PluggableBot
 
 			std::async(std::launch::async, [=]()
 			{
-				std::string content;
 				try
 				{
-					content = Other::CallSystemCommand(command, currentDir);
+					auto content = Other::CallSystemCommand(command, currentDir);
+					auto message = new Messages::SendMessage(content, userMsg->Sender, userMsg->SourceProtocol);
+					this->context->Messenger->Send(Messaging::MessagePointer(message));
 				}
 				catch (std::system_error ex)
 				{
-					content = CannotExecuteCommand + Other::FormatError(ex.code().value());
+					auto message = new Messages::AsyncExecutionFailure(this,
+						CannotExecuteCommand, ex.code().value(),
+						userMsg->Sender, userMsg->SourceProtocol);
+					this->context->Messenger->Send(Messaging::MessagePointer(message));
 				}
-				auto message = new Messages::SendMessage(content, userMsg->Sender, userMsg->SourceProtocol);
-				this->context->Messenger->Send(Messaging::MessagePointer(message));
 			});
 			return CommandExecutionResults(true);
 		}

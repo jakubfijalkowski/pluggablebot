@@ -72,6 +72,7 @@ namespace PluggableBot
 		void Handle(Messages::MessageReceived* message);
 		void Handle(Messages::ShutdownRequest* message);
 		void Handle(Messages::ProtocolFailure* message);
+		void Handle(Messages::AsyncExecutionFailure* message);
 
 		Logging::LoggerPointer Logger;
 

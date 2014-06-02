@@ -2,10 +2,12 @@
 #include <thread>
 #include <algorithm>
 #include "Application.h"
+#include "Other.h"
 #include "Commands/IParser.h"
 #include "Commands/ICommandExecutor.h"
 #include "Plugins/PluginManager.h"
 #include "External/jsonxx.h"
+#include "External/format.h"
 
 namespace PluggableBot
 {
@@ -15,10 +17,11 @@ namespace PluggableBot
 	using namespace Plugins;
 
 	static const DWORD WaitTime = 100;
-	static const char* ConfigPath = "config.json";
-	static const char* AsyncMessage = "Wiadomość jest wywoływana asynchronicznie. Odpowiedź otrzymasz, gdy wywołanie zostanie zakończone.";
-	static const char* CommandDoesNotExist = "Wiadomość nie mogła zostać przetworzona. Komenda jej odpowiadająca nie istnieje.";
-	static const char* ExecutionExceptionMessage = "Wiadomość nie mogła zostać przetworzona. Komenda zwróciła błąd.";
+	static const std::string ConfigPath = "config.json";
+	static const std::string AsyncMessage = "Wiadomość jest wywoływana asynchronicznie. Odpowiedź otrzymasz, gdy wywołanie zostanie zakończone.";
+	static const std::string CommandDoesNotExist = "Wiadomość nie mogła zostać przetworzona. Komenda jej odpowiadająca nie istnieje.";
+	static const std::string ExecutionExceptionMessage = "Wiadomość nie mogła zostać przetworzona. Komenda zwróciła błąd: {0}.";
+	static const std::string ExecutionExceptionWithSystemErrorMessage = "Wiadomość nie mogła zostać przetworzona. Komenda zwróciła błąd: {0}.\nWystąpił błąd systemowy {1}: {2}";
 
 	void Application::Initialize()
 	{
@@ -157,7 +160,8 @@ namespace PluggableBot
 			return
 				$MessageIs(MessageReceived) ||
 				$MessageIs(ProtocolFailure) ||
-				$MessageIs(ShutdownRequest);
+				$MessageIs(ShutdownRequest) ||
+				$MessageIs(AsyncExecutionFailure);
 		}, WaitTime);
 
 		for (auto message : *msgs)
@@ -165,6 +169,7 @@ namespace PluggableBot
 			$HandleMessage(MessageReceived);
 			$HandleMessage(ProtocolFailure);
 			$HandleMessage(ShutdownRequest);
+			$HandleMessage(AsyncExecutionFailure);
 		}
 	}
 
@@ -194,7 +199,14 @@ namespace PluggableBot
 		catch (Exceptions::ExecutionException ex)
 		{
 			Logger->Debug("Cannot execute the command. Message: {0}, error code: {1}.", ex.what(), ex.ErrorCode);
-			content = ExecutionExceptionMessage;
+			if (ex.ErrorCode != ERROR_SUCCESS)
+			{
+				content = fmt::str(fmt::Format(ExecutionExceptionWithSystemErrorMessage, ex.what(), ex.ErrorCode, Other::FormatError(ex.ErrorCode)));
+			}
+			else
+			{
+				content = fmt::str(fmt::Format(ExecutionExceptionMessage, ex.what()));
+			}
 		}
 
 		this->context->Messenger->Send(new SendMessage(content, message->UserMessage->Sender, message->UserMessage->SourceProtocol));
@@ -226,5 +238,20 @@ namespace PluggableBot
 	{
 		Logger->Information("ShutdownRequest received. Stopping application.");
 		this->exiting = true;
+	}
+
+	void Application::Handle(Messages::AsyncExecutionFailure* message)
+	{
+		Logger->Debug("Cannot execute the command {0}. Message: {1}, error code: {2}.", message->Command->Name, message->Description, message->ErrorCode);
+		std::string content;
+		if (message->ErrorCode != ERROR_SUCCESS)
+		{
+			content = fmt::str(fmt::Format(ExecutionExceptionWithSystemErrorMessage, message->Description, message->ErrorCode, Other::FormatError(message->ErrorCode)));
+		}
+		else
+		{
+			content = fmt::str(fmt::Format(ExecutionExceptionMessage, message->Description));
+		}
+		this->context->Messenger->Send(new SendMessage(content, message->Recipient, message->Protocol));
 	}
 }

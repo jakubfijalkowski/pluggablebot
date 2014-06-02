@@ -1,6 +1,7 @@
 #include "CatCommand.h"
 #include <Shlwapi.h>
 #include <fstream>
+#include <PluggableBot/Exceptions/ExecutionException.h>
 #include "Helper.h"
 
 namespace PluggableBot
@@ -10,10 +11,10 @@ namespace PluggableBot
 
 		static const int64_t MaxFileLength = 1024 * 1024; // 1MB
 
-		const std::string InvalidPath = "Ścieżka jest nieprawidłowa.";
-		const std::string PathIsNotFile = "Nie można odczytać zawartości folderu!";
-		const std::string FileDoesNotExist = "Podany plik nie istnieje!";
-		const std::string CannotReadFile = "Nie udało się odczytać pliku.";
+		const std::string InvalidPath = "ścieżka jest nieprawidłowa.";
+		const std::string PathIsNotFile = "nie można odczytać zawartości folderu";
+		const std::string FileDoesNotExist = "podany plik nie istnieje";
+		const std::string CannotReadFile = "nie udało się odczytać pliku";
 
 		CatCommand::CatCommand(ApplicationContext* context)
 			: ICommand("cat"), context(context), matcher(new SimpleMatcher("cat", { "file" }))
@@ -31,15 +32,15 @@ namespace PluggableBot
 			std::string newPath = JoinPath(currentDir, path);
 			if (newPath.empty())
 			{
-				return CommandExecutionResults(InvalidPath);
+				throw Exceptions::ExecutionException(InvalidPath);
 			}
 			if (PathIsDirectoryA(newPath.c_str()))
 			{
-				return CommandExecutionResults(PathIsNotFile);
+				throw Exceptions::ExecutionException(PathIsNotFile);
 			}
 			if (!PathFileExistsA(newPath.c_str()))
 			{
-				return CommandExecutionResults(FileDoesNotExist);
+				throw Exceptions::ExecutionException(FileDoesNotExist);
 			}
 
 			std::ifstream file(newPath, std::ios_base::binary);
@@ -48,7 +49,7 @@ namespace PluggableBot
 			file.seekg(0, std::ios_base::beg);
 			if (length == -1 || !file)
 			{
-				return CommandExecutionResults(CannotReadFile);
+				throw Exceptions::ExecutionException(CannotReadFile);
 			}
 			if (length > MaxFileLength)
 			{
@@ -58,7 +59,7 @@ namespace PluggableBot
 			std::unique_ptr<char[]> buffer(new char[(unsigned)length + 1]);
 			if (file.read(buffer.get(), length).bad())
 			{
-				return CommandExecutionResults(CannotReadFile);
+				throw Exceptions::ExecutionException(CannotReadFile);
 			}
 			buffer.get()[length] = 0;
 			return CommandExecutionResults(std::string(buffer.get()));
