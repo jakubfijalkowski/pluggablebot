@@ -2,6 +2,7 @@
 #include <libgadu/libgadu.h>
 #include <string>
 #include <memory>
+#include <vector>
 #include <ctime>
 #include "ConnectionFailureException.h"
 
@@ -12,6 +13,7 @@ namespace PluggableBot
 	namespace DefaultProtocols
 	{
 		typedef std::shared_ptr<gg_event> GGEvent;
+		typedef std::vector<uint32_t> ContactList;
 
 		/**
 		 * Wrapper na libgadu, uproszczający kod GGProtocol. Klient ten jest asynchroniczny, z pominięciem niektórych metod.
@@ -44,9 +46,11 @@ namespace PluggableBot
 			 *
 			 * Nie trzeba wywoływać Disconnect po nieudanej próbie połączenia.
 			 *
+			 * \param contacts Lista kontaktów, którą klient posiada.
+			 *
 			 * \exception ConnectionFailureException Rzucany, gdy nie uda się połączyć z serwerem.
 			 */
-			void Connect();
+			void Connect(const ContactList& contacts);
 
 			/**
 			 * Kończy połączenie z serwerem i zwalnia sesję.

@@ -25,6 +25,19 @@ namespace PluggableBot
 			int status = (int)config.get<jsonxx::Number>("status", GG_STATUS_AVAIL);
 			const std::string& statusDesc = config.get<std::string>("status_description", "");
 
+			if (config.has<jsonxx::Array>("contacts"))
+			{
+				auto& arr = config.get<jsonxx::Array>("contacts");
+				// Ignoruje wartoœci nie bêd¹ce liczbami
+				for (auto& n : arr.values())
+				{
+					if (n->is<jsonxx::Number>())
+					{
+						this->contacts.push_back(n->get<jsonxx::Number>());
+					}
+				}
+			}
+
 			this->client.reset(new GGClient(uid, password, status, statusDesc, EventWaitTime));
 		}
 
@@ -100,7 +113,7 @@ namespace PluggableBot
 		{
 			try
 			{
-				this->client->Connect();
+				this->client->Connect(this->contacts);
 			}
 			catch (ConnectionFailureException ex)
 			{

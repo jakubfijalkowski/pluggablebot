@@ -5,6 +5,7 @@
 #include <PluggableBot/External/jsonxx.h>
 #include <thread>
 #include <memory>
+#include <vector>
 #include "GGClient.h"
 
 namespace PluggableBot
@@ -48,6 +49,7 @@ namespace PluggableBot
 			bool shouldShutdown;
 			std::thread main;
 			std::unique_ptr<GGClient> client;
+			ContactList contacts;
 		};
 
 	}

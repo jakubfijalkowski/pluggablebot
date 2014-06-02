@@ -39,7 +39,7 @@ namespace PluggableBot
 			memset(&this->loginParams, 0, sizeof(gg_login_params));
 		}
 
-		void GGClient::Connect()
+		void GGClient::Connect(const ContactList& contacts)
 		{
 			this->session = gg_login(&this->loginParams);
 			if (!this->session)
@@ -70,7 +70,7 @@ namespace PluggableBot
 				{
 				case GG_EVENT_CONN_SUCCESS:
 					this->lastPingTime = time(nullptr);
-					if (gg_notify(this->session, nullptr, 0) == -1)
+					if (gg_notify(this->session, (uin_t*)contacts.data(), contacts.size()) == -1)
 					{
 						this->Disconnect();
 						throw ConnectionFailureException("Cannot send the user list.");
