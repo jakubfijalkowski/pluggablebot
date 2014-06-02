@@ -6,9 +6,14 @@ namespace PluggableBot
 	namespace Commands
 	{
 
+		bool IsWhiteSpace(char c)
+		{
+			return c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r';
+		}
+
 		void SkipWhiteSpace(const std::string& text, size_t& i)
 		{
-			while (i < text.length() && isspace(text[i]))
+			while (i < text.length() && IsWhiteSpace(text[i]))
 			{
 				++i;
 			}
@@ -16,7 +21,7 @@ namespace PluggableBot
 
 		void MoveToWhiteSpace(const std::string& text, size_t& i)
 		{
-			while (i < text.length() && !isspace(text[i]))
+			while (i < text.length() && !IsWhiteSpace(text[i]))
 			{
 				++i;
 			}
@@ -24,7 +29,7 @@ namespace PluggableBot
 
 		void MoveToWitespaceOrChar(const std::string& text, size_t& i, char c)
 		{
-			while (i < text.length() && text[i] != c && !isspace(text[i]))
+			while (i < text.length() && text[i] != c && !IsWhiteSpace(text[i]))
 			{
 				++i;
 			}

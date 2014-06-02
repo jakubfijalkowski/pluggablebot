@@ -72,7 +72,12 @@ namespace PluggableBot
 			 * \param receipent Numer odbiorcy.
 			 * \param content Treść wiadomości.
 			 */
-			void SendMessage(unsigned int receipent, const std::string& content);
+			void SendMessage(uin_t receipent, const std::string& content);
+
+			/**
+			 * Wysyła do nadawcy żądanie wysłania obrazka.
+			 */
+			void RequestImage(uin_t sender, uint32_t size, uint32_t crc32);
 
 		private:
 			static const int PingTime = 59;

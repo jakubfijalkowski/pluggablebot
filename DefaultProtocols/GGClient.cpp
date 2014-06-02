@@ -126,9 +126,14 @@ namespace PluggableBot
 			return event;
 		}
 
-		void GGClient::SendMessage(unsigned int receipent, const std::string& content)
+		void GGClient::SendMessage(uin_t receipent, const std::string& content)
 		{
 			gg_send_message(this->session, GG_CLASS_MSG | GG_CLASS_ACK, receipent, (const unsigned char*)content.c_str());
+		}
+
+		void GGClient::RequestImage(uin_t sender, uint32_t size, uint32_t crc32)
+		{
+			gg_image_request(this->session, sender, size, crc32);
 		}
 
 		GGEvent GGClient::WaitForEvent(int timeout)

@@ -4,6 +4,7 @@
 #include "ProtocolFailure.h"
 #include "ShutdownRequest.h"
 #include "AsyncExecutionFailure.h"
+#include "ImageReceived.h"
 
 #define $MessageIs(msgClass) message->Type == msgClass::MessageType
 #define $HandleMessage(msgClass) \

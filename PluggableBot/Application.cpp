@@ -95,11 +95,12 @@ namespace PluggableBot
 	{
 		Logger->Debug("Deinitializing.");
 
-		this->context->GetPlugins()->Unload();
 
-		delete this->context->GetPlugins();
 		delete this->context->CommandExecutor;
 		delete this->context->Messenger;
+
+		this->context->GetPlugins()->Unload();
+		delete this->context->GetPlugins();
 		this->context.reset(nullptr);
 
 		Logger->Information("Application context destroyed. Exiting.");

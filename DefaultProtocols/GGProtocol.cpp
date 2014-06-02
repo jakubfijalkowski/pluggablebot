@@ -33,7 +33,7 @@ namespace PluggableBot
 				{
 					if (n->is<jsonxx::Number>())
 					{
-						this->contacts.push_back(n->get<jsonxx::Number>());
+						this->contacts.push_back((unsigned int)n->get<jsonxx::Number>());
 					}
 				}
 			}
@@ -123,6 +123,29 @@ namespace PluggableBot
 			return true;
 		}
 
+		gg_msg_richtext_image* ExtractImage(gg_event_msg* msg)
+		{
+			const int FormatSize = sizeof(gg_msg_richtext_format);
+			const int ColorSize = sizeof(gg_msg_richtext_color);
+
+			char* ptr = (char*)msg->formats;
+			int i = 0;
+			for (; i < msg->formats_length; i += FormatSize)
+			{
+				gg_msg_richtext_format* fmt = (gg_msg_richtext_format*)(ptr + i);
+				if ((fmt->font & GG_FONT_COLOR) == GG_FONT_COLOR)
+				{
+					i += ColorSize;
+				}
+				else if ((fmt->font & GG_FONT_IMAGE) == GG_FONT_IMAGE)
+				{
+					i += FormatSize;
+					break;
+				}
+			}
+			return i == msg->formats_length ? nullptr : (gg_msg_richtext_image*)(ptr + i);
+		}
+
 		bool GGProtocol::HandleGGEvents()
 		{
 			GGEvent event;
@@ -140,11 +163,31 @@ namespace PluggableBot
 			{
 				if (event->type == GG_EVENT_MSG && event->event.msg.sender != 0)
 				{
+					gg_msg_richtext_image *image = ExtractImage(&event->event.msg);
+
+					if (image == nullptr)
+					{
+						char uin[12];
+						_itoa_s(event->event.msg.sender, uin, 10);
+
+						UserMessagePointer userMessage(new UserMessage((char*)event->event.msg.message, uin, this));
+						this->context->Messenger->Send(MessagePointer(new Messages::MessageReceived(userMessage)));
+					}
+					else if (image->unknown1 == 0x0109)
+					{
+						this->client->RequestImage(event->event.msg.sender, image->size, image->crc32);
+					}
+				}
+				else if (event->type == GG_EVENT_IMAGE_REPLY)
+				{
 					char uin[12];
 					_itoa_s(event->event.msg.sender, uin, 10);
 
-					UserMessagePointer userMessage(new UserMessage((char*)event->event.msg.message, uin, this));
-					this->context->Messenger->Send(MessagePointer(new Messages::MessageReceived(userMessage)));
+					auto reply = event->event.image_reply;
+					std::unique_ptr<char[]> dataCopy(new char[reply.size]);
+					memcpy(dataCopy.get(), reply.image, reply.size);					
+					auto imageReceived = new Messages::ImageReceived(std::move(dataCopy), reply.size, reply.filename, uin, this);
+					this->context->Messenger->Send(MessagePointer(imageReceived));
 				}
 			}
 
