@@ -12,6 +12,7 @@
     <ClCompile Include="PWDCommand.cpp" />
     <ClCompile Include="Helper.cpp" />
     <ClCompile Include="ExecuteCommand.cpp" />
+    <ClCompile Include="StoreTextCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FilesystemPlugin.h" />
@@ -22,6 +23,7 @@
     <ClInclude Include="PWDCommand.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="ExecuteCommand.h" />
+    <ClInclude Include="StoreTextCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

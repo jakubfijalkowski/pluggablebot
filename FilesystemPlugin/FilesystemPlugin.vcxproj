@@ -94,6 +94,7 @@
     <ClInclude Include="PWDCommand.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="RmCommand.h" />
+    <ClInclude Include="StoreTextCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\PluggableBot\External\format.cc" />
@@ -105,6 +106,7 @@
     <ClCompile Include="PWDCommand.cpp" />
     <ClCompile Include="Helper.cpp" />
     <ClCompile Include="RmCommand.cpp" />
+    <ClCompile Include="StoreTextCommand.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
