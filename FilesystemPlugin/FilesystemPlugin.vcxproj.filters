@@ -8,12 +8,20 @@
     <ClCompile Include="CatCommand.cpp" />
     <ClCompile Include="MvCommand.cpp" />
     <ClCompile Include="RmCommand.cpp" />
+    <ClCompile Include="CDCommand.cpp" />
+    <ClCompile Include="PWDCommand.cpp" />
+    <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="ExecuteCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FilesystemPlugin.h" />
     <ClInclude Include="CatCommand.h" />
     <ClInclude Include="MvCommand.h" />
     <ClInclude Include="RmCommand.h" />
+    <ClInclude Include="CDCommand.h" />
+    <ClInclude Include="PWDCommand.h" />
+    <ClInclude Include="Helper.h" />
+    <ClInclude Include="ExecuteCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

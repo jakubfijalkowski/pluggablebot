@@ -88,6 +88,7 @@
   <ItemGroup>
     <ClInclude Include="CatCommand.h" />
     <ClInclude Include="CDCommand.h" />
+    <ClInclude Include="ExecuteCommand.h" />
     <ClInclude Include="FilesystemPlugin.h" />
     <ClInclude Include="MvCommand.h" />
     <ClInclude Include="PWDCommand.h" />
@@ -98,6 +99,7 @@
     <ClCompile Include="..\PluggableBot\External\format.cc" />
     <ClCompile Include="CatCommand.cpp" />
     <ClCompile Include="CDCommand.cpp" />
+    <ClCompile Include="ExecuteCommand.cpp" />
     <ClCompile Include="FilesystemPlugin.cpp" />
     <ClCompile Include="MvCommand.cpp" />
     <ClCompile Include="PWDCommand.cpp" />

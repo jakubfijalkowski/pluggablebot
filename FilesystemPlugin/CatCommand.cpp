@@ -1,6 +1,5 @@
 #include "CatCommand.h"
 #include <Shlwapi.h>
-#include <algorithm>
 #include <fstream>
 #include "Helper.h"
 

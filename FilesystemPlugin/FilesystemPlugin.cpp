@@ -5,6 +5,7 @@
 #include "CatCommand.h"
 #include "MvCommand.h"
 #include "RmCommand.h"
+#include "ExecuteCommand.h"
 
 namespace PluggableBot
 {
@@ -36,6 +37,7 @@ namespace PluggableBot
 			this->supportedCommands.push_back(new CatCommand(this->context));
 			this->supportedCommands.push_back(new MvCommand(this->context));
 			this->supportedCommands.push_back(new RmCommand(this->context));
+			this->supportedCommands.push_back(new ExecuteCommand(this->context));
 		}
 
 		const IPlugin::CommandList* FilesystemPlugin::GetSupportedCommands() const
