@@ -73,8 +73,11 @@ namespace PluggableBot
 		void Handle(Messages::ShutdownRequest* message);
 		void Handle(Messages::ProtocolFailure* message);
 		void Handle(Messages::AsyncExecutionFailure* message);
+		void Handle(Messages::AsyncCommandExecuted* message);
 
 		std::string BuildSuccessResponse(const Commands::CommandExecutionResults& result);
+		std::string BuildRawSuccessResponse(const std::string& command, const std::string& message,
+			std::shared_ptr<const jsonxx::Object> additionalData, bool isAsyncResponse);
 		std::string BuildErrorResponse(const std::string& command, const std::string& message, unsigned int systemError);
 
 		Logging::LoggerPointer Logger;

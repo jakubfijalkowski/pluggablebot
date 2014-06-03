@@ -103,6 +103,9 @@
     <ClInclude Include="Messages\ImageReceived.h">
       <Filter>Messages</Filter>
     </ClInclude>
+    <ClInclude Include="Messages\AsyncCommandExecuted.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

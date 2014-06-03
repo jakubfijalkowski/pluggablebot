@@ -88,6 +88,7 @@
     <ClInclude Include="Logging\Logger.h" />
     <ClInclude Include="Logging\IOutput.h" />
     <ClInclude Include="Logging\LogFactory.h" />
+    <ClInclude Include="Messages\AsyncCommandExecuted.h" />
     <ClInclude Include="Messages\AsyncExecutionFailure.h" />
     <ClInclude Include="Messages\ImageReceived.h" />
     <ClInclude Include="Messages\Messages.h" />

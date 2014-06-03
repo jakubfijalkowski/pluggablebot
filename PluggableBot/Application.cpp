@@ -164,7 +164,8 @@ namespace PluggableBot
 				$MessageIs(MessageReceived) ||
 				$MessageIs(ProtocolFailure) ||
 				$MessageIs(ShutdownRequest) ||
-				$MessageIs(AsyncExecutionFailure);
+				$MessageIs(AsyncExecutionFailure) ||
+				$MessageIs(AsyncCommandExecuted);
 		}, WaitTime);
 
 		for (auto message : *msgs)
@@ -173,6 +174,7 @@ namespace PluggableBot
 			$HandleMessage(ProtocolFailure);
 			$HandleMessage(ShutdownRequest);
 			$HandleMessage(AsyncExecutionFailure);
+			$HandleMessage(AsyncCommandExecuted);
 		}
 	}
 
@@ -228,11 +230,23 @@ namespace PluggableBot
 		this->exiting = true;
 	}
 
-	void Application::Handle(Messages::AsyncExecutionFailure* message)
+	void Application::Handle(AsyncExecutionFailure* message)
 	{
-		Logger->Debug("Cannot execute the command {0}. Message: {1}, error code: {2}.", message->Command->Name, message->Description, message->ErrorCode);
-		std::string content = this->BuildErrorResponse(message->Command->Name, message->Description, message->ErrorCode);
+		Logger->Debug("Cannot execute the command {0}. Message: {1}, error code: {2}.",
+			message->Command->Name, message->Description, message->ErrorCode);
+		std::string content = this->BuildErrorResponse(message->Command->Name,
+			message->Description, message->ErrorCode);
 		this->context->Messenger->Send(new SendMessage(content, message->Recipient, message->Protocol));
+	}
+
+	void Application::Handle(AsyncCommandExecuted* message)
+	{
+		Logger->Debug("Async command {0} executed successfully. Sending response.",
+			message->Command->Name);
+		std::string content = this->BuildRawSuccessResponse(message->Command->Name,
+			message->Message, message->AdditionalData, true);
+		this->context->Messenger->Send(new SendMessage(content, message->Recipient,
+			message->Protocol));
 	}
 
 	std::string Application::BuildSuccessResponse(const Commands::CommandExecutionResults& result)
@@ -241,19 +255,30 @@ namespace PluggableBot
 		{
 			return this->sendJSON ? "{ \"isAsync\": true }" : AsyncMessage;
 		}
-		else if (this->sendJSON)
+		else
+		{
+			return this->BuildRawSuccessResponse("", result.Message, result.AdditionalData, false);
+		}
+	}
+
+	std::string Application::BuildRawSuccessResponse(const std::string& command, const std::string& message,
+		std::shared_ptr<const jsonxx::Object> additionalData, bool isAsyncResponse)
+	{
+		if (this->sendJSON)
 		{
 			jsonxx::Object response;
-			response << "message" << result.Message;
-			if (result.AdditionalData != nullptr)
+			response << "command" << command;
+			response << "message" << message;
+			response << "isAsyncResponse" << isAsyncResponse;
+			if (additionalData != nullptr)
 			{
-				response << "additionalData" << *result.AdditionalData;
+				response << "additionalData" << *additionalData;
 			}
 			return response.write(jsonxx::JSON);
 		}
 		else
 		{
-			return result.Message;
+			return message;
 		}
 	}
 
