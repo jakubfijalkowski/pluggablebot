@@ -30,7 +30,7 @@ namespace PluggableBot
 				try
 				{
 					auto response = Other::CallSystemCommand(commandLine, "");
-					auto message = new Messages::SendMessage(response, userMsg->Sender, userMsg->SourceProtocol);
+					auto message = new Messages::AsyncCommandExecuted(this, response, nullptr, userMsg->Sender, userMsg->SourceProtocol);
 					this->context->Messenger->Send(Messaging::MessagePointer(message));
 				}
 				catch (std::system_error ex)
