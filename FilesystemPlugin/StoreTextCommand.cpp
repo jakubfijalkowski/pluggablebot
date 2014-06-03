@@ -9,7 +9,7 @@ namespace PluggableBot
 	namespace FilesystemPlugin
 	{
 
-		const std::string InvalidPath = "ścieżka jest nieprawidłowa.";
+		const std::string InvalidPath = "ścieżka jest nieprawidłowa";
 		const std::string PathIsNotFile = "nie można nadpisać zawartości folderu";
 		const std::string CannotWriteToFile = "nie udało się zapisać pliku";
 		const std::string FileWritten = "Plik został zapisany.";

@@ -13,6 +13,7 @@
     <ClCompile Include="Helper.cpp" />
     <ClCompile Include="ExecuteCommand.cpp" />
     <ClCompile Include="StoreTextCommand.cpp" />
+    <ClCompile Include="StoreImageCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FilesystemPlugin.h" />
@@ -24,6 +25,7 @@
     <ClInclude Include="Helper.h" />
     <ClInclude Include="ExecuteCommand.h" />
     <ClInclude Include="StoreTextCommand.h" />
+    <ClInclude Include="StoreImageCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

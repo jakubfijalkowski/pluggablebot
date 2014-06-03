@@ -7,6 +7,7 @@
 #include "RmCommand.h"
 #include "ExecuteCommand.h"
 #include "StoreTextCommand.h"
+#include "StoreImageCommand.h"
 
 namespace PluggableBot
 {
@@ -40,6 +41,7 @@ namespace PluggableBot
 			this->supportedCommands.push_back(new RmCommand(this->context));
 			this->supportedCommands.push_back(new ExecuteCommand(this->context));
 			this->supportedCommands.push_back(new StoreTextCommand(this->context));
+			this->supportedCommands.push_back(new StoreImageCommand(this->context));
 		}
 
 		const IPlugin::CommandList* FilesystemPlugin::GetSupportedCommands() const
