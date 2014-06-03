@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <PluggableBot/Other.h>
 #include <PluggableBot/Exceptions/ExecutionException.h>
+#include <PluggableBot/External/jsonxx.h>
 #include "Helper.h"
 
 namespace PluggableBot
@@ -28,6 +29,7 @@ namespace PluggableBot
 			searchQuery += "*.*";
 
 			std::string result = Header;
+			jsonxx::Array jsonResult;
 
 			auto queryConverted = Other::UTF8ToWideString(searchQuery);
 			WIN32_FIND_DATAW ffd;
@@ -42,8 +44,10 @@ namespace PluggableBot
 			{
 				if (wcscmp(ffd.cFileName, L".") != 0 && wcscmp(ffd.cFileName, L"..") != 0)
 				{
+					std::string converted = Other::WideCharToUTF8(ffd.cFileName);
 					result += "\n";
-					result += Other::WideCharToUTF8(ffd.cFileName);
+					result += converted;
+					jsonResult << converted;
 				}
 			} while (FindNextFileW(hFind, &ffd));
 
@@ -58,7 +62,9 @@ namespace PluggableBot
 				FindClose(hFind);
 			}
 
-			return CommandExecutionResults(result);
+			std::shared_ptr<jsonxx::Object> o(new jsonxx::Object());
+			(*o) << "files" << jsonResult;
+			return CommandExecutionResults(result, false, std::move(o));
 		}
 
 	}

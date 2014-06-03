@@ -28,7 +28,7 @@ namespace PluggableBot
 				message += "\n";
 			}
 			std::shared_ptr<jsonxx::Object> o(new jsonxx::Object());
-			(*o) << "commands" << protocolsArray;
+			(*o) << "protocols" << protocolsArray;
 			return CommandExecutionResults(message, false, std::move(o));
 		}
 
