@@ -21,7 +21,7 @@ int main()
 	SetConsoleCtrlHandler(CtrlCHandler, TRUE);
 
 	LogFactory::AddOutput(new ConsoleOutput());
-	//TODO: add logging to file.
+	LogFactory::AddOutput(new FileOutput("PluggableBot.log"));
 
 	auto logger = LogFactory::GetLogger("Main");
 	logger->Information("Application started. You can stop it using Ctrl+C combination.");

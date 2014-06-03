@@ -74,9 +74,13 @@ namespace PluggableBot
 		void Handle(Messages::ProtocolFailure* message);
 		void Handle(Messages::AsyncExecutionFailure* message);
 
+		std::string BuildSuccessResponse(const Commands::CommandExecutionResults& result);
+		std::string BuildErrorResponse(const std::string& command, const std::string& message, unsigned int systemError);
+
 		Logging::LoggerPointer Logger;
 
 		jsonxx::Object configuration;
+		bool sendJSON;
 		std::unique_ptr<ApplicationContext> context;
 
 		std::vector<ProtocolState> protocols;

@@ -40,6 +40,8 @@ namespace PluggableBot
 			Logger->Warning("Cannot find config file. Using default.");
 		}
 
+		this->sendJSON = this->configuration.get<jsonxx::Boolean>("sendJSON", false);
+
 		auto messenger = new Messenger();
 		auto parser = new DefaultParser();
 		auto executor = new DefaultCommandExecutor(parser);
@@ -178,36 +180,21 @@ namespace PluggableBot
 	{
 		Logger->Information("Message received from {0}. Trying to interpret it.", message->UserMessage->Sender);
 
-		//TODO: add sending JSON
 		std::string content;
 		try
 		{
 			auto result = this->context->CommandExecutor->Execute(message->UserMessage);
-			if (result.IsAsync)
-			{
-				content = AsyncMessage;
-			}
-			else
-			{
-				content = result.Message;
-			}
+			content = this->BuildSuccessResponse(result);
 		}
 		catch (Exceptions::NotFoundException ex)
 		{
 			Logger->Debug("Cannot find command for the message.");
-			content = CommandDoesNotExist;
+			content = this->BuildErrorResponse("", CommandDoesNotExist, ERROR_SUCCESS);
 		}
 		catch (Exceptions::ExecutionException ex)
 		{
 			Logger->Debug("Cannot execute the command. Message: {0}, error code: {1}.", ex.what(), ex.ErrorCode);
-			if (ex.ErrorCode != ERROR_SUCCESS)
-			{
-				content = fmt::str(fmt::Format(ExecutionExceptionWithSystemErrorMessage, ex.what(), ex.ErrorCode, Other::FormatError(ex.ErrorCode)));
-			}
-			else
-			{
-				content = fmt::str(fmt::Format(ExecutionExceptionMessage, ex.what()));
-			}
+			content = this->BuildErrorResponse("", ex.what(), ex.ErrorCode);
 		}
 
 		this->context->Messenger->Send(new SendMessage(content, message->UserMessage->Sender, message->UserMessage->SourceProtocol));
@@ -244,15 +231,51 @@ namespace PluggableBot
 	void Application::Handle(Messages::AsyncExecutionFailure* message)
 	{
 		Logger->Debug("Cannot execute the command {0}. Message: {1}, error code: {2}.", message->Command->Name, message->Description, message->ErrorCode);
-		std::string content;
-		if (message->ErrorCode != ERROR_SUCCESS)
+		std::string content = this->BuildErrorResponse(message->Command->Name, message->Description, message->ErrorCode);
+		this->context->Messenger->Send(new SendMessage(content, message->Recipient, message->Protocol));
+	}
+
+	std::string Application::BuildSuccessResponse(const Commands::CommandExecutionResults& result)
+	{
+		if (result.IsAsync)
 		{
-			content = fmt::str(fmt::Format(ExecutionExceptionWithSystemErrorMessage, message->Description, message->ErrorCode, Other::FormatError(message->ErrorCode)));
+			return this->sendJSON ? "{ \"isAsync\": true }" : AsyncMessage;
+		}
+		else if (this->sendJSON)
+		{
+			jsonxx::Object response;
+			response << "message" << result.Message;
+			if (result.AdditionalData != nullptr)
+			{
+				response << "additionalData" << *result.AdditionalData;
+			}
+			return response.write(jsonxx::JSON);
 		}
 		else
 		{
-			content = fmt::str(fmt::Format(ExecutionExceptionMessage, message->Description));
+			return result.Message;
 		}
-		this->context->Messenger->Send(new SendMessage(content, message->Recipient, message->Protocol));
 	}
+
+	std::string Application::BuildErrorResponse(const std::string& command, const std::string& message, unsigned int systemError)
+	{
+		if (this->sendJSON)
+		{
+			jsonxx::Object response;
+			response << "command" << command;
+			response << "message" << message;
+			response << "systemError" << systemError;
+			response << "systemMessage" << (systemError == ERROR_SUCCESS ? "" : Other::FormatError(systemError));
+			return response.write(jsonxx::JSON);
+		}
+		else if (systemError != ERROR_SUCCESS)
+		{
+			return  fmt::str(fmt::Format(ExecutionExceptionWithSystemErrorMessage, message, systemError, Other::FormatError(systemError)));
+		}
+		else
+		{
+			return fmt::str(fmt::Format(ExecutionExceptionMessage, message));
+		}
+	}
+
 }
