@@ -81,14 +81,28 @@ namespace PluggableBot
 				(LPWSTR)&wideMessage,
 				0, nullptr);
 
-			int length = WideCharToMultiByte(CP_UTF8, 0, wideMessage, -1, nullptr, 0, nullptr, nullptr);
+			std::string converted = WideCharToUTF8(wideMessage);
+			LocalFree(wideMessage);
+			return converted;
+		}
+
+		std::string WideCharToUTF8(const wchar_t* str)
+		{
+			int length = WideCharToMultiByte(CP_UTF8, 0, str, -1, nullptr, 0, nullptr, nullptr);
 			char* message = new char[length + 1];
 			message[length] = 0;
-			WideCharToMultiByte(CP_UTF8, 0, wideMessage, -1, message, length, nullptr, nullptr);
-			LocalFree(wideMessage);
+			WideCharToMultiByte(CP_UTF8, 0, str, -1, message, length, nullptr, nullptr);
 			std::string converted = message;
 			delete[] message;
 			return converted;
+		}
+
+		std::shared_ptr<wchar_t> UTF8ToWideString(const std::string& str)
+		{
+			wchar_t* message = new wchar_t[str.length() + 1];
+			int len = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), str.length(), message, str.length());
+			message[len] = 0;
+			return std::shared_ptr<wchar_t>(message, std::default_delete<wchar_t[]>());
 		}
 	}
 }

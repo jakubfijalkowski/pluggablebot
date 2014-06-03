@@ -5,6 +5,7 @@
 #include "CatCommand.h"
 #include "MvCommand.h"
 #include "RmCommand.h"
+#include "LsCommand.h"
 #include "ExecuteCommand.h"
 #include "StoreTextCommand.h"
 #include "StoreImageCommand.h"
@@ -39,6 +40,7 @@ namespace PluggableBot
 			this->supportedCommands.push_back(new CatCommand(this->context));
 			this->supportedCommands.push_back(new MvCommand(this->context));
 			this->supportedCommands.push_back(new RmCommand(this->context));
+			this->supportedCommands.push_back(new LsCommand(this->context));
 			this->supportedCommands.push_back(new ExecuteCommand(this->context));
 			this->supportedCommands.push_back(new StoreTextCommand(this->context));
 			this->supportedCommands.push_back(new StoreImageCommand(this->context));

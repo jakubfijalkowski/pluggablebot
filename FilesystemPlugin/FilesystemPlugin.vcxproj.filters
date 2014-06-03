@@ -14,6 +14,7 @@
     <ClCompile Include="ExecuteCommand.cpp" />
     <ClCompile Include="StoreTextCommand.cpp" />
     <ClCompile Include="StoreImageCommand.cpp" />
+    <ClCompile Include="LsCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FilesystemPlugin.h" />
@@ -26,6 +27,7 @@
     <ClInclude Include="ExecuteCommand.h" />
     <ClInclude Include="StoreTextCommand.h" />
     <ClInclude Include="StoreImageCommand.h" />
+    <ClInclude Include="LsCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

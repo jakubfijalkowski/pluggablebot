@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 #include <Windows.h>
 #include <system_error>
 #include "Config.h"
@@ -34,6 +35,16 @@ namespace PluggableBot
 		 * Formatuje kod zwrócony przez GetLastError jako ci¹g znaków UTF-8.
 		 */
 		PLUGIN_API std::string FormatError(DWORD code);
+
+		/**
+		 * Konwertuje ci¹g znaków w UCS-16 na UTF-8.
+		 */
+		PLUGIN_API std::string WideCharToUTF8(const wchar_t* str);
+
+		/**
+		 * Konwertuje ci¹g znaków w UTF-8 na UCS-16.
+		 */
+		PLUGIN_API std::shared_ptr<wchar_t> UTF8ToWideString(const std::string& str);
 
 	}
 }
