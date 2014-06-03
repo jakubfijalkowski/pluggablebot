@@ -75,14 +75,10 @@ namespace PluggableBot
 		}
 
 		this->exiting = false;
-		std::thread([&]()
+		while (!this->exiting)
 		{
-			while (!this->exiting)
-			{
-				this->GetMessages();
-			}
-		}).join();
-
+			this->GetMessages();
+		}
 		this->StopProtocols();
 
 		return this->exitCode;
