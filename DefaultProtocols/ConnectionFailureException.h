@@ -8,14 +8,14 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Wyjątek mówiący o tym, że wystąpił problem z połączeniem.
+		 * \brief Wyjątek mówiący o tym, że wystąpił problem z połączeniem.
 		 */
 		class ConnectionFailureException
 			: public std::exception
 		{
 		public:
 			/**
-			 * Inicjalizuje wyjątek odpowiednią wiadomością.
+			 * \brief Inicjalizuje wyjątek odpowiednią wiadomością.
 			 */
 			ConnectionFailureException(const std::string& message)
 				: std::exception(message.c_str())

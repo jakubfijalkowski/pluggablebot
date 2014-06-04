@@ -20,6 +20,8 @@ Kolejnymi elementami są konfiguracje poszczególnych wtyczek:
 
 - *DefaultProtocols*
   * *gg* - ustawienia protokołu Gadu-Gadu
+    - *disable* - opcjonalne, *true* / *false*, domyślnie *false* - określa, czy obsługa
+      protokołu Gadu-Gadu powinna być włączona, czy nie.
     - *number* - numer konta, do którego aplikacja powinna się zalogować
     - *password* - hasło do w/w konta.
     - *contacts* - opcjonalne, domyślnie pusta - tabela numerów, które powinny być
@@ -38,6 +40,8 @@ Kolejnymi elementami są konfiguracje poszczególnych wtyczek:
       * 34 - *nie przeszkadzać*, z opisem
     - *statusDescription* - opcjonalne, domyślnie puste - jeśli *status* zawiera
       status z opisem, pole to określa właśnie opis.
+    - *maxRetryCount* - opcjonalne, domyślnie 10 - określa liczbę prób połączenia
+      się z serwerem Gadu-Gadu zanim wtyczka zgłosi błąd.
 
 ## Odpowiedź do użytkownika ##
 

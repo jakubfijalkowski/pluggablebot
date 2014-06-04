@@ -17,7 +17,7 @@ namespace PluggableBot
 
 		GGProtocol::GGProtocol(ApplicationContext* context, const jsonxx::Object& config)
 			: IProtocol("Gadu-Gadu"), Logger(Logging::LogFactory::GetLogger("GGProtocol")), context(context),
-			MaxRetryCount((int)config.get<jsonxx::Number>("max_retry_count", DefaultMaxRetryCount)),
+			MaxRetryCount((int)config.get<jsonxx::Number>("maxRetryCount", DefaultMaxRetryCount)),
 			shouldShutdown(false)
 		{
 			int uid = (int)config.get<jsonxx::Number>("number");

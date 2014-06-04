@@ -12,37 +12,55 @@ namespace PluggableBot
 {
 	namespace DefaultProtocols
 	{
+		/**
+		 * \brief Wskaźnik na zdarzenie biblioteki libgadu.
+		 */
 		typedef std::shared_ptr<gg_event> GGEvent;
+
+		/**
+		 * \brief Lista kontaktów.
+		 */
 		typedef std::vector<uint32_t> ContactList;
 
 		/**
-		 * Wrapper na libgadu, uproszczający kod GGProtocol. Klient ten jest asynchroniczny, z pominięciem niektórych metod.
+		 * \brief Wrapper na libgadu, uproszczający kod GGProtocol. Klient ten jest
+		 * asynchroniczny, z pominięciem niektórych metod.
 		 *
-		 * \a {Timeout} określa jak długo klient będzie czekał na wiadomości z serwera. Przy łączeniu z serwerem wartość ta jest mnożona
-		 * przez ConnectTimeoutMultiplier, ponieważ operacja ta jest wywoływana synchronicznie.
+		 * *Timeout* określa jak długo klient będzie czekał na wiadomości z serwera.
+		 * Przy łączeniu z serwerem wartość ta jest mnożona przez ConnectTimeoutMultiplier,
+		 * ponieważ operacja ta jest wywoływana synchronicznie.
+		 *
+		 * Do obsługi połączeń z serwerem Gadu-Gadu używana jest biblioteka
+		 * [libgadu](http://libgadu.net/). Sposób obsługi znajduje się w dokumentacji
+		 * w/w biblioteki.
 		 */
 		class GGClient
 		{
 		public:
 			/**
-			 * Mnożnik czasu oczekiwania na połączenie.
+			 * \brief Mnożnik czasu oczekiwania na połączenie.
 			 */
 			const static int ConnectTimeoutMultiplier = 30;
 
 			/**
-			 * Inicjalizuje obiekt ustawiając niezbędne wartości.
+			 * \brief Inicjalizuje obiekt ustawiając niezbędne wartości.
 			 *
-			 * \param timeout Określa jak długo klient będzie czekał na wiadomości. Wartość w milisekundach.
+			 * \param uid Numer użytkownika.
+			 * \param password Hasło.
+			 * \param status Status.
+			 * \param statusDescription Opis.
+			 * \param timeout Określa jak długo klient będzie czekał na wiadomości.
+			 *                Wartość w milisekundach.
 			 */
 			GGClient(int uid, const std::string& password, int status, const std::string& statusDescription, int timeout);
 
 			/**
-			 * Kończy połączenie(jeśli jeszcze nie zostało zakończone) i zwalnia używane zasoby.
+			 * \brief Kończy połączenie(jeśli jeszcze nie zostało zakończone) i zwalnia używane zasoby.
 			 */
 			~GGClient();
 
 			/**
-			 * Próbuje nawiązać połączenie z serwerem. Jest to wykonywane synchronicznie.
+			 * \brief Próbuje nawiązać połączenie z serwerem. Jest to wykonywane synchronicznie.
 			 *
 			 * Nie trzeba wywoływać Disconnect po nieudanej próbie połączenia.
 			 *
@@ -53,21 +71,21 @@ namespace PluggableBot
 			void Connect(const ContactList& contacts);
 
 			/**
-			 * Kończy połączenie z serwerem i zwalnia sesję.
+			 * \brief Kończy połączenie z serwerem i zwalnia sesję.
 			 */
 			void Disconnect();
 
 			/**
-			 * Pobiera zdarzenie z serwera GG. 
+			 * \brief Pobiera zdarzenie z serwera GG. 
 			 *
-			 * Obsługuje nagłe zerwanie połączenia z serwerem jak i mechanizm ping-pong.
+			 * Wewnętrznie obsługuje nagłe zerwanie połączenia z serwerem jak i mechanizm ping-pong.
 			 *
 			 * \exception ConnectionFailureException Rzucany, gdy serwer nie odpowiadał zbyt długi czas.
 			 */
 			GGEvent HandleEvents();
 
 			/**
-			 * Wysyła wiadomość do użytkownika o wskazanym numerze.
+			 * \brief Wysyła wiadomość do użytkownika o wskazanym numerze.
 			 *
 			 * \param receipent Numer odbiorcy.
 			 * \param content Treść wiadomości.
@@ -75,7 +93,7 @@ namespace PluggableBot
 			void SendMessage(uin_t receipent, const std::string& content);
 
 			/**
-			 * Wysyła do nadawcy żądanie wysłania obrazka.
+			 * \brief Wysyła do nadawcy żądanie wysłania obrazka.
 			 */
 			void RequestImage(uin_t sender, uint32_t size, uint32_t crc32);
 
@@ -83,7 +101,7 @@ namespace PluggableBot
 			static const int PingTime = 59;
 
 			/**
-			 * Oczekuje wskazany czas na wiadomość z serwera.
+			 * \brief Oczekuje wskazany czas na wiadomość z serwera.
 			 *
 			 * \exception ConnectionFailureException Rzucany, gdy wystąpił problem z odebraniem wiadomości z serwera.
 			 * \return Zwraca typ wiadomości zapisane w zmiennej event.
