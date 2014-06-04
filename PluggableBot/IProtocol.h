@@ -6,7 +6,7 @@ namespace PluggableBot
 {
 
 	/**
-	 * Interfejs dla klas obsługujących protokoły sieciowe.
+	 * \brief Interfejs dla klas obsługujących protokoły sieciowe.
 	 *
 	 * Metody tej klasy nie powinny bezpośrednio rzucać wyjątkami z racji tego,
 	 * że i tak właściwa obsługa dzieje się na osobnym wątku. Każda implementacja
@@ -21,29 +21,41 @@ namespace PluggableBot
 	{
 	public:
 		/**
-		 * Nazwa protokołu, która może być używana do, np., filtracji wiadomości albo używana do logowania.
+		 * \brief Nazwa protokołu, dostępna w celach informacyjnych i do identyfikacji
+		 * protokołu przez użytkownika.
 		 */
 		const std::string Name;
 
-		/*
-		 * Rozpoczyna pracę obiektu obsługującego protokół. Nie powinno zabierać zbyt dużo czasu
-		 * i jak najszybciej przekierować obsługę na osobny wątek.
+		/**
+		 * \brief Rozpoczyna pracę obiektu obsługującego protokół.
+		 * Powinna jak najszybciej przekierować obsługę na osobny wątek.
 		 */
 		virtual void Start() = 0;
 
 		/**
-		 * Wymusza zatrzymanie wątku obsługującego protokół sieciowy.
+		 * \brief Wymusza zatrzymanie wątku obsługującego protokół sieciowy.
 		 */
 		virtual void Stop() = 0;
 
+		/**
+		 * \brief Czyści pozostałości po obiekcie.
+		 */
 		virtual ~IProtocol() { }
 
 	protected:
+		/**
+		 * \brief Inicjalizuje protokół.
+		 */
 		IProtocol(const std::string& name)
 			: Name(name)
 		{ }
 	};
 
+	/**
+	 * \brief Wskaźnik na protokół.
+	 * Protokoły będą przeważnie zawarte we wtyczkach, dlatego użycie `smart pointer`ów
+	 * nie przyniosłoby wielu korzyści a wymagałoby dodatkowej uwagi.
+	 */
 	typedef IProtocol* ProtocolPointer;
 
 }

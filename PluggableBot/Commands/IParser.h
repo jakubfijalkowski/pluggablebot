@@ -25,7 +25,7 @@ namespace PluggableBot
 		{
 		public:
 			/**
-			 * \briefPróbuje zinterpretować wiadomość jako komendę. Sposób parsowania jest w opisie klasy.
+			 * \brief Próbuje zinterpretować wiadomość jako komendę. Sposób parsowania jest w opisie klasy.
 			 *
 			 * \param text Tekst wiadomości.
 			 */

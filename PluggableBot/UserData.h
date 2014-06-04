@@ -9,9 +9,8 @@ namespace PluggableBot
 {
 	class IProtocol;
 
-
 	/**
-	 * Wrapper na std::unordered_map, zapewniający bardziej zwarty dostęp do danych.
+	 * \brief Wrapper na std::unordered_map, zapewniający bardziej zwarty dostęp do danych.
 	 */
 	class PLUGIN_API UserDataMap
 	{
@@ -19,17 +18,17 @@ namespace PluggableBot
 		UserDataMap();
 
 		/**
-		 * Sprawdza, czy mapa zawiera element o podanym kluczu.
+		 * \brief Sprawdza, czy mapa zawiera element o podanym kluczu.
 		 */
 		bool Has(const std::string& key);
 
 		/**
-		 * Pobiera element o wskazanym kluczu.
+		 * \brief Pobiera element o wskazanym kluczu.
 		 */
 		const std::string& operator[](const std::string& key);
 
 		/**
-		 * Dodaje/zmienia element o podanym kluczu.
+		 * \brief Dodaje/zmienia element o podanym kluczu.
 		 */
 		void Set(const std::string& key, const std::string& value);
 
@@ -41,25 +40,23 @@ namespace PluggableBot
 	};
 
 	/**
-	 * Klasa przechowująca dane użytkownika.
+	 * \brief Klasa przechowująca dane użytkownika.
 	 *
 	 * Dane są przechwoywane przez określony czas. Oznacza to, że gdy użytkownik
 	 * nie wywoła komendy odwołującej się do danych przez ten czas, jego dane przepadają.
 	 * Przez dane użytkownika rozumie się pary klucz-wartość, gdzie zarówno klucz jak i wartość
 	 * są ciągami znaków.
-	 *
-	 * Dane są uaktualniane tylko przy wywołaniu Get, dlatego UserDataPointer nie powinien
 	 */
 	class PLUGIN_API UserData
 	{
 	public:
 		/**
-		* Czas pamiętania danych, w sekundach.
-		*/
+		 * \brief Czas pamiętania danych, w sekundach.
+		 */
 		static const int RetentionTime = 15 * 60;
 
 		/**
-		 * Pobiera mapę z danymi dla wskazanego użytkownika.
+		 * \brief Pobiera mapę z danymi dla wskazanego użytkownika.
 		 */
 		UserDataMap& Get(const IProtocol* protocol, const std::string& identifier);
 

@@ -10,7 +10,7 @@ namespace PluggableBot
 		{
 			return c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r';
 		}
-
+		
 		void SkipWhiteSpace(const std::string& text, size_t& i)
 		{
 			while (i < text.length() && IsWhiteSpace(text[i]))
@@ -18,7 +18,7 @@ namespace PluggableBot
 				++i;
 			}
 		}
-
+		
 		void MoveToWhiteSpace(const std::string& text, size_t& i)
 		{
 			while (i < text.length() && !IsWhiteSpace(text[i]))
@@ -26,7 +26,7 @@ namespace PluggableBot
 				++i;
 			}
 		}
-
+		
 		void MoveToWitespaceOrChar(const std::string& text, size_t& i, char c)
 		{
 			while (i < text.length() && text[i] != c && !IsWhiteSpace(text[i]))
@@ -34,7 +34,7 @@ namespace PluggableBot
 				++i;
 			}
 		}
-
+		
 		void MoveToUnescapedChar(const std::string& text, size_t& i, char c)
 		{
 			while (i < text.length() && text[i] != c && (i == 0 || text[i - 1] != '\\'))
@@ -42,7 +42,7 @@ namespace PluggableBot
 				++i;
 			}
 		}
-
+		
 		bool ExtractPart(const std::string& text, size_t& i, std::string& part, char c)
 		{
 			size_t start, end;
@@ -73,7 +73,7 @@ namespace PluggableBot
 			part = text.substr(start, end - start);
 			return true;
 		}
-
+		
 		bool ExtractParameter(const std::string& text, size_t& i, ParseResults::ParameterList* parameters)
 		{
 			std::string name, value;

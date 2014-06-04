@@ -84,9 +84,6 @@ namespace PluggableBot
 
 	/**
 	 * \brief Kod wyjścia z głównej aplikacji.
-	 *
-	 * \sa
-	 * \ref pages_application_description
 	 */
 	enum class ApplicationExitCode
 		: int
@@ -112,6 +109,9 @@ namespace PluggableBot
 	 *
 	 * Przed jej uruchomieniem należy zainicjować wszystkie rzeczy, które są pomocniecze,
 	 * np. Logger.
+	 *
+	 * \sa
+	 * \ref pages_application_description
 	 */
 	class Application
 	{
