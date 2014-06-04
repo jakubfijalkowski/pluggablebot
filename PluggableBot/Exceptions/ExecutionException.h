@@ -4,11 +4,15 @@
 
 namespace PluggableBot
 {
+
+	/**
+	 * \brief Przestrzeń nazw zawierająca wyjątki używane przez aplikację.
+	 */
 	namespace Exceptions
 	{
 
 		/**
-		 * Wyjątek rzucany, gdy nie uda się wykonać komendy.
+		 * \brief Wyjątek rzucany, gdy nie uda się wykonać komendy.
 		 *
 		 * Zawiera podstawowe informacje o błędzie, tj. wiadomość i ewentualny kod,
 		 * który jest zwracany jako dodatkowa wartość.
@@ -18,10 +22,13 @@ namespace PluggableBot
 		{
 		public:
 			/**
-			 * Kod błędu.
+			 * \brief Kod błędu.
 			 */
 			const int ErrorCode;
 
+			/**
+			 * \brief Inicjalizuje wyjątek niezbędnymi informacjami.
+			 */
 			ExecutionException(const std::string& message, int errorCode = 0)
 				: std::exception(message.c_str()), ErrorCode(errorCode)
 			{ }

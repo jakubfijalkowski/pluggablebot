@@ -13,9 +13,11 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Jest używany do wstępnej komunikacji między aplikacją a wtyczką. Odpowiada
-		 * za zarządzanie obiektami obsługującymi komendy oraz protokoły(musi je tworzyć,
-		 * gdy jest wczytywana/konfigurowana oraz zwalniać, gdy sama jest zwalniana).
+		 * \brief Jest używany do wstępnej komunikacji między aplikacją a wtyczką.
+		 *
+		 * Odpowiada za zarządzanie obiektami obsługującymi komendy oraz protokoły
+		 * (musi je tworzyć, gdy jest wczytywana/konfigurowana oraz zwalniać, gdy
+		 * sama jest zwalniana).
 		 *
 		 * Po załadowaniu(używając eksportowanej funkcji \a CreatePlugin) wtyczka jest
 		 * konfigurowana(Configure), a następnie pobierane są udostępniane przez nią
@@ -25,41 +27,53 @@ namespace PluggableBot
 		class IPlugin
 		{
 		public:
+			/*
+			 * \brief Lista komend.
+			 */
 			typedef std::vector<Commands::CommandPointer> CommandList;
+			
+			/**
+			 * \brief Lista protokołów.
+			 */
 			typedef std::vector<ProtocolPointer> ProtocolList;
 
 			/**
-			 * Pobiera nazwę wtyczki, używaną m.in. do określenia sekcji w pliku konfiguracyjnym.
+			 * \brief Pobiera nazwę wtyczki, używaną m.in. do określenia sekcji w pliku konfiguracyjnym.
 			 */
 			virtual const std::string& GetName() const = 0;
 
 			/**
-			 * Konfiguruje wtyczkę, używając ustawień wczytanych z odpowiedniej sekcji pliku konfiguracyjnego.
+			 * \brief Konfiguruje wtyczkę, używając ustawień wczytanych z odpowiedniej sekcji pliku konfiguracyjnego.
 			 */
 			virtual void Configure(const jsonxx::Object& configuration) = 0;
 
 			/**
-			 * Pobiera listę komend obsługiwanych przez wtyczkę.
+			 * \brieg Pobiera listę komend obsługiwanych przez wtyczkę.
 			 */
 			virtual const CommandList* GetSupportedCommands() const = 0;
 
 			/**
-			 * Pobiera listę protokołów obsługiwanych przez wtyczkę.
+			 * \brief Pobiera listę protokołów obsługiwanych przez wtyczkę.
 			 */
 			virtual const ProtocolList* GetSupportedProtocols() const = 0;
 
+			/**
+			 * \brief Zwalnia wtyczkę(uwaga! wtyczka jest zwalniana używając DeletePluginMethod!).
+			 */
 			virtual ~IPlugin() { }
 		};
 		
 		/**
-		 * Określa sygnaturę metody używanej przez loader do załadowania wtyczki.
+		 * \brief Określa sygnaturę metody używanej przez loader do załadowania wtyczki.
+		 *
 		 * Metoda ta powinna być dodatkowo "nieozdobiona"(tj. eksportowana w stylu C)
 		 * oraz oznaczona atrybutem \a dllexport albo eksportowana "ręcznie".
 		 */
 		typedef IPlugin* (*CreatePluginMethod)(ApplicationContext* context);
 
 		/**
-		 * Określa sygnaturę metody używanej przez loader do zwolnienia wtyczki.
+		 * \brief Określa sygnaturę metody używanej przez loader do zwolnienia wtyczki.
+		 *
 		 * Metoda ta powinna być dodatkowo "nieozdobiona"(tj. eksportowana w stylu C)
 		 * oraz oznaczona atrybutem \a dllexport albo eksportowana "ręcznie".
 		 */

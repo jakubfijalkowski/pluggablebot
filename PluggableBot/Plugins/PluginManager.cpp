@@ -98,6 +98,7 @@ namespace PluggableBot
 
 			if (createMethod == nullptr || deleteMethod == nullptr)
 			{
+				FreeLibrary(module);
 				Logger->Warning("Module {0} does not have CreatePlugin/DeletePlugin methods!", pluginName);
 				return;
 			}
@@ -106,6 +107,7 @@ namespace PluggableBot
 
 			if (plugin == nullptr)
 			{
+				FreeLibrary(module);
 				Logger->Warning("CreatePlugin of {0} did not return valid IPlugin object.", pluginName);
 				return;
 			}
