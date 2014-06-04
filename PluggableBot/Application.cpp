@@ -195,7 +195,8 @@ namespace PluggableBot
 			content = this->BuildErrorResponse("", ex.what(), ex.ErrorCode);
 		}
 
-		this->context->Messenger->Send(new SendMessage(content, message->UserMessage->Sender, message->UserMessage->SourceProtocol));
+		this->context->Messenger->Send(MessagePointer(new SendMessage(content, message->UserMessage->Sender,
+			message->UserMessage->SourceProtocol)));
 	}
 
 	void Application::Handle(ProtocolFailure* message)
@@ -232,7 +233,7 @@ namespace PluggableBot
 			message->Command->Name, message->Description, message->ErrorCode);
 		std::string content = this->BuildErrorResponse(message->Command->Name,
 			message->Description, message->ErrorCode);
-		this->context->Messenger->Send(new SendMessage(content, message->Recipient, message->Protocol));
+		this->context->Messenger->Send(MessagePointer(new SendMessage(content, message->Recipient, message->Protocol)));
 	}
 
 	void Application::Handle(AsyncCommandExecuted* message)
@@ -241,8 +242,8 @@ namespace PluggableBot
 			message->Command->Name);
 		std::string content = this->BuildRawSuccessResponse(message->Command->Name,
 			message->Message, message->AdditionalData, true);
-		this->context->Messenger->Send(new SendMessage(content, message->Recipient,
-			message->Protocol));
+		this->context->Messenger->Send(MessagePointer(new SendMessage(content, message->Recipient,
+			message->Protocol)));
 	}
 
 	std::string Application::BuildSuccessResponse(const Commands::CommandExecutionResults& result)

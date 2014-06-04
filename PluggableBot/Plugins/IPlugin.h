@@ -48,7 +48,7 @@ namespace PluggableBot
 			virtual void Configure(const jsonxx::Object& configuration) = 0;
 
 			/**
-			 * \brieg Pobiera listę komend obsługiwanych przez wtyczkę.
+			 * \brief Pobiera listę komend obsługiwanych przez wtyczkę.
 			 */
 			virtual const CommandList* GetSupportedCommands() const = 0;
 

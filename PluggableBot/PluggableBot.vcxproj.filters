@@ -151,7 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="config.json" />
-    <None Include="Pages\page_json_spec.md">
+    <None Include="Pages\json_spec.md">
       <Filter>Pages</Filter>
     </None>
   </ItemGroup>

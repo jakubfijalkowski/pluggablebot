@@ -11,7 +11,7 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Interfejs dla klas, odpowiedzialnych za parsowanie wiadomości.
+		 * \brief Interfejs dla klas, odpowiedzialnych za parsowanie wiadomości.
 		 *
 		 * Parsowanie odbywa się poprzez próbę dopasowania tekstu do następującego formatu:
 		 * {nazwa_komendy} {nazwa_parametru1}="{wartość1}" {nazwa_parametru2}="{wartość2}" ...
@@ -25,7 +25,8 @@ namespace PluggableBot
 		{
 		public:
 			/**
-			 * Próbuje zinterpretować wiadomość jako komendę. Sposób parsowania jest w opisie klasy.
+			 * \briefPróbuje zinterpretować wiadomość jako komendę. Sposób parsowania jest w opisie klasy.
+			 *
 			 * \param text Tekst wiadomości.
 			 */
 			virtual ParseResultsPointer Parse(const std::string& text) = 0;
@@ -34,7 +35,7 @@ namespace PluggableBot
 		};
 
 		/**
-		 * Domyślna implementacja IParser.
+		 * \brief Domyślna implementacja IParser.
 		 */
 		class PLUGIN_API DefaultParser
 			: public IParser

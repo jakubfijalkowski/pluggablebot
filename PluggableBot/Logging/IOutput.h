@@ -18,7 +18,7 @@ namespace PluggableBot
 			/**
 			 * \brief Zamyka wyjście.
 			 */
-			virtual ~IOutput();
+			virtual ~IOutput() { }
 
 			/**
 			 * \brief Zapisuje wiadomość o podanym poziomie, od wskazanego Logger i o podanej treści.
