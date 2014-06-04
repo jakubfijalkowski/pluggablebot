@@ -27,7 +27,7 @@ namespace PluggableBot
 		class IPlugin
 		{
 		public:
-			/*
+			/**
 			 * \brief Lista komend.
 			 */
 			typedef std::vector<Commands::CommandPointer> CommandList;

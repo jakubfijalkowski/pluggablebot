@@ -11,7 +11,7 @@ namespace PluggableBot
 	{
 		
 		/**
-		 * \breif Fabryka dla nazwanych obiektów Logger. Zaimplementowane jako klasa statyczna.
+		 * \brief Fabryka dla nazwanych obiektów Logger. Zaimplementowane jako klasa statyczna.
 		 *
 		 * W aktualnej formie nie ma możliwości konfiguracji biblioteki.
 		 */
