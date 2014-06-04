@@ -1,4 +1,4 @@
-#include <PluggableBot/Messages/Messages.h>
+ï»¿#include <PluggableBot/Messages/Messages.h>
 #include <thread>
 #include <Windows.h>
 #include "GGProtocol.h"
@@ -23,12 +23,12 @@ namespace PluggableBot
 			int uid = (int)config.get<jsonxx::Number>("number");
 			const std::string& password = config.get<std::string>("password");
 			int status = (int)config.get<jsonxx::Number>("status", GG_STATUS_AVAIL);
-			const std::string& statusDesc = config.get<std::string>("status_description", "");
+			const std::string& statusDesc = config.get<std::string>("statusDescription", "");
 
 			if (config.has<jsonxx::Array>("contacts"))
 			{
 				auto& arr = config.get<jsonxx::Array>("contacts");
-				// Ignoruje wartoœci nie bêd¹ce liczbami
+				// Ignoruje wartoÅ›ci nie bÄ™dÄ…ce liczbami
 				for (auto& n : arr.values())
 				{
 					if (n->is<jsonxx::Number>())

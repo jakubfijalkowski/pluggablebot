@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 #include "../Commands/ICommand.h"
 #include "../Messaging/IMessage.h"
@@ -11,7 +11,7 @@ namespace PluggableBot
 		using namespace Messaging;
 
 		/**
-		 * Nie uda³o siê wywo³aæ komendy asynchronicznie i u¿ytkownik powinien otrzymaæ odpowiedŸ o b³êdzie.
+		 * Nie udaÅ‚o siÄ™ wywoÅ‚aÄ‡ komendy asynchronicznie i uÅ¼ytkownik powinien otrzymaÄ‡ odpowiedÅº o bÅ‚Ä™dzie.
 		 * Asynchroniczny odpowiednik Exceptions::ExecutionException.
 		 */
 		class AsyncExecutionFailure
@@ -21,32 +21,32 @@ namespace PluggableBot
 			static const int MessageType = 5;
 
 			/**
-			 * Okreœla, która komenda wys³a³a t¹ wiadomoœæ.
+			 * OkreÅ›la, ktÃ³ra komenda wysÅ‚aÅ‚a tÄ… wiadomoÅ›Ä‡.
 			 */
 			const Commands::CommandPointer Command;
 
 			/**
-			 * Opis b³êdu.
+			 * Opis bÅ‚Ä™du.
 			 */
 			const std::string Description;
 
 			/**
-			 * Systemowy kod b³êdu.
+			 * Systemowy kod bÅ‚Ä™du.
 			 */
 			const unsigned int ErrorCode;
 
 			/**
-			 * Odbiorca wiadomoœci.
+			 * Odbiorca wiadomoÅ›ci.
 			 */
 			const std::string Recipient;
 
 			/**
-			 * Okreœla, który protokó³ powinien wys³aæ wiadomoœæ.
+			 * OkreÅ›la, ktÃ³ry protokÃ³Å‚ powinien wysÅ‚aÄ‡ wiadomoÅ›Ä‡.
 			 */
 			const ProtocolPointer Protocol;
 
 			/**
-			 * Inicializuje obiekt wiadomoœci.
+			 * Inicializuje obiekt wiadomoÅ›ci.
 			 */
 			AsyncExecutionFailure(
 				const Commands::CommandPointer command,

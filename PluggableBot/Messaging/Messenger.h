@@ -40,6 +40,9 @@ namespace PluggableBot
 		 * Problemy z implementacją:
 		 * Przez użycie smart pointerów i szablonów, biblioteki DLL muszą być kompilowane z tą samą
 		 * implementacją CRT(czyli tak naprawdę w konkretnej wersji Visual Studio).
+		 *
+		 * \sa
+		 * \ref pages_messenger_description
 		 */
 		class PLUGIN_API Messenger
 		{

@@ -8,7 +8,7 @@
 namespace PluggableBot
 {
 	/**
-	 * \page page_application_description Opis głównego obiektu aplikacji
+	 * \page pages_application_description Opis głównego obiektu aplikacji
 	 *
 	 * \tableofcontents
 	 *
@@ -77,13 +77,15 @@ namespace PluggableBot
 	 * Exceptions::ExecutionException lub wysyłając wiadomość Messages::AsyncExecutionFailure,
 	 * użytkownik zostanie powiadomiony o tym fakcie przez ustandaryzowaną wiadomość błędu.
 	 *
-	 * \see page_json_spec
-	 *
-	 *
+	 * \sa
+	 * \ref pages_json_spec
 	 */
 
 	/**
 	 * \brief Kod wyjścia z głównej aplikacji.
+	 *
+	 * \sa
+	 * \ref pages_application_description
 	 */
 	enum class ApplicationExitCode
 		: int

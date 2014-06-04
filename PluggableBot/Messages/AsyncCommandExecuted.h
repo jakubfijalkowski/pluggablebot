@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 #include <memory>
 #include "../Commands/ICommand.h"
@@ -13,7 +13,7 @@ namespace PluggableBot
 		using namespace Messaging;
 
 		/**
-		 * Komenda zosta³a wywo³ana poprawnie i zwraca u¿ytkownikowi wynik.
+		 * Komenda zostaÅ‚a wywoÅ‚ana poprawnie i zwraca uÅ¼ytkownikowi wynik.
 		 * Asynchroniczny odpowiednik Commands::CommandExecutionResults.
 		 */
 		class AsyncCommandExecuted
@@ -23,32 +23,32 @@ namespace PluggableBot
 			static const int MessageType = 7;
 
 			/**
-			 * Okreœla, która komenda wys³a³a t¹ wiadomoœæ.
+			 * OkreÅ›la, ktÃ³ra komenda wysÅ‚aÅ‚a tÄ… wiadomoÅ›Ä‡.
 			 */
 			const Commands::CommandPointer Command;
 
 			/**
-			 * Treœæ wiadomoœci, która zostanie wys³ana u¿ytkownikowi.
+			 * TreÅ›Ä‡ wiadomoÅ›ci, ktÃ³ra zostanie wysÅ‚ana uÅ¼ytkownikowi.
 			 */
 			const std::string Message;
 
 			/**
-			 * Obiekt bêd¹cy dodatkowymi danymi. Jest opcjonalny(mo¿e byæ nullptr).
+			 * Obiekt bÄ™dÄ…cy dodatkowymi danymi. Jest opcjonalny(moÅ¼e byÄ‡ nullptr).
 			 */
 			const std::shared_ptr<const jsonxx::Object> AdditionalData;
 
 			/**
-			 * Odbiorca wiadomoœci.
+			 * Odbiorca wiadomoÅ›ci.
 			 */
 			const std::string Recipient;
 
 			/**
-			 * Okreœla, który protokó³ powinien wys³aæ wiadomoœæ.
+			 * OkreÅ›la, ktÃ³ry protokÃ³Å‚ powinien wysÅ‚aÄ‡ wiadomoÅ›Ä‡.
 			 */
 			const ProtocolPointer Protocol;
 
 			/**
-			 * Inicializuje obiekt wiadomoœci.
+			 * Inicializuje obiekt wiadomoÅ›ci.
 			 */
 			AsyncCommandExecuted(
 				const Commands::CommandPointer command,

@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #include <memory>
 #include <PluggableBot/ApplicationContext.h>
 #include <PluggableBot/Commands/ICommand.h>
@@ -10,7 +10,7 @@ namespace PluggableBot
 		using namespace PluggableBot::Commands;
 
 		/**
-		 * Zapisuje wys≥any wczeúniej obrazek do pliku.
+		 * Zapisuje wys≈Çany wcze≈õniej obrazek do pliku.
 		 */
 		class StoreImageCommand
 			: public ICommand

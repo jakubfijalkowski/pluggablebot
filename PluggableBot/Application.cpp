@@ -249,7 +249,7 @@ namespace PluggableBot
 	{
 		if (result.IsAsync)
 		{
-			return this->sendJSON ? "{ \"isAsync\": true }" : AsyncMessage;
+			return this->sendJSON ? "{ \"isAsync\": true, \"isError\": false, \"isAsyncResponse\": false }" : AsyncMessage;
 		}
 		else
 		{
@@ -263,9 +263,11 @@ namespace PluggableBot
 		if (this->sendJSON)
 		{
 			jsonxx::Object response;
+			response << "isAsync" << false;
+			response << "isError" << false;
+			response << "isAsyncResponse" << isAsyncResponse;
 			response << "command" << command;
 			response << "message" << message;
-			response << "isAsyncResponse" << isAsyncResponse;
 			if (additionalData != nullptr)
 			{
 				response << "additionalData" << *additionalData;
@@ -283,6 +285,9 @@ namespace PluggableBot
 		if (this->sendJSON)
 		{
 			jsonxx::Object response;
+			response << "isAsync" << false;
+			response << "isError" << true;
+			response << "isAsyncResponse" << false;
 			response << "command" << command;
 			response << "message" << message;
 			response << "systemError" << systemError;

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 #include <memory>
 #include <Windows.h>
@@ -8,41 +8,41 @@
 namespace PluggableBot
 {
 	/**
-	 * Przestrzeñ nazw z funkcjami/sta³ymi, które nie s¹ u¿ywane bezpoœrednio
-	 * przez aplikacjê, ale maj¹ zastosowanie w wiêcej ni¿ jednym pluginie.
+	 * PrzestrzeÅ„ nazw z funkcjami/staÅ‚ymi, ktÃ³re nie sÄ… uÅ¼ywane bezpoÅ›rednio
+	 * przez aplikacjÄ™, ale majÄ… zastosowanie w wiÄ™cej niÅ¼ jednym pluginie.
 	 */
 	namespace Other
 	{
 
 		/**
-		 * Odczytuje ca³¹ zawartoœæ z hPipe(zak³ada, ¿e jest mo¿liwoœæ odczytu).
-		 * Gdy odczytane zostanê wszystkie dostêpne na dany moment dane, odczyt
+		 * Odczytuje caÅ‚Ä… zawartoÅ›Ä‡ z hPipe(zakÅ‚ada, Å¼e jest moÅ¼liwoÅ›Ä‡ odczytu).
+		 * Gdy odczytane zostanÄ™ wszystkie dostÄ™pne na dany moment dane, odczyt
 		 * zostaje przerwany.
 		 */
 		PLUGIN_API std::string ReadFromPipe(HANDLE hPipe);
 
 		/**
-		 * Wywo³uje polecenie we wskazanym katalogu roboczym, podpinaj¹c wewnêtrzne
-		 * \a {pipe}y pod standardowe wyjœcie i wyjœcie b³êdu. Czeka na zakoñczenie
-		 * procesu, dopiero po tym odczytuje wyjœcie procesu.
+		 * WywoÅ‚uje polecenie we wskazanym katalogu roboczym, podpinajÄ…c wewnÄ™trzne
+		 * \a {pipe}y pod standardowe wyjÅ›cie i wyjÅ›cie bÅ‚Ä™du. Czeka na zakoÅ„czenie
+		 * procesu, dopiero po tym odczytuje wyjÅ›cie procesu.
 		 *
-		 * \exception std::system_error Rzucane, gdy nie powiedzie siê uruchomienie
+		 * \exception std::system_error Rzucane, gdy nie powiedzie siÄ™ uruchomienie
 		 *		aplikacji lub utworzenie \a {pipe}.
 		 */
 		PLUGIN_API std::string CallSystemCommand(const std::string& command, const std::string& workingDirectory);
 
 		/**
-		 * Formatuje kod zwrócony przez GetLastError jako ci¹g znaków UTF-8.
+		 * Formatuje kod zwrÃ³cony przez GetLastError jako ciÄ…g znakÃ³w UTF-8.
 		 */
 		PLUGIN_API std::string FormatError(DWORD code);
 
 		/**
-		 * Konwertuje ci¹g znaków w UCS-16 na UTF-8.
+		 * Konwertuje ciÄ…g znakÃ³w w UCS-16 na UTF-8.
 		 */
 		PLUGIN_API std::string WideCharToUTF8(const wchar_t* str);
 
 		/**
-		 * Konwertuje ci¹g znaków w UTF-8 na UCS-16.
+		 * Konwertuje ciÄ…g znakÃ³w w UTF-8 na UCS-16.
 		 */
 		PLUGIN_API std::shared_ptr<wchar_t> UTF8ToWideString(const std::string& str);
 

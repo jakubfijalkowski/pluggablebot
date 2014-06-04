@@ -22,6 +22,9 @@
     <Filter Include="Messages">
       <UniqueIdentifier>{5bdda3e7-8531-4e04-abe0-414f5d086b53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pages">
+      <UniqueIdentifier>{33603f5e-cc74-44da-ad11-cf830c6a1ba1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\IMatcher.h">
@@ -148,5 +151,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="config.json" />
+    <None Include="Pages\page_json_spec.md">
+      <Filter>Pages</Filter>
+    </None>
   </ItemGroup>
 </Project>
