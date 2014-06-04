@@ -5,7 +5,7 @@ namespace PluggableBot
 {
 	/**
 	 * \brief Przestrzeń nazw zawierająca plugin do obsługi komend bezstanowych.
-	*/
+	 */
 	namespace StatelessCommands
 	{
 		using namespace PluggableBot::Plugins;

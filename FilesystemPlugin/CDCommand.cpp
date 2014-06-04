@@ -1,4 +1,4 @@
-#include "CDCommand.h"
+#include "CdCommand.h"
 #include <Shlwapi.h>
 #include <PluggableBot/External/format.h>
 #include <PluggableBot/Exceptions/ExecutionException.h>
@@ -12,16 +12,16 @@ namespace PluggableBot
 		const std::string InvalidPath = "ścieżka jest nieprawidłowa";
 		const std::string PathChanged = "Ścieżka została zmieniona na '{0}'.";
 
-		CDCommand::CDCommand(ApplicationContext* context)
+		CdCommand::CdCommand(ApplicationContext* context)
 			: ICommand("cd"), context(context), matcher(new SimpleMatcher("cd", { "to" }))
 		{ }
 
-		const IMatcher* CDCommand::GetMatcher() const
+		const IMatcher* CdCommand::GetMatcher() const
 		{
 			return this->matcher.get();
 		}
 
-		CommandExecutionResults CDCommand::Execute(const ExecutionContext& context)
+		CommandExecutionResults CdCommand::Execute(const ExecutionContext& context)
 		{
 			auto& currentDir = GetCurrentPath(this->context->UserData, context.Message->SourceProtocol, context.Message->Sender);
 			std::string path = SanitizePath(context.ParseResults->GetParameter("to"));

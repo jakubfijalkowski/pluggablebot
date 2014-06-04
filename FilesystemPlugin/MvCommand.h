@@ -10,14 +10,27 @@ namespace PluggableBot
 		using namespace PluggableBot::Commands;
 
 		/**
-		 * Przenosi plik.
+		 * \brief Przenosi plik.
+		 *
+		 * Składnia: `mv from="plik źródłowy" to="plik docelowy"`
 		 */
 		class MvCommand
 			: public ICommand
 		{
 		public:
+			/**
+			 * \brief Inicjalizuje komendę.
+			 */
 			MvCommand(ApplicationContext* context);
+
+			/**
+			 * \brief Zwraca SimpleMatcher odpowiedzialny za dopasowanie komendy.
+			 */
 			virtual const IMatcher* GetMatcher() const;
+
+			/**
+			 * \brief Wywołuje komendę.
+			 */
 			virtual CommandExecutionResults Execute(const ExecutionContext& context);
 
 		private:

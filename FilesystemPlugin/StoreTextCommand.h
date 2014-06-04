@@ -10,14 +10,27 @@ namespace PluggableBot
 		using namespace PluggableBot::Commands;
 
 		/**
-		 * Zapisuje tekst do pliku.
+		 * \brief Zapisuje tekst do pliku.
+		 *
+		 * Składnia: `storetext file="plik docelowy" content="treść"`
 		 */
 		class StoreTextCommand
 			: public ICommand
 		{
 		public:
+			/**
+			 * \brief Inicjalizuje komendę.
+			 */
 			StoreTextCommand(ApplicationContext* context);
+
+			/**
+			 * \brief Zwraca SimpleMatcher odpowiedzialny za dopasowanie komendy.
+			 */
 			virtual const IMatcher* GetMatcher() const;
+
+			/**
+			 * \brief Wywołuje komendę.
+			 */
 			virtual CommandExecutionResults Execute(const ExecutionContext& context);
 
 		private:

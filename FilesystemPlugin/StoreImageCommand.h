@@ -10,14 +10,27 @@ namespace PluggableBot
 		using namespace PluggableBot::Commands;
 
 		/**
-		 * Zapisuje wysłany wcześniej obrazek do pliku.
+		 * \brief Zapisuje wysłany wcześniej obrazek do pliku.
+		 *
+		 * Składnia: `storeimage file="nazwa pliku do zapisania"`
 		 */
 		class StoreImageCommand
 			: public ICommand
 		{
 		public:
+			/**
+			 * \brief Inicjalizuje komendę.
+			 */
 			StoreImageCommand(ApplicationContext* context);
+
+			/**
+			 * \brief Zwraca SimpleMatcher odpowiedzialny za dopasowanie komendy.
+			 */
 			virtual const IMatcher* GetMatcher() const;
+
+			/**
+			 * \brief Wywołuje komendę.
+			 */
 			virtual CommandExecutionResults Execute(const ExecutionContext& context);
 
 		private:

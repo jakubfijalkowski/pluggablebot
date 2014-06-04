@@ -10,14 +10,27 @@ namespace PluggableBot
 		using namespace PluggableBot::Commands;
 
 		/**
-		 * Usuwa plik.
+		 * \brief Usuwa plik.
+		 *
+		 * Składnia: `rm file="nazwa pliku"`
 		 */
 		class RmCommand
 			: public ICommand
 		{
 		public:
+			/**
+			 * \brief Inicjalizuje komendę.
+			 */
 			RmCommand(ApplicationContext* context);
+
+			/**
+			 * \brief Zwraca SimpleMatcher odpowiedzialny za dopasowanie komendy.
+			 */
 			virtual const IMatcher* GetMatcher() const;
+
+			/**
+			 * \brief Wywołuje komendę.
+			 */
 			virtual CommandExecutionResults Execute(const ExecutionContext& context);
 
 		private:

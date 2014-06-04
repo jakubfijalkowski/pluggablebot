@@ -1,7 +1,7 @@
 #include "FilesystemPlugin.h"
 
-#include "PWDCommand.h"
-#include "CDCommand.h"
+#include "PwdCommand.h"
+#include "CdCommand.h"
 #include "CatCommand.h"
 #include "MvCommand.h"
 #include "RmCommand.h"
@@ -35,8 +35,8 @@ namespace PluggableBot
 
 		void FilesystemPlugin::Configure(const jsonxx::Object& configuration)
 		{
-			this->supportedCommands.push_back(new PWDCommand(this->context));
-			this->supportedCommands.push_back(new CDCommand(this->context));
+			this->supportedCommands.push_back(new PwdCommand(this->context));
+			this->supportedCommands.push_back(new CdCommand(this->context));
 			this->supportedCommands.push_back(new CatCommand(this->context));
 			this->supportedCommands.push_back(new MvCommand(this->context));
 			this->supportedCommands.push_back(new RmCommand(this->context));

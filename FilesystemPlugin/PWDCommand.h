@@ -10,14 +10,27 @@ namespace PluggableBot
 		using namespace PluggableBot::Commands;
 
 		/**
-		 * Wyświetla aktualną ścieżkę dla danego użytkownika.
+		 * \brief Wyświetla aktualną ścieżkę dla danego użytkownika.
+		 *
+		 * Składnia: `pwd`
 		 */
-		class PWDCommand
+		class PwdCommand
 			: public ICommand
 		{
 		public:
-			PWDCommand(ApplicationContext* context);
+			/**
+			 * \brief Inicjalizuje komendę.
+			 */
+			PwdCommand(ApplicationContext* context);
+
+			/**
+			 * \brief Zwraca SimpleMatcher odpowiedzialny za dopasowanie komendy.
+			 */
 			virtual const IMatcher* GetMatcher() const;
+
+			/**
+			 * \brief Wywołuje komendę.
+			 */
 			virtual CommandExecutionResults Execute(const ExecutionContext& context);
 
 		private:

@@ -10,14 +10,27 @@ namespace PluggableBot
 		using namespace PluggableBot::Commands;
 
 		/**
-		 * Wyświetla aktualną ścieżkę dla danego użytkownika.
+		 * \brief Przechodzi do wskazanego katalogu.
+		 *
+		 * Składnia: `cd to="ścieżka"`
 		 */
-		class CDCommand
+		class CdCommand
 			: public ICommand
 		{
 		public:
-			CDCommand(ApplicationContext* context);
+			/**
+			 * \brief Inicjalizuje komendę.
+			 */
+			CdCommand(ApplicationContext* context);
+
+			/**
+			 * \brief Zwraca SimpleMatcher odpowiedzialny za dopasowanie komendy.
+			 */
 			virtual const IMatcher* GetMatcher() const;
+
+			/**
+			 * \brief Wywołuje komendę.
+			 */
 			virtual CommandExecutionResults Execute(const ExecutionContext& context);
 
 		private:

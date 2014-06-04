@@ -10,14 +10,27 @@ namespace PluggableBot
 		using namespace PluggableBot::Commands;
 
 		/**
-		 * Wyświetla zawartość pliku spod wskazanej ścieżki.
+		 * \brief Wywołuje, asynchronicznie, podane polecenie i odsyła wynik.
+		 *
+		 * Składnia: `execute command="polecenie"`
 		 */
 		class ExecuteCommand
 			: public ICommand
 		{
 		public:
+			/**
+			 * \brief Inicjalizuje komendę.
+			 */
 			ExecuteCommand(ApplicationContext* context);
+
+			/**
+			 * \brief Zwraca SimpleMatcher odpowiedzialny za dopasowanie komendy.
+			 */
 			virtual const IMatcher* GetMatcher() const;
+
+			/**
+			 * \brief Wywołuje komendę.
+			 */
 			virtual CommandExecutionResults Execute(const ExecutionContext& context);
 
 		private:
