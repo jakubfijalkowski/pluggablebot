@@ -10,14 +10,30 @@ namespace PluggableBot
 		using namespace PluggableBot::Commands;
 
 		/**
-		 * Zatrzymuje działanie aplikacji.
+		 * \brief Zatrzymuje działanie aplikacji.
+		 *
+		 * Zatrzymanie aplikacji odbywa się przez wysłanie wiadomości
+		 * Messages::ShutdownRequest.
+		 *
+		 * Składnia: `stop`
 		 */
 		class StopCommand
 			: public ICommand
 		{
 		public:
+			/**
+			 * \brief Inicjalizuje komendę.
+			 */
 			StopCommand(ApplicationContext* context);
+
+			/**
+			 * \brief Zwraca SimpleMatcher odpowiedzialny za dopasowanie komendy.
+			 */
 			virtual const IMatcher* GetMatcher() const;
+
+			/**
+			 * \brief Wywołuje komendę.
+			 */
 			virtual CommandExecutionResults Execute(const ExecutionContext& context);
 
 		private:

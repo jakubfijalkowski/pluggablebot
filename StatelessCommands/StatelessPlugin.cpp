@@ -12,7 +12,7 @@ namespace PluggableBot
 	{
 
 		StatelessPlugin::StatelessPlugin(ApplicationContext* context)
-			: name("StatelessPlugin"), context(context)
+			: name("StatelessCommands"), context(context)
 		{ }
 
 		StatelessPlugin::~StatelessPlugin()

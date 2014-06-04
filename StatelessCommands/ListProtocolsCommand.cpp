@@ -20,7 +20,10 @@ namespace PluggableBot
 			jsonxx::Array protocolsArray;
 			for (auto& protocol : *this->context->Protocols)
 			{
-				protocolsArray << protocol.Protocol->Name;
+				jsonxx::Object protocolState;
+				protocolState << "name" << protocol.Protocol->Name;
+				protocolState << "isWorking" << protocol.IsWorking;
+				protocolsArray << protocolState;
 
 				message += protocol.Protocol->Name;
 				message += " - ";
