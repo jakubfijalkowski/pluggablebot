@@ -7,55 +7,64 @@
 
 namespace PluggableBot
 {
+
+	/**
+	 * \brief Przestrzeń nazw zawierająca podsystem logowania.
+	 */
 	namespace Logging
 	{
 		class IOutput;
 
 		/**
-		 * Poziom wiadomości.
+		 * \brief Poziom wiadomości.
 		 */
 		enum class LogLevel
 		{
 			/**
-			 * Najniższy - informacja przydatna w debugowaniu.
+			 * \brief Najniższy - informacja przydatna w debugowaniu.
 			 */
 			Debug,
 
 			/**
-			 * Oznacza operację ukończoną sukcesem.
+			 * \brief Informacja - operacja ukończona sukcesem.
 			 */
 			Information,
 
 			/**
-			 * Ostrzeżenie - coś się nie udało, ale nie ma to większego wpływu na działanie aplikacji.
+			 * \brief Ostrzeżenie - coś się nie udało, ale nie ma to większego wpływu na działanie aplikacji.
 			 */
 			Warning,
 
 			 /**
-			 * Błąd - operacja się nie udała, część funkcjonalności może nie być dostępna, ale aplikacja
+			 * \brief Błąd - operacja się nie udała, część funkcjonalności może nie być dostępna, ale aplikacja
 			 * działa nadal.
 			 */
 			Error,
 			
 			/**
-			 * Błąd którego nie da się naprawić - przerywa działanie aplikacji.
+			 * \brief Błąd którego nie da się naprawić - przerywa działanie aplikacji.
 			 */
 			Fatal
 		};
 
 		/**
-		 * Logger - służy do logowania informacji z wykonywania aplikacji.
+		 * \brief Służy do logowania informacji z wykonywania aplikacji.
+		 *
+		 * Metody logujące, które przyjmują więcej niż jeden parametr, używają biblioteki
+		 * do formatowania, dzięki czemu można korzystać z formatów znanych z C#. Np.
+		 * `To jest {0} pierwszy, a to {1} parametr.`.
+		 * 
 		 */
 		class PLUGIN_API Logger
 		{
 		public:
 			/**
-			 * Inicjalizuje logger o wskazanej nazwie i podanymi wyjściami.
+			 * \brief Inicjalizuje logger o wskazanej nazwie i podanymi wyjściami.
 			 */
 			Logger(const std::string& name, const std::vector<IOutput*>& outputs);
 
 			/**
-			 * Loguje informacje o poziomie LogLevel::Debug.
+			 * \brief Loguje informacje o poziomie LogLevel::Debug.
 			 */
 			void Debug(const std::string& message)
 			{
@@ -63,7 +72,7 @@ namespace PluggableBot
 			}
 
 			/**
-			 * Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Debug.
+			 * \brief Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Debug.
 			 */
 			template<typename... Args>
 			void Debug(const std::string& format, const Args&... args)
@@ -72,16 +81,16 @@ namespace PluggableBot
 			}
 
 			/**
-			* Loguje informacje o poziomie LogLevel::Information.
-			*/
+			 * \brief Loguje informacje o poziomie LogLevel::Information.
+			 */
 			void Information(const std::string& message)
 			{
 				this->Log(LogLevel::Information, message);
 			}
 
 			/**
-			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Information.
-			*/
+			 * \brief Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Information.
+			 */
 			template<typename... Args>
 			void Information(const std::string& format, const Args&... args)
 			{
@@ -89,16 +98,16 @@ namespace PluggableBot
 			}
 
 			/**
-			* Loguje informacje o poziomie LogLevel::Warning.
-			*/
+			 * \brief Loguje informacje o poziomie LogLevel::Warning.
+			 */
 			void Warning(const std::string& message)
 			{
 				this->Log(LogLevel::Warning, message);
 			}
 
 			/**
-			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Warning.
-			*/
+			 * \brief Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Warning.
+			 */
 			template<typename... Args>
 			void Warning(const std::string& format, const Args&... args)
 			{
@@ -106,16 +115,16 @@ namespace PluggableBot
 			}
 
 			/**
-			* Loguje informacje o poziomie LogLevel::Error.
-			*/
+			 * \brief Loguje informacje o poziomie LogLevel::Error.
+			 */
 			void Error(const std::string& message)
 			{
 				this->Log(LogLevel::Error, message);
 			}
 
 			/**
-			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Error.
-			*/
+			 * \brief Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Error.
+			 */
 			template<typename... Args>
 			void Error(const std::string& format, const Args&... args)
 			{
@@ -123,16 +132,16 @@ namespace PluggableBot
 			}
 
 			/**
-			* Loguje informacje o poziomie LogLevel::Fatal.
-			*/
+			 * \brief Loguje informacje o poziomie LogLevel::Fatal.
+			 */
 			void Fatal(const std::string& message)
 			{
 				this->Log(LogLevel::Fatal, message);
 			}
 
 			/**
-			* Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Fatal.
-			*/
+			 * \brief Loguje tekst, który przed zapisem jest formatowany, o poziomie LogLevel::Fatal.
+			 */
 			template<typename... Args>
 			void Fatal(const std::string& format, const Args&... args)
 			{
@@ -140,7 +149,7 @@ namespace PluggableBot
 			}
 
 			/**
-			 * Loguje wiadomość o podanym poziomie na wszystkie wyjścia.
+			 * \brief Loguje wiadomość o podanym poziomie na wszystkie wyjścia.
 			 *
 			 * Metoda ta musi jest thread-safe, jako iż jest główną używaną do zapisu informacji,
 			 * i może być wywoływana z wielu wątków.
@@ -152,6 +161,10 @@ namespace PluggableBot
 			const std::vector<IOutput*>& outputs;
 		};
 
+		/**
+		 * \brief Wskaźnik na Logger, który powinien być używany w aplikacji do zarządzania
+		 * loggerami.
+		 */
 		typedef std::unique_ptr<Logger> LoggerPointer;
 	}
 }

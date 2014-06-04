@@ -10,6 +10,10 @@
 
 namespace PluggableBot
 {
+	
+	/**
+	 * \brief Przestrzeń nazw zawierająca obsługę wiadomości przesyłanych wewnątrz aplikacji.
+	 */
 	namespace Messaging
 	{
 

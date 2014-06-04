@@ -10,27 +10,44 @@ namespace PluggableBot
 	{
 		
 		/**
-		 * Wyjście dla klasy loggera.
+		 * \brief Wyjście dla klasy loggera.
 		 */
 		class PLUGIN_API IOutput
 		{
 		public:
 			/**
-			 * Zapisuje wiadomość do wyjścia.
+			 * \brief Zamyka wyjście.
+			 */
+			virtual ~IOutput();
+
+			/**
+			 * \brief Zapisuje wiadomość o podanym poziomie, od wskazanego Logger i o podanej treści.
+			 * Nie przeprowadza żadnego formatowania.
 			 */
 			virtual void Write(LogLevel level, const std::string& loggerName, const std::string& message) = 0;
 		};
 
 		/**
-		 * Wyświetla wiadomości w konsoli.
+		 * \brief Wyświetla wiadomości w konsoli.
+		 * Jest *thread-safe*.
 		 */
 		class ConsoleOutput
 			: public IOutput
 		{
 		public:
+			/**
+			 * \brief Otwiera konsolę i przygotowuje ją do zapisu.
+			 */
 			ConsoleOutput();
+
+			/**
+			 * \brief Zamyka konsolę.
+			 */
 			~ConsoleOutput();
 
+			/**
+			 * \brief Zapisuje log do konsoli.
+			 */
 			virtual void Write(LogLevel level, const std::string& loggerName, const std::string& message);
 
 		private:
@@ -40,15 +57,29 @@ namespace PluggableBot
 
 
 		/**
-		 * Zapisuje wiadomości do pliku.
+		 * \brief Zapisuje wiadomości do pliku.
+		 * Jest *thread-safe*.
+		 *
+		 * Logi zapisywane są "jeden na raz", otwierając, *flushując* i zamykając plik
+		 * przy każdej wiadomości.
 		 */
 		class FileOutput
 			: public IOutput
 		{
 		public:
+			/**
+			 * \brief Inicjalizuje wyjście.
+			 */
 			FileOutput(const std::string& fileName);
+			
+			/**
+			 * \brief Czyści wyjscie.
+			 */
 			~FileOutput();
 
+			/**
+			* \brief Zapisuje log do konsoli.
+			*/
 			virtual void Write(LogLevel level, const std::string& loggerName, const std::string& message);
 
 		private:
