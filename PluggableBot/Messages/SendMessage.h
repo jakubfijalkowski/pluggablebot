@@ -14,32 +14,31 @@ namespace PluggableBot
 		using namespace Messaging;
 
 		/**
-		 * Rządanie wysłania wiadomości.
+		 * \brief Rządanie wysłania wiadomości przez odpowiedni protokół.
 		 */
 		class SendMessage
 			: public IMessage
 		{
 		public:
-			static const int MessageType = 2;
+			static const int MessageType = 2; //!< Typ wiadomości.
 
 			/**
-			 * Wiadomość, która ma zostać wysłana.
+			 * \brief Wiadomość tekstowa, która ma zostać wysłana.
 			 */
 			const std::string Content;
 
 			/**
-			 * Odbiorca wiadomości.
+			 * \brief Odbiorca wiadomości.
 			 */
 			const std::string Recipient;
 
 			/**
-			 * Określa, który protokół powinien wysłać wiadomość.
-			 * Jeśli jest \a {nullptr}, nie ma ograniczeń, kto powinien obsłużyć tą wiadomość.
+			 * \brief Określa, który protokół powinien wysłać wiadomość.
 			 */
 			const ProtocolPointer Protocol;
 
 			/**
-			 * Inicializuje obiekt wiadomości.
+			 * \brief  Inicializuje obiekt wiadomości niezbędnymi wartościami.
 			 */
 			SendMessage(const std::string& content, const std::string& recipient, const ProtocolPointer protocol)
 				: IMessage(MessageType), Content(content), Recipient(recipient), Protocol(protocol)

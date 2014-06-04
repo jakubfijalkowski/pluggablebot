@@ -79,6 +79,7 @@ namespace PluggableBot
 	 *
 	 * \sa
 	 * \ref pages_json_spec
+	 * \ref PluggableBot::Messages
 	 */
 
 	/**

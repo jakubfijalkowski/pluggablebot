@@ -8,14 +8,15 @@ namespace PluggableBot
 	{
 
 		/**
-		 * Interfejs dla wszystkich wiadomości - zawiera pole Type, pozwalające określić właściwy typ
-		 * wiadomości nie używając dynamic_cast.
+		 * \brief Interfejs dla wszystkich wiadomości wymienianych w aplikacji.
+		 * Zawiera pole Type, pozwalające określić właściwy typ wiadomości nie używając
+		 * `dynamic_cast`.
 		 */
 		class PLUGIN_API IMessage
 		{
 		public:
 			/**
-			 * Typ wiadomości
+			 * \brief Typ wiadomości
 			 */
 			const int Type;
 
@@ -23,13 +24,16 @@ namespace PluggableBot
 
 		protected:
 			/**
-			 * Inicjalizuje obiekt jego typem.
+			 * \brief Inicjalizuje obiekt jego typem.
 			 */
 			IMessage(int type)
 				: Type(type)
 			{ }
 		};
 
+		/**
+		 * \brief Wskaźnik na wiadomość, którym posługuje się aplikacja.
+		 */
 		typedef std::shared_ptr<IMessage> MessagePointer;
 
 	}

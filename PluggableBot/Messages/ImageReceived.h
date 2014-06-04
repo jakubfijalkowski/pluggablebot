@@ -10,41 +10,45 @@ namespace PluggableBot
 		using namespace Messaging;
 
 		/**
-		 * Otrzymano obrazek od użytkownika.
+		 * \brief Otrzymano obrazek od użytkownika.
+		 *
+		 * UWAGA! Wiadomość ta może długo zalegać w obiekcie Messenger, dlatego
+		 * należy ograniczać wysyłanie obrazków bez wywołania komendy zapisującej
+		 * je(np. FilesystemPlugin::StoreTextCommand)!
 		 */
 		class ImageReceived
 			: public IMessage
 		{
 		public:
-			static const int MessageType = 6;
+			static const int MessageType = 6; //!< Typ wiadomości.
 			
 			/**
-			 * Dane obrazka.
+			 * \brief Dane obrazka.
 			 */
 			const std::unique_ptr<char[]> Data;
 
 			/**
-			 * Rozmiar danych.
+			 * \brief Rozmiar danych w bajtach.
 			 */
 			const size_t DataSize;
 
 			/**
-			 * Nazwa pliku. Może być ignorowane.
+			 * \brief Nazwa pliku. Może być ignorowana.
 			 */
 			const std::string FileName;
 
 			/**
-			 * Nadawca wiadomości.
+			 * \brief Nadawca wiadomości.
 			 */
 			const std::string Sender;
 
 			/**
-			 * Określa, z któego protokołu otrzymano wiadomość.
+			 * \brief Określa, z którego protokołu otrzymano wiadomość.
 			 */
 			const ProtocolPointer Protocol;
 
 			/**
-			 * Inicializuje obiekt wiadomości.
+			 * \brief Inicializuje obiekt wiadomości niezbędnymi wartościami.
 			 */
 			ImageReceived(
 				std::unique_ptr<char[]> data, size_t dataSize, const std::string& filename,

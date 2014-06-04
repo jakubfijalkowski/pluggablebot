@@ -13,42 +13,42 @@ namespace PluggableBot
 		using namespace Messaging;
 
 		/**
-		 * Komenda została wywołana poprawnie i zwraca użytkownikowi wynik.
+		 * \brief Komenda została wywołana poprawnie i zwraca użytkownikowi wynik.
 		 * Asynchroniczny odpowiednik Commands::CommandExecutionResults.
 		 */
 		class AsyncCommandExecuted
 			: public IMessage
 		{
 		public:
-			static const int MessageType = 7;
+			static const int MessageType = 7; //!< Typ wiadomości.
 
 			/**
-			 * Określa, która komenda wysłała tą wiadomość.
+			 * \brief Określa, która komenda wysłała tą wiadomość.
 			 */
 			const Commands::CommandPointer Command;
 
 			/**
-			 * Treść wiadomości, która zostanie wysłana użytkownikowi.
+			 * \brief Treść wiadomości, która zostanie wysłana użytkownikowi.
 			 */
 			const std::string Message;
 
 			/**
-			 * Obiekt będący dodatkowymi danymi. Jest opcjonalny(może być nullptr).
+			 * \brief Obiekt będący dodatkowymi danymi. Jest opcjonalny(może być `nullptr`).
 			 */
 			const std::shared_ptr<const jsonxx::Object> AdditionalData;
 
 			/**
-			 * Odbiorca wiadomości.
+			 * \brief Odbiorca wiadomości.
 			 */
 			const std::string Recipient;
 
 			/**
-			 * Określa, który protokół powinien wysłać wiadomość.
+			 * \brief Określa, który protokół powinien wysłać wiadomość.
 			 */
 			const ProtocolPointer Protocol;
 
 			/**
-			 * Inicializuje obiekt wiadomości.
+			 * \brief Inicializuje obiekt wiadomości niezbędnymi informacjami.
 			 */
 			AsyncCommandExecuted(
 				const Commands::CommandPointer command,

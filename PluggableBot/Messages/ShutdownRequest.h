@@ -10,16 +10,16 @@ namespace PluggableBot
 		using namespace Messaging;
 
 		/**
-		 * Użytkownik zażądał zatrzymania aplikacji.
+		 * \brief Użytkownik zażądał zatrzymania aplikacji.
 		 */
 		class ShutdownRequest
 			: public IMessage
 		{
 		public:
-			static const int MessageType = 4;
+			static const int MessageType = 4; //!< Typ wiadomości.
 
 			/**
-			 * Inicializuje obiekt wiadomości.
+			 * \brief Inicializuje obiekt wiadomości.
 			 */
 			ShutdownRequest()
 				: IMessage(MessageType)

@@ -10,21 +10,21 @@ namespace PluggableBot
 		using namespace Messaging;
 
 		/**
-		 * Otrzymano wiadomość od użytkownika.
+		 * \brief Otrzymano wiadomość od użytkownika.
 		 */
 		class MessageReceived
 			: public IMessage
 		{
 		public:
-			static const int MessageType = 1;
+			static const int MessageType = 1; //!< Typ wiadomości.
 
 			/**
-			 * Wiadomość, którą otrzymano.
+			 * \brief Wiadomość, którą otrzymano.
 			 */
 			const UserMessagePointer UserMessage;
 
 			/**
-			 * Inicializuje obiekt wiadomości.
+			 * \brief Inicializuje obiekt wiadomości niezgędnymi wartościami.
 			 */
 			MessageReceived(UserMessagePointer userMsg)
 				: IMessage(MessageType), UserMessage(userMsg)

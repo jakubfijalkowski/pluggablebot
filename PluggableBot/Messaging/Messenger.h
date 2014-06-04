@@ -13,12 +13,23 @@ namespace PluggableBot
 	namespace Messaging
 	{
 
+		/**
+		 * \brief Funkcja, która służy do filtrowania listy wiadomości.
+		 */
 		typedef std::function<bool(IMessage*)> MessagePredicate;
+
+		/**
+		 * \brief Lista wiadomości przefiltrowana przez Messenger.
+		 */
 		typedef std::list<MessagePointer> MessageList;
+		
+		/**
+		 * \brief Wskaźnik na listę wiadomości.
+		 */
 		typedef std::shared_ptr<MessageList> MessageListPointer;
 
 		/**
-		 * Posłaniec, czy też szyna wiadomości, który synchronizuje dostęp do głównego elementu
+		 * \brief Posłaniec, czy też szyna wiadomości, który synchronizuje dostęp do głównego elementu
 		 * komunikacyjnego aplikacji.
 		 *
 		 * Klasa ta odpowiada za przekazywanie wiadomości między poszczególnymi podsystemami
@@ -41,49 +52,68 @@ namespace PluggableBot
 		 * Przez użycie smart pointerów i szablonów, biblioteki DLL muszą być kompilowane z tą samą
 		 * implementacją CRT(czyli tak naprawdę w konkretnej wersji Visual Studio).
 		 *
+		 * Algorytm pobierania jednej wiadomości:
+		 * 1. Wejdź do sekcji krytycznej. 
+		 * 2. Sprawdź, czy istnieje wiadomość o określonym typie.
+		 * 3. Jeśli tak, to:
+		 *    - Usuń ją z kolekcji.
+		 *    - Wyjdź z sekcji krytycznej.
+		 *    - Zwróć ją i zakończ algorytm.
+		 * 4. Jeśli nie, to wyjdź z sekcji krytycznej i przejdź dalej.
+		 * 5. Zwiększ licznik oczekujących na wiadomość.
+		 * 6. Czekaj na zdarzenie informujące o dodaniu wiadomości.
+		 *    - Gdy zdarzenie nadejdzie, to rozpocznij algorytm od nowa.
+		 *    - Gdy zdarzenie nie nadejdzie w określonym czasie, zwróć nullptr i zakończ algorytm.
+		 *    - Zmniejsz licznik oczekujących na wiadomość niezależnie od w/w warunków.
+		 *
+		 * Algorytm pobierania wielu wiadomości:
+		 * 1. Wejdź do sekcji krytycznej.
+		 * 2. Wybierz z kolekcji te wiadomości, które spełniają dany predykat:
+		 *    - Sprawdź, czy wiadomość spełnia warunek. Jeśli tak to przejdź dalej, jeśli nie to
+		 *      przejdź do kolejnej wiadomości.
+		 *    - Dodaj wiadomość do kolekcji wybranych wiadomości.
+		 *    - Usuń wiadomość z kolekcji.
+		 *    - Przejdź do następnej wiadomości lub wyjdź z pętli.
+		 * 3. Wyjdź z sekcji krytycznej.
+		 * 4. Jeśli kolekcja zapisanych wiadomości nie jest pusta, zwróć ją i zakończ algorytm.
+		 * 5. Jeśli kolekcja zapisanych wiadomości jest pusta, to przejdź dalej.
+		 * 6. Zwiększ licznik oczekujących na wiadomość.
+		 * 7. Czekaj na zdarzenie informujące o dodaniu wiadomości.
+		 *    - Gdy zdarzenie nadejdzie, to rozpocznij algorytm od nowa.
+		 *    - Gdy zdarzenie nie nadejdzie w określonym czasie, zwróć pustą kolekcję i zakończ
+		 *      algorytm.
+		 *    - Zmniejsz licznik oczekujących na wiadomość niezależnie od w/w warunków.
+		 *
+		 * Algorytm dodawania nowej wiadomości:
+		 * 1. Wejdź do sekcji krytycznej.
+		 * 2. Dodaj wiadomośc do kolekcji.
+		 * 3. Wyjdź z sekcji krytycznej.
+		 * 4. Jeśli licznik oczekujących na wiadomość nie jest zerem, to wyślij zdarzenie otrzymania
+		 *    nowej wiadomości.
+		 *
 		 * \sa
-		 * \ref pages_messenger_description
+		 * \ref PluggableBot::Messages
 		 */
 		class PLUGIN_API Messenger
 		{
 		public:
 			/**
-			 * Inicjalizuje nowy obiekt.
+			 * \brief Inicjalizuje nowy obiekt.
 			 */
 			Messenger();
 
 			/**
-			 * Czyści po obiekcie.
+			 * \brief Czyści obiekt, usuwając pozostałe wiadomości.
 			 */
 			~Messenger();
 
 			/**
-			 * Wysyła nową pustą wiadomość o wskazanym typie.
-			 *
-			 * UWAGA! Może spowodować problem z dealokacją w niewłaściwym miejscu(DLL boundary)
-			 */
-			template<typename TMessage>
-			void Send()
-			{
-				this->Send(MessagePointer(new TMessage(), MessageDeleter<TMessage>()));
-			}
-
-			/**
-			 * Wysyła wskazaną wiadomość, opakowując obiekt w shared_ptr.
-			 */
-			template<typename TMessage>
-			void Send(TMessage* message)
-			{
-				this->Send(MessagePointer(message));
-			}
-
-			/**
-			 * Wysyła wskazaną wiadomość.
+			 * \brief Wysyła wskazaną wiadomość do wszystkich.
 			 */
 			void Send(MessagePointer message);
 
 			/**
-			 * Badziej przejrzysta wersja Get(type, 0);
+			 * \brief Badziej przejrzysta wersja `Get(type, 0)`.
 			 */
 			MessagePointer TryGet(int type)
 			{
@@ -91,7 +121,7 @@ namespace PluggableBot
 			}
 
 			/**
-			 * Badziej przejrzysta wersja Get(predicate, 0);
+			 * \brief Badziej przejrzysta wersja `Get(predicate, 0)`.
 			 */
 			MessageListPointer TryGet(MessagePredicate predicate)
 			{
@@ -99,22 +129,26 @@ namespace PluggableBot
 			}
 
 			/**
-			 * Pobiera jedną wiadomość z list, a jeśli takowa nie istnieje - czeka aż się pojawi
-			 * i ją zwraca. Jeśli czas oczekiwania zostanie przekroczony, zostaje zwrócony nullptr.
+			 * \brief Pobiera jedną wiadomość z list o wskazanym typie.
+			 * Jeśli takowa nie istnieje - czeka określony czas aż się pojawi i ją zwraca.
+			 * Jeśli czas oczekiwania zostanie przekroczony, zostaje zwrócony `nullptr`.
 			 *
 			 * \param type Typ wiadomości, której oczekujemy.
 			 * \param timeout Maksymalny czas oczekiwania. Domyślnie nieskończoność.
+			 * \returns Wskaźnik na wiadomość *lub* `nullptr`, gdy wiadomość nie istnieje
 			 */
 			MessagePointer Get(int type, DWORD timeout = INFINITE);
 
 			/**
-			 * Wybiera z listy wiadomości, które spełniają wskazany warunek. Gdy nie ma wiadomości
-			 * spełniających takie założenia, czeka określony czas do pojawienia się PIERWSZEJ
-			 * wiadomości, która może być zwrócona. Gdy czas oczekiwania zostanie przekroczony,
-			 * zostanie zwrócona pusta kolekcja wiadomości.
+			 * \brief Wybiera z listy wiadomości, które spełniają wskazany warunek.
+			 * Gdy nie ma * wiadomości spełniających kryteria, czeka określony czas do pojawienia
+			 * się PIERWSZEJ wiadomości, która może być zwrócona. Gdy czas oczekiwania zostanie
+			 * przekroczony, zostanie zwrócona pusta kolekcja wiadomości.
 			 *
 			 * \param predicate Warunek, który musi zostać spełniony, by wiadomość była zwrócona.
 			 * \param timeout Maksymalny czas oczekiwania. Domyślnie nieskończoność.
+			 * \returns Lista wiadomości *lub* pusta lista, gdy nie pojawiły się widomości
+			 *          spełniające wskazany warunek.
 			 */
 			MessageListPointer Get(MessagePredicate predicate, DWORD timeout = INFINITE);
 

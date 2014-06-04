@@ -10,21 +10,21 @@ namespace PluggableBot
 		using namespace Messaging;
 
 		/**
-		 * Protokół przestał działać.
+		 * \brief Protokół przestał działać.
 		 */
 		class ProtocolFailure
 			: public IMessage
 		{
 		public:
-			static const int MessageType = 3;
+			static const int MessageType = 3; //!< Typ wiadomości.
 
 			/**
-			 * Określa, który protokół przestał działać.
+			 * \brief Określa, który protokół przestał działać.
 			 */
 			const IProtocol* const Protocol;
 
 			/**
-			 * Inicializuje obiekt wiadomości.
+			 * \brief Inicializuje obiekt wiadomości niezbędnymi wartościami.
 			 */
 			ProtocolFailure(const IProtocol* protocol)
 				: IMessage(MessageType), Protocol(protocol)

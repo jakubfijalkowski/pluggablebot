@@ -11,42 +11,43 @@ namespace PluggableBot
 		using namespace Messaging;
 
 		/**
-		 * Nie udało się wywołać komendy asynchronicznie i użytkownik powinien otrzymać odpowiedź o błędzie.
+		 * \brief Nie udało się wywołać komendy asynchronicznie i użytkownik powinien
+		 * otrzymać odpowiedź o błędzie.
 		 * Asynchroniczny odpowiednik Exceptions::ExecutionException.
 		 */
 		class AsyncExecutionFailure
 			: public IMessage
 		{
 		public:
-			static const int MessageType = 5;
+			static const int MessageType = 5; //!< Typ wiadomości.
 
 			/**
-			 * Określa, która komenda wysłała tą wiadomość.
+			 * \brief Określa, która komenda wysłała tą wiadomość.
 			 */
 			const Commands::CommandPointer Command;
 
 			/**
-			 * Opis błędu.
+			 * \brief Opis błędu.
 			 */
 			const std::string Description;
 
 			/**
-			 * Systemowy kod błędu.
+			 * \brief Systemowy kod błędu.
 			 */
 			const unsigned int ErrorCode;
 
 			/**
-			 * Odbiorca wiadomości.
+			 * \brief Odbiorca wiadomości.
 			 */
 			const std::string Recipient;
 
 			/**
-			 * Określa, który protokół powinien wysłać wiadomość.
+			 * \brief Określa, który protokół powinien wysłać wiadomość.
 			 */
 			const ProtocolPointer Protocol;
 
 			/**
-			 * Inicializuje obiekt wiadomości.
+			 * \brief Inicializuje obiekt wiadomości niezbędnymi wartościami.
 			 */
 			AsyncExecutionFailure(
 				const Commands::CommandPointer command,
