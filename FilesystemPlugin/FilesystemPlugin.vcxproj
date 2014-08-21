@@ -87,13 +87,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CatCommand.h" />
-    <ClInclude Include="CDCommand.h" />
+    <ClInclude Include="CdCommand.h" />
     <ClInclude Include="ExecuteCommand.h" />
     <ClInclude Include="FilesystemPlugin.h" />
     <ClInclude Include="LsCommand.h" />
     <ClInclude Include="MvCommand.h" />
-    <ClInclude Include="PWDCommand.h" />
     <ClInclude Include="Helper.h" />
+    <ClInclude Include="PwdCommand.h" />
     <ClInclude Include="RmCommand.h" />
     <ClInclude Include="StoreImageCommand.h" />
     <ClInclude Include="StoreTextCommand.h" />
@@ -101,13 +101,13 @@
   <ItemGroup>
     <ClCompile Include="..\PluggableBot\External\format.cc" />
     <ClCompile Include="CatCommand.cpp" />
-    <ClCompile Include="CDCommand.cpp" />
+    <ClCompile Include="CdCommand.cpp" />
     <ClCompile Include="ExecuteCommand.cpp" />
     <ClCompile Include="FilesystemPlugin.cpp" />
     <ClCompile Include="LsCommand.cpp" />
     <ClCompile Include="MvCommand.cpp" />
-    <ClCompile Include="PWDCommand.cpp" />
     <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="PwdCommand.cpp" />
     <ClCompile Include="RmCommand.cpp" />
     <ClCompile Include="StoreImageCommand.cpp" />
     <ClCompile Include="StoreTextCommand.cpp" />

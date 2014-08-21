@@ -12,17 +12,17 @@ namespace PluggableBot
 		/**
 		 * \brief Pinguje podany adres IP i zwraca, asynchronicznie, dane.
 		 *
-		 * Komenda wykonuje siê asynchronicznie.
-		 * Komenda u¿ywa do tego systemowego polecenia `ping`.
+		 * Komenda wykonuje siÄ™ asynchronicznie.
+		 * Komenda uÅ¼ywa do tego systemowego polecenia `ping`.
 		 *
-		 * Sk³adnia: `ping address="address"`
+		 * SkÅ‚adnia: `ping address="address"`
 		 */
 		class PingCommand
 			: public ICommand
 		{
 		public:
 			/**
-			 * \brief Inicjalizuje komendê.
+			 * \brief Inicjalizuje komendÄ™.
 			 */
 			PingCommand(ApplicationContext* context);
 
@@ -32,7 +32,7 @@ namespace PluggableBot
 			virtual const IMatcher* GetMatcher() const;
 
 			/**
-			 * \brief Wywo³uje komendê.
+			 * \brief WywoÅ‚uje komendÄ™.
 			 */
 			virtual CommandExecutionResults Execute(const ExecutionContext& context);
 

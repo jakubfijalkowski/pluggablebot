@@ -23,7 +23,7 @@
       <UniqueIdentifier>{5bdda3e7-8531-4e04-abe0-414f5d086b53}</UniqueIdentifier>
     </Filter>
     <Filter Include="Pages">
-      <UniqueIdentifier>{33603f5e-cc74-44da-ad11-cf830c6a1ba1}</UniqueIdentifier>
+      <UniqueIdentifier>{71c47b19-44ab-4d70-8158-16c144686808}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +152,9 @@
   <ItemGroup>
     <None Include="config.json" />
     <None Include="Pages\json_spec.md">
+      <Filter>Pages</Filter>
+    </None>
+    <None Include="Pages\mainpage.md">
       <Filter>Pages</Filter>
     </None>
   </ItemGroup>
