@@ -48,9 +48,6 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>copy /Y $(ProjectDir)config.json $(TargetDir)config.json</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -65,9 +62,6 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
-    <PostBuildEvent>
-      <Command>copy /Y $(ProjectDir)config.json $(TargetDir)config.json</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -121,9 +115,6 @@
     <ClCompile Include="UserData.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.json">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
     <None Include="Pages\mainpage.md" />
     <None Include="Pages\json_spec.md" />
   </ItemGroup>
